@@ -1,0 +1,27 @@
+html,
+body {
+  font-family: sans-serif;
+  margin: 0;
+  /* padding: 15px; */
+  color: #fff;
+  background-color: #121214;
+  font-family: "Montserrat", sans-serif;
+}
+/* 
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+} */
+
+/* img {
+  max-width: 100%;
+  display: block;
+} */
