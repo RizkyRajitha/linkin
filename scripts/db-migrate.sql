@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS  "users" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into users (username, password) values ('admin', '$2b$10$BUli0c.muyCW1ErNJc3jL.vFRFtFJWrT8/GcR4A.sUdCznaXiqFXa');
+insert into users (username, password) values ('admin', '$2b$10$BUli0c.muyCW1ErNJc3jL.vFRFtFJWrT8/GcR4A.sUdCznaXiqFXa') ON CONFLICT (did) DO NOTHING;
