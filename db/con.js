@@ -1,11 +1,12 @@
 const { Pool } = require("pg");
+const DBURLLOCAL = require("../configs/config").DBURLLOCAL;
 const connectionString =
-  process.env.NODE_ENV === "production"
-    ? process.env.DBURL
-    : "postgresql://linkin:123@localhost:5432/linkin?schema=public"; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
+  process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
 const pool = new Pool({
   connectionString: connectionString,
+  idleTimeoutMillis: 500,
+  max: 3,
 });
 
 let con = {
@@ -25,6 +26,7 @@ let con = {
           reject(err);
           return;
         }
+        console.log(res);
         resolve(res);
 
         // callback(err, res);
