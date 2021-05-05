@@ -16,11 +16,13 @@ let con = {
       return pool.query(text, params, (err, res) => {
         const duration = Date.now() - start;
 
-        console.log("executed query", {
-          text,
-          duration,
-          top2rows: res ? res.rows.slice(0, 2) || [] : [],
-        });
+        if (process.env.NODE_ENV !== "production") {
+          console.log("executed query", {
+            text,
+            duration,
+            top2rows: res ? res.rows.slice(0, 2) || [] : [],
+          });
+        }
 
         if (err) {
           reject(err);
