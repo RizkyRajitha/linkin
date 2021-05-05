@@ -17,7 +17,8 @@ const Admin = ({ data }) => {
       <div className="d-flex">
         {" "}
         <div className={styles.authWrapper}>
-s          <div
+          s{" "}
+          <div
             className={`${styles.authInner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-4 `}
           >
             {/* <div hidden={!showmsg} className="alert alert-danger">
