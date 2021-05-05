@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+import bcrypt from 'bcrypt';
 
 const { getUser } = require("../../lib/dbfunc");
 export default async function handler(req, res) {
