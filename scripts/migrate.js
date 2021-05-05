@@ -19,7 +19,7 @@ async function migrate() {
 
     let script = fs.readFileSync(__dirname + "/db-migrate.sql").toString();
 
-    // console.log(script);
+    console.log(script);
 
     let query = {
       text: script,
@@ -27,7 +27,7 @@ async function migrate() {
     };
 
     let res = await client.query(query);
-    console.log(res.command);
+    console.log(res.rows);
     await client.end();
     console.log("disconnected from database");
     console.log("migration ran successfully");

@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
-    "migrate": "node scripts/migrate.js"
+    "migrate": "node scripts/migrate.js",
+    "build": "npm-run-all migrate build-next",
+    "build-next": "next build"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cookie": "^0.4.1",
     "next": "9.5.3",
+    "npm-run-all": "^4.1.5",
     "pg": "^8.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1"
