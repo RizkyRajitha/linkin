@@ -1,4 +1,4 @@
-import { compare } from "bcrypt";
+// import { compare } from "bcrypt";
 import { createUser } from "../../lib/dbfunc";
 
 export default async function handler(req, res) {
