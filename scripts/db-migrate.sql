@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into pagedata ("id", "handlerText") values (1 , 'w1212212');
+insert into pagedata ("id", "handlerText") values (1 , 'w1212212') ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS  "linkdata" (
     "id" serial primary key,

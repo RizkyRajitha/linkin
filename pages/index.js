@@ -3,12 +3,31 @@ import Head from "next/head";
 import style from "../styles/landing.module.css";
 // import { getSortedPostsData } from "../lib/posts";
 
-export function getStaticProps() {
+export async function getStaticProps() {
   // const allPostsData = getSortedPostsData();
-  return { props: { allPostsData: 1212 } };
+  let data;
+  try {
+    data = await fetch("http://localhost:3000/api/view").then((res) =>
+      res.json()
+    );
+    console.log("nexttt");
+
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+
+  // .then((resolve) => {
+  //   console.log(resolve);
+  // })
+  // .catch((reject) => {
+  //   console.log(reject);
+  // });
+
+  return { props: { data } };
 }
 
-export default function Home({ allPostsData }) {
+export default function Home({ data }) {
   return (
     <div className={style.outterwrap}>
       <div className={style.wrap}>
@@ -18,7 +37,7 @@ export default function Home({ allPostsData }) {
             className={style.instraghandler}
             href="https://www.instagram.com/wonderousnightsky/?hl=en"
           >
-            <span className={style.profile_name}>@wonderousnightsky</span>
+            <span className={style.profile_name}>{data.handlerText}</span>
           </a>
         </div>
         <div className={style.links}>
@@ -63,9 +82,7 @@ export default function Home({ allPostsData }) {
           <p>Just a card to display some information ...</p>
         </div> --> */}
         </div>
-        <div className={style.footer}>
-          Copyright © 2021 All Rights Reserved by Wonderousnightsky.
-        </div>
+        <div className={style.footer}>{data.footerText}</div>
       </div>
     </div>
   );
