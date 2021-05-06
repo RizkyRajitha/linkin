@@ -1,5 +1,8 @@
 // import Cors from "cors";
 
+import { parse } from "cookie";
+import { parseSecureToken } from "../lib/crypto";
+
 // // Initializing the cors middleware
 // const cors = Cors({
 //   methods: ["GET", "HEAD", "POST"],
@@ -20,14 +23,34 @@ export function use(req, res, fn) {
 }
 
 export function jwtAuth(req, res, next) {
-  console.log(req.cookie);
-  let token = req.cookie;
-  if (!token) {
+  // console.log(req);
+  console.log(req.headers);
+
+  // console.log(req.cookie);
+  let cookie = req.headers?.cookie;
+  console.log(cookie);
+
+  if (!cookie) {
     // next(new Error("no token"));
     res.status(403).json({ success: false, message: "no auth token found" });
+    return;
     // throw new Error("no token");
   } else {
-    console.log("ok");
+    let token = parse(cookie)["linkin.auth"];
+    let decodedToken = parseSecureToken(token);
+
+    if (!decodedToken) {
+      res.status(500).json({ success: false, message: "auth token error" });
+      return;
+    }
+
+    req.username = decodedToken.username;
+
+    console.log(decodedToken.username);
+    // console.log(tk);
+
+    console.log("middleware ok");
+
     next();
   }
 }

@@ -29,7 +29,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  let token = createSecureToken(data);
+  let token = createSecureToken({ username: data.username });
   console.log(data);
   console.log(token);
   console.log(pass);

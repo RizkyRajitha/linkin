@@ -10,10 +10,14 @@ const pool = new Pool({
 });
 
 let con = {
-  query: (text, params) => {
+  query: ({ text, params = [] }) => {
     return new Promise((resolve, reject) => {
+      if (!text) {
+        reject({ message: "invalid query" });
+        return;
+      }
       const start = Date.now();
-      return pool.query(text, params, (err, res) => {
+      pool.query(text, params, (err, res) => {
         const duration = Date.now() - start;
 
         if (process.env.NODE_ENV !== "production") {
@@ -25,10 +29,11 @@ let con = {
         }
 
         if (err) {
+          // console.log(err);
           reject(err);
           return;
         }
-        console.log(res);
+        // console.log(res.command);
         resolve(res);
 
         // callback(err, res);

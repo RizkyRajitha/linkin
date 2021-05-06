@@ -1,0 +1,94 @@
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+
+.outterwrap {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 15px;
+  height: 100vh;
+  background-color: #121214;
+  font-family: "Montserrat", sans-serif;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+.profile {
+  text-align: center;
+  color: #fff;
+}
+.photo {
+  border-radius: 50%;
+  width: 60%;
+}
+.profile_name {
+  padding: 10px;
+  font-weight: bold;
+  display: block;
+}
+.at {
+  font-size: 13px;
+}
+.links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.links ul li {
+  margin: 14px 0;
+}
+.link {
+  padding: 14px;
+  display: block;
+  background-color: #2c6bed;
+  text-align: left;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: ease all 0.3s;
+  color: #fff;
+}
+.link:hover {
+  opacity: 0.9;
+}
+.card {
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+.card h3 {
+  margin: 0;
+  color: #202024;
+}
+.card p {
+  margin: 5px 0;
+  font-size: 13px;
+  color: #202024;
+}
+
+.instraghandler {
+  text-decoration: dashed;
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.iconpadding {
+  padding: 1rem;
+}
+
+.paypalicon {
+  font-size: 24px;
+  /* padding: 0.4rem; */
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  width: 50%;
+  background-color: #000;
+  text-align: center;
+  color: #fff;
+  font-size: 0.6rem;
+}
