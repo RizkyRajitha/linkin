@@ -3,7 +3,7 @@ import Head from "next/head";
 import style from "../styles/landing.module.css";
 // import { getSortedPostsData } from "../lib/posts";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   // const allPostsData = getSortedPostsData();
   let data;
   try {
