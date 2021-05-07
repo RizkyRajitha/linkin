@@ -6,15 +6,14 @@ import { getPageData } from "../lib/dbfunc";
 import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
 export async function getServerSideProps({ req, res }) {
-  let data = false; //await data.json();
   let cookie = req.headers?.cookie;
+  console.log("cook");
+  console.log(cookie);
   if (!cookie) {
-    // res.send({ success: false, message: "no cookie error" });
     res.setHeader("location", "/admin");
     res.statusCode = 302;
     res.end();
-    return;
-    // return { props: { data } };
+    return { props: { data: "redirecting" } };
   }
 
   let token = parse(cookie)["linkin.auth"];
@@ -22,14 +21,13 @@ export async function getServerSideProps({ req, res }) {
   let decodedToken = parseSecureToken(token);
 
   if (!decodedToken) {
-    // res.send({ success: false, message: "auth token error" });
     res.setHeader("location", "/admin");
     res.statusCode = 302;
     res.end();
-    return;
+    return { props: { data: "redirecting" } };
   }
 
-  data = await getPageData();
+  let data = await getPageData();
   console.log(data);
 
   return { props: { data } };
