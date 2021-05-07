@@ -2,7 +2,7 @@ import Head from "next/head";
 import style from "../styles/landing.module.css";
 const endpoint =
   process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : "http://localhost:3000";
 
 console.log(endpoint);
@@ -12,10 +12,8 @@ export async function getServerSideProps() {
     console.log("endpoint");
     console.log(endpoint);
 
-    console.log(await fetch(`${endpoint}/api/view`).then((res) => res.json()));
-    data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
-      res.json()
-    );
+    // data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
+    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
 
     console.log("nexttt");
 
