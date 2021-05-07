@@ -1,13 +1,38 @@
 // import styles from "../styles/dashboard.module.css";
 
+import { parse } from "cookie";
+import { parseSecureToken } from "../lib/crypto";
+import { getPageData } from "../lib/dbfunc";
 import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
-export async function getServerSideProps() {
-  // let data =  //await fetch("https://jsonplaceholder.typicode.com/todos/1");
-  let jsondata = { wow: 1212 }; //await data.json();
-  console.log(jsondata);
-  // const allPostsData = getSortedPostsData();
-  return { props: { data: [jsondata] } };
+export async function getServerSideProps({ req, res }) {
+  let data = false; //await data.json();
+  let cookie = req.headers?.cookie;
+  if (!cookie) {
+    // res.send({ success: false, message: "no cookie error" });
+    res.setHeader("location", "/admin");
+    res.statusCode = 302;
+    res.end();
+    return;
+    // return { props: { data } };
+  }
+
+  let token = parse(cookie)["linkin.auth"];
+  console.log(token);
+  let decodedToken = parseSecureToken(token);
+
+  if (!decodedToken) {
+    // res.send({ success: false, message: "auth token error" });
+    res.setHeader("location", "/admin");
+    res.statusCode = 302;
+    res.end();
+    return;
+  }
+
+  data = await getPageData();
+  console.log(data);
+
+  return { props: { data } };
 }
 
 const Admin = ({ data }) => {
@@ -15,6 +40,7 @@ const Admin = ({ data }) => {
     <>
       <div className="d-flex">
         {" "}
+        {console.log(data)}
         <div className={styles.Wrapper}>
           s{" "}
           <div
@@ -101,7 +127,7 @@ const Admin = ({ data }) => {
           </div>
         </div>
         <div className={styles.Wrapper}>
-          <Home />
+          <Home {...data} />
         </div>
       </div>
     </>

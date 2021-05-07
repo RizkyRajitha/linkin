@@ -1,14 +1,8 @@
 // import Head from "next/head";
-// import Layout, { siteTitle } from "../components/layout";
 import style from "../styles/homeview.module.css";
-// import { getSortedPostsData } from "../lib/posts";
 
-export function getStaticProps() {
-  // const allPostsData = getSortedPostsData();
-  return { props: { allPostsData: 1212 } };
-}
-
-export default function Home({ allPostsData }) {
+export default function Home({ handlerText }) {
+  console.log(handlerText);
   return (
     <div className={style.outterwrap}>
       <div className={style.wrap}>
@@ -18,7 +12,7 @@ export default function Home({ allPostsData }) {
             className={style.instraghandler}
             href="https://www.instagram.com/wonderousnightsky/?hl=en"
           >
-            <span className={style.profile_name}>@wonderousnightsky</span>
+            <span className={style.profile_name}>{handlerText}</span>
           </a>
         </div>
         <div className={style.links}>
