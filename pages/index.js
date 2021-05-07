@@ -12,7 +12,7 @@ export async function getServerSideProps() {
     console.log("endpoint");
     console.log(endpoint);
 
-    // data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
+    console.log(await fetch(`${endpoint}/api/view`).then((res) => res.json()));
     data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
       res.json()
     );
@@ -30,6 +30,7 @@ export async function getServerSideProps() {
 export default function Home({ data }) {
   return (
     <div className={style.outterwrap}>
+      {console.log(data)}
       <div className={style.wrap}>
         <div className={style.profile}>
           <img src="/images/logo.jpg" className={style.photo} />
@@ -37,7 +38,7 @@ export default function Home({ data }) {
             className={style.instraghandler}
             href="https://www.instagram.com/wonderousnightsky/?hl=en"
           >
-            <span className={style.profile_name}>{data.handlerText}</span>
+            {/* <span className={style.profile_name}>{data.handlerText}</span> */}
           </a>
         </div>
         <div className={style.links}>
@@ -82,7 +83,7 @@ export default function Home({ data }) {
           <p>Just a card to display some information ...</p>
         </div> --> */}
         </div>
-        <div className={style.footer}>{data.footerText}</div>
+        {/* <div className={style.footer}>{data.footerText}</div> */}
       </div>
     </div>
   );
