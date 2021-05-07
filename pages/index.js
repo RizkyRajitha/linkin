@@ -36,7 +36,7 @@ export default function Home({ data }) {
             className={style.instraghandler}
             href="https://www.instagram.com/wonderousnightsky/?hl=en"
           >
-            {/* <span className={style.profile_name}>{data.handlerText}</span> */}
+            <span className={style.profile_name}>{data?.handlerText}</span>
           </a>
         </div>
         <div className={style.links}>
@@ -81,7 +81,7 @@ export default function Home({ data }) {
           <p>Just a card to display some information ...</p>
         </div> --> */}
         </div>
-        {/* <div className={style.footer}>{data.footerText}</div> */}
+        <div className={style.footer}>{data?.footerText}</div>
       </div>
     </div>
   );
