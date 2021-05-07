@@ -73,7 +73,7 @@ const Admin = ({ data }) => {
                   <div className="invalid-feedback">{errors.email.message}</div>
                 )} */}
               </div>
-              <div class="mb-3 ">
+              <div className="mb-3 ">
                 <label className="form-label">Password</label>
                 <input
                   name="password"
