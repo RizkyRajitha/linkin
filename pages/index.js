@@ -12,12 +12,16 @@ export async function getServerSideProps() {
     console.log("endpoint");
     console.log(endpoint);
 
-    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
+    // data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
+    data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
+      res.json()
+    );
+
     console.log("nexttt");
 
     console.log(data);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
   }
 
   return { props: { data } };
