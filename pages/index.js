@@ -1,28 +1,21 @@
 import Head from "next/head";
-// import Layout, { siteTitle } from "../components/layout";
 import style from "../styles/landing.module.css";
-// import { getSortedPostsData } from "../lib/posts";
+const endpoint =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_VERCEL_URL
+    : "http://localhost:3000";
 
+console.log(endpoint);
 export async function getServerSideProps() {
-  // const allPostsData = getSortedPostsData();
   let data;
   try {
-    data = await fetch("http://localhost:3000/api/view").then((res) =>
-      res.json()
-    );
+    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
     console.log("nexttt");
 
     console.log(data);
   } catch (error) {
     console.log(error);
   }
-
-  // .then((resolve) => {
-  //   console.log(resolve);
-  // })
-  // .catch((reject) => {
-  //   console.log(reject);
-  // });
 
   return { props: { data } };
 }
