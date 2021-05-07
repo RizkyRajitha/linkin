@@ -9,6 +9,9 @@ console.log(endpoint);
 export async function getServerSideProps() {
   let data;
   try {
+    console.log("endpoint");
+    console.log(endpoint);
+
     data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
     console.log("nexttt");
 
