@@ -10,7 +10,7 @@ async function handler(req, res) {
     await updatePageData(req.body);
     let updatedPageData = await getPageData();
     console.log(updatedPageData);
-    res.json(updatedPageData);
+    res.json({ success: true, updatedPageData });
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);

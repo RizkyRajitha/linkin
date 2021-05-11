@@ -9,6 +9,11 @@ import { cookieValidate } from "../middleware/middleware";
 import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
 
+const endpoint =
+  process.env.NODE_ENV === "production"
+    ? `${window.location.origin}`
+    : "http://localhost:3000";
+
 export async function getServerSideProps({ req, res }) {
   try {
     cookieValidate(req, res);
@@ -75,7 +80,44 @@ const Admin = ({ data }) => {
     });
 
     console.log(prePageData);
-    setpageData(prePageData);
+
+    try {
+      let res = await fetch(`${endpoint}/api/updatepagedata`, {
+        method: "POST",
+        body: JSON.stringify(prePageData),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      if (!res.success) {
+        setloading(false);
+
+        if (res.message === "invalid_credential") {
+          setshowmsg("User creadentials are not valid");
+        } else {
+          setshowmsg("Server Error");
+        }
+        return;
+      }
+      setloading(false);
+
+      console.log(res);
+      setpageData(res.updatedPageData);
+    } catch (error) {
+      setloading(false);
+
+      console.log(error);
+    }
+  };
+
+  const login = async (data) => {
+    setloading(true);
+    console.log(data);
+    setshowmsg("");
+    let payload = {
+      username: data.username,
+      password: data.password,
+    };
+    console.log(payload);
   };
 
   return (
