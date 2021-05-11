@@ -35,7 +35,7 @@ const Admin = ({ data }) => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm();
+  } = useForm({ defaultValues: data });
 
   // watch((data, { name, type }) => {
   //   console.log(data, name, type);
@@ -75,8 +75,8 @@ const Admin = ({ data }) => {
 
     let keys = Object.keys(data);
 
-    keys.map((x) => {
-      prePageData[x] = data[x];
+    keys.map((item) => {
+      prePageData[item] = data[item];
     });
 
     console.log(prePageData);
@@ -104,8 +104,8 @@ const Admin = ({ data }) => {
       setpageData(res.updatedPageData);
     } catch (error) {
       setloading(false);
-
       console.log(error);
+      setshowmsg("Server Error " + error.message);
     }
   };
 
@@ -129,9 +129,9 @@ const Admin = ({ data }) => {
           <div
             className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-4 `}
           >
-            {/* <div hidden={!showmsg} className="alert alert-danger">
+            <div hidden={!showmsg} className="alert alert-danger">
               {showmsg}
-            </div> */}
+            </div>
             <form onSubmit={(e) => e.preventDefault()}>
               <h3>Edit</h3>
               <div className="mb-3 ">
