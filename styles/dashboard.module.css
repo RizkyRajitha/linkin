@@ -29,6 +29,10 @@
   box-shadow: none;
 }
 
+.previewImage {
+  max-width: 20% !important;
+}
+
 .Wrapper h3 {
   text-align: center;
   margin: 0;

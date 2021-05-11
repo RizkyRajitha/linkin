@@ -236,7 +236,7 @@ const Admin = ({ data }) => {
                 {imageUrl && (
                   <img
                     src={imageUrl}
-                    className="img-thumbnail"
+                    className={styles.previewImage + " img-thumbnail"}
                     alt="image Loading failed"
                   ></img>
                 )}
