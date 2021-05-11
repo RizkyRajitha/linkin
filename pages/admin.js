@@ -10,11 +10,9 @@ const endpoint =
     ? `${window.location.origin}`
     : "http://localhost:3000";
 
-    
 export async function getServerSideProps({ req, res }) {
   try {
     cookieValidateLogin(req, res);
-
     return { props: {} };
   } catch (error) {
     return { props: {} };

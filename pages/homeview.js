@@ -1,31 +1,19 @@
 // import Head from "next/head";
 import style from "../styles/homeview.module.css";
 
-export default function Home({ handlerText, footerText }) {
+export default function Home({
+  handlerText,
+  footerText,
+  bgColor,
+  handlerlink,
+}) {
   console.log(handlerText);
   return (
     <div className={"outterwrap"}>
-      <style jsx>{`
-        .outterwrap {
-          font-family: sans-serif;
-          margin: 0;
-          padding: 15px;
-          height: 100vh;
-          font-family: "Montserrat", sans-serif;
-        }
-      `}</style>
-      <style jsx>{`
-        .outterwrap {
-          background: #eee;
-        }
-      `}</style>
       <div className={style.wrap}>
         <div className={style.profile}>
           <img src="/images/logo.jpg" className={style.photo} />
-          <a
-            className={style.instraghandler}
-            href="https://www.instagram.com/wonderousnightsky/?hl=en"
-          >
+          <a className={style.instraghandler} href={`${handlerlink}`}>
             <span className={style.profile_name}>{handlerText}</span>
           </a>
         </div>
@@ -75,6 +63,16 @@ export default function Home({ handlerText, footerText }) {
           Copyright © 2021 All Rights Reserved by {footerText}.
         </div>
       </div>
+      <style jsx>{`
+        .outterwrap {
+          font-family: sans-serif;
+          margin: 0;
+          padding: 15px;
+          height: 100vh;
+          font-family: "Montserrat", sans-serif;
+          background: ${bgColor};
+        }
+      `}</style>
     </div>
   );
 }

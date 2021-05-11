@@ -32,18 +32,32 @@ const Admin = ({ data }) => {
     watch,
   } = useForm();
 
-  // const watchAllFields = watch();
+  // watch((data, { name, type }) => {
+  //   console.log(data, name, type);
 
-  // useEffect(() => {
   //   let prePageData = { ...pageData };
 
-  //   let keys = Object.keys(watchAllFields);
+  //   let keys = Object.keys(data);
 
   //   keys.map((x) => {
-  //     prePageData[x] = watchAllFields[x];
+  //     prePageData[x] = data[x];
   //   });
 
   //   setpageData(prePageData);
+  // });
+
+  // const watchAllFields = watch();
+
+  // useEffect(() => {
+  // let prePageData = { ...pageData };
+
+  // let keys = Object.keys(watchAllFields);
+
+  // keys.map((x) => {
+  //   prePageData[x] = watchAllFields[x];
+  // });
+
+  // setpageData(prePageData);
   // }, [watchAllFields]);
 
   // useWatch();
@@ -52,7 +66,6 @@ const Admin = ({ data }) => {
 
   const save = async (data) => {
     console.log(data);
-    // console.log(watchAllFields);
     let prePageData = { ...pageData };
 
     let keys = Object.keys(data);
@@ -60,8 +73,8 @@ const Admin = ({ data }) => {
     keys.map((x) => {
       prePageData[x] = data[x];
     });
-    console.log(prePageData);
 
+    console.log(prePageData);
     setpageData(prePageData);
   };
 
@@ -89,15 +102,13 @@ const Admin = ({ data }) => {
                       : "form-control"
                   }
                   placeholder="Enter Handler name"
-                  {...register("handlerText", {
-                    required: "You must specify an Email address",
-                  })}
+                  {...register("handlerText")}
                 />
-                {errors.handlerText && (
+                {/* {errors.handlerText && (
                   <div className="invalid-feedback">
                     {errors.handlerText.message}
                   </div>
-                )}
+                )} */}
               </div>
               <div className="mb-3 ">
                 <label className="form-label">Handler link</label>
@@ -136,7 +147,7 @@ const Admin = ({ data }) => {
                 <input
                   type="color"
                   className="form-control form-control-color"
-                  value="#563d7c"
+                  // value="#563d7c"
                   title="Choose Background color"
                   {...register("bgColor")}
                 />
@@ -155,7 +166,7 @@ const Admin = ({ data }) => {
                 <input
                   type="color"
                   className="form-control form-control-color"
-                  value="#563d7c"
+                  // value="#563d7c"
                   title="Choose Accent color"
                   {...register("accentColor")}
                 />
