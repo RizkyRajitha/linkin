@@ -10,9 +10,7 @@ import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
 
 const endpoint =
-  process.env.NODE_ENV === "production"
-    ? `${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 export async function getServerSideProps({ req, res }) {
   try {

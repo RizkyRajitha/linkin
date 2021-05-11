@@ -6,9 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { cookieValidateLogin } from "../middleware/middleware";
 const endpoint =
-  process.env.NODE_ENV === "production"
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000";
+  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 console.log(endpoint);
 // console.log(process.env.VERCEL_URL);
