@@ -123,11 +123,9 @@ const Admin = ({ data }) => {
   return (
     <>
       <div className="d-flex">
-        {" "}
-        {/* {console.log(data)} */}
         <div className={styles.Wrapper}>
           <div
-            className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-4 `}
+            className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
           >
             <div hidden={!showmsg} className="alert alert-danger">
               {showmsg}
@@ -164,6 +162,10 @@ const Admin = ({ data }) => {
                   placeholder="Enter Handler link"
                   {...register("handlerlink")}
                 />
+                <div className="form-text">
+                  Ex - https://www.instagram.com/wonderousnightsky/
+                </div>
+
                 {errors.handlerlink && (
                   <div className="invalid-feedback">
                     {errors.handlerlink.message}
@@ -213,20 +215,27 @@ const Admin = ({ data }) => {
                   {...register("accentColor")}
                 />
               </div>{" "}
-              {/* <div className="mb-3 ">
-                <label className="form-label">Handler name</label>
+              <div className="mb-3 ">
+                <label className="form-label">Avatar Url</label>
                 <input
                   type="text"
                   className={
-                    errors.handlername
+                    errors.avatarUrl
                       ? "form-control is-invalid"
                       : "form-control"
                   }
-                  placeholder="Enter Handler name"
-                  {...register("handlername")}
+                  placeholder="Enter Avatar Url"
+                  {...register("avatarUrl")}
                 />
+                <div className="form-text">
+                  square images are better. (
+                  <a href="https://imgur.com/" target="_blank">
+                    imgur
+                  </a>{" "}
+                  is preferd)
+                </div>
               </div>{" "}
-              <div className="mb-3 ">
+              {/* <div className="mb-3 ">
                 <label className="form-label">Handler name</label>
                 <input
                   type="text"

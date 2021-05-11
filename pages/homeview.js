@@ -6,14 +6,19 @@ export default function Home({
   footerText,
   bgColor,
   handlerlink,
+  avatarUrl,
 }) {
   console.log(handlerText);
   return (
     <div className={"outterwrap"}>
       <div className={style.wrap}>
         <div className={style.profile}>
-          <img src="/images/logo.jpg" className={style.photo} />
-          <a className={style.instraghandler} href={`${handlerlink}`}>
+          <img src={avatarUrl} className={style.photo} />
+          <a
+            className={style.instraghandler}
+            href={`${handlerlink}`}
+            target="_blank"
+          >
             <span className={style.profile_name}>{handlerText}</span>
           </a>
         </div>
