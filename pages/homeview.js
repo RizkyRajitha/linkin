@@ -1,7 +1,7 @@
 // import Head from "next/head";
 import style from "../styles/homeview.module.css";
 
-export default function Home({ handlerText }) {
+export default function Home({ handlerText, footerText }) {
   console.log(handlerText);
   return (
     <div className={style.outterwrap}>
@@ -58,7 +58,7 @@ export default function Home({ handlerText }) {
         </div> --> */}
         </div>
         <div className={style.footer}>
-          Copyright © 2021 All Rights Reserved by Wonderousnightsky.
+          Copyright © 2021 All Rights Reserved by {footerText}.
         </div>
       </div>
     </div>

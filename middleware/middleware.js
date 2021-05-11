@@ -55,6 +55,31 @@ export function jwtAuth(req, res, next) {
   }
 }
 
+export function cookieValidate(req, res) {
+  let cookie = req.headers?.cookie;
+  console.log("cook");
+  console.log(cookie);
+  if (!cookie) {
+    res.setHeader("location", "/admin");
+    res.statusCode = 302;
+    res.end();
+    return new Error("cookie invalid");
+  }
+
+  let token = parse(cookie)["linkin.auth"];
+  console.log(token);
+  let decodedToken = parseSecureToken(token);
+
+  if (!decodedToken) {
+    res.setHeader("location", "/admin");
+    res.statusCode = 302;
+    res.end();
+    return new Error("cookie invalid");
+  }
+
+  return true;
+}
+
 // export const jwtMiddleare = use(jwtAuth);
 
 // export const useAuth = use(async (req, res, next) => {

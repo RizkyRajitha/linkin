@@ -13,7 +13,6 @@ const Admin = ({}) => {
   const router = useRouter();
   const [showmsg, setshowmsg] = useState("");
   const [loading, setloading] = useState(false);
-  // const [toggled, settoggled] = useState(false);
 
   const {
     register,
@@ -58,28 +57,6 @@ const Admin = ({}) => {
 
       console.log(error);
     }
-
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-
-    //     if (data.success) {
-    //       localStorage.setItem("jwt", data.token);
-    //       props.history.push("/dashboard");
-    //     } else {
-    //       if (data.msg === "invalid_email") {
-    //         setshowmsg("No valid user is available in this email.");
-    //       }
-    // if (data.msg === "invalid_password") {
-    //   setshowmsg("User creadentials are not valid");
-    // }
-    //       setloading(false);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     setloading(false);
-    //   });
   };
 
   return (
@@ -132,15 +109,6 @@ const Admin = ({}) => {
                   </div>
                 )}
               </div>
-
-              {/* <button class="btn btn-primary" type="button" disabled>
-                <span
-                  class="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-                Loading...
-              </button> */}
 
               <button
                 type="submit"

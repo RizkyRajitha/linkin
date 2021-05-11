@@ -1,46 +1,66 @@
 // import styles from "../styles/dashboard.module.css";
 
-import { parse } from "cookie";
-import { parseSecureToken } from "../lib/crypto";
+import { useState, useEffect } from "react";
+import { useForm, useWatch } from "react-hook-form";
+
 import { getPageData } from "../lib/dbfunc";
+import { cookieValidate } from "../middleware/middleware";
+
 import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
+
 export async function getServerSideProps({ req, res }) {
-  let cookie = req.headers?.cookie;
-  console.log("cook");
-  console.log(cookie);
-  if (!cookie) {
-    res.setHeader("location", "/admin");
-    res.statusCode = 302;
-    res.end();
-    return { props: { data: "redirecting" } };
+  try {
+    cookieValidate(req, res);
+    let data = await getPageData();
+    console.log(data);
+    return { props: { data } };
+  } catch (error) {
+    return { props: { error } };
   }
-
-  let token = parse(cookie)["linkin.auth"];
-  console.log(token);
-  let decodedToken = parseSecureToken(token);
-
-  if (!decodedToken) {
-    res.setHeader("location", "/admin");
-    res.statusCode = 302;
-    res.end();
-    return { props: { data: "redirecting" } };
-  }
-
-  let data = await getPageData();
-  console.log(data);
-
-  return { props: { data } };
 }
 
 const Admin = ({ data }) => {
+  const [showmsg, setshowmsg] = useState("");
+  const [loading, setloading] = useState(false);
+  const [pageData, setpageData] = useState(data);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm();
+
+  useEffect(() => {
+    console.log(watch);
+  }, [{ ...watch }]);
+
+  // useWatch();
+
+  // form;
+
+  const save = async (data) => {
+    console.log(data);
+    console.log(watch);
+    let prePageData = { ...pageData };
+
+    let keys = Object.keys(data);
+
+    keys.map((x) => {
+      prePageData[x] = data[x];
+    });
+    console.log(prePageData);
+
+    setpageData(prePageData);
+  };
+
   return (
     <>
       <div className="d-flex">
         {" "}
-        {console.log(data)}
+        {/* {console.log(data)} */}
         <div className={styles.Wrapper}>
-          s{" "}
           <div
             className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-4 `}
           >
@@ -48,52 +68,108 @@ const Admin = ({ data }) => {
               {showmsg}
             </div> */}
             <form onSubmit={(e) => e.preventDefault()}>
-              <h3>Sign In</h3>
+              <h3>Edit</h3>
               <div className="mb-3 ">
-                <label className="form-label">Email address</label>
+                <label className="form-label">Handler name</label>
                 <input
                   type="text"
-                  name="email"
-                  className="form-control"
-                  // className={
-                  //   errors.email ? "form-control is-invalid" : "form-control"
-                  // }
-                  placeholder="Enter email"
-                  // ref={register({
-                  //   required: "You must specify an Email address",
-                  //   pattern: {
-                  //     value: RegExp(
-                  //       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                  //     ),
-                  //     message: "You must specify an valid Email address",
-                  //   },
-                  // })}
+                  className={
+                    errors.handlerText
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Handler name"
+                  {...register("handlerText", {
+                    required: "You must specify an Email address",
+                  })}
                 />
-                {/* {errors.email && (
-                  <div className="invalid-feedback">{errors.email.message}</div>
-                )} */}
+                {errors.handlerText && (
+                  <div className="invalid-feedback">
+                    {errors.handlerText.message}
+                  </div>
+                )}
               </div>
               <div className="mb-3 ">
-                <label className="form-label">Password</label>
+                <label className="form-label">Handler link</label>
                 <input
-                  name="password"
-                  type="password"
-                  className="form-control"
-                  // className={
-                  //   errors.password ? "form-control is-invalid" : "form-control"
-                  // }
-                  // placeholder="Enter Password"
-                  // ref={register({
-                  //   required: "You must specify a password",
-                  // })}
+                  type="text"
+                  className={
+                    errors.handlerlink
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Handler link"
+                  {...register("handlerlink")}
                 />
-                {/* {errors.password && (
+                {errors.handlerlink && (
                   <div className="invalid-feedback">
-                    {errors.password.message}
+                    {errors.handlerlink.message}
                   </div>
-                )} */}
-              </div>
-
+                )}
+              </div>{" "}
+              <div className="mb-3 ">
+                <label className="form-label">Footer text</label>
+                <input
+                  type="text"
+                  className={
+                    errors.footerText
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Footer text"
+                  {...register("footerText")}
+                />
+              </div>{" "}
+              <div className="mb-3 ">
+                <label className="form-label">Background color</label>
+                <input
+                  type="text"
+                  className={
+                    errors.bgColor ? "form-control is-invalid" : "form-control"
+                  }
+                  placeholder="Enter Background color"
+                  {...register("bgColor")}
+                />
+              </div>{" "}
+              <div className="mb-3 ">
+                <label className="form-label">Accent color </label>
+                <input
+                  type="text"
+                  className={
+                    errors.accentColor
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Accent color"
+                  {...register("accentColor")}
+                />
+              </div>{" "}
+              {/* <div className="mb-3 ">
+                <label className="form-label">Handler name</label>
+                <input
+                  type="text"
+                  className={
+                    errors.handlername
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Handler name"
+                  {...register("handlername")}
+                />
+              </div>{" "}
+              <div className="mb-3 ">
+                <label className="form-label">Handler name</label>
+                <input
+                  type="text"
+                  className={
+                    errors.handlername
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Handler name"
+                  {...register("handlername")}
+                />
+              </div> */}
               {/* <button class="btn btn-primary" type="button" disabled>
             <span
               class="spinner-border spinner-border-sm"
@@ -102,11 +178,10 @@ const Admin = ({ data }) => {
             ></span>
             Loading...
           </button> */}
-
               <button
                 type="submit"
                 className="btn btn-primary btn-block"
-                // onClick={handleSubmit(login)}
+                onClick={handleSubmit(save)}
                 // disabled={loading}
               >
                 {/* {loading && (
@@ -116,7 +191,7 @@ const Admin = ({ data }) => {
                     aria-hidden="true"
                   ></span>
                 )} */}
-                Login
+                Save
               </button>
               {/* <p className="forgot-password text-right">
             Forgot <a href="#">password?</a>
@@ -125,7 +200,7 @@ const Admin = ({ data }) => {
           </div>
         </div>
         <div className={styles.Wrapper}>
-          <Home {...data} />
+          <Home {...pageData} />
         </div>
       </div>
     </>
