@@ -7,7 +7,7 @@ import { useState } from "react";
 import { cookieValidateLogin } from "../middleware/middleware";
 const endpoint =
   process.env.NODE_ENV === "production"
-    ? `${window.location.origin}`
+    ? `${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : "http://localhost:3000";
 
 export async function getServerSideProps({ req, res }) {
