@@ -4,10 +4,22 @@ import { useRouter } from "next/router";
 import styles from "../styles/login.module.css";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { cookieValidateLogin } from "../middleware/middleware";
 const endpoint =
   process.env.NODE_ENV === "production"
     ? `${window.location.origin}`
     : "http://localhost:3000";
+
+    
+export async function getServerSideProps({ req, res }) {
+  try {
+    cookieValidateLogin(req, res);
+
+    return { props: {} };
+  } catch (error) {
+    return { props: {} };
+  }
+}
 
 const Admin = ({}) => {
   const router = useRouter();
