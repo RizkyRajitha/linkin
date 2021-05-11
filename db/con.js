@@ -5,8 +5,8 @@ const connectionString =
 
 const pool = new Pool({
   connectionString: connectionString,
-  idleTimeoutMillis: 500,
-  max: 3,
+  idleTimeoutMillis: 200,
+  max: 1,
 });
 
 let con = {

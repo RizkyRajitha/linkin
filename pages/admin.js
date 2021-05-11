@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 const endpoint =
   process.env.NODE_ENV === "production"
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    ? `${window.location.origin}`
     : "http://localhost:3000";
 
 const Admin = ({}) => {
@@ -39,6 +39,8 @@ const Admin = ({}) => {
       }).then((res) => res.json());
 
       if (!res.success) {
+        setloading(false);
+
         if (res.message === "invalid_credential") {
           setshowmsg("User creadentials are not valid");
         } else {
@@ -46,11 +48,14 @@ const Admin = ({}) => {
         }
         return;
       }
+      setloading(false);
 
       router.push("/dashboard");
 
       console.log(res);
     } catch (error) {
+      setloading(false);
+
       console.log(error);
     }
 
@@ -141,15 +146,15 @@ const Admin = ({}) => {
                 type="submit"
                 className="btn btn-primary btn-block"
                 onClick={handleSubmit(login)}
-                // disabled={loading}
+                disabled={loading}
               >
-                {/* {loading && (
+                {loading && (
                   <span
                     class="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                )} */}
+                )}
                 Login
               </button>
               {/* <p className="forgot-password text-right">
