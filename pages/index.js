@@ -2,7 +2,7 @@ import Head from "next/head";
 import style from "../styles/landing.module.css";
 const endpoint =
   process.env.NODE_ENV === "production"
-    ? `${window.location.origin}`
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : "http://localhost:3000";
 
 console.log(endpoint);

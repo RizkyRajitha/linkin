@@ -70,6 +70,8 @@ const Admin = ({ data }) => {
   // form;
 
   const save = async (data) => {
+    setloading(true);
+    setshowmsg("");
     console.log(data);
     let prePageData = { ...pageData };
 
@@ -89,8 +91,6 @@ const Admin = ({ data }) => {
       }).then((res) => res.json());
 
       if (!res.success) {
-        setloading(false);
-
         if (res.message === "invalid_credential") {
           setshowmsg("User creadentials are not valid");
         } else {
@@ -101,6 +101,7 @@ const Admin = ({ data }) => {
       setloading(false);
 
       console.log(res);
+      // setshowmsg("updated");
       setpageData(res.updatedPageData);
     } catch (error) {
       setloading(false);
@@ -112,7 +113,7 @@ const Admin = ({ data }) => {
   const login = async (data) => {
     setloading(true);
     console.log(data);
-    setshowmsg("");
+
     let payload = {
       username: data.username,
       password: data.password,
