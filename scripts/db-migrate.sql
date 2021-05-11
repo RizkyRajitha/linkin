@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "bgColor" varchar,
     "accentColor" varchar,
     "handlerText" varchar,
+    "handlerLink" varchar,
     "footerText" varchar,
     "bgImgUrl" varchar,
     "created_at" timestamp with time zone default current_timestamp

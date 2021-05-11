@@ -126,6 +126,7 @@ const Admin = ({ data }) => {
           <div
             className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
           >
+            {console.log(errors)}
             <div hidden={!showmsg} className="alert alert-danger">
               {showmsg}
             </div>
@@ -159,7 +160,13 @@ const Admin = ({ data }) => {
                       : "form-control"
                   }
                   placeholder="Enter Handler link"
-                  {...register("handlerlink")}
+                  {...register("handlerlink", {
+                    pattern: {
+                      message: "Should be a valid URL",
+                      value:
+                        /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                    },
+                  })}
                 />
                 <div className="form-text">
                   Ex - https://www.instagram.com/wonderousnightsky/
@@ -224,7 +231,13 @@ const Admin = ({ data }) => {
                       : "form-control"
                   }
                   placeholder="Enter Avatar Url"
-                  {...register("avatarUrl")}
+                  {...register("avatarUrl", {
+                    pattern: {
+                      message: "Should be a valid Image URL",
+                      value:
+                        /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                    },
+                  })}
                 />
                 <div className="form-text">
                   square images are better. (
@@ -233,6 +246,11 @@ const Admin = ({ data }) => {
                   </a>{" "}
                   is preferd)
                 </div>
+                {errors.avatarUrl && (
+                  <div className="invalid-feedback">
+                    {errors.avatarUrl.message}
+                  </div>
+                )}
               </div>{" "}
               {/* <div className="mb-3 ">
                 <label className="form-label">Handler name</label>
