@@ -1,7 +1,5 @@
-// import styles from "../styles/dashboard.module.css";
-
 import { useState, useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
@@ -34,6 +32,8 @@ const Admin = ({ data }) => {
     formState: { errors },
     watch,
   } = useForm({ defaultValues: data });
+
+  let imageUrl = watch(["avatarUrl"]);
 
   // watch((data, { name, type }) => {
   //   console.log(data, name, type);
@@ -106,17 +106,6 @@ const Admin = ({ data }) => {
       console.log(error);
       setshowmsg("Server Error " + error.message);
     }
-  };
-
-  const login = async (data) => {
-    setloading(true);
-    console.log(data);
-
-    let payload = {
-      username: data.username,
-      password: data.password,
-    };
-    console.log(payload);
   };
 
   return (
@@ -201,15 +190,6 @@ const Admin = ({ data }) => {
                   title="Choose Background color"
                   {...register("bgColor")}
                 />
-
-                {/* <input
-                  type="text"
-                  className={
-                    errors.bgColor ? "form-control is-invalid" : "form-control"
-                  }
-                  placeholder="Enter Background color"
-                  {...register("bgColor")}
-                /> */}
               </div>{" "}
               <div className="mb-3 ">
                 <label className="form-label">Accent color </label>
@@ -239,6 +219,7 @@ const Admin = ({ data }) => {
                     },
                   })}
                 />
+
                 <div className="form-text">
                   square images are better. (
                   <a href="https://imgur.com/" target="_blank">
@@ -251,46 +232,30 @@ const Admin = ({ data }) => {
                     {errors.avatarUrl.message}
                   </div>
                 )}
+
+                {imageUrl && (
+                  <img
+                    src={imageUrl}
+                    className="img-thumbnail"
+                    alt="image Loading failed"
+                  ></img>
+                )}
               </div>{" "}
-              {/* <div className="mb-3 ">
-                <label className="form-label">Handler name</label>
-                <input
-                  type="text"
-                  className={
-                    errors.handlername
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }
-                  placeholder="Enter Handler name"
-                  {...register("handlername")}
-                />
-              </div> */}
-              {/* <button class="btn btn-primary" type="button" disabled>
-            <span
-              class="spinner-border spinner-border-sm"
-              role="status"
-              aria-hidden="true"
-            ></span>
-            Loading...
-          </button> */}
               <button
                 type="submit"
                 className="btn btn-primary btn-block"
                 onClick={handleSubmit(save)}
-                // disabled={loading}
+                disabled={loading}
               >
-                {/* {loading && (
+                {loading && (
                   <span
                     class="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                )} */}
+                )}
                 Save
               </button>
-              {/* <p className="forgot-password text-right">
-            Forgot <a href="#">password?</a>
-          </p> */}
             </form>
           </div>
         </div>
