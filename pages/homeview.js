@@ -4,7 +4,21 @@ import style from "../styles/homeview.module.css";
 export default function Home({ handlerText, footerText }) {
   console.log(handlerText);
   return (
-    <div className={style.outterwrap}>
+    <div className={"outterwrap"}>
+      <style jsx>{`
+        .outterwrap {
+          font-family: sans-serif;
+          margin: 0;
+          padding: 15px;
+          height: 100vh;
+          font-family: "Montserrat", sans-serif;
+        }
+      `}</style>
+      <style jsx>{`
+        .outterwrap {
+          background: #eee;
+        }
+      `}</style>
       <div className={style.wrap}>
         <div className={style.profile}>
           <img src="/images/logo.jpg" className={style.photo} />

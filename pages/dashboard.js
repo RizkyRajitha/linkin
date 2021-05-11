@@ -32,9 +32,19 @@ const Admin = ({ data }) => {
     watch,
   } = useForm();
 
-  useEffect(() => {
-    console.log(watch);
-  }, [{ ...watch }]);
+  // const watchAllFields = watch();
+
+  // useEffect(() => {
+  //   let prePageData = { ...pageData };
+
+  //   let keys = Object.keys(watchAllFields);
+
+  //   keys.map((x) => {
+  //     prePageData[x] = watchAllFields[x];
+  //   });
+
+  //   setpageData(prePageData);
+  // }, [watchAllFields]);
 
   // useWatch();
 
@@ -42,7 +52,7 @@ const Admin = ({ data }) => {
 
   const save = async (data) => {
     console.log(data);
-    console.log(watch);
+    // console.log(watchAllFields);
     let prePageData = { ...pageData };
 
     let keys = Object.keys(data);
@@ -122,25 +132,31 @@ const Admin = ({ data }) => {
               </div>{" "}
               <div className="mb-3 ">
                 <label className="form-label">Background color</label>
+
                 <input
+                  type="color"
+                  className="form-control form-control-color"
+                  value="#563d7c"
+                  title="Choose Background color"
+                  {...register("bgColor")}
+                />
+
+                {/* <input
                   type="text"
                   className={
                     errors.bgColor ? "form-control is-invalid" : "form-control"
                   }
                   placeholder="Enter Background color"
                   {...register("bgColor")}
-                />
+                /> */}
               </div>{" "}
               <div className="mb-3 ">
                 <label className="form-label">Accent color </label>
                 <input
-                  type="text"
-                  className={
-                    errors.accentColor
-                      ? "form-control is-invalid"
-                      : "form-control"
-                  }
-                  placeholder="Enter Accent color"
+                  type="color"
+                  className="form-control form-control-color"
+                  value="#563d7c"
+                  title="Choose Accent color"
                   {...register("accentColor")}
                 />
               </div>{" "}
