@@ -12,8 +12,11 @@ const endpoint =
 
 export async function getServerSideProps({ req, res }) {
   try {
-    cookieValidate(req, res);
-    let data = await getPageData();
+    let valid = cookieValidate(req, res);
+    let data;
+    if (valid) {
+      data = await getPageData();
+    }
     console.log(data);
     return { props: { data } };
   } catch (error) {

@@ -82,14 +82,6 @@ export function cookieValidate(req, res) {
 
 export function cookieValidateLogin(req, res) {
   let cookie = req.headers?.cookie;
-  console.log("cook");
-  console.log(cookie);
-  // if (!cookie) {
-  //   res.setHeader("location", "/admin");
-  //   res.statusCode = 302;
-  //   res.end();
-  //   return new Error("cookie invalid");
-  // }
 
   let token = parse(cookie)["linkin.auth"];
   console.log(token);
@@ -99,17 +91,9 @@ export function cookieValidateLogin(req, res) {
     res.setHeader("location", "/dashboard");
     res.statusCode = 302;
     res.end();
-    // return new Error("cookie invalid");
   }
 
-  // if (!decodedToken) {
-  //   res.setHeader("location", "/admin");
-  //   res.statusCode = 302;
-  //   res.end();
-  //   return new Error("cookie invalid");
-  // }
-
-  return true;
+  // return true;
 }
 
 // export const jwtMiddleare = use(jwtAuth);
