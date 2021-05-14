@@ -74,6 +74,7 @@ export default function Home({
           margin: 0;
           padding: 15px;
           height: 100vh;
+          width: 50vw;
           font-family: "Montserrat", sans-serif;
           background: ${bgColor};
         }

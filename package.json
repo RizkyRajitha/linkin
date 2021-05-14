@@ -19,6 +19,7 @@
     "pg": "^8.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-hook-form": "^7.4.2"
+    "react-hook-form": "^7.4.2",
+    "react-tabs": "^3.2.2"
   }
 }

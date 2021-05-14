@@ -1,0 +1,64 @@
+.Wrapper {
+  width: 100%;
+  background: #1c8ef9 !important;
+  min-height: 100vh;
+  display: flex;
+  font-weight: 400;
+  font-family: "Fira Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: left;
+}
+
+.Inner {
+  /* width: 450px; */
+  margin: auto;
+  background: #ffffff;
+  box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+  padding-top: 40px;
+  padding-right: 30px;
+  padding-bottom: 45px;
+  padding-left: 30px;
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.Wrapper .form-control:focus {
+  border-color: #167bff;
+  box-shadow: none;
+}
+
+.previewImage {
+  max-width: 20% !important;
+}
+
+.Wrapper h3 {
+  text-align: center;
+  margin: 0;
+  line-height: 1;
+  padding-bottom: 20px;
+}
+
+.custom-control-label {
+  font-weight: 400;
+}
+
+/* .forgot-password,
+  .forgot-password a {
+    text-align: right;
+    font-size: 13px;
+    padding-top: 10px;
+    color: #7f7d7d;
+    margin: 0;
+  }
+  
+  .forgot-password a {
+    color: #167bff;
+  } */
+
+.divider-social {
+  margin-top: 10px;
+  border-top: 1px solid #d0cbcb;
+  padding-top: 10px;
+}
