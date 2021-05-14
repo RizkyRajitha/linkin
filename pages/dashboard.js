@@ -8,7 +8,6 @@ import { cookieValidate } from "../middleware/middleware";
 // import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
 
-import DataForm from "../components/form";
 import Formwrapper from "../components/formwrapper";
 
 const endpoint =

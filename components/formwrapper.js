@@ -1,11 +1,18 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 // import "react-tabs/style/react-tabs.css";
 
-import DataForm from "./form";
+import GenaralForm from "./genaralform";
 
 import styles from "../styles/formwrapper.module.css";
 
+import { useRouter } from "next/router";
+
+const endpoint =
+  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
+
 function Formwrapper({ data }) {
+  const router = useRouter();
+
   const logout = async () => {
     try {
       let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
@@ -36,12 +43,12 @@ function Formwrapper({ data }) {
         <div className="container">
           <Tabs>
             <TabList>
-              <Tab>Title 1</Tab>
+              <Tab>Genaral Data</Tab>
               <Tab>Title 2</Tab>
             </TabList>
 
             <TabPanel>
-              <DataForm data={data} />
+              <GenaralForm data={data} />
             </TabPanel>
             <TabPanel>
               <h2>Any content 2</h2>

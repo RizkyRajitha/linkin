@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import styles from "../styles/dataform.module.css";
+import styles from "../styles/genaralform.module.css";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const DataForm = ({ data }) => {
+const GenaralForm = ({ data }) => {
   const router = useRouter();
 
   const [showmsg, setshowmsg] = useState("");
@@ -108,7 +108,7 @@ const DataForm = ({ data }) => {
             {showmsg}
           </div>
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Edit</h3>
+            <h3>Genaral Data</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler name</label>
               <input
@@ -247,4 +247,4 @@ const DataForm = ({ data }) => {
     </>
   );
 };
-export default DataForm;
+export default GenaralForm;
