@@ -34,14 +34,14 @@ const Admin = ({ data }) => {
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm({ defaultValues: data });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  //   watch,
+  // } = useForm({ defaultValues: data });
 
-  let imageUrl = watch(["avatarUrl"]);
+  // let imageUrl = watch(["avatarUrl"]);
 
   // watch((data, { name, type }) => {
   //   console.log(data, name, type);
@@ -75,52 +75,57 @@ const Admin = ({ data }) => {
 
   // form;
 
-  const save = async (data) => {
-    setloading(true);
-    setshowmsg("");
+  // const save = async (data) => {
+  //   setloading(true);
+  //   setshowmsg("");
+  //   console.log(data);
+  //   let prePageData = { ...pageData };
+
+  //   let keys = Object.keys(data);
+
+  //   keys.map((item) => {
+  //     prePageData[item] = data[item];
+  //   });
+
+  //   console.log(prePageData);
+
+  //   try {
+  //     let res = await fetch(`${endpoint}/api/updatepagedata`, {
+  //       method: "POST",
+  //       body: JSON.stringify(prePageData),
+  //       headers: { "Content-Type": "application/json" },
+  //     }).then((res) => res.json());
+
+  //     if (!res.success) {
+  //       if (res.message === "invalid_credential") {
+  //         setshowmsg("User creadentials are not valid");
+  //       } else {
+  //         setshowmsg("Server Error");
+  //       }
+  //       return;
+  //     }
+  //     setloading(false);
+
+  //     console.log(res);
+  //     // setshowmsg("updated");
+  //     setpageData(res.updatedPageData);
+  //   } catch (error) {
+  //     setloading(false);
+  //     console.log(error);
+  //     setshowmsg("Server Error " + error.message);
+  //   }
+  // };
+
+  const update = (data) => {
     console.log(data);
-    let prePageData = { ...pageData };
-
-    let keys = Object.keys(data);
-
-    keys.map((item) => {
-      prePageData[item] = data[item];
-    });
-
-    console.log(prePageData);
-
-    try {
-      let res = await fetch(`${endpoint}/api/updatepagedata`, {
-        method: "POST",
-        body: JSON.stringify(prePageData),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      if (!res.success) {
-        if (res.message === "invalid_credential") {
-          setshowmsg("User creadentials are not valid");
-        } else {
-          setshowmsg("Server Error");
-        }
-        return;
-      }
-      setloading(false);
-
-      console.log(res);
-      // setshowmsg("updated");
-      setpageData(res.updatedPageData);
-    } catch (error) {
-      setloading(false);
-      console.log(error);
-      setshowmsg("Server Error " + error.message);
-    }
+    setpageData(data);
   };
 
   return (
     <>
       <div className="d-flex">
         {/* <div className={styles.Wrapper}> */}
-        <Formwrapper data={data} />
+        <Formwrapper data={data} update={update} />
         <Home {...pageData} />
         {/* </div> */}
       </div>

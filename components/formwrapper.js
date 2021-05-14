@@ -10,9 +10,9 @@ import { useRouter } from "next/router";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ data }) {
+function Formwrapper({ data, update }) {
   const router = useRouter();
-
+  console.log(update);
   const logout = async () => {
     try {
       let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
@@ -48,7 +48,7 @@ function Formwrapper({ data }) {
             </TabList>
 
             <TabPanel>
-              <GenaralForm data={data} />
+              <GenaralForm data={data} update={update} />
             </TabPanel>
             <TabPanel>
               <h2>Any content 2</h2>

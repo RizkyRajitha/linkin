@@ -7,7 +7,7 @@ import styles from "../styles/genaralform.module.css";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const GenaralForm = ({ data }) => {
+const GenaralForm = ({ data, update }) => {
   const router = useRouter();
 
   const [showmsg, setshowmsg] = useState("");
@@ -85,7 +85,7 @@ const GenaralForm = ({ data }) => {
         return;
       }
       setloading(false);
-
+      update(res.updatedPageData);
       console.log(res);
       // setshowmsg("updated");
       setpageData(res.updatedPageData);
@@ -103,7 +103,7 @@ const GenaralForm = ({ data }) => {
         <div
           className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
         >
-          {console.log(errors)}
+          {/* {console.log(errors)} */}
           <div hidden={!showmsg} className="alert alert-danger">
             {showmsg}
           </div>
@@ -166,7 +166,7 @@ const GenaralForm = ({ data }) => {
                 {...register("footerText")}
               />
             </div>{" "}
-            <div className="mb-3 ">
+            {/* <div className="mb-3 ">
               <label className="form-label">Background color</label>
 
               <input
@@ -186,7 +186,7 @@ const GenaralForm = ({ data }) => {
                 title="Choose Accent color"
                 {...register("accentColor")}
               />
-            </div>{" "}
+            </div>{" "} */}
             <div className="mb-3 ">
               <label className="form-label">Avatar Url</label>
               <input
