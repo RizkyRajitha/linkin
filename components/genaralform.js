@@ -1,18 +1,11 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
 
 import styles from "../styles/genaralform.module.css";
 
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
-
-const GenaralForm = ({ data, update }) => {
-  const router = useRouter();
-
-  const [showmsg, setshowmsg] = useState("");
-  const [loading, setloading] = useState(false);
-  const [pageData, setpageData] = useState(data);
+const GenaralForm = ({ data, update, loading }) => {
+  // const [showmsg, setshowmsg] = useState("");
+  // const [loading, setloading] = useState(false);
 
   const {
     register,
@@ -34,7 +27,10 @@ const GenaralForm = ({ data, update }) => {
   //     prePageData[x] = data[x];
   //   });
 
-  //   setpageData(prePageData);
+  //   // clearTimeout(updateTimeout);
+  //   // let updateTimeout = setTimeout(() => {
+  //   //   update(prePageData);
+  //   // }, 500);
   // });
 
   // const watchAllFields = watch();
@@ -55,46 +51,46 @@ const GenaralForm = ({ data, update }) => {
 
   // form;
 
-  const save = async (data) => {
-    setloading(true);
-    setshowmsg("");
-    console.log(data);
-    let prePageData = { ...pageData };
+  // const save = async (data) => {
+  //   setloading(true);
+  //   setshowmsg("");
+  //   console.log(data);
+  //   let prePageData = { ...pageData };
 
-    let keys = Object.keys(data);
+  //   let keys = Object.keys(data);
 
-    keys.map((item) => {
-      prePageData[item] = data[item];
-    });
+  //   keys.map((item) => {
+  //     prePageData[item] = data[item];
+  //   });
 
-    console.log(prePageData);
+  //   console.log(prePageData);
 
-    try {
-      let res = await fetch(`${endpoint}/api/updatepagedata`, {
-        method: "POST",
-        body: JSON.stringify(prePageData),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
+  //   try {
+  //     let res = await fetch(`${endpoint}/api/updatepagedata`, {
+  //       method: "POST",
+  //       body: JSON.stringify(prePageData),
+  //       headers: { "Content-Type": "application/json" },
+  //     }).then((res) => res.json());
 
-      if (!res.success) {
-        if (res.message === "invalid_credential") {
-          setshowmsg("User creadentials are not valid");
-        } else {
-          setshowmsg("Server Error");
-        }
-        return;
-      }
-      setloading(false);
-      update(res.updatedPageData);
-      console.log(res);
-      // setshowmsg("updated");
-      setpageData(res.updatedPageData);
-    } catch (error) {
-      setloading(false);
-      console.log(error);
-      setshowmsg("Server Error " + error.message);
-    }
-  };
+  //     if (!res.success) {
+  //       if (res.message === "invalid_credential") {
+  //         setshowmsg("User creadentials are not valid");
+  //       } else {
+  //         setshowmsg("Server Error");
+  //       }
+  //       return;
+  //     }
+  //     setloading(false);
+  //     update(res.updatedPageData);
+  //     console.log(res);
+  //     // setshowmsg("updated");
+  //     setpageData(res.updatedPageData);
+  //   } catch (error) {
+  //     setloading(false);
+  //     console.log(error);
+  //     setshowmsg("Server Error " + error.message);
+  //   }
+  // };
 
   return (
     <>
@@ -103,10 +99,6 @@ const GenaralForm = ({ data, update }) => {
         <div
           className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
         >
-          {/* {console.log(errors)} */}
-          <div hidden={!showmsg} className="alert alert-danger">
-            {showmsg}
-          </div>
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Genaral Data</h3>
             <div className="mb-3 ">
@@ -228,7 +220,7 @@ const GenaralForm = ({ data, update }) => {
             <button
               type="submit"
               className="btn btn-primary btn-block"
-              onClick={handleSubmit(save)}
+              onClick={handleSubmit(update)}
               disabled={loading}
             >
               {loading && (
@@ -243,7 +235,6 @@ const GenaralForm = ({ data, update }) => {
           </form>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 };

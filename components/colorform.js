@@ -2,46 +2,24 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import { getPageData } from "../lib/dbfunc";
-import { cookieValidate } from "../middleware/middleware";
-
-// import styles from "../styles/dashboard.module.css";
-import Home from "./homeview";
-
-import Formwrapper from "../components/formwrapper";
+import styles from "../styles/genaralform.module.css";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-export async function getServerSideProps({ req, res }) {
-  try {
-    let valid = cookieValidate(req, res);
-    let data;
-    if (valid) {
-      data = await getPageData();
-    }
-    console.log(data);
-    return { props: { data } };
-  } catch (error) {
-    return { props: { error } };
-  }
-}
-
-const Admin = ({ data }) => {
+const ColorForm = ({ data, update }) => {
   const router = useRouter();
 
   const [showmsg, setshowmsg] = useState("");
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
 
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   watch,
-  // } = useForm({ defaultValues: data });
-
-  // let imageUrl = watch(["avatarUrl"]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm({ defaultValues: data });
 
   // watch((data, { name, type }) => {
   //   console.log(data, name, type);
@@ -105,9 +83,9 @@ const Admin = ({ data }) => {
         return;
       }
       setloading(false);
-
+      update(res.updatedPageData);
       console.log(res);
-      setshowmsg("updated");
+      // setshowmsg("updated");
       setpageData(res.updatedPageData);
     } catch (error) {
       setloading(false);
@@ -116,27 +94,59 @@ const Admin = ({ data }) => {
     }
   };
 
-  const update = (data) => {
-    console.log(data);
-    save(data);
-    // setpageData(data);
-    // setloading(true);
-  };
-
   return (
     <>
-      <div className="d-flex">
-        {/* <div className={styles.Wrapper}> */}
-        <Formwrapper
-          data={pageData}
-          update={update}
-          loading={loading}
-          showmsg={showmsg}
-        />
-        <Home {...pageData} />
-        {/* </div> */}
+      {/* <div className="d-flex"> */}
+      <div className={styles.Wrapper}>
+        <div
+          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
+        >
+          {/* {console.log(errors)} */}
+          <div hidden={!showmsg} className="alert alert-danger">
+            {showmsg}
+          </div>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <h3>Colors</h3>
+            <div className="mb-3 ">
+              <label className="form-label">Background color</label>
+
+              <input
+                type="color"
+                className="form-control form-control-color"
+                // value="#563d7c"
+                title="Choose Background color"
+                {...register("bgColor")}
+              />
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Accent color </label>
+              <input
+                type="color"
+                className="form-control form-control-color"
+                // value="#563d7c"
+                title="Choose Accent color"
+                {...register("accentColor")}
+              />
+            </div>{" "}
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              onClick={handleSubmit(save)}
+              disabled={loading}
+            >
+              {loading && (
+                <span
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+              )}
+              Save
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
 };
-export default Admin;
+export default ColorForm;

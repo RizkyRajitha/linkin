@@ -1,19 +1,19 @@
-import GenaralForm from "./genaralform";
-
-import styles from "../styles/formwrapper.module.css";
-
 import { useRouter } from "next/router";
 import { useState } from "react";
+
+import styles from "../styles/formwrapper.module.css";
+import ColorForm from "./colorform";
+
+import GenaralForm from "./genaralform";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ data, update }) {
+function Formwrapper({ data, update, loading, showmsg }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
 
-  console.log(update);
   const logout = async () => {
     try {
       let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
@@ -50,7 +50,9 @@ function Formwrapper({ data, update }) {
             >
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className={`btn btn-outline-primary ${
+                  activeForm === "genaralForm" ? "active" : ""
+                } `}
                 onClick={() => {
                   setactiveForm("genaralForm");
                 }}
@@ -59,9 +61,11 @@ function Formwrapper({ data, update }) {
               </button>
               <button
                 type="button"
-                className="btn btn-outline-primary"
+                className={`btn btn-outline-primary ${
+                  activeForm === "colorForm" ? "active" : ""
+                } `}
                 onClick={() => {
-                  setactiveForm("colorsForm");
+                  setactiveForm("colorForm");
                 }}
               >
                 Colors
@@ -71,9 +75,14 @@ function Formwrapper({ data, update }) {
               </button>
             </div>
           </div>
-
+          <div hidden={!showmsg} className="alert alert-danger">
+            {showmsg}
+          </div>
           {activeForm === "genaralForm" && (
-            <GenaralForm data={data} update={update} />
+            <GenaralForm data={data} update={update} loading={loading} />
+          )}
+          {activeForm === "colorForm" && (
+            <ColorForm data={data} update={update} loading={loading} />
           )}
         </div>
 
