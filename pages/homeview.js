@@ -7,22 +7,19 @@ export default function Home({
   bgColor,
   handlerlink,
   avatarUrl,
+  accentColor,
 }) {
   console.log(handlerText);
   return (
-    <div className={"outterwrap"}>
+    <div className="outterwrap">
       <div className={style.wrap}>
         <div className={style.profile}>
           <img src={avatarUrl} className={style.photo} />
-          <a
-            className={style.instraghandler}
-            href={`${handlerlink}`}
-            target="_blank"
-          >
+          <a className="instraghandler" href={`${handlerlink}`} target="_blank">
             <span className={style.profile_name}>{handlerText}</span>
           </a>
         </div>
-        <div className={style.links}>
+        {/* <div className={style.links}>
           <ul>
             <li>
               <a
@@ -58,12 +55,12 @@ export default function Home({
                 DM for collaborations
               </a>
             </li>
-          </ul>
-          {/* <!-- <div className="card">
+          </ul> */}
+        {/* <!-- <div className="card">
           <h3>Card</h3>
           <p>Just a card to display some information ...</p>
         </div> --> */}
-        </div>
+        {/* </div> */}
         <div className={style.footer}>
           Copyright © 2021 All Rights Reserved by {footerText}.
         </div>
@@ -77,6 +74,16 @@ export default function Home({
           width: 50vw;
           font-family: "Montserrat", sans-serif;
           background: ${bgColor};
+        }
+
+        .instraghandler {
+          text-decoration: dashed;
+          color: #fff;
+          font-size: 1.4rem;
+        }
+
+        a:hover {
+          color: ${accentColor};
         }
       `}</style>
     </div>

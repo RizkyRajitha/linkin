@@ -8,7 +8,9 @@ const ColorForm = ({ data, update, loading }) => {
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm({ defaultValues: data });
+  } = useForm({
+    defaultValues: { bgColor: data.bgColor, accentColor: data.accentColor },
+  });
 
   // watch((data, { name, type }) => {
   //   console.log(data, name, type);

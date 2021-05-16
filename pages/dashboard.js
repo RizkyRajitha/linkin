@@ -31,20 +31,20 @@ const Admin = ({ data }) => {
     setloading(true);
     setshowmsg("");
     console.log(data);
-    let prePageData = { ...pageData };
+    // let prePageData = { ...pageData };
 
-    let keys = Object.keys(data);
+    // let keys = Object.keys(data);
 
-    keys.map((item) => {
-      prePageData[item] = data[item];
-    });
+    // keys.map((item) => {
+    //   prePageData[item] = data[item];
+    // });
 
-    console.log(prePageData);
+    // console.log(prePageData);
 
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
-        body: JSON.stringify(prePageData),
+        body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 

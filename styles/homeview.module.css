@@ -59,12 +59,6 @@
   color: #202024;
 }
 
-.instraghandler {
-  text-decoration: dashed;
-  color: #fff;
-  font-size: 1.4rem;
-}
-
 .iconpadding {
   padding: 1rem;
 }
@@ -80,7 +74,7 @@
   bottom: 0;
   padding: 1rem;
   width: 50%;
-  background-color: #000;
+  /* background-color: #000; */
   text-align: center;
   color: #fff;
   font-size: 0.6rem;
