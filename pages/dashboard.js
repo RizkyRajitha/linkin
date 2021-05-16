@@ -1,13 +1,8 @@
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import { useState } from "react";
 
 import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
-
-// import styles from "../styles/dashboard.module.css";
 import Home from "./homeview";
-
 import Formwrapper from "../components/formwrapper";
 
 const endpoint =
@@ -28,52 +23,9 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Admin = ({ data }) => {
-  const router = useRouter();
-
   const [showmsg, setshowmsg] = useState("");
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
-
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  //   watch,
-  // } = useForm({ defaultValues: data });
-
-  // let imageUrl = watch(["avatarUrl"]);
-
-  // watch((data, { name, type }) => {
-  //   console.log(data, name, type);
-
-  //   let prePageData = { ...pageData };
-
-  //   let keys = Object.keys(data);
-
-  //   keys.map((x) => {
-  //     prePageData[x] = data[x];
-  //   });
-
-  //   setpageData(prePageData);
-  // });
-
-  // const watchAllFields = watch();
-
-  // useEffect(() => {
-  // let prePageData = { ...pageData };
-
-  // let keys = Object.keys(watchAllFields);
-
-  // keys.map((x) => {
-  //   prePageData[x] = watchAllFields[x];
-  // });
-
-  // setpageData(prePageData);
-  // }, [watchAllFields]);
-
-  // useWatch();
-
-  // form;
 
   const save = async (data) => {
     setloading(true);
@@ -116,17 +68,15 @@ const Admin = ({ data }) => {
     }
   };
 
+  //TODO : add live update
   const update = (data) => {
-    console.log(data);
+    // console.log(data);
     save(data);
-    // setpageData(data);
-    // setloading(true);
   };
 
   return (
     <>
       <div className="d-flex">
-        {/* <div className={styles.Wrapper}> */}
         <Formwrapper
           data={pageData}
           update={update}
@@ -134,7 +84,6 @@ const Admin = ({ data }) => {
           showmsg={showmsg}
         />
         <Home {...pageData} />
-        {/* </div> */}
       </div>
     </>
   );

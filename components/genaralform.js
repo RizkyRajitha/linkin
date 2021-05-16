@@ -1,12 +1,8 @@
-import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import styles from "../styles/genaralform.module.css";
 
 const GenaralForm = ({ data, update, loading }) => {
-  // const [showmsg, setshowmsg] = useState("");
-  // const [loading, setloading] = useState(false);
-
   const {
     register,
     handleSubmit,
@@ -51,50 +47,8 @@ const GenaralForm = ({ data, update, loading }) => {
 
   // form;
 
-  // const save = async (data) => {
-  //   setloading(true);
-  //   setshowmsg("");
-  //   console.log(data);
-  //   let prePageData = { ...pageData };
-
-  //   let keys = Object.keys(data);
-
-  //   keys.map((item) => {
-  //     prePageData[item] = data[item];
-  //   });
-
-  //   console.log(prePageData);
-
-  //   try {
-  //     let res = await fetch(`${endpoint}/api/updatepagedata`, {
-  //       method: "POST",
-  //       body: JSON.stringify(prePageData),
-  //       headers: { "Content-Type": "application/json" },
-  //     }).then((res) => res.json());
-
-  //     if (!res.success) {
-  //       if (res.message === "invalid_credential") {
-  //         setshowmsg("User creadentials are not valid");
-  //       } else {
-  //         setshowmsg("Server Error");
-  //       }
-  //       return;
-  //     }
-  //     setloading(false);
-  //     update(res.updatedPageData);
-  //     console.log(res);
-  //     // setshowmsg("updated");
-  //     setpageData(res.updatedPageData);
-  //   } catch (error) {
-  //     setloading(false);
-  //     console.log(error);
-  //     setshowmsg("Server Error " + error.message);
-  //   }
-  // };
-
   return (
     <>
-      {/* <div className="d-flex"> */}
       <div className={styles.Wrapper}>
         <div
           className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
@@ -158,27 +112,6 @@ const GenaralForm = ({ data, update, loading }) => {
                 {...register("footerText")}
               />
             </div>{" "}
-            {/* <div className="mb-3 ">
-              <label className="form-label">Background color</label>
-
-              <input
-                type="color"
-                className="form-control form-control-color"
-                // value="#563d7c"
-                title="Choose Background color"
-                {...register("bgColor")}
-              />
-            </div>{" "}
-            <div className="mb-3 ">
-              <label className="form-label">Accent color </label>
-              <input
-                type="color"
-                className="form-control form-control-color"
-                // value="#563d7c"
-                title="Choose Accent color"
-                {...register("accentColor")}
-              />
-            </div>{" "} */}
             <div className="mb-3 ">
               <label className="form-label">Avatar Url</label>
               <input
