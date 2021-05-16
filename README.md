@@ -12,7 +12,14 @@ genaral
 links
 colors
 
-fix update function with object keys`
+fix update function with object keys 
+
+
+seperate alert componnet 
+
+
+
+`
 
 
 issues - too many connections persists  -->

@@ -78,12 +78,12 @@ const GenaralForm = ({ data, update, loading }) => {
               <input
                 type="text"
                 className={
-                  errors.handlerlink
+                  errors.handlerLink
                     ? "form-control is-invalid"
                     : "form-control"
                 }
                 placeholder="Enter Handler link"
-                {...register("handlerlink", {
+                {...register("handlerLink", {
                   pattern: {
                     message: "Should be a valid URL",
                     value:
@@ -95,9 +95,9 @@ const GenaralForm = ({ data, update, loading }) => {
                 Ex - https://www.instagram.com/wonderousnightsky/
               </div>
 
-              {errors.handlerlink && (
+              {errors.handlerLink && (
                 <div className="invalid-feedback">
-                  {errors.handlerlink.message}
+                  {errors.handlerLink.message}
                 </div>
               )}
             </div>{" "}
