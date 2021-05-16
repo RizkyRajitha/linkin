@@ -1,17 +1,18 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-// import "react-tabs/style/react-tabs.css";
-
 import GenaralForm from "./genaralform";
 
 import styles from "../styles/formwrapper.module.css";
 
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 function Formwrapper({ data, update }) {
   const router = useRouter();
+
+  const [activeForm, setactiveForm] = useState("genaralForm");
+
   console.log(update);
   const logout = async () => {
     try {
@@ -41,36 +42,39 @@ function Formwrapper({ data, update }) {
         </div>
 
         <div className="container">
-          <Tabs>
-            <TabList>
-              <Tab>Genaral Data</Tab>
-              <Tab>Title 2</Tab>
-            </TabList>
-
-            <TabPanel>
-              <GenaralForm data={data} update={update} />
-            </TabPanel>
-            <TabPanel>
-              <h2>Any content 2</h2>
-            </TabPanel>
-          </Tabs>{" "}
-          {/* <ul className="nav nav-tabs">
-            <li className="nav-item">
-              <a className="nav-link" aria-current="page" href="#">
-                Active
-              </a>
-            </li>
-          </ul>
-          <div className="tab-content" id="myTabContent">
+          <div className="container d-flex justify-content-center">
             <div
-              className="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
+              class="btn-group"
+              role="group"
+              aria-label="Basic outlined example"
             >
-              1
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => {
+                  setactiveForm("genaralForm");
+                }}
+              >
+                Genaral
+              </button>
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => {
+                  setactiveForm("colorsForm");
+                }}
+              >
+                Colors
+              </button>
+              <button type="button" className="btn btn-outline-primary">
+                Right
+              </button>
             </div>
-          </div> */}
+          </div>
+
+          {activeForm === "genaralForm" && (
+            <GenaralForm data={data} update={update} />
+          )}
         </div>
 
         {/* <DataForm data={data} /> */}

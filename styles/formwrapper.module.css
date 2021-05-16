@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   width: 50vw;
-  background: #1c8ef9 !important;
+  /* background: #1c8ef9 !important; */
   overflow-y: scroll;
 }
 
@@ -11,4 +11,6 @@
   margin: 10px;
 }
 
-
+.buttongroupbg {
+  background-color: #fff;
+}
