@@ -2,24 +2,6 @@
 
 
 
-.wrap {
-  width: 100%;
-  max-width: 320px;
-  margin: 0 auto;
-}
-.profile {
-  text-align: center;
-  color: #fff;
-}
-.photo {
-  border-radius: 50%;
-  width: 60%;
-}
-.profile_name {
-  padding: 10px;
-  font-weight: bold;
-  display: block;
-}
 .at {
   font-size: 13px;
 }

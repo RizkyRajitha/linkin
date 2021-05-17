@@ -48,7 +48,7 @@ const ColorForm = ({ data, update, loading }) => {
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
+          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Colors</h3>

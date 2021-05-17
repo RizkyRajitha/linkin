@@ -75,9 +75,13 @@ function Formwrapper({ data, update, loading, showmsg }) {
               </button>
             </div>
           </div>
-          <div hidden={!showmsg} className="alert alert-danger">
-            {showmsg}
+
+          <div className="mt-4">
+            <div hidden={!showmsg} className="alert alert-danger">
+              {showmsg}
+            </div>
           </div>
+
           {activeForm === "genaralForm" && (
             <GenaralForm data={data} update={update} loading={loading} />
           )}

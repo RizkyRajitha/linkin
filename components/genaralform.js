@@ -51,7 +51,7 @@ const GenaralForm = ({ data, update, loading }) => {
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-6 `}
+          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Genaral Data</h3>
@@ -113,6 +113,58 @@ const GenaralForm = ({ data, update, loading }) => {
               />
             </div>{" "}
             <div className="mb-3 ">
+              <label className="form-label">Footer text</label>
+              <input
+                type="number"
+                className={
+                  errors.handlerFontSize
+                    ? "form-control is-invalid"
+                    : "form-control"
+                }
+                placeholder="Enter handler font size"
+                {...register("handlerFontSize", {
+                  // max: { message: "Width must be below 100%", value: 100 },
+                  min: { message: "Width must be above 1px", value: 1 },
+                })}
+              />
+              {errors.handlerFontSize && (
+                <div className="invalid-feedback">
+                  {errors.handlerFontSize.message}
+                </div>
+              )}
+            </div>{" "}
+            {/* <div className="mb-3 ">
+              <label className="form-label">Footer text</label>
+              <input
+                type="text"
+                className={
+                  errors.footerText ? "form-control is-invalid" : "form-control"
+                }
+                placeholder="Enter Footer text"
+                {...register("footerText")}
+              />
+            </div>{" "} */}
+            <div className="mb-3 ">
+              <label className="form-label">Avatar width</label>
+              <input
+                type="number"
+                className={
+                  errors.avatarwidth
+                    ? "form-control is-invalid"
+                    : "form-control"
+                }
+                placeholder="Enter Avatar width "
+                {...register("avatarwidth", {
+                  max: { message: "Width must be below 100%", value: 100 },
+                })}
+              />
+              {errors.avatarwidth && (
+                <div className="invalid-feedback">
+                  {errors.avatarwidth.message}
+                </div>
+              )}
+            </div>{" "}
+            <div className="mb-3 ">
               <label className="form-label">Avatar Url</label>
               <input
                 type="text"
@@ -121,11 +173,11 @@ const GenaralForm = ({ data, update, loading }) => {
                 }
                 placeholder="Enter Avatar Url"
                 {...register("avatarUrl", {
-                  pattern: {
-                    message: "Should be a valid Image URL",
-                    value:
-                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
-                  },
+                  // pattern: {
+                  //   message: "Should be a valid Image URL",
+                  //   value:
+                  //     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  // },
                 })}
               />
 

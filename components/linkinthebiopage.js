@@ -8,16 +8,18 @@ export default function Home({
   handlerLink,
   avatarUrl,
   accentColor,
+  avatarwidth,
+  handlerFontSize,
   preview = false,
 }) {
   console.log(handlerText);
   return (
     <div className="outterwrap">
-      <div className={style.wrap}>
-        <div className={style.profile}>
-          <img src={avatarUrl} className={style.photo} />
-          <a className="instraghandler" href={`${handlerLink}`} target="_blank">
-            <span className={style.profile_name}>{handlerText}</span>
+      <div className="wrap">
+        <div className="profile">
+          <img src={avatarUrl} className="photo" />
+          <a className="handlerLink" href={`${handlerLink}`} target="_blank">
+            <span className="handlerText">{handlerText}</span>
           </a>
         </div>
         {/* <div className={style.links}>
@@ -62,9 +64,9 @@ export default function Home({
           <p>Just a card to display some information ...</p>
         </div> --> */}
         {/* </div> */}
-        <div className="footer">
+        {/* <div className="footer">
           Copyright © 2021 All Rights Reserved by {footerText}.
-        </div>
+        </div> */}
       </div>
       <style jsx>{`
         .outterwrap {
@@ -76,7 +78,7 @@ export default function Home({
           font-family: "Montserrat", sans-serif;
           background: ${bgColor};
         }
-        .instraghandler {
+        .handlerLink {
           text-decoration: dashed;
           color: #fff;
           font-size: 1.4rem;
@@ -96,6 +98,26 @@ export default function Home({
           color: #fff;
           font-size: 0.6rem;
           width: ${preview ? "50%" : "100%"};
+        }
+
+        .wrap {
+          width: 100%;
+          max-width: 320px;
+          margin: 0 auto;
+        }
+        .profile {
+          text-align: center;
+          color: #fff;
+        }
+        .photo {
+          border-radius: 50%;
+          width: ${avatarwidth}%;
+        }
+        .handlerText {
+          padding: 10px;
+          font-weight: bold;
+          display: block;
+          font-size: ${handlerFontSize}px;
         }
       `}</style>
     </div>
