@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
-import Home from "../components/home";
+import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
 
 const endpoint =

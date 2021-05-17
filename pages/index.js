@@ -1,17 +1,15 @@
 import Head from "next/head";
 
-import LinkinTheBioPage from "../components/home";
+import LinkinTheBioPage from "../components/linkinthebiopage";
+import { getPageData } from "../lib/dbfunc";
 
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
-
-console.log(endpoint);
+// console.log(endpoint);
 export async function getServerSideProps() {
   let data;
   try {
     // data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
-    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
-
+    //    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
+    data = await getPageData();
     console.log("nexttt");
 
     console.log(data);
