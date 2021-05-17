@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
-import Home from "./homeview";
+import Home from "../components/home";
 import Formwrapper from "../components/formwrapper";
 
 const endpoint =
@@ -83,7 +83,9 @@ const Admin = ({ data }) => {
           loading={loading}
           showmsg={showmsg}
         />
-        <Home {...pageData} />
+        <div className="w-50">
+          <Home {...pageData} preview={true} />
+        </div>
       </div>
     </>
   );

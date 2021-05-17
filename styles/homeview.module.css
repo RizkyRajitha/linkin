@@ -72,9 +72,9 @@
   position: absolute;
   right: 0;
   bottom: 0;
+  left: 0;
   padding: 1rem;
-  width: 50%;
-  /* background-color: #000; */
+  background-color: #000;
   text-align: center;
   color: #fff;
   font-size: 0.6rem;
