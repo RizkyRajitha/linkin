@@ -113,7 +113,7 @@ const GenaralForm = ({ data, update, loading }) => {
               />
             </div>{" "}
             <div className="mb-3 ">
-              <label className="form-label">Footer text</label>
+              <label className="form-label">Handler Font Size</label>
               <input
                 type="number"
                 className={
@@ -124,7 +124,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter handler font size"
                 {...register("handlerFontSize", {
                   // max: { message: "Width must be below 100%", value: 100 },
-                  min: { message: "Width must be above 1px", value: 1 },
+                  min: { message: "Font Size must be above 1px", value: 1 },
                 })}
               />
               {errors.handlerFontSize && (
@@ -182,11 +182,14 @@ const GenaralForm = ({ data, update, loading }) => {
               />
 
               <div className="form-text">
-                square images are better. (
+                square images are better. can be used (
                 <a href="https://imgur.com/" target="_blank">
                   imgur
                 </a>{" "}
-                is preferd)
+                <a href="https://cloudinary.com/" target="_blank">
+                  cloudinary
+                </a>{" "}
+                )
               </div>
               {errors.avatarUrl && (
                 <div className="invalid-feedback">

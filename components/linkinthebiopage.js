@@ -92,11 +92,6 @@ export default function Home({
         }
         .handlerLink {
           text-decoration: dashed;
-          color: #fff;
-          font-size: 1.4rem;
-        }
-        a:hover {
-          color: ${accentColor};
         }
 
         .footer {
@@ -112,25 +107,35 @@ export default function Home({
           width: ${preview ? "50%" : "100%"};
         }
 
+        a {
+          color: ${handlerFontColor};
+        }
+
+        a:hover {
+          color: ${accentColor};
+        }
+
         .wrap {
           width: 100%;
           max-width: 320px;
           margin: 0 auto;
         }
+
         .profile {
           text-align: center;
           color: #fff;
         }
+
         .photo {
           border-radius: 50%;
           width: ${avatarwidth}%;
         }
+
         .handlerText {
           padding: 10px;
           font-weight: bold;
           display: block;
           font-size: ${handlerFontSize}px;
-          color: ${handlerFontColor};
         }
       `}</style>
     </div>

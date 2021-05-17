@@ -9,7 +9,11 @@ const ColorForm = ({ data, update, loading }) => {
     formState: { errors },
     watch,
   } = useForm({
-    defaultValues: { bgColor: data.bgColor, accentColor: data.accentColor },
+    defaultValues: {
+      bgColor: data.bgColor,
+      accentColor: data.accentColor,
+      handlerFontColor: data.handlerFontColor,
+    },
   });
 
   // watch((data, { name, type }) => {
@@ -71,6 +75,16 @@ const ColorForm = ({ data, update, loading }) => {
                 // value="#563d7c"
                 title="Choose Accent color"
                 {...register("accentColor")}
+              />
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Handler Font color </label>
+              <input
+                type="color"
+                className="form-control form-control-color"
+                // value="#563d7c"
+                title="Choose handler Font color"
+                {...register("handlerFontColor")}
               />
             </div>{" "}
             <button
