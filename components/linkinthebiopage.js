@@ -1,6 +1,6 @@
-// import Head from "next/head";
-import style from "../styles/homeview.module.css";
+import { isEmptry } from "../lib/side";
 
+// import Head from "next/head";
 export default function Home({
   handlerText,
   footerText,
@@ -10,9 +10,21 @@ export default function Home({
   accentColor,
   avatarwidth,
   handlerFontSize,
+  handlerFontColor,
   preview = false,
 }) {
-  console.log(handlerText);
+  avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
+  handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
+  handlerFontColor = isEmptry(handlerFontColor) ? "#000" : handlerFontColor;
+  bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
+
+  console.log(
+    handlerText,
+    handlerFontColor,
+    handlerFontSize,
+    bgColor,
+    avatarwidth
+  );
   return (
     <div className="outterwrap">
       <div className="wrap">
@@ -118,6 +130,7 @@ export default function Home({
           font-weight: bold;
           display: block;
           font-size: ${handlerFontSize}px;
+          color: ${handlerFontColor};
         }
       `}</style>
     </div>

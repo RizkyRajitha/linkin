@@ -19,10 +19,12 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "handlerLink" varchar,
     "footerText" varchar,
     "bgImgUrl" varchar,
+    "handlerFontSize" varchar,
+    "handlerFontColor" varchar,    
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into pagedata ("id", "handlerText") values (1 , 'linkin') ON CONFLICT (id) DO NOTHING;
+insert into pagedata ("id", "handlerText" , "avatarUrl" ) values (1 , 'linkin' , '') ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS  "linkdata" (
     "id" serial primary key,
