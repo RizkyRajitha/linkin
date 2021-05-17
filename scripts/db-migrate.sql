@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into pagedata ("id", "handlerText" , "avatarUrl" ) values (1 , 'linkin' , '') ON CONFLICT (id) DO NOTHING;
+insert into pagedata ("id", "handlerText" , "avatarUrl" ) values (1 , 'linkin' , 'https://pbs.twimg.com/profile_images/1372981799366713351/bzCQoygt_400x400.jpg') ON CONFLICT (id) DO NOTHING;
 
 CREATE TABLE IF NOT EXISTS  "linkdata" (
     "id" serial primary key,

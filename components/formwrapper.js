@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import styles from "../styles/formwrapper.module.css";
+import Alert from "./alert";
 import ColorForm from "./colorform";
 
 import GenaralForm from "./genaralform";
@@ -9,7 +10,7 @@ import GenaralForm from "./genaralform";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ data, update, loading, showmsg }) {
+function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
@@ -75,12 +76,7 @@ function Formwrapper({ data, update, loading, showmsg }) {
               </button>
             </div>
           </div>
-
-          <div className="mt-4">
-            <div hidden={!showmsg} className="alert alert-danger">
-              {showmsg}
-            </div>
-          </div>
+          {showmsg && <Alert showmsg={showmsg} type={showmsgtype} />}
 
           {activeForm === "genaralForm" && (
             <GenaralForm data={data} update={update} loading={loading} />

@@ -24,22 +24,16 @@ export async function getServerSideProps({ req, res }) {
 
 const Admin = ({ data }) => {
   const [showmsg, setshowmsg] = useState("");
+  const [showmsgtype, setshowmsgtype] = useState("danger");
+
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
 
   const save = async (data) => {
     setloading(true);
     setshowmsg("");
+    setshowmsgtype("");
     console.log(data);
-    // let prePageData = { ...pageData };
-
-    // let keys = Object.keys(data);
-
-    // keys.map((item) => {
-    //   prePageData[item] = data[item];
-    // });
-
-    // console.log(prePageData);
 
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
@@ -49,6 +43,7 @@ const Admin = ({ data }) => {
       }).then((res) => res.json());
 
       if (!res.success) {
+        setshowmsgtype("danger");
         if (res.message === "invalid_credential") {
           setshowmsg("User creadentials are not valid");
         } else {
@@ -59,11 +54,14 @@ const Admin = ({ data }) => {
       setloading(false);
 
       console.log(res);
+
       setshowmsg("updated");
+      setshowmsgtype("success");
       setpageData(res.updatedPageData);
     } catch (error) {
       setloading(false);
       console.log(error);
+      setshowmsgtype("danger");
       setshowmsg("Server Error " + error.message);
     }
   };
@@ -82,6 +80,7 @@ const Admin = ({ data }) => {
           update={update}
           loading={loading}
           showmsg={showmsg}
+          showmsgtype={showmsgtype}
         />
         <div className="w-50">
           <Home {...pageData} preview={true} />
