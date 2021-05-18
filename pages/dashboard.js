@@ -74,7 +74,7 @@ const Admin = ({ data }) => {
 
   return (
     <>
-      <div className="d-flex">
+      <div className="d-flex dashboardwrapepr">
         <Formwrapper
           data={pageData}
           update={update}
@@ -82,10 +82,24 @@ const Admin = ({ data }) => {
           showmsg={showmsg}
           showmsgtype={showmsgtype}
         />
-        <div className="w-50">
+        <div className="preview">
           <Home {...pageData} preview={true} />
         </div>
       </div>
+      <style jsx>{`
+        .preview {
+          width: 50vw;
+        }
+
+        @media (max-width: 768px) {
+          .dashboardwrapepr {
+            flex-direction: column;
+          }
+          .preview {
+            width: 100vw;
+          }
+        }
+      `}</style>
     </>
   );
 };

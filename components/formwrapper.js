@@ -46,7 +46,7 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
         <div className="container">
           <div className="container d-flex justify-content-center">
             <div
-              class="btn-group"
+              className="btn-group"
               role="group"
               aria-label="Basic outlined example"
             >
