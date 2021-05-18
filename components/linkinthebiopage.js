@@ -1,6 +1,6 @@
 import { isEmptry } from "../lib/side";
 
-// import Head from "next/head";
+import { defaultHead } from "next/head";
 
 export default function Home({
   handlerText,
@@ -33,6 +33,20 @@ export default function Home({
   );
   return (
     <div className="outterwrap">
+      <defaultHead>
+        <title> {`${handlerText}'s Link In The Bio Page`}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="og:description"
+          content={`${handlerText}'s Link In The Bio Page`}
+        />
+        <meta name="og:site_name" content={handlerText} />
+        <meta
+          name="og:title"
+          content={`${handlerText}'s Link In The Bio Page`}
+        />
+        <meta name="og:image" content={avatarUrl} />
+      </defaultHead>
       <div className="wrap">
         <div className="profile">
           <img src={avatarUrl} className="photo" />
