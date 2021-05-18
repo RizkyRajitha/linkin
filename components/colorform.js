@@ -1,14 +1,9 @@
 import { useForm } from "react-hook-form";
 
-import styles from "../styles/genaralform.module.css";
+import styles from "../styles/form.module.css";
 
 const ColorForm = ({ data, update, loading }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm({
+  const { register, handleSubmit } = useForm({
     defaultValues: {
       bgColor: data.bgColor,
       accentColor: data.accentColor,
@@ -16,43 +11,11 @@ const ColorForm = ({ data, update, loading }) => {
     },
   });
 
-  // watch((data, { name, type }) => {
-  //   console.log(data, name, type);
-
-  //   let prePageData = { ...pageData };
-
-  //   let keys = Object.keys(data);
-
-  //   keys.map((x) => {
-  //     prePageData[x] = data[x];
-  //   });
-
-  //   setpageData(prePageData);
-  // });
-
-  // const watchAllFields = watch();
-
-  // useEffect(() => {
-  // let prePageData = { ...pageData };
-
-  // let keys = Object.keys(watchAllFields);
-
-  // keys.map((x) => {
-  //   prePageData[x] = watchAllFields[x];
-  // });
-
-  // setpageData(prePageData);
-  // }, [watchAllFields]);
-
-  // useWatch();
-
-  // form;
-
   return (
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-8 `}
+          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Colors</h3>
@@ -62,7 +25,6 @@ const ColorForm = ({ data, update, loading }) => {
               <input
                 type="color"
                 className="form-control form-control-color"
-                // value="#563d7c"
                 title="Choose Background color"
                 {...register("bgColor")}
               />
@@ -72,7 +34,6 @@ const ColorForm = ({ data, update, loading }) => {
               <input
                 type="color"
                 className="form-control form-control-color"
-                // value="#563d7c"
                 title="Choose Accent color"
                 {...register("accentColor")}
               />
@@ -82,7 +43,6 @@ const ColorForm = ({ data, update, loading }) => {
               <input
                 type="color"
                 className="form-control form-control-color"
-                // value="#563d7c"
                 title="Choose handler Font color"
                 {...register("handlerFontColor")}
               />

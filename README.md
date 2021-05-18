@@ -14,8 +14,9 @@ colors
 
 fix update function with object keys 
 
-
 seperate alert componnet 
+
+photo boarder changeble . 
 
 
 

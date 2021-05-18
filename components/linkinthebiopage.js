@@ -1,9 +1,9 @@
 import { isEmptry } from "../lib/side";
 
 // import Head from "next/head";
+
 export default function Home({
   handlerText,
-  footerText,
   bgColor,
   handlerLink,
   avatarUrl,
@@ -97,6 +97,7 @@ export default function Home({
           font-family: ${fontFamily};
           background: ${bgColor};
         }
+
         .handlerLink {
           text-decoration: dashed;
         }
@@ -136,6 +137,8 @@ export default function Home({
         .photo {
           border-radius: 50%;
           width: ${avatarwidth}%;
+          padding: 4px;
+          background: #fff;
         }
 
         .handlerText {

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-import styles from "../styles/genaralform.module.css";
+import styles from "../styles/form.module.css";
 
 const FontForm = ({ data, update, loading }) => {
   const {
@@ -14,7 +14,7 @@ const FontForm = ({ data, update, loading }) => {
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-8 col-md-8 col-lg-6 col-xl-6 col-xxl-8 `}
+          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Font Data</h3>
