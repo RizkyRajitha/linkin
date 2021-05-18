@@ -101,7 +101,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 </div>
               )}
             </div>{" "}
-            <div className="mb-3 ">
+            {/* <div className="mb-3 ">
               <label className="form-label">Footer text</label>
               <input
                 type="text"
@@ -111,28 +111,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Footer text"
                 {...register("footerText")}
               />
-            </div>{" "}
-            <div className="mb-3 ">
-              <label className="form-label">Handler Font Size</label>
-              <input
-                type="number"
-                className={
-                  errors.handlerFontSize
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                placeholder="Enter handler font size"
-                {...register("handlerFontSize", {
-                  // max: { message: "Width must be below 100%", value: 100 },
-                  min: { message: "Font Size must be above 1px", value: 1 },
-                })}
-              />
-              {errors.handlerFontSize && (
-                <div className="invalid-feedback">
-                  {errors.handlerFontSize.message}
-                </div>
-              )}
-            </div>{" "}
+            </div>{" "} */}
             {/* <div className="mb-3 ">
               <label className="form-label">Footer text</label>
               <input

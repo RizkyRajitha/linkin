@@ -6,6 +6,7 @@ import Alert from "./alert";
 import ColorForm from "./colorform";
 
 import GenaralForm from "./genaralform";
+import FontForm from "./fontform";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
@@ -71,18 +72,29 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
               >
                 Colors
               </button>
-              <button type="button" className="btn btn-outline-primary">
-                Right
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                className={`btn btn-outline-primary ${
+                  activeForm === "fontForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("fontForm");
+                }}
+              >
+                Fonts
               </button>
             </div>
           </div>
           {showmsg && <Alert showmsg={showmsg} type={showmsgtype} />}
-
           {activeForm === "genaralForm" && (
             <GenaralForm data={data} update={update} loading={loading} />
           )}
           {activeForm === "colorForm" && (
             <ColorForm data={data} update={update} loading={loading} />
+          )}{" "}
+          {activeForm === "fontForm" && (
+            <FontForm data={data} update={update} loading={loading} />
           )}
         </div>
 

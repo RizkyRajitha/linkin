@@ -36,3 +36,4 @@ CREATE TABLE IF NOT EXISTS  "linkdata" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
+ALTER TABLE "pagedata" ADD COLUMN "fontFamily" varchar , ADD COLUMN "fontUrl" varchar;

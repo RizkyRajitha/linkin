@@ -11,12 +11,18 @@ export default function Home({
   avatarwidth,
   handlerFontSize,
   handlerFontColor,
+  fontFamily,
+  fontUrl,
   preview = false,
 }) {
   avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
   handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
   handlerFontColor = isEmptry(handlerFontColor) ? "#000" : handlerFontColor;
   bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
+  fontFamily = isEmptry(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
+  fontUrl = isEmptry(fontUrl)
+    ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+    : fontUrl;
 
   console.log(
     handlerText,
@@ -81,13 +87,14 @@ export default function Home({
         </div> */}
       </div>
       <style jsx>{`
+        @import url("${fontUrl}");
+
         .outterwrap {
-          font-family: sans-serif;
           margin: 0;
           padding: 15px;
           height: 100vh;
           width: 100%;
-          font-family: "Montserrat", sans-serif;
+          font-family: ${fontFamily};
           background: ${bgColor};
         }
         .handlerLink {
