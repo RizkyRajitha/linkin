@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
@@ -9,10 +9,15 @@ const LinksForm = ({ data, update, loading }) => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
-  } = useForm({ defaultValues: [{ link: "asasa", name: "asasa" }] });
+    control,
+  } = useForm({ defaultValues: { links: [{ link: "asasa", name: "asasa" }] } });
 
-  const [links, setlinks] = useState([{ link: "asasa", name: "asasa" }]);
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "links",
+  });
+
+  // const [links, setlinks] = useState([{ link: "asasa", name: "asasa" }]);
 
   const save = (linkdata) => {
     console.log("links linkdata");
@@ -32,19 +37,26 @@ const LinksForm = ({ data, update, loading }) => {
               className="btn btn-primary btn-block"
               // onClick={handleSubmit(update)}
               onClick={() => {
-                setlinks((pre) => {
-                  return [...pre, { link: "", name: "" }];
-                });
+                // setlinks((pre) => {
+                //   return [...pre, { link: "", name: "" }];
+                // });
+                append({ link: "", name: "" });
               }}
             >
               Add new
             </button>
 
-            {links.length &&
-              links.map((ele, index) => {
-                console.log(ele);
-
-                return <LinkCard id={index} register={register} />;
+            {fields.length &&
+              fields.map((item, index) => {
+                console.log(item);
+                return (
+                  <LinkCard
+                    id={index}
+                    item={item}
+                    errors={errors}
+                    register={register}
+                  />
+                );
               })}
 
             {/* {links.length &&
