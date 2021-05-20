@@ -37,3 +37,5 @@ CREATE TABLE IF NOT EXISTS  "linkdata" (
 );
 
 ALTER TABLE "pagedata" ADD COLUMN IF NOT EXISTS "fontFamily" varchar , ADD COLUMN IF NOT EXISTS "fontUrl" varchar;
+
+ALTER TABLE "linkdata" ADD COLUMN IF NOT EXISTS "active" boolean ;

@@ -3,8 +3,9 @@ import { useState } from "react";
 
 import styles from "../styles/formwrapper.module.css";
 import Alert from "./alert";
-import ColorForm from "./colorform";
 
+import ColorForm from "./colorform";
+import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
@@ -83,6 +84,30 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
                 }}
               >
                 Fonts
+              </button>{" "}
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                className={`btn btn-outline-primary ${
+                  activeForm === "fontForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("linksForm");
+                }}
+              >
+                Links
+              </button>{" "}
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                className={`btn btn-outline-primary ${
+                  activeForm === "fontForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("fontForm");
+                }}
+              >
+                TODO
               </button>
             </div>
           </div>
@@ -95,6 +120,9 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
           )}{" "}
           {activeForm === "fontForm" && (
             <FontForm data={data} update={update} loading={loading} />
+          )}
+          {activeForm === "linksForm" && (
+            <LinksForm data={data} update={update} loading={loading} />
           )}
         </div>
 

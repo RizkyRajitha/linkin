@@ -28,7 +28,7 @@ const Admin = ({ data }) => {
 
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
-
+  console.log(data);
   const save = async (data) => {
     setloading(true);
     setshowmsg("");
