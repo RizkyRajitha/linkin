@@ -20,6 +20,17 @@ photo boarder changeble .
 
 
 
+
+
+add update link route
+
+add delete link route
+
+
+
+better save stratergy
+
+
 `
 
 
