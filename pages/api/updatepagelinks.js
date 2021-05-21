@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { updatePageData, getPageData } from "../../lib/dbfunc";
+import { getPageData, updateLink } from "../../lib/dbfunc";
 
 async function handler(req, res) {
   // Run the middleware
@@ -7,9 +7,9 @@ async function handler(req, res) {
   try {
     await use(req, res, jwtAuth);
     console.log(req.body);
-    await updatePageData(req.body);
+    await updateLink(req.body);
     let updatedPageData = await getPageData();
-    console.log(updatedPageData);
+    // console.log(updatedPageData);
     res.json(updatedPageData);
   } catch (error) {
     console.log(error.message);
