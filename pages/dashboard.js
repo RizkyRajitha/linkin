@@ -23,54 +23,15 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Admin = ({ data, linkDataSS }) => {
-  const [showmsg, setshowmsg] = useState("");
-  const [showmsgtype, setshowmsgtype] = useState("danger");
-
-  const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
   const [linkData, setlinkData] = useState(linkDataSS);
   console.log(data);
-  const save = async (data) => {
-    setloading(true);
-    setshowmsg("");
-    setshowmsgtype("");
-    console.log(data);
-
-    try {
-      let res = await fetch(`${endpoint}/api/updatepagedata`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      if (!res.success) {
-        setshowmsgtype("danger");
-        if (res.message === "invalid_credential") {
-          setshowmsg("User creadentials are not valid");
-        } else {
-          setshowmsg("Server Error");
-        }
-        return;
-      }
-      setloading(false);
-
-      console.log(res);
-
-      setshowmsg("updated");
-      setshowmsgtype("success");
-      setpageData(res.updatedPageData);
-    } catch (error) {
-      setloading(false);
-      console.log(error);
-      setshowmsgtype("danger");
-      setshowmsg("Server Error " + error.message);
-    }
-  };
 
   //TODO : add live update
   const update = (data) => {
-    // console.log(data);
-    save(data);
+    console.log(data);
+    // save(data);
+    setpageData(data.pageData);
   };
 
   const updateLinks = (data) => {
@@ -86,9 +47,6 @@ const Admin = ({ data, linkDataSS }) => {
           linkData={linkData}
           update={update}
           updateLinks={updateLinks}
-          loading={loading}
-          showmsg={showmsg}
-          showmsgtype={showmsgtype}
         />
         <div className="preview">
           <Home {...pageData} preview={true} />

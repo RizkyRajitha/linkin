@@ -12,18 +12,63 @@ import FontForm from "./fontform";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({
-  data,
-  linkData,
-  update,
-  loading,
-  showmsg,
-  showmsgtype,
-  updateLinks,
-}) {
+function Formwrapper({ data, linkData, update, updateLinks }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
+
+  const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
+  // const [showmsgtype, setshowmsgtype] = useState("danger");
+  const [loading, setloading] = useState(false);
+
+  const save = async (data) => {
+    setloading(true);
+    setshowAlert({
+      msg: "",
+      type: "",
+    });
+    console.log(data);
+
+    try {
+      let res = await fetch(`${endpoint}/api/updatepagedata`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      if (!res.success) {
+        if (res.message === "invalid_credential") {
+          setshowAlert({
+            msg: "User creadentials are not valid",
+            type: "danger",
+          });
+        } else {
+          setshowAlert({
+            msg: "Server Error",
+            type: "danger",
+          });
+        }
+        return;
+      }
+      setloading(false);
+
+      console.log(res);
+      setshowAlert({
+        msg: "updated",
+        type: "success",
+      });
+
+      // setpageData(res.updatedPageData);
+      update(res.updatedPageData);
+    } catch (error) {
+      setloading(false);
+      console.log(error);
+      setshowAlert({
+        msg: "Server Error",
+        type: "Server Error " + error.message,
+      });
+    }
+  };
 
   const logout = async () => {
     try {
@@ -37,7 +82,7 @@ function Formwrapper({
       setshowmsg("Logout Error " + error.message);
     }
   };
-  console.log(linkData);
+
   return (
     <>
       <div className={styles.dashform}>
@@ -119,15 +164,15 @@ function Formwrapper({
               </button> */}
             </div>
           </div>
-          {showmsg && <Alert showmsg={showmsg} type={showmsgtype} />}
+          {showAlert.msg && <Alert {...showAlert} />}
           {activeForm === "genaralForm" && (
-            <GenaralForm data={data} update={update} loading={loading} />
+            <GenaralForm data={data} update={save} loading={loading} />
           )}
           {activeForm === "colorForm" && (
-            <ColorForm data={data} update={update} loading={loading} />
+            <ColorForm data={data} update={save} loading={loading} />
           )}{" "}
           {activeForm === "fontForm" && (
-            <FontForm data={data} update={update} loading={loading} />
+            <FontForm data={data} update={save} loading={loading} />
           )}
           {activeForm === "linksForm" && (
             <LinksForm
