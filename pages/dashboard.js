@@ -50,7 +50,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
           updatedLinkData={updatedLinkData}
         />
         <div className="preview">
-          <Home {...pageData} preview={true} />
+          <Home {...pageData} linkData={linkData} preview={true} />
         </div>
       </div>
       <style jsx>{`

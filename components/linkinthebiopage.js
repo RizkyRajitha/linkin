@@ -14,6 +14,7 @@ export default function Home({
   fontFamily,
   fontUrl,
   preview = false,
+  linkData,
 }) {
   avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
   handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
@@ -31,6 +32,7 @@ export default function Home({
     bgColor,
     avatarwidth
   );
+  console.log(linkData);
   return (
     <div className="outterwrap">
       <Head>
@@ -68,6 +70,24 @@ export default function Home({
           <a className="handlerLink" href={`${handlerLink}`} target="_blank">
             <span className="handlerText">{handlerText}</span>
           </a>
+        </div>
+        <div className="links">
+          <ul>
+            {linkData.map((element, id) => {
+              return (
+                <li>
+                  <a
+                    href={`${element.linkUrl}`}
+                    className="link"
+                    target="_blank"
+                  >
+                    {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
+                    {element.displayText}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
         {/* <div className={style.links}>
           <ul>
@@ -175,6 +195,28 @@ export default function Home({
           font-weight: bold;
           display: block;
           font-size: ${handlerFontSize}px;
+        }
+
+        .links ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
+        .links ul li {
+          margin: 14px 0;
+        }
+        .link {
+          padding: 14px;
+          display: block;
+          background-color: #2c6bed;
+          text-align: left;
+          text-decoration: none;
+          border-radius: 4px;
+          transition: ease all 0.3s;
+          color: #fff;
+        }
+        .link:hover {
+          opacity: 0.9;
         }
       `}</style>
     </div>
