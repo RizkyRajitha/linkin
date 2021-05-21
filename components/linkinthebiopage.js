@@ -1,6 +1,6 @@
 import { isEmptry } from "../lib/side";
 
-import Head from "next/head";
+// import Head from "next/head";
 
 export default function Home({
   handlerText,
@@ -35,21 +35,6 @@ export default function Home({
   console.log(linkData);
   return (
     <div className="outterwrap">
-      <Head>
-        {" "}
-        <title> {`${handlerText}'s Link In The Bio Page`}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta
-          name="og:description"
-          content={`${handlerText}'s Link In The Bio Page`}
-        />
-        <meta name="og:site_name" content={handlerText} />
-        <meta
-          name="og:title"
-          content={`${handlerText}'s Link In The Bio Page`}
-        />
-        <meta name="og:image" content={avatarUrl} />
-      </Head>
       {/* <defaultHead>
         <title> {`${handlerText}'s Link In The Bio Page`}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -75,7 +60,7 @@ export default function Home({
           <ul>
             {linkData.map((element, id) => {
               return (
-                <li>
+                <li key={id}>
                   <a
                     href={`${element.linkUrl}`}
                     className="link"

@@ -4,9 +4,7 @@ import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
-
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
+import Head from "next/head";
 
 export async function getServerSideProps({ req, res }) {
   try {
@@ -42,6 +40,14 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
 
   return (
     <>
+      <Head>
+        {" "}
+        <title> {`Linkin Dashboard`}</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="og:description" content={`Linkin Dashboard`} />
+        <meta name="og:site_name" content="Linkin" />
+        <meta name="og:title" content={`Linkin Dashboard`} />
+      </Head>
       <div className="d-flex dashboardwrapepr">
         <Formwrapper
           pageData={pageData}
@@ -50,7 +56,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
           updatedLinkData={updatedLinkData}
         />
         <div className="preview">
-          <Home {...pageData} linkData={linkData} preview={true} />
+          <Home {...pageData} linkData={linkData} preview />
         </div>
       </div>
       <style jsx>{`
