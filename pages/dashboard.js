@@ -16,18 +16,19 @@ export async function getServerSideProps({ req, res }) {
       data = await getPageData();
     }
     console.log(data);
-    return { props: { data } };
+    return { props: { data: data.pageData, linkDataSS: data.linkData } };
   } catch (error) {
     return { props: { error } };
   }
 }
 
-const Admin = ({ data }) => {
+const Admin = ({ data, linkDataSS }) => {
   const [showmsg, setshowmsg] = useState("");
   const [showmsgtype, setshowmsgtype] = useState("danger");
 
   const [loading, setloading] = useState(false);
   const [pageData, setpageData] = useState(data);
+  const [linkData, setlinkData] = useState(linkDataSS);
   console.log(data);
   const save = async (data) => {
     setloading(true);
@@ -72,12 +73,19 @@ const Admin = ({ data }) => {
     save(data);
   };
 
+  const updateLinks = (data) => {
+    console.log(data);
+    // save(data);
+  };
+
   return (
     <>
       <div className="d-flex dashboardwrapepr">
         <Formwrapper
           data={pageData}
+          linkData={linkData}
           update={update}
+          updateLinks={updateLinks}
           loading={loading}
           showmsg={showmsg}
           showmsgtype={showmsgtype}

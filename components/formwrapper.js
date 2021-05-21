@@ -12,7 +12,15 @@ import FontForm from "./fontform";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
+function Formwrapper({
+  data,
+  linkData,
+  update,
+  loading,
+  showmsg,
+  showmsgtype,
+  updateLinks,
+}) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
@@ -29,7 +37,7 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
       setshowmsg("Logout Error " + error.message);
     }
   };
-
+console.log(linkData)
   return (
     <>
       <div className={styles.dashform}>
@@ -122,7 +130,7 @@ function Formwrapper({ data, update, loading, showmsg, showmsgtype }) {
             <FontForm data={data} update={update} loading={loading} />
           )}
           {activeForm === "linksForm" && (
-            <LinksForm data={data} update={update} loading={loading} />
+            <LinksForm data={linkData} update={updateLinks} loading={loading} />
           )}
         </div>
 
