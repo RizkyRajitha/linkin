@@ -215,6 +215,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
               data={linkData}
               update={saveLinkData}
               loading={loading}
+              pagedataid={pageData.id}
               // showmsg={showmsg}
               // showmsgtype={showmsgtype}
             />

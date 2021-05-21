@@ -5,7 +5,7 @@ import LinkCard from "./linkcard";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const LinksForm = ({ data, update, showmsg, showmsgtype }) => {
+const LinksForm = ({ data, update, pagedataid }) => {
   console.log(data);
   const [links, setlinks] = useState(data);
 
@@ -28,7 +28,7 @@ const LinksForm = ({ data, update, showmsg, showmsgtype }) => {
                   {
                     linkUrl: "",
                     displayText: "",
-                    pagedataid: data[0].pagedataid,
+                    pagedataid: pagedataid,
                   },
                 ];
               });
@@ -43,6 +43,7 @@ const LinksForm = ({ data, update, showmsg, showmsgtype }) => {
               return (
                 <LinkCard
                   // id={index}
+                  key={index}
                   item={item}
                   save={update}
                   // errors={errors}
