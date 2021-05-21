@@ -16,37 +16,38 @@ export async function getServerSideProps({ req, res }) {
       data = await getPageData();
     }
     console.log(data);
-    return { props: { data: data.pageData, linkDataSS: data.linkData } };
+    return { props: { pageDataSS: data.pageData, linkDataSS: data.linkData } };
   } catch (error) {
     return { props: { error } };
   }
 }
 
-const Admin = ({ data, linkDataSS }) => {
-  const [pageData, setpageData] = useState(data);
+const Admin = ({ pageDataSS, linkDataSS }) => {
+  const [pageData, setpageData] = useState(pageDataSS);
   const [linkData, setlinkData] = useState(linkDataSS);
-  console.log(data);
+  console.log(pageDataSS);
 
   //TODO : add live update
-  const update = (data) => {
+  const updatedPageData = (data) => {
     console.log(data);
     // save(data);
     setpageData(data.pageData);
   };
 
-  const updateLinks = (data) => {
+  const updatedLinkData = (data) => {
     console.log(data);
     // save(data);
+    setlinkData(data);
   };
 
   return (
     <>
       <div className="d-flex dashboardwrapepr">
         <Formwrapper
-          data={pageData}
+          pageData={pageData}
           linkData={linkData}
-          update={update}
-          updateLinks={updateLinks}
+          updatedPageData={updatedPageData}
+          updatedLinkData={updatedLinkData}
         />
         <div className="preview">
           <Home {...pageData} preview={true} />

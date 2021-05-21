@@ -12,16 +12,14 @@ import FontForm from "./fontform";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ data, linkData, update, updateLinks }) {
+function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
-
   const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
-  // const [showmsgtype, setshowmsgtype] = useState("danger");
   const [loading, setloading] = useState(false);
 
-  const save = async (data) => {
+  const savePageData = async (data) => {
     setloading(true);
     setshowAlert({
       msg: "",
@@ -59,7 +57,7 @@ function Formwrapper({ data, linkData, update, updateLinks }) {
       });
 
       // setpageData(res.updatedPageData);
-      update(res.updatedPageData);
+      updatedPageData(res.updatedPageData);
     } catch (error) {
       setloading(false);
       console.log(error);
@@ -68,6 +66,36 @@ function Formwrapper({ data, linkData, update, updateLinks }) {
         type: "Server Error " + error.message,
       });
     }
+  };
+
+  const saveLinkData = async (linkdata) => {
+    console.log("links linkdata");
+    console.log(linkdata);
+
+    setshowAlert({
+      msg: "",
+      type: "",
+    });
+
+    let operation = "insertpagelinks";
+    if (linkdata.hasOwnProperty("id")) {
+      operation = `updatepagelinks`;
+    }
+
+    let res = await fetch(`${endpoint}/api/${operation}`, {
+      method: "POST",
+      body: JSON.stringify([linkdata]),
+      headers: { "Content-Type": "application/json" },
+    }).then((res) => res.json());
+
+    setshowAlert({
+      msg: operation + " success ",
+      type: "success",
+    });
+
+    console.log(res);
+    updatedLinkData(res.linkData);
+    // setlinks(res.linkData);
   };
 
   const logout = async () => {
@@ -166,21 +194,29 @@ function Formwrapper({ data, linkData, update, updateLinks }) {
           </div>
           {showAlert.msg && <Alert {...showAlert} />}
           {activeForm === "genaralForm" && (
-            <GenaralForm data={data} update={save} loading={loading} />
+            <GenaralForm
+              data={pageData}
+              update={savePageData}
+              loading={loading}
+            />
           )}
           {activeForm === "colorForm" && (
-            <ColorForm data={data} update={save} loading={loading} />
+            <ColorForm
+              data={pageData}
+              update={savePageData}
+              loading={loading}
+            />
           )}{" "}
           {activeForm === "fontForm" && (
-            <FontForm data={data} update={save} loading={loading} />
+            <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
           {activeForm === "linksForm" && (
             <LinksForm
               data={linkData}
-              update={updateLinks}
+              update={saveLinkData}
               loading={loading}
-              showmsg={showmsg}
-              showmsgtype={showmsgtype}
+              // showmsg={showmsg}
+              // showmsgtype={showmsgtype}
             />
           )}
         </div>

@@ -5,30 +5,9 @@ import LinkCard from "./linkcard";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const LinksForm = ({ data, showmsg, showmsgtype }) => {
+const LinksForm = ({ data, update, showmsg, showmsgtype }) => {
   console.log(data);
   const [links, setlinks] = useState(data);
-
-  const save = async (linkdata) => {
-    console.log("links linkdata");
-    console.log(linkdata);
-    let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
-    }
-
-    let res = await fetch(`${endpoint}/api/${operation}`, {
-      method: "POST",
-      body: JSON.stringify([linkdata]),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
-
-    showmsg(operation + " success ");
-    showmsgtype("success");
-
-    console.log(res);
-    setlinks(res.linkData);
-  };
 
   return (
     <>
@@ -65,7 +44,7 @@ const LinksForm = ({ data, showmsg, showmsgtype }) => {
                 <LinkCard
                   // id={index}
                   item={item}
-                  save={save}
+                  save={update}
                   // errors={errors}
                   // register={register}
                 />
