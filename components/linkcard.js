@@ -40,7 +40,15 @@ export default function LinkCard({ item, save, loading }) {
                 {...register(`linkUrl`)}
               />
             </div>
-
+            <div className="mb-3 ">
+              <label className="form-label">Handler Font color </label>
+              <input
+                type="color"
+                className="form-control form-control-color"
+                title="Choose Link background color"
+                {...register("bgColor")}
+              />
+            </div>{" "}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               {/* <button class="btn btn-primary me-md-2" type="button">
                 Button

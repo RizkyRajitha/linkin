@@ -1,9 +1,6 @@
 import { useState } from "react";
-
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 const LinksForm = ({ data, update, pagedataid }) => {
   console.log(data);
@@ -15,12 +12,10 @@ const LinksForm = ({ data, update, pagedataid }) => {
         <div
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-10 col-xxl-8 `}
         >
-          {/* <form onSubmit={(e) => e.preventDefault()}> */}
           <h3>Link Data</h3>
           <button
             type="button"
             className="btn btn-primary btn-block"
-            // onClick={handleSubmit(update)}
             onClick={() => {
               setlinks((pre) => {
                 return [
@@ -29,10 +24,10 @@ const LinksForm = ({ data, update, pagedataid }) => {
                     linkUrl: "",
                     displayText: "",
                     pagedataid: pagedataid,
+                    bgColor: "#2c6bed",
                   },
                 ];
               });
-              // append({ linkUrl: "", displayText: "" });
             }}
           >
             Add new
@@ -40,38 +35,8 @@ const LinksForm = ({ data, update, pagedataid }) => {
           {links.length &&
             links.map((item, index) => {
               console.log(item);
-              return (
-                <LinkCard
-                  // id={index}
-                  key={index}
-                  item={item}
-                  save={update}
-                  // errors={errors}
-                  // register={register}
-                />
-              );
+              return <LinkCard key={index} item={item} save={update} />;
             })}
-          {/* {links.length &&
-              links.map((ele) => {
-                console.log(ele);
-                return <LinkCard {...ele} />;
-              })} */}
-          {/* <button
-            type="submit"
-            className="btn btn-primary btn-block"
-            onClick={handleSubmit(save)}
-            // disabled={loading}
-          > */}
-          {/* {loading && (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              )} */}
-          {/* Save */}
-          {/* </button> */}
-          {/* </form> */}
         </div>
       </div>
     </>

@@ -1,7 +1,5 @@
 import { isEmptry } from "../lib/side";
 
-// import Head from "next/head";
-
 export default function Home({
   handlerText,
   bgColor,
@@ -65,6 +63,7 @@ export default function Home({
                     href={`${element.linkUrl}`}
                     className="link"
                     target="_blank"
+                    style={{ backgroundColor: element.bgColor || "#2c6bed" }}
                   >
                     {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
                     {element.displayText}
@@ -193,7 +192,6 @@ export default function Home({
         .link {
           padding: 14px;
           display: block;
-          background-color: #2c6bed;
           text-align: left;
           text-decoration: none;
           border-radius: 4px;
