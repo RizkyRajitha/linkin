@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import styles from "../styles/login.module.css";
@@ -71,6 +70,9 @@ const Admin = ({}) => {
 
   return (
     <>
+      <Head>
+        <title>Admin Login</title>
+      </Head>
       <div className="d-flex">
         {" "}
         <div className={styles.authWrapper}>

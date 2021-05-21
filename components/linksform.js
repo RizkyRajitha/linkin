@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
 
-const LinksForm = ({ data, update, pagedataid }) => {
+const LinksForm = ({ data, update, pagedataid, loading }) => {
   console.log(data);
   const [links, setlinks] = useState(data);
 
@@ -35,7 +35,14 @@ const LinksForm = ({ data, update, pagedataid }) => {
           {links.length &&
             links.map((item, index) => {
               console.log(item);
-              return <LinkCard key={index} item={item} save={update} />;
+              return (
+                <LinkCard
+                  key={index}
+                  item={item}
+                  save={update}
+                  loading={loading}
+                />
+              );
             })}
         </div>
       </div>

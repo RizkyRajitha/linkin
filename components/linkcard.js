@@ -50,9 +50,17 @@ export default function LinkCard({ item, save, loading }) {
               />
             </div>{" "}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-              {/* <button class="btn btn-primary me-md-2" type="button">
-                Button
-              </button> */}
+              <button
+                className="btn btn-outline-warning btn-sm"
+                type="button"
+                disabled={!isDirty}
+                hidden={!isDirty}
+                onClick={() => {
+                  reset({}, { keepDefaultValues: true });
+                }}
+              >
+                Revert
+              </button>
               <button
                 type="submit"
                 className="btn btn-primary btn-block btn-sm"
@@ -60,13 +68,13 @@ export default function LinkCard({ item, save, loading }) {
                 disabled={!isDirty}
                 hidden={!isDirty}
               >
-                {/* {loading && (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  role="status"
-                  aria-hidden="true"
-                ></span>
-              )} */}
+                {loading && (
+                  <span
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                )}
                 Save
               </button>
             </div>
