@@ -192,7 +192,7 @@ export default function Home({
         .link {
           padding: 14px;
           display: block;
-          text-align: left;
+          text-align: center;
           text-decoration: none;
           border-radius: 4px;
           transition: ease all 0.3s;

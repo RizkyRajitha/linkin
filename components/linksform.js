@@ -32,7 +32,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           >
             Add new
           </button>
-          {links.length &&
+          {
             links.map((item, index) => {
               console.log(item);
               return (

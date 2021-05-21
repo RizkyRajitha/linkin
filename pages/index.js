@@ -8,7 +8,7 @@ export async function getServerSideProps() {
   try {
     // data = await fetch(`https://linkin-xi.vercel.app/api/view`).then((res) =>
     //    data = await fetch(`${endpoint}/api/view`).then((res) => res.json());
-    data = await getPageData();
+    data = await getPageData(false);
     console.log("nexttt");
 
     console.log(data);

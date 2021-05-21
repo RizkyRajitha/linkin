@@ -14,6 +14,16 @@ export default function LinkCard({ item, save, loading }) {
       <div class="card mt-3">
         <div class="card-body">
           <form onSubmit={(e) => e.preventDefault()}>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexSwitchCheckDefault"
+              />
+              <label class="form-check-label" for="flexSwitchCheckDefault">
+                Default switch checkbox input
+              </label>
+            </div>
             <div className="mb-3 small">
               <label className="form-label">Link Display Text</label>
               <input

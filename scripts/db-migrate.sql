@@ -21,6 +21,9 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "bgImgUrl" varchar,
     "handlerFontSize" varchar,
     "handlerFontColor" varchar,    
+    "active" boolean DEFAULT TRUE,
+    "fontFamily" varchar,
+    "fontUrl" varchar,
     "created_at" timestamp with time zone default current_timestamp
 );
 
@@ -33,9 +36,11 @@ CREATE TABLE IF NOT EXISTS  "linkdata" (
     "displayText" varchar,
     "linkUrl" varchar,
     "bgColor" varchar,
+    "active" boolean DEFAULT TRUE,
     "created_at" timestamp with time zone default current_timestamp
 );
 
-ALTER TABLE "pagedata" ADD COLUMN IF NOT EXISTS "fontFamily" varchar , ADD COLUMN IF NOT EXISTS "fontUrl" varchar;
+-- ALTER TABLE "pagedata" ADD COLUMN IF NOT EXISTS "fontFamily" varchar , ADD COLUMN IF NOT EXISTS "fontUrl" varchar;
 
-ALTER TABLE "linkdata" ADD COLUMN IF NOT EXISTS "active" boolean ;
+-- ALTER TABLE "linkdata" ADD COLUMN IF NOT EXISTS "active" boolean DEFAULT TRUE;
+-- ALTER TABLE users  ADD COLUMN "priv_user" BOOLEAN NOT NULL DEFAULT FALSE;
