@@ -56,7 +56,11 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
           updatedLinkData={updatedLinkData}
         />
         <div className="preview">
-          <Home {...pageData} linkData={linkData} preview />
+          <Home
+            {...pageData}
+            linkData={linkData.filter((ele) => ele.active)}
+            preview
+          />
         </div>
       </div>
       <style jsx>{`

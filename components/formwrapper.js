@@ -82,21 +82,32 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       operation = `updatepagelinks`;
     }
 
-    let res = await fetch(`${endpoint}/api/${operation}`, {
-      method: "POST",
-      body: JSON.stringify([linkdata]),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
+    try {
+      let res = await fetch(`${endpoint}/api/${operation}`, {
+        method: "POST",
+        body: JSON.stringify([linkdata]),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
 
-    setshowAlert({
-      msg: operation + " success ",
-      type: "success",
-    });
+      setshowAlert({
+        msg: operation + " success ",
+        type: "success",
+      });
 
-    console.log(res);
-    updatedLinkData(res.linkData);
+      console.log(res);
+      updatedLinkData(res.linkData);
+      // linkupdated();
+    } catch (error) {
+      setshowAlert({
+        msg: operation + "failed" + error.message,
+        type: "danger",
+      });
+    }
+
     // setlinks(res.linkData);
   };
+
+  // const linkupdated = () => {};
 
   const logout = async () => {
     try {

@@ -9,20 +9,25 @@ export default function LinkCard({ item, save, loading }) {
     reset,
   } = useForm({ defaultValues: item });
 
+  const saveLinkData = (data) => {
+    save(data);
+    reset({}, { keepValues: true });
+  };
+
   return (
     <>
-      <div class="card mt-3">
-        <div class="card-body">
+      <div className="card mt-3">
+        <div className="card-body">
           <form onSubmit={(e) => e.preventDefault()}>
-            <div class="form-check form-switch">
+            <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
-                class="form-check-input"
+                className="form-check-input"
                 type="checkbox"
-                id="flexSwitchCheckDefault"
+                {...register(`active`)}
               />
-              <label class="form-check-label" for="flexSwitchCheckDefault">
-                Default switch checkbox input
-              </label>
+              {/* <label className="form-check-label" for="flexSwitchCheckDefault">
+                active
+              </label> */}
             </div>
             <div className="mb-3 small">
               <label className="form-label">Link Display Text</label>
@@ -74,8 +79,8 @@ export default function LinkCard({ item, save, loading }) {
               <button
                 type="submit"
                 className="btn btn-primary btn-block btn-sm"
-                onClick={handleSubmit(save)}
-                disabled={!isDirty}
+                onClick={handleSubmit(saveLinkData)}
+                disabled={!isDirty || loading}
                 hidden={!isDirty}
               >
                 {loading && (
