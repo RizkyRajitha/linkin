@@ -37,7 +37,7 @@ function Formwrapper({
       setshowmsg("Logout Error " + error.message);
     }
   };
-console.log(linkData)
+  console.log(linkData);
   return (
     <>
       <div className={styles.dashform}>
@@ -97,7 +97,7 @@ console.log(linkData)
                 type="button"
                 className="btn btn-outline-primary"
                 className={`btn btn-outline-primary ${
-                  activeForm === "fontForm" ? "active" : ""
+                  activeForm === "linksForm" ? "active" : ""
                 } `}
                 onClick={() => {
                   setactiveForm("linksForm");
@@ -105,7 +105,7 @@ console.log(linkData)
               >
                 Links
               </button>{" "}
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-outline-primary"
                 className={`btn btn-outline-primary ${
@@ -116,7 +116,7 @@ console.log(linkData)
                 }}
               >
                 TODO
-              </button>
+              </button> */}
             </div>
           </div>
           {showmsg && <Alert showmsg={showmsg} type={showmsgtype} />}
@@ -130,7 +130,13 @@ console.log(linkData)
             <FontForm data={data} update={update} loading={loading} />
           )}
           {activeForm === "linksForm" && (
-            <LinksForm data={linkData} update={updateLinks} loading={loading} />
+            <LinksForm
+              data={linkData}
+              update={updateLinks}
+              loading={loading}
+              showmsg={showmsg}
+              showmsgtype={showmsgtype}
+            />
           )}
         </div>
 

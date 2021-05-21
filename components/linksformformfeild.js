@@ -1,97 +1,86 @@
 import { useState } from "react";
+import { useFieldArray, useForm } from "react-hook-form";
 
 import styles from "../styles/form.module.css";
-import LinkCard from "./linkcard";
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
+import LinkCard from "./linkzcardformfeild";
 
-const LinksForm = ({ data, showmsg, showmsgtype }) => {
+const LinksForm = ({ data, update, loading }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, dirtyFields },
+    control,
+  } = useForm({ defaultValues: { links: data } });
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "links",
+  });
   console.log(data);
-  const [links, setlinks] = useState(data);
+  // const [links, setlinks] = useState([{ link: "asasa", name: "asasa" }]);
 
-  const save = async (linkdata) => {
+  const save = (linkdata) => {
     console.log("links linkdata");
     console.log(linkdata);
-    let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
-    }
-
-    let res = await fetch(`${endpoint}/api/${operation}`, {
-      method: "POST",
-      body: JSON.stringify([linkdata]),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
-
-    showmsg(operation + " success ");
-    showmsgtype("success");
-
-    console.log(res);
-    setlinks(res.linkData);
+    console.log(dirtyFields);
   };
 
   return (
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-10 col-xxl-8 `}
+          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8 col-xxl-8 `}
         >
-          {/* <form onSubmit={(e) => e.preventDefault()}> */}
-          <h3>Link Data</h3>
-          <button
-            type="button"
-            className="btn btn-primary btn-block"
-            // onClick={handleSubmit(update)}
-            onClick={() => {
-              setlinks((pre) => {
-                return [
-                  ...pre,
-                  {
-                    linkUrl: "",
-                    displayText: "",
-                    pagedataid: data[0].pagedataid,
-                  },
-                ];
-              });
-              // append({ linkUrl: "", displayText: "" });
-            }}
-          >
-            Add new
-          </button>
-          {links.length &&
-            links.map((item, index) => {
-              console.log(item);
-              return (
-                <LinkCard
-                  // id={index}
-                  item={item}
-                  save={save}
-                  // errors={errors}
-                  // register={register}
-                />
-              );
-            })}
-          {/* {links.length &&
+          <form onSubmit={(e) => e.preventDefault()}>
+            <h3>Genaral Data</h3>
+            <button
+              type="button"
+              className="btn btn-primary btn-block"
+              // onClick={handleSubmit(update)}
+              onClick={() => {
+                // setlinks((pre) => {
+                //   return [...pre, { link: "", name: "" }];
+                // });
+                append({ linkUrl: "", displayText: "" });
+              }}
+            >
+              Add new
+            </button>
+
+            {fields.length &&
+              fields.map((item, index) => {
+                console.log(item);
+                return (
+                  <LinkCard
+                    id={index}
+                    item={item}
+                    errors={errors}
+                    register={register}
+                  />
+                );
+              })}
+
+            {/* {links.length &&
               links.map((ele) => {
                 console.log(ele);
                 return <LinkCard {...ele} />;
               })} */}
-          {/* <button
-            type="submit"
-            className="btn btn-primary btn-block"
-            onClick={handleSubmit(save)}
-            // disabled={loading}
-          > */}
-          {/* {loading && (
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              onClick={handleSubmit(save)}
+              // disabled={loading}
+            >
+              {/* {loading && (
                 <span
                   className="spinner-border spinner-border-sm"
                   role="status"
                   aria-hidden="true"
                 ></span>
               )} */}
-          {/* Save */}
-          {/* </button> */}
-          {/* </form> */}
+              Save
+            </button>
+          </form>
         </div>
       </div>
     </>
