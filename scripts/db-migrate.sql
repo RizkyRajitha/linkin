@@ -27,7 +27,9 @@ CREATE TABLE IF NOT EXISTS  "pagedata" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into pagedata ("id", "handlerText" , "avatarUrl" ) values (1 , 'linkin' , 'https://pbs.twimg.com/profile_images/1372981799366713351/bzCQoygt_400x400.jpg') ON CONFLICT (id) DO NOTHING;
+insert into pagedata ("id", "handlerText" , "avatarUrl" , "bgColor" , "accentColor" , "handlerFontSize") values (1 , 'LinkIn' , 'https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png' , '#7ea2ff',	'#bdd7ff' , '20' ) ON CONFLICT (id) DO NOTHING;
+
+-- 1	https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png				LinkIn					#ffffff	true	font-family: 'Poppins', sans-serif;	https://fonts.googleapis.com/css2?family=Poppins&display=swap	2021-05-21 19:11:06
 
 CREATE TABLE IF NOT EXISTS  "linkdata" (
     "id" serial primary key,

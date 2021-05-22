@@ -11,7 +11,7 @@ export default function LinkCard({ item, save, loading }) {
 
   const saveLinkData = (data) => {
     save(data);
-    reset({}, { keepValues: true });
+    // reset({}, { keepValues: true });
   };
 
   return (

@@ -25,6 +25,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
                     displayText: "",
                     pagedataid: pagedataid,
                     bgColor: "#2c6bed",
+                    active: true,
                   },
                 ];
               });
@@ -32,18 +33,17 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           >
             Add new
           </button>
-          {
-            links.map((item, index) => {
-              console.log(item);
-              return (
-                <LinkCard
-                  key={index}
-                  item={item}
-                  save={update}
-                  loading={loading}
-                />
-              );
-            })}
+          {links.map((item, index) => {
+            console.log(item);
+            return (
+              <LinkCard
+                key={index}
+                item={item}
+                save={update}
+                loading={loading}
+              />
+            );
+          })}
         </div>
       </div>
     </>
