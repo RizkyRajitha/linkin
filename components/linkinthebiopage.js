@@ -11,8 +11,8 @@ export default function Home({
   handlerFontColor,
   fontFamily,
   fontUrl,
-  preview = false,
   linkData,
+  preview = false,
 }) {
   avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
   handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
@@ -65,8 +65,13 @@ export default function Home({
                     target="_blank"
                     style={{ backgroundColor: element.bgColor || "#2c6bed" }}
                   >
+                    {element.iconClass && (
+                      <i className={`${element.iconClass} icon`}></i>
+                    )}
                     {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
-                    {element.displayText}
+                    <div className="d-flex w-100 align-items-center justify-content-center">
+                      {element.displayText}
+                    </div>
                   </a>
                 </li>
               );
@@ -121,6 +126,8 @@ export default function Home({
       </div>
       <style jsx>{`
         @import url("${fontUrl}");
+
+        @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
 
         .outterwrap {
           margin: 0;
@@ -190,16 +197,22 @@ export default function Home({
           margin: 14px 0;
         }
         .link {
-          padding: 14px;
-          display: block;
+          padding: 2rem;
+          display: flex;
           text-align: center;
           text-decoration: none;
           border-radius: 4px;
           transition: ease all 0.3s;
           color: #fff;
+          align-items: center;
         }
         .link:hover {
           opacity: 0.9;
+        }
+
+        .icon {
+          // padding: 1rem;
+          font-size: 1.7rem;
         }
       `}</style>
     </div>

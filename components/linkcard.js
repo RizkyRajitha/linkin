@@ -55,6 +55,19 @@ export default function LinkCard({ item, save, loading }) {
                 {...register(`linkUrl`)}
               />
             </div>
+            <div className="mb-3 small">
+              <label className="form-label">Icon Class</label>
+              <input
+                type="text"
+                className={
+                  errors.handlerText
+                    ? "form-control is-invalid"
+                    : "form-control"
+                }
+                placeholder="Enter Icon Class"
+                {...register(`iconClass`)}
+              />
+            </div>
             <div className="mb-3 ">
               <label className="form-label">Handler Font color </label>
               <input
