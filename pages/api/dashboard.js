@@ -11,7 +11,7 @@ async function handler(req, res) {
     console.log(username);
     const pageData = await getPageData();
 
-    console.log(pageData);
+   // console.log(pageData);
     res.json({ message: "Hello ! " + username, pageData });
   } catch (error) {
     console.log(error.message);

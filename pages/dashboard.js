@@ -16,6 +16,7 @@ export async function getServerSideProps({ req, res }) {
     console.log(data);
     return { props: { pageDataSS: data.pageData, linkDataSS: data.linkData } };
   } catch (error) {
+    // console.log(error);
     return { props: { error } };
   }
 }

@@ -85,7 +85,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
     try {
       let res = await fetch(`${endpoint}/api/${operation}`, {
         method: "POST",
-        body: JSON.stringify([linkdata]),
+        body: JSON.stringify(linkdata),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
