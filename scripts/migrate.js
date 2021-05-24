@@ -1,6 +1,7 @@
-const { Client } = require("pg");
-const fs = require("fs");
-const DBURLLOCAL = require("../configs/config").DBURLLOCAL;
+import { Client } from "pg";
+import { DBURLLOCAL } from "../configs/config";
+import { readFileSync } from "fs";
+
 const connectionString =
   process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
@@ -17,7 +18,7 @@ async function migrate() {
     await client.connect();
     console.log("connected to database");
 
-    let script = fs.readFileSync(__dirname + "/db-migrate.sql").toString();
+    let script = readFileSync(__dirname + "/db-migrate.sql").toString();
 
     console.log(script);
 
@@ -27,7 +28,8 @@ async function migrate() {
     };
 
     let res = await client.query(query);
-    console.log(res.rows);
+    console.log(res.command);
+    console.log(res.rowCount);
     await client.end();
     console.log("disconnected from database");
     console.log("migration ran successfully");

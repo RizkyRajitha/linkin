@@ -2,7 +2,8 @@ import bcrypt from "bcrypt";
 import { serialize } from "cookie";
 import { createSecureToken } from "../../lib/crypto";
 
-const { getUser } = require("../../lib/dbfunc");
+import { getUser } from "../../lib/dbfunc";
+// const { getUser } = require("../../lib/dbfunc");
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
