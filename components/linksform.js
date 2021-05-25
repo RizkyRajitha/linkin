@@ -31,7 +31,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-10 col-xxl-8 `}
+          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 `}
         >
           <h3>Link Data</h3>
           <button
@@ -44,7 +44,6 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
             Add new
           </button>
           {links.map((item, index) => {
-            // console.log(item);
             return (
               <LinkCard
                 key={index}

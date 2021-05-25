@@ -126,8 +126,15 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   return (
     <>
       <div className={styles.dashform}>
-        <div className="d-flex justify-content-end">
+        <div className="d-flex justify-content-end mb-4">
           {" "}
+          <a
+            className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
+            href={`${window.origin}`}
+            target="_blank"
+          >
+            visit
+          </a>
           <button
             className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
             onClick={() => logout()}

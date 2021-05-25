@@ -13,7 +13,7 @@ const FontForm = ({ data, update, loading }) => {
     <>
       <div className={styles.Wrapper}>
         <div
-          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-8 col-xl-8 col-xxl-8 `}
+          className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Font Data</h3>
@@ -28,7 +28,6 @@ const FontForm = ({ data, update, loading }) => {
                 }
                 placeholder="Enter handler font size"
                 {...register("handlerFontSize", {
-                  // max: { message: "Width must be below 100%", value: 100 },
                   min: { message: "Font Size must be above 1px", value: 1 },
                 })}
               />
