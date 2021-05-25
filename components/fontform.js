@@ -7,7 +7,6 @@ const FontForm = ({ data, update, loading }) => {
     register,
     handleSubmit,
     formState: { errors },
-    watch,
   } = useForm({ defaultValues: data });
 
   return (
@@ -93,7 +92,7 @@ const FontForm = ({ data, update, loading }) => {
             >
               {loading && (
                 <span
-                  className="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm me-1"
                   role="status"
                   aria-hidden="true"
                 ></span>

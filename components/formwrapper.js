@@ -25,6 +25,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       msg: "",
       type: "",
     });
+    
     console.log(data);
 
     try {
@@ -48,7 +49,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         }
         return;
       }
-      setloading(false);
 
       console.log(res);
       setshowAlert({
@@ -59,19 +59,19 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       // setpageData(res.updatedPageData);
       updatedPageData(res.updatedPageData);
     } catch (error) {
-      setloading(false);
       console.log(error);
       setshowAlert({
-        msg: "Server Error",
-        type: "Server Error " + error.message,
+        msg: "Server Error" + error.message,
+        type: "danger",
       });
+      setloading(false);
     }
   };
 
   const saveLinkData = async (linkdata) => {
     console.log("links linkdata");
     console.log(linkdata);
-
+    setloading(true);
     setshowAlert({
       msg: "",
       type: "",
@@ -90,24 +90,24 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       }).then((res) => res.json());
 
       setshowAlert({
-        msg: operation + " success ",
+        msg:
+          operation === "insertpagelinks"
+            ? "Insert page links "
+            : "Update page links " + " success ",
         type: "success",
       });
 
       console.log(res);
       updatedLinkData(res.linkData);
-      // linkupdated();
     } catch (error) {
       setshowAlert({
         msg: operation + "failed" + error.message,
         type: "danger",
       });
     }
-
+    setloading(false);
     // setlinks(res.linkData);
   };
-
-  // const linkupdated = () => {};
 
   const logout = async () => {
     try {
@@ -118,7 +118,10 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         router.push("/admin");
       }
     } catch (error) {
-      setshowmsg("Logout Error " + error.message);
+      setshowAlert({
+        msg: "Logout Error " + error.message,
+        type: "danger",
+      });
     }
   };
 
@@ -131,7 +134,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
             className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
             onClick={() => logout()}
           >
-            {" "}
             logout
           </button>
         </div>
@@ -167,7 +169,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
               </button>
               <button
                 type="button"
-                className="btn btn-outline-primary"
                 className={`btn btn-outline-primary ${
                   activeForm === "fontForm" ? "active" : ""
                 } `}
@@ -179,7 +180,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
               </button>{" "}
               <button
                 type="button"
-                className="btn btn-outline-primary"
                 className={`btn btn-outline-primary ${
                   activeForm === "linksForm" ? "active" : ""
                 } `}
@@ -227,13 +227,9 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
               update={saveLinkData}
               loading={loading}
               pagedataid={pageData.id}
-              // showmsg={showmsg}
-              // showmsgtype={showmsgtype}
             />
           )}
         </div>
-
-        {/* <DataForm data={data} /> */}
       </div>
     </>
   );

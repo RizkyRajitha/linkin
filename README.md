@@ -3,7 +3,7 @@
 </p>
 
 
-# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441)
+# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin)
 
 ### Linkin is a customizable self hosted link in the bio platform.
 

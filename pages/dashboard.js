@@ -1,10 +1,10 @@
 import { useState } from "react";
+import Head from "next/head";
 
 import { getPageData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
-import Head from "next/head";
 
 export async function getServerSideProps({ req, res }) {
   try {

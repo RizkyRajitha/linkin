@@ -98,7 +98,7 @@ export default function LinkCard({ item, save, loading }) {
               >
                 {loading && (
                   <span
-                    className="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm me-1"
                     role="status"
                     aria-hidden="true"
                   ></span>

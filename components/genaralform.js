@@ -192,7 +192,7 @@ const GenaralForm = ({ data, update, loading }) => {
             >
               {loading && (
                 <span
-                  className="spinner-border spinner-border-sm"
+                  className="spinner-border spinner-border-sm me-1"
                   role="status"
                   aria-hidden="true"
                 ></span>
