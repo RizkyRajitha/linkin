@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function LinkCard({ item, save, loading }) {
@@ -9,9 +10,14 @@ export default function LinkCard({ item, save, loading }) {
     reset,
   } = useForm({ defaultValues: item });
 
+  useEffect(() => {
+    console.log("111111-link card-11111111");
+    reset(item);
+  }, [item]);
+
   const saveLinkData = (data) => {
     save(data);
-    // reset({}, { keepValues: true });
+    // reset(data);
   };
 
   return (

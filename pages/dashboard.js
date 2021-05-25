@@ -34,9 +34,15 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
   };
 
   const updatedLinkData = (data) => {
+    console.log("updateeeeeeeeee");
     console.log(data);
     // save(data);
-    setlinkData(data);
+    // let newLinkData = data.map((ele) => {
+    //   return { ...ele };
+    // });
+    // console.log("newLinkData");
+    // console.log(newLinkData);
+    setlinkData([...data]);
   };
 
   return (

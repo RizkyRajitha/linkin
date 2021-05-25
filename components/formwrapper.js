@@ -25,8 +25,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       msg: "",
       type: "",
     });
-    
-    console.log(data);
 
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
@@ -64,8 +62,8 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         msg: "Server Error" + error.message,
         type: "danger",
       });
-      setloading(false);
     }
+    setloading(false);
   };
 
   const saveLinkData = async (linkdata) => {
@@ -81,7 +79,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
     if (linkdata.hasOwnProperty("id")) {
       operation = `updatepagelinks`;
     }
-
+    console.log(operation);
     try {
       let res = await fetch(`${endpoint}/api/${operation}`, {
         method: "POST",
@@ -92,8 +90,8 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       setshowAlert({
         msg:
           operation === "insertpagelinks"
-            ? "Insert page links "
-            : "Update page links " + " success ",
+            ? "Added new page link "
+            : "Updated page link " + " successfully",
         type: "success",
       });
 
