@@ -44,4 +44,3 @@ async function migrate() {
 migrate()
   .then(() => process.exit())
   .then((err) => console.error(err));
-console.log(process.env);

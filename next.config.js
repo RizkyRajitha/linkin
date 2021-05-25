@@ -4,5 +4,5 @@ module.exports = {
   env: {
     VERSION: pkg.version,
   },
-  basePath: process.env.BASE_PATH,
+  basePath: "/",
 };
