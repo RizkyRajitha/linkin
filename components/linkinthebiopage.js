@@ -16,7 +16,7 @@ export default function Home({
 }) {
   avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
   handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
-  handlerFontColor = isEmptry(handlerFontColor) ? "#000" : handlerFontColor;
+  handlerFontColor = isEmptry(handlerFontColor) ? "#fff" : handlerFontColor;
   bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
   fontFamily = isEmptry(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
   fontUrl = isEmptry(fontUrl)

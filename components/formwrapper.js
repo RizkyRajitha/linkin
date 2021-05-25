@@ -15,6 +15,8 @@ const endpoint =
 function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   const router = useRouter();
 
+  console.log(router.basePath);
+
   const [activeForm, setactiveForm] = useState("genaralForm");
   const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
   const [loading, setloading] = useState(false);
@@ -130,7 +132,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
           {" "}
           <a
             className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
-            href={`${window.origin}`}
+            // href={`${origin}`}
             target="_blank"
           >
             visit

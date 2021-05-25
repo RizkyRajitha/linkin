@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS  "users" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into users (username, password) values ('admin', '$2b$10$BUli0c.muyCW1ErNJc3jL.vFRFtFJWrT8/GcR4A.sUdCznaXiqFXa') ON CONFLICT (username) DO NOTHING;
+insert into users (username, password) values ('admin', '$2b$10$gKoU.xdV9vrGY2wEW0KAnuBmQeYxOUgXRHS9f8Sgx40m7kxpejddG') ON CONFLICT (username) DO NOTHING;
 
 
 CREATE TABLE IF NOT EXISTS  "pagedata" (
