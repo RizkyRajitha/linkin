@@ -1,16 +1,18 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { getPageData, insertPageLinks } from "../../lib/dbfunc";
+import { getLinkData, insertPageLinks } from "../../lib/dbfunc";
 
 async function handler(req, res) {
-  // Run the middleware
 
   try {
+  // Run the middleware
     await use(req, res, jwtAuth);
-    console.log(req.body);
+    // console.log(req.body);
+
     await insertPageLinks(req.body);
-    let updatedPageData = await getPageData();
+    
+    let updatedLinkData = await getLinkData();
     // console.log(updatedPageData);
-    res.json(updatedPageData);
+    res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
   } catch (error) {
     console.log(error.message);
 

@@ -96,9 +96,9 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
             : "Updated page link " + " successfully",
         type: "success",
       });
-
+debugger
       console.log(res);
-      updatedLinkData(res.linkData);
+      updatedLinkData(res.updatedLinkData);
     } catch (error) {
       setshowAlert({
         msg: operation + "failed" + error.message,

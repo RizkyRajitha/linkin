@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Head from "next/head";
 
-import { getPageData } from "../lib/dbfunc";
+import { getPageDatawLinkData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
@@ -11,7 +11,7 @@ export async function getServerSideProps({ req, res }) {
     let valid = cookieValidate(req, res);
     let data;
     if (valid) {
-      data = await getPageData();
+      data = await getPageDatawLinkData();
     }
     console.log(data);
     return { props: { pageDataSS: data.pageData, linkDataSS: data.linkData } };
@@ -30,18 +30,13 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
   const updatedPageData = (data) => {
     console.log(data);
     // save(data);
-    setpageData(data.pageData);
+    setpageData(data);
   };
 
   const updatedLinkData = (data) => {
     console.log("updateeeeeeeeee");
     console.log(data);
-    // save(data);
-    // let newLinkData = data.map((ele) => {
-    //   return { ...ele };
-    // });
-    // console.log("newLinkData");
-    // console.log(newLinkData);
+
     setlinkData([...data]);
   };
 
