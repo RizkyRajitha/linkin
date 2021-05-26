@@ -15,8 +15,6 @@ const endpoint =
 function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   const router = useRouter();
 
-  // console.log(router.basePath);
-
   const [activeForm, setactiveForm] = useState("genaralForm");
   const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
   const [loading, setloading] = useState(false);
@@ -50,7 +48,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         return;
       }
 
-      console.log(res);
+      // console.log(res);
       setshowAlert({
         msg: "updated",
         type: "success",
@@ -96,7 +94,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
             : "Updated page link " + " successfully",
         type: "success",
       });
-debugger
       console.log(res);
       updatedLinkData(res.updatedLinkData);
     } catch (error) {
@@ -106,7 +103,6 @@ debugger
       });
     }
     setloading(false);
-    // setlinks(res.linkData);
   };
 
   const logout = async () => {
