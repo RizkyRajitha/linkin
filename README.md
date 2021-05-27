@@ -30,11 +30,6 @@
 
 ![Screenshot_2021-05-22 Linkin Dashboard](https://user-images.githubusercontent.com/38534289/119221939-7c585780-bb0f-11eb-944f-514beb5573b7.png)
 
-Built With building_construction
-NextJS - NextJS
-TailwindCSS - TailwindCSS
-KnexJS - Database ORM
-
 ### Build with
 
 - [NextJs](https://nextjs.org/)
@@ -44,7 +39,23 @@ KnexJS - Database ORM
 
 - [Vercel](https://vercel.com/) .
 
-### To develop locally 
+### Developing locally
+
+#### Requirements
+
+- Node.js 10.13 or newer
+- Postgresql
+
+Setup local environmrnt variables in [config.js](configs/config.js)
+
+example
+
+```
+exports.DBURLLOCAL = "postgres://linkin:123@localhost:5432/linkin";
+exports.SECRETKEY = "123";
+
+```
+
 #### Clone and install dependancies
 
 ```
@@ -53,12 +64,13 @@ cd linkin
 npm i
 npm run dev
 ```
+
 #### Database migration
 
 **you must have postgres database setup locally**
 
 ```
-node scripts/migrate.js 
+node scripts/migrate.js
 ```
 
 <!-- todo
