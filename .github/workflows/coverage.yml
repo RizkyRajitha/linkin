@@ -24,7 +24,6 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
 
-
     strategy:
       matrix:
         node-version: [14.x]
@@ -44,12 +43,13 @@ jobs:
       - name: migrate database
         run: node scripts/migrate.js
         env:
-          env: "production"
+          NODE_ENV: production
           DBURL: "postgres://postgres:123@localhost:5432/postgres"
 
       - name: Run the tests
         run: npm run test
         env:
+          NODE_ENV: production
           DBURL: postgres://postgres:123@localhost:5432/postgres
 
       - name: Upload coverage to Codecov
