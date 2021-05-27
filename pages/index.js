@@ -1,11 +1,11 @@
 import Head from "next/head";
 import LinkinTheBioPage from "../components/linkinthebiopage";
-import { getPageData } from "../lib/dbfunc";
+import { getPageDatawLinkData } from "../lib/dbfunc";
 
 export async function getServerSideProps() {
   let data;
   try {
-    data = await getPageData(false);
+    data = await getPageDatawLinkData(false);
     console.log(data);
   } catch (error) {
     console.log(error.message);

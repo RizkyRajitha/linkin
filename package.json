@@ -7,7 +7,8 @@
     "start": "next start",
     "migrate": "node scripts/migrate.js",
     "build": "npm-run-all migrate build-next",
-    "build-next": "next build"
+    "build-next": "next build",
+    "test": "jest --coverage"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -20,5 +21,12 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-hook-form": "^7.4.2"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^7.31.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "babel-jest": "^27.0.1",
+    "jest": "^27.0.1"
   }
 }
