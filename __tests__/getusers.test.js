@@ -12,12 +12,14 @@ const { getUser } = require("../lib/dbfunc");
 console.log(process.env);
 console.log(connectionString);
 
-beforeAll(() => {
+beforeAll(async () => {
   // Clears the database and adds some testing data.
   // Jest will wait for this promise to resolve before running tests.
 
   await client.connect();
   console.log("connected to database");
+
+  console.log(await getUser());
 
   //   let script = ``
 
