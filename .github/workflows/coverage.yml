@@ -44,8 +44,8 @@ jobs:
       - name: migrate database
         run: node scripts/migrate.js
         env:
-          env: production
-          DBURL: postgres://postgres:123@localhost:5432/postgres
+          env: "production"
+          DBURL: "postgres://postgres:123@localhost:5432/postgres"
 
       - name: Run the tests
         run: npm run test
