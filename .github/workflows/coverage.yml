@@ -3,7 +3,7 @@ name: Running Code Coverage
 on: [push, pull_request]
 
 jobs:
-  build:
+  Test:
     runs-on: ubuntu-latest
     # Service containers to run with `runner-job`
     services:
