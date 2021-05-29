@@ -135,10 +135,16 @@ export default function Home({
         .outterwrap {
           margin: 0;
           padding: 15px;
-          height: 100vh;
+          height: 100%;
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
+        }
+
+        .wrap {
+          width: 100%;
+          max-width: 320px;
+          margin: 0 auto;
         }
 
         .handlerLink {
@@ -164,12 +170,6 @@ export default function Home({
 
         a:hover {
           color: ${accentColor};
-        }
-
-        .wrap {
-          width: 100%;
-          max-width: 320px;
-          margin: 0 auto;
         }
 
         .profile {
