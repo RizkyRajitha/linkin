@@ -14,6 +14,7 @@ export default function Home({
   linkData,
   preview = false,
 }) {
+  accentColor = isEmptry(accentColor) ? "#BDD7FF" : accentColor;
   avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
   handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
   handlerFontColor = isEmptry(handlerFontColor) ? "#fff" : handlerFontColor;
@@ -28,25 +29,12 @@ export default function Home({
     handlerFontColor,
     handlerFontSize,
     bgColor,
-    avatarwidth
+    avatarwidth,
+    accentColor
   );
   console.log(linkData);
   return (
     <div className="outterwrap">
-      {/* <defaultHead>
-        <title> {`${handlerText}'s Link In The Bio Page`}</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta
-          name="og:description"
-          content={`${handlerText}'s Link In The Bio Page`}
-        />
-        <meta name="og:site_name" content={handlerText} />
-        <meta
-          name="og:title"
-          content={`${handlerText}'s Link In The Bio Page`}
-        />
-        <meta name="og:image" content={avatarUrl} />
-      </defaultHead> */}
       <div className="wrap">
         <div className="profile">
           <img src={avatarUrl} className="photo" />
@@ -124,7 +112,13 @@ export default function Home({
           Copyright © 2021 All Rights Reserved by {footerText}.
         </div> */}
       </div>
-      <style jsx>{`
+      <style
+        jsx
+        onError={(e) => {
+          console.log(e);
+        }}
+        onece
+      >{`
         @import url("${fontUrl}");
 
         @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");

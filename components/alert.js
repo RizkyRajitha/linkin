@@ -4,11 +4,7 @@ export default function Alert({ msg, type = "danger" }) {
   const [msgstate, setmsg] = useState(msg);
 
   useEffect(() => {
-    setTimeout(() => {
-      setmsg(false);
-      //   msg = false;
-      console.log("alert ", msg);
-    }, 10000);
+    // return;
   }, [msg]);
   console.log("alert ", msg, type);
   return (
