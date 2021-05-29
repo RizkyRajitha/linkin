@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { isEmptry } from "../lib/side";
 
 export default function Home({
@@ -32,6 +33,15 @@ export default function Home({
     avatarwidth,
     accentColor
   );
+
+  useEffect(() => {
+    console.log("up");
+    console.log(avatarwidth);
+    return () => {
+      console.log("cleanup");
+    };
+  }, [avatarwidth]);
+
   console.log(linkData);
   return (
     <div className="outterwrap">
@@ -117,7 +127,6 @@ export default function Home({
         onError={(e) => {
           console.log(e);
         }}
-        onece
       >{`
         @import url("${fontUrl}");
 
