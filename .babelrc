@@ -1,4 +1,5 @@
 {
+  // diabled optimizeForSpeed becasue styled-jsx style not found error wehn updating styles
   "presets": [["next/babel", { "styled-jsx": { "optimizeForSpeed": false } }]]
   // "plugins": [
   //   ["styled-jsx/babel", { "optimizeForSpeed": true }]
