@@ -1,5 +1,5 @@
 {
-  "presets": [["next/babel", { "styled-jsx": { "optimizeForSpeed": true } }]]
+  "presets": [["next/babel", { "styled-jsx": { "optimizeForSpeed": false } }]]
   // "plugins": [
   //   ["styled-jsx/babel", { "optimizeForSpeed": true }]
   // ]
