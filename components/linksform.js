@@ -13,6 +13,15 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
   }, [data]);
 
   const addNewLink = () => {
+    // console.log(links.length);
+    // console.log(links[links.length - 1]);
+
+    let newLink = links[links.length - 1];
+
+    if (!newLink.hasOwnProperty("id")) {
+      // console.log("new link on arr");
+      return;
+    }
     setlinks((pre) => {
       return [
         ...pre,
