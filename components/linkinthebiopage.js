@@ -136,6 +136,7 @@ export default function Home({
           margin: 0;
           padding: 15px;
           height: 100%;
+          min-height: 100vh;
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
