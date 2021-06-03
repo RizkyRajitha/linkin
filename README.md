@@ -93,6 +93,20 @@ npm run dev
 
 <!-- todo
 
+add react toast
+
+add link data update to link card
+
+add react context
+
+
+
+
+
+
+
+
+
 add update form to update page data
 add index with avatar url and other data
 add update form to update links

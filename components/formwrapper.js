@@ -9,6 +9,8 @@ import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
+import throttle from "lodash.throttle";
+
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
@@ -66,7 +68,16 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
     setloading(false);
   };
 
+  let tot = throttle((data) => {
+    console.log("asse");
+    console.log(data);
+  }, 1000);
   const saveLinkData = async (linkdata) => {
+    console.log(linkdata);
+    tot(linkdata);
+  };
+
+  const saveLinkDataPost = async (linkdata) => {
     console.log("links linkdata");
     console.log(linkdata);
     setloading(true);

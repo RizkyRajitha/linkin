@@ -1,22 +1,94 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useStateValue } from "../pages/context/state";
 
-export default function LinkCard({ item, save, loading }) {
+import debounce from "lodash.debounce";
+
+const endpoint =
+  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
+export default function LinkCard({ index }) {
+  const [loading, setloading] = useState(false);
+  const [{ links }, dispatch] = useStateValue();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty },
-    control,
     reset,
-  } = useForm({ defaultValues: item });
+    watch,
+  } = useForm({ defaultValues: links[index] });
+  // const [linkData, setlinkData] = useState(item);
+
+  // useEffect(() => {
+  //   reset(links[index]);
+  //   // dispatch({ type: "changeTheme", linkdata: linkDataSS });
+  // }, [links]);
+
+  // highlight-starts
+  const debouncedSave = useCallback(
+    debounce((nextValue) => saveToDb(nextValue), 1000),
+    [] // will be created only once initially
+  );
+  // highlight-ends
+
+  const saveToDb = (nextValue) => {
+    console.log(nextValue);
+    saveLinkDataPost(nextValue);
+  };
+
+  watch((data) => {
+    console.log(data);
+    debouncedSave(data);
+  });
+
+  const saveLinkDataPost = async (linkdata) => {
+    console.log("links linkdata");
+    console.log(linkdata);
+    setloading(true);
+    // setshowAlert({
+    //   msg: "",
+    //   type: "",
+    // });
+
+    let operation = "insertpagelinks";
+    if (linkdata.hasOwnProperty("id")) {
+      operation = `updatepagelinks`;
+    }
+    console.log(operation);
+    try {
+      let res = await fetch(`${endpoint}/api/${operation}`, {
+        method: "POST",
+        body: JSON.stringify(linkdata),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      // setshowAlert({
+      //   msg:
+      //     operation === "insertpagelinks"
+      //       ? "Added new page link "
+      //       : "Updated page link " + " successfully",
+      //   type: "success",
+      // });
+      console.log(res);
+      // updatedLinkData(res.updatedLinkData);
+      dispatch({ type: "changeTheme", linkdata: res.updatedLinkData });
+      // reset(res.updatedLinkData[index]);
+    } catch (error) {
+      // setshowAlert({
+      //   msg: operation + "failed" + error.message,
+      //   type: "danger",
+      // });
+    }
+    setloading(false);
+  };
 
   useEffect(() => {
     console.log("111111-link card-11111111");
-    reset(item);
-  }, [item]);
+    // reset(item);
+  }, [links]);
 
   const saveLinkData = (data) => {
-    save(data);
+    // save(data);
     // reset(data);
   };
 
@@ -83,7 +155,7 @@ export default function LinkCard({ item, save, loading }) {
                 {...register("bgColor")}
               />
             </div>{" "}
-            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+            {/* <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-outline-warning btn-sm"
                 type="button"
@@ -111,7 +183,7 @@ export default function LinkCard({ item, save, loading }) {
                 )}
                 Save
               </button>
-            </div>
+            </div> */}
           </form>
         </div>{" "}
       </div>

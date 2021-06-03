@@ -1,15 +1,18 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
+import { useStateValue } from "../pages/context/state";
 
 const LinksForm = ({ data, update, pagedataid, loading }) => {
   console.log(data);
-  const [links, setlinks] = useState(data);
+  const [{ links }, dispatch] = useStateValue();
+
+  // const [links, setlinks] = useState(data);
 
   useEffect(() => {
     // to sync newly added link with linkdata id ,
     //if not a new link is insertted without updateing old link
-    setlinks([...data]);
+    // setlinks([...data]);
   }, [data]);
 
   const addNewLink = () => {
@@ -18,13 +21,14 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
 
     let newLink = links[links.length - 1];
 
-    if (!newLink.hasOwnProperty("id")) {
+    if (newLink && !newLink.hasOwnProperty("id")) {
       // console.log("new link on arr");
       return;
     }
-    setlinks((pre) => {
-      return [
-        ...pre,
+    dispatch({
+      type: "changeTheme",
+      linkdata: [
+        ...links,
         {
           linkUrl: "",
           displayText: "",
@@ -32,8 +36,20 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           bgColor: "#2c6bed",
           active: true,
         },
-      ];
+      ],
     });
+    // setlinks((pre) => {
+    //   return [
+    //     ...pre,
+    //     {
+    //       linkUrl: "",
+    //       displayText: "",
+    //       pagedataid: pagedataid,
+    //       bgColor: "#2c6bed",
+    //       active: true,
+    //     },
+    //   ];
+    // });
   };
 
   return (
@@ -56,6 +72,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
             return (
               <LinkCard
                 key={index}
+                index={index}
                 item={item}
                 save={update}
                 loading={loading}
@@ -63,7 +80,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
             );
           })}
         </div>
-        <div className='mb-5' ></div>
+        <div className="mb-5"></div>
       </div>
     </>
   );

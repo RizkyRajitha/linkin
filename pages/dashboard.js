@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 
 import { getPageDatawLinkData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
+import { useStateValue } from "./context/state";
 
 export async function getServerSideProps({ req, res }) {
   try {
@@ -23,7 +24,14 @@ export async function getServerSideProps({ req, res }) {
 
 const Admin = ({ pageDataSS, linkDataSS }) => {
   const [pageData, setpageData] = useState(pageDataSS);
-  const [linkData, setlinkData] = useState(linkDataSS);
+  // const [linkData, setlinkData] = useState(linkDataSS);
+
+  const [{ links }, dispatch] = useStateValue();
+  useEffect(() => {
+    dispatch({ type: "changeTheme", linkdata: linkDataSS });
+  }, []);
+  console.log(links);
+
   console.log(pageDataSS);
 
   //TODO : add live update
@@ -36,8 +44,9 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
   const updatedLinkData = (data) => {
     console.log("updateeeeeeeeee");
     console.log(data);
+    dispatch({ type: "changeTheme", linkdata: data });
 
-    setlinkData([...data]);
+    // setlinkData([...data]);
   };
 
   return (
@@ -53,21 +62,21 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
       <div className="d-flex dashboardwrapepr">
         <Formwrapper
           pageData={pageData}
-          linkData={linkData}
+          linkData={links}
           updatedPageData={updatedPageData}
           updatedLinkData={updatedLinkData}
         />
         <div className="preview">
           <Home
             {...pageData}
-            linkData={linkData.filter((ele) => ele.active)}
+            linkData={links.filter((ele) => ele.active)}
             preview
           />
         </div>
       </div>
       <style jsx>{`
         .preview {
-          width: 50vw;
+          width: 40vw;
         }
 
         @media (max-width: 768px) {
