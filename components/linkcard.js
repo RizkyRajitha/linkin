@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useStateValue } from "../pages/context/state";
 
@@ -6,38 +6,36 @@ import debounce from "lodash.debounce";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
-export default function LinkCard({ index }) {
+export default function LinkCard({ index, item }) {
   const [loading, setloading] = useState(false);
-  const [{ links }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
+
+  // console.log("rerenmd");
+  // console.log(linksdata);
 
   const {
     register,
-    handleSubmit,
     formState: { errors, isDirty },
     reset,
     watch,
-  } = useForm({ defaultValues: links[index] });
-  // const [linkData, setlinkData] = useState(item);
+  } = useForm({ defaultValues: item });
 
-  // useEffect(() => {
-  //   reset(links[index]);
-  //   // dispatch({ type: "changeTheme", linkdata: linkDataSS });
-  // }, [links]);
-
-  // highlight-starts
   const debouncedSave = useCallback(
     debounce((nextValue) => saveToDb(nextValue), 1000),
-    [] // will be created only once initially
+    []
   );
-  // highlight-ends
 
   const saveToDb = (nextValue) => {
     console.log(nextValue);
     saveLinkDataPost(nextValue);
   };
 
-  watch((data) => {
-    console.log(data);
+  watch((data, { type }) => {
+    console.log(type);
+    // event fired when rest the form with updated data
+    if (type == undefined) {
+      return;
+    }
     debouncedSave(data);
   });
 
@@ -70,9 +68,8 @@ export default function LinkCard({ index }) {
       //   type: "success",
       // });
       console.log(res);
-      // updatedLinkData(res.updatedLinkData);
       dispatch({ type: "changeTheme", linkdata: res.updatedLinkData });
-      // reset(res.updatedLinkData[index]);
+      reset(res.updatedLinkData[index]);
     } catch (error) {
       // setshowAlert({
       //   msg: operation + "failed" + error.message,
@@ -82,20 +79,17 @@ export default function LinkCard({ index }) {
     setloading(false);
   };
 
-  useEffect(() => {
-    console.log("111111-link card-11111111");
-    // reset(item);
-  }, [links]);
-
-  const saveLinkData = (data) => {
-    // save(data);
-    // reset(data);
-  };
-
   return (
     <>
       <div className="card mt-3">
         <div className="card-body">
+          {
+            <span
+              className="spinner-border spinner-border-sm me-1"
+              role="status"
+              aria-hidden="true"
+            ></span>
+          }
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
