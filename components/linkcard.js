@@ -79,6 +79,46 @@ export default function LinkCard({ index, item }) {
     setloading(false);
   };
 
+  const deleteLink = async () => {
+    console.log("delete link");
+    console.log(item.id);
+    setloading(true);
+    // setshowAlert({
+    //   msg: "",
+    //   type: "",
+    // });
+
+    let operation = "deletepagelink";
+    // if (linkdata.hasOwnProperty("id")) {
+    //   operation = `updatepagelinks`;
+    // }
+    console.log(operation);
+    try {
+      let res = await fetch(`${endpoint}/api/${operation}`, {
+        method: "POST",
+        body: JSON.stringify({ id: item.id }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      // setshowAlert({
+      //   msg:
+      //     operation === "insertpagelinks"
+      //       ? "Added new page link "
+      //       : "Updated page link " + " successfully",
+      //   type: "success",
+      // });
+      console.log(res);
+      dispatch({ type: "changeTheme", linkdata: res.updatedLinkData });
+      // reset(res.updatedLinkData[index]);
+    } catch (error) {
+      // setshowAlert({
+      //   msg: operation + "failed" + error.message,
+      //   type: "danger",
+      // });
+    }
+    setloading(false);
+  };
+
   return (
     <>
       <div className="card mt-3">
@@ -150,6 +190,19 @@ export default function LinkCard({ index, item }) {
                 {...register("bgColor")}
               />
             </div>{" "}
+            <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button
+                className="btn btn-outline-warning btn-sm"
+                type="button"
+                disabled={loading}
+                hidden={!item.id}
+                onClick={() => {
+                  deleteLink();
+                }}
+              >
+                Delete
+              </button>
+            </div>
             {/* <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-outline-warning btn-sm"
