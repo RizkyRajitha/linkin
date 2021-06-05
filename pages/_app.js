@@ -1,6 +1,6 @@
 import "../styles/global.css";
 import "../styles/boostrap.min.css";
-import { StateProvider } from "./context/state";
+import { StateProvider } from "../components/context/state";
 
 export default function App({ Component, pageProps }) {
   const initialState = {

@@ -22,7 +22,8 @@
     "pg": "^8.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-hook-form": "^7.4.2"
+    "react-hook-form": "^7.4.2",
+    "sweetalert2": "^11.0.16"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.31.0",

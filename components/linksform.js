@@ -1,6 +1,6 @@
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
-import { useStateValue } from "../pages/context/state";
+import { useStateValue } from "./context/state";
 
 const LinksForm = ({ data, update, pagedataid, loading }) => {
   console.log(data);

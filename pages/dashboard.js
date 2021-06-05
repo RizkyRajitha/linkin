@@ -5,7 +5,7 @@ import { getPageDatawLinkData } from "../lib/dbfunc";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
-import { useStateValue } from "./context/state";
+import { useStateValue } from "../components/context/state";
 
 export async function getServerSideProps({ req, res }) {
   try {

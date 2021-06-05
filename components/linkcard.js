@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useStateValue } from "../pages/context/state";
+import { useStateValue } from "./context/state";
 
 import debounce from "lodash.debounce";
 
@@ -15,13 +15,13 @@ export default function LinkCard({ index, item }) {
 
   const {
     register,
-    formState: { errors, isDirty },
+    formState: { errors },
     reset,
     watch,
   } = useForm({ defaultValues: item });
 
   const debouncedSave = useCallback(
-    debounce((nextValue) => saveToDb(nextValue), 1000),
+    debounce((data) => saveToDb(data), 1000),
     []
   );
 
@@ -32,7 +32,7 @@ export default function LinkCard({ index, item }) {
 
   watch((data, { type }) => {
     console.log(type);
-    // event fired when rest the form with updated data
+    // event fired when reset the form with updated data
     if (type == undefined) {
       return;
     }
