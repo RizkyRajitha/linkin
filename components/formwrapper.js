@@ -11,6 +11,8 @@ import FontForm from "./fontform";
 
 import throttle from "lodash.throttle";
 
+const PUBLICURL = process.env.VERCEL_URL || "http://localhost:3000";
+
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
@@ -135,11 +137,11 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   return (
     <>
       <div className={styles.dashform}>
-        <div className="d-flex justify-content-end mb-4">
+        <div className="d-flex justify-content-end mb-2">
           {" "}
           <a
             className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
-            href={`${router.basePath}`}
+            href={`${PUBLICURL}`}
             target="_blank"
           >
             visit
