@@ -69,7 +69,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
         <div className="preview">
           <Home
             {...pageData}
-            linkData={links.filter((ele) => ele.active)}
+            linkData={links.filter((ele) => ele.displayText && ele.active)}
             preview
           />
         </div>

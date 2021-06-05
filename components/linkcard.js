@@ -10,8 +10,8 @@ export default function LinkCard({ index, item }) {
   const [loading, setloading] = useState(false);
   const [{}, dispatch] = useStateValue();
 
-  // console.log("rerenmd");
-  // console.log(linksdata);
+  console.log("rerenmd");
+  console.log(item);
 
   const {
     register,
@@ -82,14 +82,16 @@ export default function LinkCard({ index, item }) {
   return (
     <>
       <div className="card mt-3">
-        <div className="card-body">
-          {
-            <span
-              className="spinner-border spinner-border-sm me-1"
-              role="status"
-              aria-hidden="true"
-            ></span>
-          }
+        <div className="card-body py-2 px-4">
+          {loading && (
+            <div className="d-grid gap-2 d-md-flex justify-content-start">
+              <span
+                className="spinner-border text-info spinner-border-sm me-1"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </div>
+          )}
           <form onSubmit={(e) => e.preventDefault()}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
@@ -97,55 +99,54 @@ export default function LinkCard({ index, item }) {
                 type="checkbox"
                 {...register(`active`)}
               />
-              {/* <label className="form-check-label" for="flexSwitchCheckDefault">
-                active
-              </label> */}
             </div>
-            <div className="mb-3 small">
-              <label className="form-label">Link Display Text</label>
+            <div className="mb-1 small">
+              {/* <label className="form-label small ">Link Display Text</label> */}
               <input
                 type="text"
                 className={
                   errors.handlerText
-                    ? "form-control is-invalid"
-                    : "form-control"
+                    ? "form-control form-control-sm mb-2 is-invalid"
+                    : "form-control form-control-sm mb-2"
                 }
-                placeholder="Enter name"
+                placeholder="Enter Link Display Text"
+                // disabled={loading}
                 {...register(`displayText`)}
               />
             </div>
-            <div className="mb-3 small">
-              <label className="form-label">Enter Link Url</label>
+            <div className="mb-1 small">
+              {/* <label className="form-label small">Enter Link Url</label> */}
               <input
                 type="text"
                 className={
                   errors.handlerText
-                    ? "form-control is-invalid"
-                    : "form-control"
+                    ? "form-control form-control-sm mb-2  is-invalid"
+                    : "form-control form-control-sm mb-2 "
                 }
-                placeholder="Enter link"
+                placeholder="Enter Link Url"
                 {...register(`linkUrl`)}
               />
             </div>
-            <div className="mb-3 small">
-              <label className="form-label">Icon Class</label>
+            <div className="mb-1 small">
+              {/* <label className="form-label small">Icon Class</label> */}
               <input
                 type="text"
                 className={
                   errors.handlerText
-                    ? "form-control is-invalid"
-                    : "form-control"
+                    ? "form-control form-control-sm mb-2  is-invalid"
+                    : "form-control form-control-sm mb-2 "
                 }
                 placeholder="Enter Icon Class"
                 {...register(`iconClass`)}
               />
             </div>
-            <div className="mb-3 ">
-              <label className="form-label">Handler Font color </label>
+            <div className="mb-1 small ">
+              {/* <label className="form-label small">Handler Font color </label> */}
               <input
                 type="color"
-                className="form-control form-control-color"
+                className="form-control form-control-sm mb-2 form-control-color"
                 title="Choose Link background color"
+                placeholder="Choose Link background color"
                 {...register("bgColor")}
               />
             </div>{" "}

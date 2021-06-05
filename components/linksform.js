@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
 import { useStateValue } from "../pages/context/state";
@@ -9,14 +8,14 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
 
   // const [links, setlinks] = useState(data);
 
-  useEffect(() => {
-    // to sync newly added link with linkdata id ,
-    //if not a new link is insertted without updateing old link
-    // setlinks([...data]);
-  }, [data]);
+  // useEffect(() => {
+  // to sync newly added link with linkdata id ,
+  //if not a new link is insertted without updateing old link
+  // setlinks([...data]);
+  // }, [data]);
 
   const addNewLink = () => {
-    // console.log(links.length);
+    console.log(links.length);
     // console.log(links[links.length - 1]);
 
     let newLink = links[links.length - 1];
@@ -38,18 +37,6 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
         },
       ],
     });
-    // setlinks((pre) => {
-    //   return [
-    //     ...pre,
-    //     {
-    //       linkUrl: "",
-    //       displayText: "",
-    //       pagedataid: pagedataid,
-    //       bgColor: "#2c6bed",
-    //       active: true,
-    //     },
-    //   ];
-    // });
   };
 
   return (
@@ -59,14 +46,17 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 `}
         >
           <h3>Link Data</h3>
+
           <button
             type="button"
-            className="btn btn-primary btn-block"
-            onClick={() => {
+            className="btn btn-outline-primary"
+            onClick={(e) => {
+              // console.log(e);
+              console.log("click");
               addNewLink();
             }}
           >
-            Add new
+            Add new link
           </button>
           {links.map((item, index) => {
             return (
