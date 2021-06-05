@@ -28,7 +28,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
 
   const [{ links }, dispatch] = useStateValue();
   useEffect(() => {
-    dispatch({ type: "changeTheme", linkdata: linkDataSS });
+    dispatch({ type: "updateLink", linkdata: linkDataSS });
   }, []);
   console.log(links);
 
@@ -44,7 +44,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
   const updatedLinkData = (data) => {
     console.log("updateeeeeeeeee");
     console.log(data);
-    dispatch({ type: "changeTheme", linkdata: data });
+    dispatch({ type: "updateLink", linkdata: data });
 
     // setlinkData([...data]);
   };

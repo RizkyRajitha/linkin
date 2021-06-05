@@ -2,20 +2,12 @@ import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
 import { useStateValue } from "./context/state";
 
-const LinksForm = ({ data, update, pagedataid, loading }) => {
+const LinksForm = ({ data, pagedataid }) => {
   console.log(data);
   const [{ links }, dispatch] = useStateValue();
 
-  // const [links, setlinks] = useState(data);
-
-  // useEffect(() => {
-  // to sync newly added link with linkdata id ,
-  //if not a new link is insertted without updateing old link
-  // setlinks([...data]);
-  // }, [data]);
-
   const addNewLink = () => {
-    console.log(links.length);
+    // console.log(links.length);
     // console.log(links[links.length - 1]);
 
     let newLink = links[links.length - 1];
@@ -25,7 +17,7 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
       return;
     }
     dispatch({
-      type: "changeTheme",
+      type: "updateLink",
       linkdata: [
         ...links,
         {
@@ -52,23 +44,24 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
             className="btn btn-outline-primary"
             onClick={(e) => {
               // console.log(e);
-              console.log("click");
+              // console.log("click");
               addNewLink();
             }}
           >
             Add new link
           </button>
-          {links.map((item, index) => {
-            return (
-              <LinkCard
-                key={index}
-                index={index}
-                item={item}
-                save={update}
-                loading={loading}
-              />
-            );
-          })}
+          {links &&
+            links.map((item, index) => {
+              return (
+                <LinkCard
+                  key={index}
+                  index={index}
+                  item={item}
+                  // save={update}
+                  // loading={loading}
+                />
+              );
+            })}
         </div>
         <div className="mb-5"></div>
       </div>

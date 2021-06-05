@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useStateValue } from "./context/state";
 
@@ -8,27 +8,34 @@ const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 export default function LinkCard({ index, item }) {
   const [loading, setloading] = useState(false);
+  const [afterdeleted, setafterdeleted] = useState(false);
+
   const [{}, dispatch] = useStateValue();
+
+  const refSubmitButtom = useRef(null);
 
   console.log("rerenmd");
   console.log(item);
+  console.log("---------------------iiidd");
+  console.log(index);
+
+  useEffect(() => {
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!111");
+    console.log(item);
+    if (afterdeleted) {
+      reset(item);
+      setafterdeleted(false);
+    }
+    //
+  }, [item]);
 
   const {
     register,
+    handleSubmit,
     formState: { errors },
     reset,
     watch,
   } = useForm({ defaultValues: item });
-
-  const debouncedSave = useCallback(
-    debounce((data) => saveToDb(data), 1500),
-    []
-  );
-
-  const saveToDb = (nextValue) => {
-    console.log(nextValue);
-    saveLinkDataPost(nextValue);
-  };
 
   watch((data, { type }) => {
     console.log(type);
@@ -36,10 +43,20 @@ export default function LinkCard({ index, item }) {
     if (type == undefined) {
       return;
     }
-    debouncedSave(data);
+    debouncedSaveLinkData();
   });
+  const debouncedSaveLinkData = useCallback(
+    debounce(() => {
+      // console.log(data);
+      if (loading) {
+        return;
+      }
+      refSubmitButtom?.current?.click();
+    }, 1500),
+    []
+  );
 
-  const saveLinkDataPost = async (linkdata) => {
+  const saveLinkData = async (linkdata) => {
     console.log("links linkdata");
     console.log(linkdata);
     setloading(true);
@@ -68,9 +85,10 @@ export default function LinkCard({ index, item }) {
       //   type: "success",
       // });
       console.log(res);
-      dispatch({ type: "changeTheme", linkdata: res.updatedLinkData });
+      dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
       reset(res.updatedLinkData[index]);
     } catch (error) {
+      console.log(error);
       // setshowAlert({
       //   msg: operation + "failed" + error.message,
       //   type: "danger",
@@ -108,9 +126,14 @@ export default function LinkCard({ index, item }) {
       //   type: "success",
       // });
       console.log(res);
-      dispatch({ type: "changeTheme", linkdata: res.updatedLinkData });
-      // reset(res.updatedLinkData[index]);
+      // reset();
+      dispatch({ type: "deleteLink", id: item.id });
+      setafterdeleted(true);
+      // console.warn("reSETTTTTTTTTTTTT");
+      // console.log(item);
+      // reset({});
     } catch (error) {
+      console.log(error);
       // setshowAlert({
       //   msg: operation + "failed" + error.message,
       //   type: "danger",
@@ -122,7 +145,12 @@ export default function LinkCard({ index, item }) {
   return (
     <>
       <div className="card mt-3">
-        <div className="card-body py-2 px-4">
+        <div
+          className="card-body py-2 px-4"
+          style={{
+            background: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
+          }}
+        >
           {loading && (
             <div className="d-grid gap-2 d-md-flex justify-content-start">
               <span
@@ -132,7 +160,9 @@ export default function LinkCard({ index, item }) {
               ></span>
             </div>
           )}
-          <form onSubmit={(e) => e.preventDefault()}>
+          {console.log(errors)}
+          {JSON.stringify(item)}
+          <form onSubmit={handleSubmit(saveLinkData)}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
                 className="form-check-input"
@@ -145,27 +175,43 @@ export default function LinkCard({ index, item }) {
               <input
                 type="text"
                 className={
-                  errors.handlerText
+                  errors.displayText
                     ? "form-control form-control-sm mb-2 is-invalid"
                     : "form-control form-control-sm mb-2"
                 }
                 placeholder="Enter Link Display Text"
                 // disabled={loading}
-                {...register(`displayText`)}
-              />
+                {...register(`displayText`, {
+                  required: true,
+                })}
+              />{" "}
+              {errors.displayText && (
+                <div className="invalid-feedback">
+                  Link Display Text is required
+                </div>
+              )}
             </div>
             <div className="mb-1 small">
               {/* <label className="form-label small">Enter Link Url</label> */}
               <input
                 type="text"
                 className={
-                  errors.handlerText
+                  errors.linkUrl
                     ? "form-control form-control-sm mb-2  is-invalid"
                     : "form-control form-control-sm mb-2 "
                 }
                 placeholder="Enter Link Url"
-                {...register(`linkUrl`)}
-              />
+                {...register(`linkUrl`, {
+                  pattern: {
+                    message: "Should be a valid URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
+                })}
+              />{" "}
+              {errors.linkUrl && (
+                <div className="invalid-feedback">{errors.linkUrl.message}</div>
+              )}
             </div>
             <div className="mb-1 small">
               {/* <label className="form-label small">Icon Class</label> */}
@@ -203,6 +249,7 @@ export default function LinkCard({ index, item }) {
                 Delete
               </button>
             </div>
+            <button hidden={true} ref={refSubmitButtom} type={"submit"} />
             {/* <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-outline-warning btn-sm"

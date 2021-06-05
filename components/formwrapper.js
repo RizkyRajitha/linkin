@@ -9,8 +9,6 @@ import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
-import throttle from "lodash.throttle";
-
 const PUBLICURL = process.env.VERCEL_URL || "http://localhost:3000";
 
 const endpoint =
@@ -64,54 +62,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
       console.log(error);
       setshowAlert({
         msg: "Server Error" + error.message,
-        type: "danger",
-      });
-    }
-    setloading(false);
-  };
-
-  let tot = throttle((data) => {
-    console.log("asse");
-    console.log(data);
-  }, 1000);
-  const saveLinkData = async (linkdata) => {
-    console.log(linkdata);
-    tot(linkdata);
-  };
-
-  const saveLinkDataPost = async (linkdata) => {
-    console.log("links linkdata");
-    console.log(linkdata);
-    setloading(true);
-    setshowAlert({
-      msg: "",
-      type: "",
-    });
-
-    let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
-    }
-    console.log(operation);
-    try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
-        method: "POST",
-        body: JSON.stringify(linkdata),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      setshowAlert({
-        msg:
-          operation === "insertpagelinks"
-            ? "Added new page link "
-            : "Updated page link " + " successfully",
-        type: "success",
-      });
-      console.log(res);
-      updatedLinkData(res.updatedLinkData);
-    } catch (error) {
-      setshowAlert({
-        msg: operation + "failed" + error.message,
         type: "danger",
       });
     }
@@ -238,12 +188,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
             <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
           {activeForm === "linksForm" && (
-            <LinksForm
-              data={linkData}
-              update={saveLinkData}
-              loading={loading}
-              pagedataid={pageData.id}
-            />
+            <LinksForm data={linkData} pagedataid={pageData.id} />
           )}
         </div>
       </div>

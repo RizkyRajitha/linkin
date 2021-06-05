@@ -4,7 +4,6 @@ import { StateProvider } from "../components/context/state";
 
 export default function App({ Component, pageProps }) {
   const initialState = {
-    theme: { primary: "green" },
     links: [],
   };
 
@@ -13,10 +12,17 @@ export default function App({ Component, pageProps }) {
     console.log(state);
     console.log(action);
     switch (action.type) {
-      case "changeTheme":
+      case "updateLink":
         return {
-          ...state,
+          // ...state,
           links: action.linkdata,
+        };
+      case "deleteLink":
+        console.log("dellllllllllll0000000000000000000");
+        console.log(state.links.filter((ele) => ele.id != action.id));
+        return {
+          // ...state,
+          links: state.links.filter((ele) => ele.id != action.id),
         };
       default:
         return state;
