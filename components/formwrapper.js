@@ -140,14 +140,14 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         <div className="d-flex justify-content-end mb-2">
           {" "}
           <a
-            className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
+            className={`btn btn-outline-primary logout-btn ${styles.logoutbtn}`}
             href={`${PUBLICURL}`}
             target="_blank"
           >
             visit
           </a>
           <button
-            className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
+            className={`btn btn-outline-secondary logout-btn ${styles.logoutbtn}`}
             onClick={() => logout()}
           >
             logout

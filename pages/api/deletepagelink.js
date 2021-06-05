@@ -8,7 +8,7 @@ async function handler(req, res) {
     await use(req, res, jwtAuth);
     console.log(req.body);
     await deleteLink(req.body);
-    let updatedPageData = await getPageData();
+    let updatedPageData = await getLinkData();
     console.log(updatedPageData);
     res.json(updatedPageData);
   } catch (error) {

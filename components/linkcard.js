@@ -21,7 +21,7 @@ export default function LinkCard({ index, item }) {
   } = useForm({ defaultValues: item });
 
   const debouncedSave = useCallback(
-    debounce((data) => saveToDb(data), 1000),
+    debounce((data) => saveToDb(data), 1500),
     []
   );
 
