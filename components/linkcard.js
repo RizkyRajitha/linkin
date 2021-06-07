@@ -14,16 +14,13 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     watch,
   } = useForm({ defaultValues: item });
 
-  // console.log("rerenmd");
-  // console.log(item);
-  // console.log("---------------------iiidd");
-  // console.log(index);
-
   useEffect(() => {
-    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!111");
+    // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
     // console.log(item);
+
+    // reset when the linkdata is change to the form update with new values
     if (item) {
-      reset(item);
+      reset(item, { keepIsSubmitted: true, keepSubmitCount: true });
     }
   }, [item]);
 
@@ -38,8 +35,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
 
   const debouncedSaveLinkData = useCallback(
     debounce(() => {
-      // console.log(data);
-      if (loading) {
+      if (isSubmitted) {
         return;
       }
       refSubmitButtom?.current?.click();
@@ -51,17 +47,8 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     <>
       <div className="card mt-3">
         <div className="card-body py-2 px-4">
-          {loading && (
-            <div className="d-grid gap-2 d-md-flex justify-content-start">
-              <span
-                className="spinner-border text-info spinner-border-sm me-1"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            </div>
-          )}
-          {console.log(errors)}
-          {JSON.stringify(item)}
+          {/* {console.log(errors)} */}
+          {/* {JSON.stringify(item)} */}
           <form onSubmit={handleSubmit(updateLink)}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input

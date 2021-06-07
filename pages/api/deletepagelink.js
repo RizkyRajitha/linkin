@@ -8,13 +8,13 @@ async function handler(req, res) {
     await use(req, res, jwtAuth);
     console.log(req.body);
     await deleteLink(req.body);
-    let updatedLinkData = await getLinkData();
+    // let updatedLinkData = await getLinkData();
     // console.log(updatedPageData);
-    res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
+    res.json({ success: true });
   } catch (error) {
     console.log(error.message);
 
-    res.status(500).send(error.message);
+    res.status(500).json({ success: false, msg: error.message });
   }
 }
 

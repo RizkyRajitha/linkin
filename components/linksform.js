@@ -107,6 +107,9 @@ const LinksForm = ({ pagedataid }) => {
       // });
       console.log(res);
       // reset();
+      if (res.success !== true) {
+        throw new Error("Error deleting link " + id);
+      }
       dispatch({ type: "deleteLink", id: id });
       // console.warn("reSETTTTTTTTTTTTT");
       // console.log(item);
@@ -128,7 +131,15 @@ const LinksForm = ({ pagedataid }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 `}
         >
           <h3>Link Data</h3>
-
+          {loading && (
+            <div className="d-grid gap-2 d-md-flex justify-content-end">
+              <span
+                className="spinner-border text-info spinner-border me-1"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </div>
+          )}
           <button
             type="button"
             className="btn btn-outline-primary"

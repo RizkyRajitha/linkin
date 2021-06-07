@@ -9,7 +9,8 @@ import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
-const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL || "http://localhost:3000";
+const PUBLICURL =
+  `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
