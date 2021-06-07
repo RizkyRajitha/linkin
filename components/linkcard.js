@@ -1,33 +1,10 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useStateValue } from "./context/state";
 
 import debounce from "lodash.debounce";
 
-const endpoint =
-  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
-export default function LinkCard({ index, item }) {
-  const [loading, setloading] = useState(false);
-  const [afterdeleted, setafterdeleted] = useState(false);
-
-  const [{}, dispatch] = useStateValue();
-
+export default function LinkCard({ item, updateLink, deleteLink, loading }) {
   const refSubmitButtom = useRef(null);
-
-  console.log("rerenmd");
-  console.log(item);
-  console.log("---------------------iiidd");
-  console.log(index);
-
-  useEffect(() => {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!111");
-    console.log(item);
-    if (afterdeleted) {
-      reset(item);
-      setafterdeleted(false);
-    }
-    //
-  }, [item]);
 
   const {
     register,
@@ -37,18 +14,28 @@ export default function LinkCard({ index, item }) {
     watch,
   } = useForm({ defaultValues: item });
 
+  useEffect(() => {
+    // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
+    // console.log(item);
+
+    // reset when the linkdata is change to the form update with new values
+    if (item) {
+      reset(item, { keepIsSubmitted: true, keepSubmitCount: true });
+    }
+  }, [item]);
+
   watch((data, { type }) => {
-    console.log(type);
+    // console.log(type);
     // event fired when reset the form with updated data
     if (type == undefined) {
       return;
     }
     debouncedSaveLinkData();
   });
+
   const debouncedSaveLinkData = useCallback(
     debounce(() => {
-      // console.log(data);
-      if (loading) {
+      if (isSubmitted) {
         return;
       }
       refSubmitButtom?.current?.click();
@@ -56,113 +43,13 @@ export default function LinkCard({ index, item }) {
     []
   );
 
-  const saveLinkData = async (linkdata) => {
-    console.log("links linkdata");
-    console.log(linkdata);
-    setloading(true);
-    // setshowAlert({
-    //   msg: "",
-    //   type: "",
-    // });
-
-    let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
-    }
-    console.log(operation);
-    try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
-        method: "POST",
-        body: JSON.stringify(linkdata),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      // setshowAlert({
-      //   msg:
-      //     operation === "insertpagelinks"
-      //       ? "Added new page link "
-      //       : "Updated page link " + " successfully",
-      //   type: "success",
-      // });
-      console.log(res);
-      dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
-      reset(res.updatedLinkData[index]);
-    } catch (error) {
-      console.log(error);
-      // setshowAlert({
-      //   msg: operation + "failed" + error.message,
-      //   type: "danger",
-      // });
-    }
-    setloading(false);
-  };
-
-  const deleteLink = async () => {
-    console.log("delete link");
-    console.log(item.id);
-    setloading(true);
-    // setshowAlert({
-    //   msg: "",
-    //   type: "",
-    // });
-
-    let operation = "deletepagelink";
-    // if (linkdata.hasOwnProperty("id")) {
-    //   operation = `updatepagelinks`;
-    // }
-    console.log(operation);
-    try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
-        method: "POST",
-        body: JSON.stringify({ id: item.id }),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      // setshowAlert({
-      //   msg:
-      //     operation === "insertpagelinks"
-      //       ? "Added new page link "
-      //       : "Updated page link " + " successfully",
-      //   type: "success",
-      // });
-      console.log(res);
-      // reset();
-      dispatch({ type: "deleteLink", id: item.id });
-      setafterdeleted(true);
-      // console.warn("reSETTTTTTTTTTTTT");
-      // console.log(item);
-      // reset({});
-    } catch (error) {
-      console.log(error);
-      // setshowAlert({
-      //   msg: operation + "failed" + error.message,
-      //   type: "danger",
-      // });
-    }
-    setloading(false);
-  };
-
   return (
     <>
       <div className="card mt-3">
-        <div
-          className="card-body py-2 px-4"
-          style={{
-            background: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
-          }}
-        >
-          {loading && (
-            <div className="d-grid gap-2 d-md-flex justify-content-start">
-              <span
-                className="spinner-border text-info spinner-border-sm me-1"
-                role="status"
-                aria-hidden="true"
-              ></span>
-            </div>
-          )}
-          {console.log(errors)}
-          {JSON.stringify(item)}
-          <form onSubmit={handleSubmit(saveLinkData)}>
+        <div className="card-body py-2 px-4">
+          {/* {console.log(errors)} */}
+          {/* {JSON.stringify(item)} */}
+          <form onSubmit={handleSubmit(updateLink)}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
                 className="form-check-input"
@@ -243,7 +130,7 @@ export default function LinkCard({ index, item }) {
                 disabled={loading}
                 hidden={!item.id}
                 onClick={() => {
-                  deleteLink();
+                  deleteLink(item.id);
                 }}
               >
                 Delete

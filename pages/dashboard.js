@@ -41,14 +41,6 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
     setpageData(data);
   };
 
-  const updatedLinkData = (data) => {
-    console.log("updateeeeeeeeee");
-    console.log(data);
-    dispatch({ type: "updateLink", linkdata: data });
-
-    // setlinkData([...data]);
-  };
-
   return (
     <>
       <Head>
@@ -60,12 +52,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
         <meta name="og:title" content={`Linkin Dashboard`} />
       </Head>
       <div className="d-flex dashboardwrapepr">
-        <Formwrapper
-          pageData={pageData}
-          linkData={links}
-          updatedPageData={updatedPageData}
-          updatedLinkData={updatedLinkData}
-        />
+        <Formwrapper pageData={pageData} updatedPageData={updatedPageData} />
         <div className="preview">
           <Home
             {...pageData}

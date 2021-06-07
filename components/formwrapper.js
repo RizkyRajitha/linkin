@@ -9,12 +9,13 @@ import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
-const PUBLICURL = process.env.VERCEL_URL || "http://localhost:3000";
+const PUBLICURL =
+  `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
+function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
@@ -187,9 +188,7 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
           {activeForm === "fontForm" && (
             <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
-          {activeForm === "linksForm" && (
-            <LinksForm data={linkData} pagedataid={pageData.id} />
-          )}
+          {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
         </div>
       </div>
     </>
