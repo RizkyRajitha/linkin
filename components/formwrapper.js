@@ -2,29 +2,28 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import styles from "../styles/formwrapper.module.css";
-import Alert from "./alert";
 
 import ColorForm from "./colorform";
 import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 
+import { ToastContainer, toast } from "react-toastify";
+
+const PUBLICURL =
+  `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000";
+
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
+function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
-  const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
   const [loading, setloading] = useState(false);
 
   const savePageData = async (data) => {
     setloading(true);
-    setshowAlert({
-      msg: "",
-      type: "",
-    });
 
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
@@ -35,71 +34,50 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
 
       if (!res.success) {
         if (res.message === "invalid_credential") {
-          setshowAlert({
-            msg: "User creadentials are not valid",
-            type: "danger",
+          toast.error(`User creadentials are not valid`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
         } else {
-          setshowAlert({
-            msg: "Server Error",
-            type: "danger",
+          toast.error("Server Error", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
         }
         return;
       }
 
-      // console.log(res);
-      setshowAlert({
-        msg: "updated",
-        type: "success",
+      toast.success(`successfully update page`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
 
-      // setpageData(res.updatedPageData);
       updatedPageData(res.updatedPageData);
     } catch (error) {
       console.log(error);
-      setshowAlert({
-        msg: "Server Error" + error.message,
-        type: "danger",
-      });
-    }
-    setloading(false);
-  };
-
-  const saveLinkData = async (linkdata) => {
-    console.log("links linkdata");
-    console.log(linkdata);
-    setloading(true);
-    setshowAlert({
-      msg: "",
-      type: "",
-    });
-
-    let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
-    }
-    console.log(operation);
-    try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
-        method: "POST",
-        body: JSON.stringify(linkdata),
-        headers: { "Content-Type": "application/json" },
-      }).then((res) => res.json());
-
-      setshowAlert({
-        msg:
-          operation === "insertpagelinks"
-            ? "Added new page link "
-            : "Updated page link " + " successfully",
-        type: "success",
-      });
-      console.log(res);
-      updatedLinkData(res.updatedLinkData);
-    } catch (error) {
-      setshowAlert({
-        msg: operation + "failed" + error.message,
-        type: "danger",
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
     setloading(false);
@@ -114,9 +92,14 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
         router.push("/admin");
       }
     } catch (error) {
-      setshowAlert({
-        msg: "Logout Error " + error.message,
-        type: "danger",
+      toast.error(`Logout Error  : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
   };
@@ -124,17 +107,17 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
   return (
     <>
       <div className={styles.dashform}>
-        <div className="d-flex justify-content-end mb-4">
+        <div className="d-flex justify-content-end mb-2">
           {" "}
           <a
-            className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
-            href={`${router.basePath}`}
+            className={`btn btn-outline-primary logout-btn ${styles.logoutbtn}`}
+            href={`${PUBLICURL}`}
             target="_blank"
           >
             visit
           </a>
           <button
-            className={`btn btn-primary logout-btn ${styles.logoutbtn}`}
+            className={`btn btn-outline-secondary logout-btn ${styles.logoutbtn}`}
             onClick={() => logout()}
           >
             logout
@@ -206,7 +189,6 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
               </button> */}
             </div>
           </div>
-          {showAlert.msg && <Alert {...showAlert} />}
           {activeForm === "genaralForm" && (
             <GenaralForm
               data={pageData}
@@ -224,15 +206,19 @@ function Formwrapper({ pageData, linkData, updatedPageData, updatedLinkData }) {
           {activeForm === "fontForm" && (
             <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
-          {activeForm === "linksForm" && (
-            <LinksForm
-              data={linkData}
-              update={saveLinkData}
-              loading={loading}
-              pagedataid={pageData.id}
-            />
-          )}
+          {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
         </div>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </>
   );

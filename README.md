@@ -31,17 +31,16 @@
 ![Screenshot_2021-05-22 Linkin Dashboard](https://user-images.githubusercontent.com/38534289/119221939-7c585780-bb0f-11eb-944f-514beb5573b7.png)
 
 ### Getting started
+
 - host in vercel
-  - set vercel environment variables 
+  - set vercel environment variables
     - `DBURL` - **Postgres** database url
     - `SECRETKEY` - random secret key
-  
 - after successfully deploying visit `youdomain/admin` to view admin login
-- use default login credentials 
+- use default login credentials
   - username = `admin`
   - password = `linkin123`
 - after a successfull login you will be able to see above admin dashboard.
-
 
 ### Build with
 
@@ -86,12 +85,33 @@ node scripts/migrate.js
 
 #### Run
 
-
 ```
 npm run dev
 ```
 
 <!-- todo
+
+v 0.2.0
+
+add react toast
+
+add sweet altert
+
+add delete links function
+
+add link data update to link card ✅
+
+add react context ✅
+
+gfx minorn updates  ✅
+
+
+
+
+
+
+
+
 
 add update form to update page data
 add index with avatar url and other data

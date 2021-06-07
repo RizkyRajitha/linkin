@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
 import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
+import { useStateValue } from "./context/state";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
-const LinksForm = ({ data, update, pagedataid, loading }) => {
-  console.log(data);
-  const [links, setlinks] = useState(data);
+const endpoint =
+  process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-  useEffect(() => {
-    // to sync newly added link with linkdata id ,
-    //if not a new link is insertted without updateing old link
-    setlinks([...data]);
-  }, [data]);
+const LinksForm = ({ pagedataid }) => {
+  const [{ links }, dispatch] = useStateValue();
+  const [loading, setloading] = useState(false);
 
   const addNewLink = () => {
     // console.log(links.length);
@@ -18,13 +18,14 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
 
     let newLink = links[links.length - 1];
 
-    if (!newLink.hasOwnProperty("id")) {
+    if (newLink && !newLink.hasOwnProperty("id")) {
       // console.log("new link on arr");
       return;
     }
-    setlinks((pre) => {
-      return [
-        ...pre,
+    dispatch({
+      type: "updateLink",
+      linkdata: [
+        ...links,
         {
           linkUrl: "",
           displayText: "",
@@ -32,8 +33,112 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           bgColor: "#2c6bed",
           active: true,
         },
-      ];
+      ],
     });
+  };
+
+  const saveLinkData = async (linkdata) => {
+    console.log("save linkdata");
+    console.log(linkdata);
+    setloading(true);
+
+    let operation = "insertpagelinks";
+    if (linkdata.hasOwnProperty("id")) {
+      operation = `updatepagelinks`;
+    }
+    console.log(operation);
+    try {
+      let res = await fetch(`${endpoint}/api/${operation}`, {
+        method: "POST",
+        body: JSON.stringify(linkdata),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      console.log(res);
+      dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
+      toast.success(
+        `${
+          operation === "insertpagelinks"
+            ? "Added new page link "
+            : "Updated page link " + " successfully"
+        }`,
+        {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
+    } catch (error) {
+      console.log(error);
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    setloading(false);
+  };
+
+  const deleteLink = async (id) => {
+    let confirm = await Swal.fire({
+      title: "Delete Link",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (!confirm.isConfirmed) {
+      return;
+    }
+    console.log("delete link");
+    console.log(id);
+    setloading(true);
+
+    try {
+      let res = await fetch(`${endpoint}/api/deletepagelink`, {
+        method: "POST",
+        body: JSON.stringify({ id: id }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      console.log(res);
+      if (res.success !== true) {
+        throw new Error("Error " + res.msg);
+      }
+      dispatch({ type: "deleteLink", id: id });
+      toast.success(`successfully deleted link`, {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } catch (error) {
+      console.log(error);
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+    setloading(false);
   };
 
   return (
@@ -43,27 +148,49 @@ const LinksForm = ({ data, update, pagedataid, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10 col-xxl-8 `}
         >
           <h3>Link Data</h3>
+          {loading && (
+            <div className="d-grid gap-2 d-md-flex justify-content-end">
+              <span
+                className="spinner-border text-info spinner-border me-1"
+                role="status"
+                aria-hidden="true"
+              ></span>
+            </div>
+          )}
           <button
             type="button"
-            className="btn btn-primary btn-block"
-            onClick={() => {
+            className="btn btn-outline-primary"
+            onClick={(e) => {
               addNewLink();
             }}
           >
-            Add new
+            Add new link
           </button>
-          {links.map((item, index) => {
-            return (
-              <LinkCard
-                key={index}
-                item={item}
-                save={update}
-                loading={loading}
-              />
-            );
-          })}
+          {links &&
+            links.map((item, index) => {
+              return (
+                <LinkCard
+                  key={index}
+                  item={item}
+                  deleteLink={deleteLink}
+                  updateLink={saveLinkData}
+                  loading={loading}
+                />
+              );
+            })}
         </div>
-        <div className='mb-5' ></div>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <div className="mb-5"></div>
       </div>
     </>
   );
