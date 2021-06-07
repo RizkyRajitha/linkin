@@ -12,41 +12,6 @@ const GenaralForm = ({ data, update, loading }) => {
 
   let imageUrl = watch(["avatarUrl"]);
 
-  // watch((data, { name, type }) => {
-  //   console.log(data, name, type);
-
-  //   let prePageData = { ...pageData };
-
-  //   let keys = Object.keys(data);
-
-  //   keys.map((x) => {
-  //     prePageData[x] = data[x];
-  //   });
-
-  //   // clearTimeout(updateTimeout);
-  //   // let updateTimeout = setTimeout(() => {
-  //   //   update(prePageData);
-  //   // }, 500);
-  // });
-
-  // const watchAllFields = watch();
-
-  // useEffect(() => {
-  // let prePageData = { ...pageData };
-
-  // let keys = Object.keys(watchAllFields);
-
-  // keys.map((x) => {
-  //   prePageData[x] = watchAllFields[x];
-  // });
-
-  // setpageData(prePageData);
-  // }, [watchAllFields]);
-
-  // useWatch();
-
-  // form;
-
   return (
     <>
       <div className={styles.Wrapper}>

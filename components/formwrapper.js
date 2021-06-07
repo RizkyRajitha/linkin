@@ -2,12 +2,13 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 import styles from "../styles/formwrapper.module.css";
-import Alert from "./alert";
 
 import ColorForm from "./colorform";
 import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
+
+import { ToastContainer, toast } from "react-toastify";
 
 const PUBLICURL =
   `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || "http://localhost:3000";
@@ -19,15 +20,10 @@ function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState("genaralForm");
-  const [showAlert, setshowAlert] = useState({ msg: "", type: "danger" });
   const [loading, setloading] = useState(false);
 
   const savePageData = async (data) => {
     setloading(true);
-    setshowAlert({
-      msg: "",
-      type: "",
-    });
 
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
@@ -38,32 +34,50 @@ function Formwrapper({ pageData, updatedPageData }) {
 
       if (!res.success) {
         if (res.message === "invalid_credential") {
-          setshowAlert({
-            msg: "User creadentials are not valid",
-            type: "danger",
+          toast.error(`User creadentials are not valid`, {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
         } else {
-          setshowAlert({
-            msg: "Server Error",
-            type: "danger",
+          toast.error("Server Error", {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
           });
         }
         return;
       }
 
-      // console.log(res);
-      setshowAlert({
-        msg: "updated",
-        type: "success",
+      toast.success(`successfully update page`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
 
-      // setpageData(res.updatedPageData);
       updatedPageData(res.updatedPageData);
     } catch (error) {
       console.log(error);
-      setshowAlert({
-        msg: "Server Error" + error.message,
-        type: "danger",
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
     setloading(false);
@@ -78,9 +92,14 @@ function Formwrapper({ pageData, updatedPageData }) {
         router.push("/admin");
       }
     } catch (error) {
-      setshowAlert({
-        msg: "Logout Error " + error.message,
-        type: "danger",
+      toast.error(`Logout Error  : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
       });
     }
   };
@@ -170,7 +189,6 @@ function Formwrapper({ pageData, updatedPageData }) {
               </button> */}
             </div>
           </div>
-          {showAlert.msg && <Alert {...showAlert} />}
           {activeForm === "genaralForm" && (
             <GenaralForm
               data={pageData}
@@ -190,6 +208,17 @@ function Formwrapper({ pageData, updatedPageData }) {
           )}
           {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
         </div>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </>
   );

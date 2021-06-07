@@ -18,9 +18,12 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
     // console.log(item);
 
+    // cancel the debounce function when submited by enter
+    debouncedSaveLinkData.cancel();
+
     // reset when the linkdata is change to the form update with new values
     if (item) {
-      reset(item, { keepIsSubmitted: true, keepSubmitCount: true });
+      reset(item);
     }
   }, [item]);
 
@@ -35,9 +38,6 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
 
   const debouncedSaveLinkData = useCallback(
     debounce(() => {
-      if (isSubmitted) {
-        return;
-      }
       refSubmitButtom?.current?.click();
     }, 1500),
     []
@@ -125,7 +125,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
             </div>{" "}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
-                className="btn btn-outline-warning btn-sm"
+                className="btn btn-outline-danger btn-sm"
                 type="button"
                 disabled={loading}
                 hidden={!item.id}
@@ -137,65 +137,9 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
               </button>
             </div>
             <button hidden={true} ref={refSubmitButtom} type={"submit"} />
-            {/* <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button
-                className="btn btn-outline-warning btn-sm"
-                type="button"
-                disabled={!isDirty}
-                hidden={!isDirty}
-                onClick={() => {
-                  reset({}, { keepDefaultValues: true });
-                }}
-              >
-                Revert
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary btn-block btn-sm"
-                onClick={handleSubmit(saveLinkData)}
-                disabled={!isDirty || loading}
-                hidden={!isDirty}
-              >
-                {loading && (
-                  <span
-                    className="spinner-border spinner-border-sm me-1"
-                    role="status"
-                    aria-hidden="true"
-                  ></span>
-                )}
-                Save
-              </button>
-            </div> */}
           </form>
         </div>{" "}
       </div>
-
-      {/* <div class="card">
-        <div class="card-body">
-          <div className="mb-3 small">
-            <label className="form-label">Name</label>
-            <input
-              type="text"
-              className={
-                errors.handlerText ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Enter Handler name"
-              {...register("name")}
-            />
-          </div>
-          <div className="mb-3 small">
-            <label className="form-label">Link</label>
-            <input
-              type="text"
-              className={
-                errors.handlerText ? "form-control is-invalid" : "form-control"
-              }
-              placeholder="Enter Handler name"
-              {...register("link")}
-            />
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

@@ -2,12 +2,13 @@ import styles from "../styles/form.module.css";
 import LinkCard from "./linkcard";
 import { useStateValue } from "./context/state";
 import { useState } from "react";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 const LinksForm = ({ pagedataid }) => {
-  // console.log(data);
   const [{ links }, dispatch] = useStateValue();
   const [loading, setloading] = useState(false);
 
@@ -40,10 +41,6 @@ const LinksForm = ({ pagedataid }) => {
     console.log("save linkdata");
     console.log(linkdata);
     setloading(true);
-    // setshowAlert({
-    //   msg: "",
-    //   type: "",
-    // });
 
     let operation = "insertpagelinks";
     if (linkdata.hasOwnProperty("id")) {
@@ -57,69 +54,89 @@ const LinksForm = ({ pagedataid }) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      // setshowAlert({
-      //   msg:
-      //     operation === "insertpagelinks"
-      //       ? "Added new page link "
-      //       : "Updated page link " + " successfully",
-      //   type: "success",
-      // });
       console.log(res);
       dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
-      // reset(res.updatedLinkData[index]);
+      toast.success(
+        `${
+          operation === "insertpagelinks"
+            ? "Added new page link "
+            : "Updated page link " + " successfully"
+        }`,
+        {
+          position: "bottom-left",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        }
+      );
     } catch (error) {
       console.log(error);
-      // setshowAlert({
-      //   msg: operation + "failed" + error.message,
-      //   type: "danger",
-      // });
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     setloading(false);
   };
 
   const deleteLink = async (id) => {
+    let confirm = await Swal.fire({
+      title: "Delete Link",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (!confirm.isConfirmed) {
+      return;
+    }
     console.log("delete link");
     console.log(id);
     setloading(true);
-    // setshowAlert({
-    //   msg: "",
-    //   type: "",
-    // });
 
-    let operation = "deletepagelink";
-    // if (linkdata.hasOwnProperty("id")) {
-    //   operation = `updatepagelinks`;
-    // }
-    console.log(operation);
     try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
+      let res = await fetch(`${endpoint}/api/deletepagelink`, {
         method: "POST",
         body: JSON.stringify({ id: id }),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      // setshowAlert({
-      //   msg:
-      //     operation === "insertpagelinks"
-      //       ? "Added new page link "
-      //       : "Updated page link " + " successfully",
-      //   type: "success",
-      // });
       console.log(res);
-      // reset();
       if (res.success !== true) {
-        throw new Error("Error deleting link " + id);
+        throw new Error("Error " + res.msg);
       }
       dispatch({ type: "deleteLink", id: id });
-      // console.warn("reSETTTTTTTTTTTTT");
-      // console.log(item);
-      // reset({});
+      toast.success(`successfully deleted link`, {
+        position: "bottom-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } catch (error) {
       console.log(error);
-      // setshowAlert({
-      //   msg: operation + "failed" + error.message,
-      //   type: "danger",
-      // });
+      toast.error(`Error : ${error.message}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     setloading(false);
   };
@@ -162,6 +179,17 @@ const LinksForm = ({ pagedataid }) => {
               );
             })}
         </div>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={true}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <div className="mb-5"></div>
       </div>
     </>
