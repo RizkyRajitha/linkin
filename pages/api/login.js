@@ -32,9 +32,9 @@ export default async function handler(req, res) {
     }
 
     let token = createSecureToken({ username: data.username });
-    console.log(data);
-    console.log(token);
-    console.log(pass);
+    // console.log(data);
+    // console.log(token);
+    // console.log(pass);
 
     const cookie = serialize("linkin.auth", token, {
       path: "/",
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       maxAge: 60 * 60 * 24 * 365,
     });
 
-    console.log(cookie);
+    // console.log(cookie);
 
     res.setHeader("Set-Cookie", [cookie]);
 
