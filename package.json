@@ -1,7 +1,14 @@
 {
   "name": "linkin",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
+  "license": "MIT",
+  "description": "Linkin is a customizable self hosted link in the bio platform",
+  "logo": "https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RizkyRajitha/linkin.git"
+  },
   "scripts": {
     "dev": "next dev",
     "start": "next start",

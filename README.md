@@ -24,6 +24,10 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL&envDescription=PostgreSQL%20database%20URL&demo-title=Linkin%20&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20in%20the%20bio%20platform%20.%20And%20it's%20ready%20for%20you)
 
+## Deploy with Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin&env[DBURL]=postgresdburl&env[KEY]=123)
+
 ![Screenshot_2021-05-22 LinkIn's Link In The Bio Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
 ![Screenshot_2021-05-22 Linkin Dashboard](https://user-images.githubusercontent.com/38534289/119221942-7d898480-bb0f-11eb-9175-5e139fa57f0a.png)
@@ -35,7 +39,7 @@
 - host in vercel
   - set vercel environment variables
     - `DBURL` - **Postgres** database url
-    - `SECRETKEY` - random secret key
+    - `KEY` - random secret key
 - after successfully deploying visit `youdomain/admin` to view admin login
 - use default login credentials
   - username = `admin`
