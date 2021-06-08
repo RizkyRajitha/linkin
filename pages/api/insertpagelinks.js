@@ -2,14 +2,17 @@ import { jwtAuth, use } from "../../middleware/middleware";
 import { getLinkData, insertPageLinks } from "../../lib/dbfunc";
 
 async function handler(req, res) {
-
+  if (req.method !== "POST") {
+    res.status(400).send("method not allowed");
+    return;
+  }
   try {
-  // Run the middleware
+    // Run the middleware
     await use(req, res, jwtAuth);
     // console.log(req.body);
 
     await insertPageLinks(req.body);
-    
+
     let updatedLinkData = await getLinkData();
     // console.log(updatedPageData);
     res.json({ success: true, updatedLinkData: updatedLinkData.linkData });

@@ -2,9 +2,12 @@ import { jwtAuth, use } from "../../middleware/middleware";
 import { updatePageData, getPageData } from "../../lib/dbfunc";
 
 async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(400).send("method not allowed");
+    return;
+  }
   try {
     // Run the middleware
-
     await use(req, res, jwtAuth);
     // console.log(req.body);
 
