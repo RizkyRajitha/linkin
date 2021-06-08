@@ -1,1 +1,1 @@
-web: npm herokustart
+web: npm run herokustart
