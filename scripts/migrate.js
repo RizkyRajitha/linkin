@@ -5,7 +5,14 @@ const DBURLLOCAL = require("../configs/config").DBURLLOCAL;
 const connectionString =
   process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
-console.log(connectionString);
+if (!connectionString) {
+  console.warn(
+    "connectionString is not defined\nPlease define connectionString in Environment variables \nAborting migration"
+  );
+  process.exit(1);
+}
+
+// console.log(connectionString);
 
 const client = new Client({
   connectionString: connectionString,
@@ -20,7 +27,7 @@ async function migrate() {
 
     let script = fs.readFileSync(__dirname + "/db-migrate.sql").toString();
 
-    console.log(script);
+    // console.log(script);
 
     let query = {
       text: script,
@@ -28,8 +35,8 @@ async function migrate() {
     };
 
     let res = await client.query(query);
-    console.log(res.command);
-    console.log(res.rowCount);
+    // console.log(res.command);
+    // console.log(res.rowCount);
     await client.end();
     console.log("disconnected from database");
     console.log("migration ran successfully");
