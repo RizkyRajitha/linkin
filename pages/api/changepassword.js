@@ -6,6 +6,10 @@ import { changePassword, getUser } from "../../lib/dbfunc";
 const saltRounds = 10;
 
 async function handler(req, res) {
+  if (req.method !== "POST") {
+    res.status(400).send("method not allowed");
+    return;
+  }
   try {
     // Run the middleware
     await use(req, res, jwtAuth);

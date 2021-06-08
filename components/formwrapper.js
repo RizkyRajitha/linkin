@@ -7,6 +7,7 @@ import ColorForm from "./colorform";
 import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
+import PasswordChangeForm from "./passwordchangeform";
 
 import { ToastContainer, toast } from "react-toastify";
 
@@ -107,8 +108,18 @@ function Formwrapper({ pageData, updatedPageData }) {
   return (
     <>
       <div className={styles.dashform}>
-        <div className="d-flex justify-content-end mb-2">
+        <div className="d-flex justify-content-end mb-4">
           {" "}
+          <button
+            className={`btn btn-outline-primary logout-btn ${
+              styles.logoutbtn
+            } ${activeForm === "passwordchangeform" ? "active" : ""} `}
+            onClick={() => {
+              setactiveForm("passwordchangeform");
+            }}
+          >
+            Change Password
+          </button>
           <a
             className={`btn btn-outline-primary logout-btn ${styles.logoutbtn}`}
             href={`${PUBLICURL}`}
@@ -207,6 +218,7 @@ function Formwrapper({ pageData, updatedPageData }) {
             <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
           {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
+          {activeForm === "passwordchangeform" && <PasswordChangeForm />}
         </div>
         <ToastContainer
           position="bottom-left"
