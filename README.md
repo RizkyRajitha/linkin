@@ -26,7 +26,9 @@
 
 ## Deploy with Heroku
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin&env[DBURL]=postgresdburl&env[KEY]=123)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin)
+
+<!-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin&env[DBURL]=postgresdburl&env[KEY]=123) -->
 
 ![Screenshot_2021-05-22 LinkIn's Link In The Bio Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
@@ -36,24 +38,18 @@
 
 ### Getting started
 
-- host in vercel
-  - set vercel environment variables
+- hosting
+  - set environment variables
+  - **Mandatory**
     - `DBURL` - **Postgres** database url
     - `KEY` - random secret key
+  - **Optional**
+    - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
 - after successfully deploying visit `youdomain/admin` to view admin login
 - use default login credentials
   - username = `admin`
   - password = `linkin123`
 - after a successfull login you will be able to see above admin dashboard.
-
-### Build with
-
-- [NextJs](https://nextjs.org/)
-- [Postgres](https://www.postgresql.org/)
-
-### Host in
-
-- [Vercel](https://vercel.com/) .
 
 ### Developing locally
 
@@ -93,15 +89,30 @@ node scripts/migrate.js
 npm run dev
 ```
 
+### Build with
+
+- [NextJs](https://nextjs.org/)
+  - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" width="150" title="nextjs logo">
+    <!-- - ![Nextjs logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png) -->
+- [Postgres](https://www.postgresql.org/)
+  - <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" width="150" title="postgres db logo">
+
+### Host in
+
+- [Vercel](https://vercel.com/) .
+  - <img src="https://assets.vercel.com/image/upload/q_auto/front/zeit/og.png" width="150" title="vercel logo">
+- [Heroku](https://heroku.com/) .
+  - <img src="https://brand.heroku.com/static/media/heroku-logotype-horizontal.81c49462.svg" width="150" title="heroku logo">
+
 <!-- todo
 
 v 0.2.0
 
-add react toast
+add react toast ✅
 
-add sweet altert
+add sweet altert ✅
 
-add delete links function
+add delete links function ✅
 
 add link data update to link card ✅
 
@@ -110,39 +121,37 @@ add react context ✅
 gfx minorn updates  ✅
 
 
+v 0.2.1
 
 
+add heroku deploy ✅
+
+add change password ✅
+
+form submit better ✅
+
+backgroud gradients
+
+backgroud images
 
 
-
+photo boarder changeble .
 
 
 add update form to update page data
 add index with avatar url and other data
-add update form to update links
-logout button navbar -
+
 
 add forms
 genaral
 links
 colors
 
-fix update function with object keys
-
-seperate alert componnet
-
-photo boarder changeble .
 
 
 
 
 
-add update link route
-
-add delete link route
-
-
-usefetch hook
 
 better save stratergy
 https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap
