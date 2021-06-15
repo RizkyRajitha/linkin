@@ -12,5 +12,15 @@
     "react",
     "node",
     "postgres"
-  ]
+  ],
+  "env": {
+    "KEY": {
+      "description": "Random secret key.This gets generated automatically",
+      "value": ""
+    },
+    "DBURL": {
+      "description": "Postgres database url",
+      "value": ""
+    }
+  }
 }
