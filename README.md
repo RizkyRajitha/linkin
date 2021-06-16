@@ -4,7 +4,7 @@
 
 # Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin) ![license](https://img.shields.io/github/license/rizkyrajitha/linkin??style=plastic)
 
-## Linkin is a customizable self hosted link in the bio platform.
+## Linkin is a customizable self-hosted link tree platform.
 
 <!-- <br>
 <br>
@@ -13,7 +13,7 @@
 ### You have absolute control
 
 ### Add your custom fonts
-### No branding , it's yours
+### No branding, it's yours
 
 ### You control your data .  -->
 
@@ -22,7 +22,9 @@
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL&envDescription=PostgreSQL%20database%20URL&demo-title=Linkin%20&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20in%20the%20bio%20platform%20.%20And%20it's%20ready%20for%20you)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,KEY&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
+
+<!-- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL&envDescription=PostgreSQL%20database%20URL&demo-title=Linkin%20&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20in%20the%20bio%20platform%20.%20And%20it's%20ready%20for%20you) -->
 
 ## Deploy with Heroku
 
@@ -30,7 +32,7 @@
 
 <!-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin&env[DBURL]=postgresdburl&env[KEY]=123) -->
 
-![Screenshot_2021-05-22 LinkIn's Link In The Bio Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
+![Screenshot_2021-05-22 LinkIn's Link tree Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
 ![Screenshot_2021-05-22 Linkin Dashboard](https://user-images.githubusercontent.com/38534289/119221942-7d898480-bb0f-11eb-9175-5e139fa57f0a.png)
 
@@ -38,18 +40,18 @@
 
 ### Getting started
 
-- hosting
+- Hosting
   - set environment variables
   - **Mandatory**
     - `DBURL` - **Postgres** database url
     - `KEY` - random secret key
   - **Optional**
     - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
-- after successfully deploying visit `youdomain/admin` to view admin login
-- use default login credentials
-  - username = `admin`
-  - password = `linkin123`
-- after a successfull login you will be able to see above admin dashboard.
+  - after successfully deploying visit `youdomain/admin` to view admin login
+  - use default login credentials
+    - username = `admin`
+    - password = `linkin123`
+  - after a successfull login you will be able to see above admin dashboard.
 
 ### Developing locally
 
@@ -67,7 +69,7 @@ exports.DBURLLOCAL = "postgres://linkin:123@localhost:5432/linkin";
 exports.SECRETKEY = "123";
 ```
 
-#### Clone and install dependancies
+#### Clone and install dependencies
 
 ```
 git clone https://github.com/RizkyRajitha/linkin.git
@@ -77,7 +79,7 @@ npm i
 
 #### Database migration
 
-**you must have postgres database setup locally**
+**you must have Postgres database setup locally**
 
 ```
 node scripts/migrate.js
@@ -91,9 +93,20 @@ npm run dev
 
 ### Build with
 
+- [Next.Js](https://nextjs.org/) .
+    <!-- - ![Nextjs logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png) -->
+- [Postgres](https://www.postgresql.org/) .
+
+### Currently supported hosting in
+
+- [Vercel](https://vercel.com/) .
+- [Heroku](https://heroku.com/) .
+
+<!-- ### Build with
+
 - [NextJs](https://nextjs.org/)
   - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" width="150" title="nextjs logo">
-    <!-- - ![Nextjs logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png) -->
+
 - [Postgres](https://www.postgresql.org/)
   - <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" width="150" title="postgres db logo">
 
@@ -102,7 +115,7 @@ npm run dev
 - [Vercel](https://vercel.com/) .
   - <img src="https://assets.vercel.com/image/upload/q_auto/front/zeit/og.png" width="150" title="vercel logo">
 - [Heroku](https://heroku.com/) .
-  - <img src="https://brand.heroku.com/static/media/heroku-logotype-horizontal.81c49462.svg" width="150" title="heroku logo">
+  - <img src="https://brand.heroku.com/static/media/heroku-logotype-horizontal.81c49462.svg" width="150" title="heroku logo"> -->
 
 <!-- todo
 
@@ -110,7 +123,7 @@ v 0.2.0
 
 add react toast ✅
 
-add sweet altert ✅
+add sweet alert ✅
 
 add delete links function ✅
 
