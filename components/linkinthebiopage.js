@@ -48,7 +48,7 @@ export default function Home({
     <div className="outterwrap">
       <div className="wrap">
         <div className="profile">
-          {/* <img src={avatarUrl} className="photo" /> */}
+          <img src={avatarUrl} className="photo" />
           <a className="handlerLink" href={`${handlerLink}`} target="_blank">
             <span className="handlerText">{handlerText}</span>
           </a>
