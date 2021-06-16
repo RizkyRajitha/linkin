@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import debounce from "lodash.debounce";
 
 export default function LinkCard({ item, updateLink, deleteLink, loading }) {
   const refSubmitButtom = useRef(null);
+  const [cardInfo, setCardInfo] = useState(item);
 
   const {
     register,
@@ -19,12 +20,30 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     // console.log(item);
 
     // cancel the debounce function when submited by enter
-    debouncedSaveLinkData.cancel();
+    // debouncedSaveLinkData.cancel();
+
+    // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
+    // console.log(item);
+    // console.log(cardInfo);
+    // console.log(cardInfo.id);
 
     // reset when the linkdata is change to the form update with new values
-    if (item) {
+    if (cardInfo.id === undefined && item.id) {
+      // console.log("reset with item");
       reset(item);
+      setCardInfo(item);
     }
+    // reset when the link is deleted to the card will show differert value
+    if (cardInfo.id !== item.id) {
+      // console.log("reset after delete");
+      reset(item);
+      setCardInfo(item);
+    }
+
+    // reset when the linkdata is change to the form update with new values
+    // if (item) {
+    //   reset(item);
+    // }
   }, [item]);
 
   watch((data, { type }) => {
@@ -36,6 +55,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     debouncedSaveLinkData();
   });
 
+  // debounced function to save the data after 1.5 seconds
   const debouncedSaveLinkData = useCallback(
     debounce(() => {
       refSubmitButtom?.current?.click();
@@ -43,13 +63,20 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
     []
   );
 
+  const submitAction = (data) => {
+    // when the form is submited by enter , the debounced action is canceled to avoid uplicate debounce
+    debouncedSaveLinkData.cancel();
+    // console.log(data);
+    updateLink(data);
+  };
+
   return (
     <>
       <div className="card mt-3">
         <div className="card-body py-2 px-4">
           {/* {console.log(errors)} */}
           {/* {JSON.stringify(item)} */}
-          <form onSubmit={handleSubmit(updateLink)}>
+          <form onSubmit={handleSubmit(submitAction)}>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
                 className="form-check-input"

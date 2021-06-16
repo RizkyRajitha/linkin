@@ -13,6 +13,7 @@ const PasswordChangeForm = () => {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const router = useRouter();
@@ -49,6 +50,7 @@ const PasswordChangeForm = () => {
           draggable: true,
           progress: undefined,
         });
+        reset();
         setloading(false);
         return;
       }
@@ -65,6 +67,7 @@ const PasswordChangeForm = () => {
       await logout();
     } catch (error) {
       console.log(error);
+      reset();
       toast.error(`Error : ${error.message}`, {
         position: "bottom-left",
         autoClose: 5000,

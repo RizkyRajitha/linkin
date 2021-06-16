@@ -18,16 +18,16 @@ export default function Home({ pageData, linkData }) {
   return (
     <>
       <Head>
-        <title> {`${pageData.handlerText}'s Link In The Bio Page`}</title>
+        <title> {`${pageData.handlerText}'s Link tree Page`}</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
         <meta
           name="og:description"
-          content={`${pageData.handlerText}'s Link In The Bio Page`}
+          content={`${pageData.handlerText}'s Link tree Page`}
         />
         <meta name="og:site_name" content={pageData.handlerText} />
         <meta
           name="og:title"
-          content={`${pageData.handlerText}'s Link In The Bio Page`}
+          content={`${pageData.handlerText}'s Link tree Page`}
         />
         <meta name="og:image" content={pageData.avatarUrl} />
       </Head>

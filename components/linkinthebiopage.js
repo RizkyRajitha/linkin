@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { isEmptry } from "../lib/side";
+// import Image from "next/image";
 
 export default function Home({
   handlerText,
@@ -47,7 +48,7 @@ export default function Home({
     <div className="outterwrap">
       <div className="wrap">
         <div className="profile">
-          <img src={avatarUrl} className="photo" />
+          {/* <img src={avatarUrl} className="photo" /> */}
           <a className="handlerLink" href={`${handlerLink}`} target="_blank">
             <span className="handlerText">{handlerText}</span>
           </a>

@@ -14,6 +14,15 @@ async function handler(req, res) {
     await insertPageLinks(req.body);
 
     let updatedLinkData = await getLinkData();
+
+
+    // mock loading times for testing
+    // await new Promise((resolve, reject) =>
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 5000)
+    // );
+
     // console.log(updatedPageData);
     res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
   } catch (error) {

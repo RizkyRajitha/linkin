@@ -14,6 +14,12 @@ async function handler(req, res) {
 
     let updatedLinkData = await getLinkData();
 
+    // mock loading times for testing
+    // await new Promise((resolve, reject) =>
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 5000)
+    // );
     res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
   } catch (error) {
     console.log(error.message);
