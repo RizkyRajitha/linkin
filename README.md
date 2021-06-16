@@ -2,7 +2,7 @@
   <img width="400" height="400" alt="Linkin logo" src="https://user-images.githubusercontent.com/38534289/119221855-0522c380-bb0f-11eb-8fee-c335fd0ff67c.png">
 </p>
 
-# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin) ![license](https://img.shields.io/github/license/rizkyrajitha/linkin??style=plastic)
+# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin) ![license](https://img.shields.io/github/license/rizkyrajitha/linkin??style=plastic) [![Github Actions](https://github.com/rizkyrajitha/linkin/workflows/Code-Coverage/badge.svg)]
 
 ## Linkin is a customizable self-hosted link tree platform.
 
@@ -24,13 +24,12 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,KEY&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
 
-<!-- [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL&envDescription=PostgreSQL%20database%20URL&demo-title=Linkin%20&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20in%20the%20bio%20platform%20.%20And%20it's%20ready%20for%20you) -->
+
 
 ## Deploy with Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin)
 
-<!-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin&env[DBURL]=postgresdburl&env[KEY]=123) -->
 
 ![Screenshot_2021-05-22 LinkIn's Link tree Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
