@@ -49,7 +49,11 @@ export default function Home({
       <div className="wrap">
         <div className="profile">
           <img src={avatarUrl} className="photo" />
-          <a className="handlerLink" href={`${handlerLink}`} target="_blank">
+          <a
+            className="handlerLink"
+            href={`${handlerLink || "#"}`}
+            target="_blank"
+          >
             <span className="handlerText">{handlerText}</span>
           </a>
         </div>
