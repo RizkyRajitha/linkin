@@ -13,7 +13,7 @@
 ### You have absolute control
 
 ### Add your custom fonts
-### No branding, it's yours 
+### No branding, it's yours
 
 ### You control your data .  -->
 
@@ -22,14 +22,11 @@
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,KEY&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
-
-
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,KEY,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
 
 ## Deploy with Heroku
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/RizkyRajitha/linkin)
-
 
 ![Screenshot_2021-05-22 LinkIn's Link tree Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
@@ -39,18 +36,33 @@
 
 ### Getting started
 
-- Hosting
+- Deploy in Heroku
   - set environment variables
-  - **Mandatory**
-    - `DBURL` - **Postgres** database url
-    - `KEY` - random secret key
-  - **Optional**
-    - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+    - **Mandatory**
+      - `DBURL` - **Postgres** database url
+      - `KEY` - random secret key
+    - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
+  
+- Deploy in Vercel
+  - set environment variables
+    - **Mandatory**
+      - `DBURL` - **Postgres** database url
+      - `KEY` - random secret key
+      - `NODE_ENV` - set NODE_ENV to `production`
+    - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+  - after successfully deploying visit `youdomain/admin` to view admin login
+  - use default login credentials
+    - username = `admin`
+    - password = `linkin123`
+  - after a successfull login you will be able to see above admin dashboard.
+
 
 ### Developing locally
 
