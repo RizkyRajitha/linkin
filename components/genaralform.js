@@ -19,7 +19,7 @@ const GenaralForm = ({ data, update, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Genaral Data</h3>
+            <h3>General Data</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler name</label>
               <input
