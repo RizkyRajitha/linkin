@@ -6,6 +6,10 @@
 
 ## Linkin is a customizable self-hosted link tree platform.
 
+<br>
+
+[Visit Demo](https://linkindemo.vercel.app)
+
 <!-- <br>
 <br>
 
@@ -48,7 +52,6 @@
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-  
 - Deploy in Vercel
   - set environment variables
     - **Mandatory**
@@ -62,7 +65,6 @@
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-
 
 ### Developing locally
 
@@ -113,11 +115,9 @@ npm run dev
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
 
-
-Join our discord community for questions and updates 
+Join our discord community for questions and updates
 
 https://discord.gg/Jsmc5Dm9wg
-
 
 <!-- ### Build with
 
