@@ -1,9 +1,18 @@
 import { jwtAuth, use } from "../../middleware/middleware";
 import { getLinkData, insertPageLinks } from "../../lib/dbfunc";
 
+const changePasswordEnabled =
+  process.env.changePasswordEnabled === "false" ? false : true;
+
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
+    return;
+  }
+  if (!changePasswordEnabled) {
+    res
+      .status(401)
+      .json({ success: false, message: "Cannot change data in Demo mode" });
     return;
   }
   try {
@@ -14,7 +23,6 @@ async function handler(req, res) {
     await insertPageLinks(req.body);
 
     let updatedLinkData = await getLinkData();
-
 
     // mock loading times for testing
     // await new Promise((resolve, reject) =>

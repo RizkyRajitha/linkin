@@ -49,7 +49,7 @@ function Formwrapper({ pageData, updatedPageData }) {
             progress: undefined,
           });
         } else {
-          toast.error("Server Error", {
+          toast.error(`Error ${res.message}`, {
             position: "bottom-left",
             autoClose: 5000,
             hideProgressBar: false,
@@ -59,6 +59,7 @@ function Formwrapper({ pageData, updatedPageData }) {
             progress: undefined,
           });
         }
+        setloading(false);
         return;
       }
 
@@ -156,7 +157,7 @@ function Formwrapper({ pageData, updatedPageData }) {
                   setactiveForm("genaralForm");
                 }}
               >
-                Genaral
+                General
               </button>
               <button
                 type="button"

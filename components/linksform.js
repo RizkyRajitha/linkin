@@ -55,6 +55,21 @@ const LinksForm = ({ pagedataid }) => {
       }).then((res) => res.json());
 
       console.log(res);
+
+      if (!res.success) {
+        toast.error(`Error ${res.message}`, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setloading(false);
+        return;
+      }
+
       dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
       toast.success(
         `${
@@ -113,8 +128,19 @@ const LinksForm = ({ pagedataid }) => {
       }).then((res) => res.json());
 
       console.log(res);
-      if (res.success !== true) {
-        throw new Error("Error " + res.msg);
+
+      if (!res.success) {
+        toast.error(`Error ${res.message}`, {
+          position: "bottom-left",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setloading(false);
+        return;
       }
       dispatch({ type: "deleteLink", id: id });
       toast.success(`successfully deleted link`, {
