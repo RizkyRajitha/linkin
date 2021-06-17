@@ -59,7 +59,7 @@ export default function Home({
               return (
                 <li key={id}>
                   <a
-                    href={`${element.linkUrl}`}
+                    href={`${element.linkUrl || "#"}`}
                     className="link"
                     target="_blank"
                     style={{ backgroundColor: element.bgColor || "#2c6bed" }}
