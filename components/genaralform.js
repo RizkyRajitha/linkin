@@ -117,16 +117,16 @@ const GenaralForm = ({ data, update, loading }) => {
                 }
                 placeholder="Enter Avatar Url"
                 {...register("avatarUrl", {
-                  // pattern: {
-                  //   message: "Should be a valid Image URL",
-                  //   value:
-                  //     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
-                  // },
+                  pattern: {
+                    message: "Should be a valid Image URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
                 })}
               />
 
               <div className="form-text">
-                square images are better. can be used (
+                square images are better. can use image providers Ex - (
                 <a href="https://imgur.com/" target="_blank">
                   imgur
                 </a>{" "}
