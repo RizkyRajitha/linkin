@@ -45,8 +45,8 @@
     - **Mandatory**
       - `DBURL` - **Postgres** database url
       - `KEY` - random secret key
-    - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+      <!-- - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
@@ -58,8 +58,8 @@
       - `DBURL` - **Postgres** database url
       - `KEY` - random secret key
       - `NODE_ENV` - set NODE_ENV to `production`
-    - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+      <!-- - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`

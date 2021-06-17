@@ -18,7 +18,8 @@ const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const changePasswordEnabled = process.env.changePasswordEnabled || true;
+const changePasswordEnabled =
+  process.env.changePasswordEnabled === "false" ? false : true;
 
 function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
