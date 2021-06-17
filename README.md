@@ -8,7 +8,10 @@
 
 <br>
 
-[Visit Demo](https://linkindemo.vercel.app)
+[Visit Demo](https://linkinapp.vercel.app)
+
+- Demo username = `admin`
+- Demo password = `linkin123`
 
 <!-- <br>
 <br>
