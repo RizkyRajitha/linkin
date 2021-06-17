@@ -6,6 +6,13 @@
 
 ## Linkin is a customizable self-hosted link tree platform.
 
+<br>
+
+[Visit Demo](https://linkinapp.vercel.app)
+
+- Demo username = `admin`
+- Demo password = `linkin123`
+
 <!-- <br>
 <br>
 
@@ -41,28 +48,26 @@
     - **Mandatory**
       - `DBURL` - **Postgres** database url
       - `KEY` - random secret key
-    - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+      <!-- - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-  
 - Deploy in Vercel
   - set environment variables
     - **Mandatory**
       - `DBURL` - **Postgres** database url
       - `KEY` - random secret key
       - `NODE_ENV` - set NODE_ENV to `production`
-    - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` .
+      <!-- - **Optional**
+      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-
 
 ### Developing locally
 
@@ -112,6 +117,10 @@ npm run dev
 
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
+
+Join our discord community for questions and updates
+
+https://discord.gg/Jsmc5Dm9wg
 
 <!-- ### Build with
 
