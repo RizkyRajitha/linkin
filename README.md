@@ -113,6 +113,12 @@ npm run dev
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
 
+
+Join our discord community for questions and updates 
+
+https://discord.gg/Jsmc5Dm9wg
+
+
 <!-- ### Build with
 
 - [NextJs](https://nextjs.org/)
