@@ -138,7 +138,10 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
                 }
                 placeholder="Enter Icon Class"
                 {...register(`iconClass`)}
-              />
+              />{" "}
+              <div className="form-text">
+                Use font awesome for icon classes
+              </div>
             </div>
             <div className="mb-1 small ">
               {/* <label className="form-label small">Handler Font color </label> */}

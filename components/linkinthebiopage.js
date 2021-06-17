@@ -49,7 +49,11 @@ export default function Home({
       <div className="wrap">
         <div className="profile">
           <img src={avatarUrl} className="photo" />
-          <a className="handlerLink" href={`${handlerLink}`} target="_blank">
+          <a
+            className="handlerLink"
+            href={`${handlerLink || "#"}`}
+            target="_blank"
+          >
             <span className="handlerText">{handlerText}</span>
           </a>
         </div>
@@ -59,7 +63,7 @@ export default function Home({
               return (
                 <li key={id}>
                   <a
-                    href={`${element.linkUrl}`}
+                    href={`${element.linkUrl || "#"}`}
                     className="link"
                     target="_blank"
                     style={{ backgroundColor: element.bgColor || "#2c6bed" }}
