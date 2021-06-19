@@ -8,21 +8,10 @@
 
 <br>
 
-[Visit Demo](https://linkinapp.vercel.app)
+[Visit Demo](http://linkindemo.vercel.app/)
 
 - Demo username = `admin`
 - Demo password = `linkin123`
-
-<!-- <br>
-<br>
-
-### Add Any amount of links
-### You have absolute control
-
-### Add your custom fonts
-### No branding, it's yours
-
-### You control your data .  -->
 
 <br>
 <br>
@@ -43,31 +32,31 @@
 
 ### Getting started
 
-- Deploy in Heroku
-  - set environment variables
-    - **Mandatory**
-      - `DBURL` - **Postgres** database url
-      - `KEY` - random secret key
-      <!-- - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
-  - after successfully deploying visit `youdomain/admin` to view admin login
-  - use default login credentials
-    - username = `admin`
-    - password = `linkin123`
-  - after a successfull login you will be able to see above admin dashboard.
 - Deploy in Vercel
   - set environment variables
-    - **Mandatory**
-      - `DBURL` - **Postgres** database url
-      - `KEY` - random secret key
-      - `NODE_ENV` - set NODE_ENV to `production`
-      <!-- - **Optional**
-      - `changePasswordEnabled` - for showcase so that anonymous users cant change the password . default set to `true` . -->
+    - `DBURL` - **Postgres** database url
+    - `KEY` - random secret key
+    - `NODE_ENV` - set NODE_ENV to `production`
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
+
+<br>
+<br>
+
+- Deploy in Heroku
+  - set environment variables
+    - `DBURL` - **Postgres** database url
+    - `KEY` - random secret key
+  - after successfully deploying visit `youdomain/admin` to view admin login
+  - use default login credentials
+    - username = `admin`
+    - password = `linkin123`
+  - after a successfull login you will be able to see above admin dashboard.
+
+<br>
 
 ### Developing locally
 
@@ -110,7 +99,6 @@ npm run dev
 ### Build with
 
 - [Next.Js](https://nextjs.org/) .
-    <!-- - ![Nextjs logo](https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png) -->
 - [Postgres](https://www.postgresql.org/) .
 
 ### Currently supported hosting in
@@ -118,79 +106,16 @@ npm run dev
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
 
+
+### Community
+
 Join our discord community for questions and updates
 
 https://discord.gg/Jsmc5Dm9wg
 
-<!-- ### Build with
 
-- [NextJs](https://nextjs.org/)
-  - <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Nextjs-logo.svg/800px-Nextjs-logo.svg.png" width="150" title="nextjs logo">
-
-- [Postgres](https://www.postgresql.org/)
-  - <img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg" width="150" title="postgres db logo">
-
-### Host in
-
-- [Vercel](https://vercel.com/) .
-  - <img src="https://assets.vercel.com/image/upload/q_auto/front/zeit/og.png" width="150" title="vercel logo">
-- [Heroku](https://heroku.com/) .
-  - <img src="https://brand.heroku.com/static/media/heroku-logotype-horizontal.81c49462.svg" width="150" title="heroku logo"> -->
-
-<!-- todo
-
-v 0.2.0
-
-add react toast ✅
-
-add sweet alert ✅
-
-add delete links function ✅
-
-add link data update to link card ✅
-
-add react context ✅
-
-gfx minorn updates  ✅
-
-
-v 0.2.1
-
-
-add heroku deploy ✅
-
-add change password ✅
-
-form submit better ✅
-
-backgroud gradients
-
-backgroud images
-
-
-photo boarder changeble .
-
-
-add update form to update page data
-add index with avatar url and other data
-
-
-add forms
-genaral
-links
-colors
-
-
-
-
-
-
-
-better save stratergy
+<!-- 
 https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap
 https://res.cloudinary.com/dijjqfsto/image/upload/v1621257334/af1fcce7-deb9-4834-965e-4fed59ef6c08_z2l3yf.jpg
-
-`
 'Source Code Pro', monospace
-
-issues - too many connections persists  -->
+ -->

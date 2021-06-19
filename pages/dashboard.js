@@ -24,7 +24,6 @@ export async function getServerSideProps({ req, res }) {
 
 const Admin = ({ pageDataSS, linkDataSS }) => {
   const [pageData, setpageData] = useState(pageDataSS);
-  // const [linkData, setlinkData] = useState(linkDataSS);
 
   const [{ links }, dispatch] = useStateValue();
   useEffect(() => {
@@ -34,7 +33,6 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
 
   console.log(pageDataSS);
 
-  //TODO : add live update
   const updatedPageData = (data) => {
     console.log(data);
     // save(data);

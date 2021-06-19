@@ -1,16 +1,16 @@
-const { isEmptry } = require("../lib/side");
+const { isEmpty } = require("../lib/side");
 
-describe("isEmptry ", () => {
+describe("isEmpty ", () => {
   it(" '' is true", () => {
-    expect(isEmptry("")).toBe(true);
+    expect(isEmpty("")).toBe(true);
   });
-  it(" false isEmptry true", () => {
-    expect(isEmptry(false)).toBe(true);
+  it(" false isEmpty true", () => {
+    expect(isEmpty(false)).toBe(true);
   });
-  it(" null isEmptry true", () => {
-    expect(isEmptry(null)).toBe(true);
+  it(" null isEmpty true", () => {
+    expect(isEmpty(null)).toBe(true);
   });
-  it(" undefined isEmptry true", () => {
-    expect(isEmptry(undefined)).toBe(true);
+  it(" undefined isEmpty true", () => {
+    expect(isEmpty(undefined)).toBe(true);
   });
 });

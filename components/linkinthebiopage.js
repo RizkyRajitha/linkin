@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { isEmptry } from "../lib/side";
+import { isEmpty } from "../lib/side";
 // import Image from "next/image";
 
 export default function Home({
@@ -16,13 +16,13 @@ export default function Home({
   linkData,
   preview = false,
 }) {
-  accentColor = isEmptry(accentColor) ? "#BDD7FF" : accentColor;
-  avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
-  handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
-  handlerFontColor = isEmptry(handlerFontColor) ? "#fff" : handlerFontColor;
-  bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
-  fontFamily = isEmptry(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
-  fontUrl = isEmptry(fontUrl)
+  accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
+  avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
+  handlerFontSize = isEmpty(handlerFontSize) ? "15" : handlerFontSize;
+  handlerFontColor = isEmpty(handlerFontColor) ? "#fff" : handlerFontColor;
+  bgColor = isEmpty(bgColor) ? "#fff" : bgColor;
+  fontFamily = isEmpty(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
+  fontUrl = isEmpty(fontUrl)
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
 
