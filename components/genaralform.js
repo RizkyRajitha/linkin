@@ -52,7 +52,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 })}
               />
               <div className="form-text">
-                Ex - https://www.instagram.com/wonderousnightsky/
+                Ex - https://www.instagram.com/[yourhandle]
               </div>
 
               {errors.handlerLink && (
