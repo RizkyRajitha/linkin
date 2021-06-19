@@ -19,7 +19,7 @@ const GenaralForm = ({ data, update, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Genaral Data</h3>
+            <h3>General Data</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler name</label>
               <input
@@ -117,16 +117,16 @@ const GenaralForm = ({ data, update, loading }) => {
                 }
                 placeholder="Enter Avatar Url"
                 {...register("avatarUrl", {
-                  // pattern: {
-                  //   message: "Should be a valid Image URL",
-                  //   value:
-                  //     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
-                  // },
+                  pattern: {
+                    message: "Should be a valid Image URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
                 })}
               />
 
               <div className="form-text">
-                square images are better. can be used (
+                square images are better. can use image providers Ex - (
                 <a href="https://imgur.com/" target="_blank">
                   imgur
                 </a>{" "}
