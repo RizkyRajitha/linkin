@@ -32,11 +32,6 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Handler name"
                 {...register("handlerText")}
               />
-              {/* {errors.handlerText && (
-                  <div className="invalid-feedback">
-                    {errors.handlerText.message}
-                  </div>
-                )} */}
             </div>
             <div className="mb-3 ">
               <label className="form-label">Handler link</label>
