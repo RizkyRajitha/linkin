@@ -100,6 +100,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Avatar width "
                 {...register("avatarwidth", {
                   max: { message: "Width must be below 100%", value: 100 },
+                  min: { message: "Width must be above 1%", value: 1 },
                 })}
               />
               {errors.avatarwidth && (

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { isEmpty } from "../lib/side";
 // import Image from "next/image";
 
@@ -26,24 +25,16 @@ export default function Home({
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
 
-  console.log(
-    handlerText,
-    handlerFontColor,
-    handlerFontSize,
-    bgColor,
-    avatarwidth,
-    accentColor
-  );
+  // console.log(
+  //   handlerText,
+  //   handlerFontColor,
+  //   handlerFontSize,
+  //   bgColor,
+  //   avatarwidth,
+  //   accentColor
+  // );
 
-  useEffect(() => {
-    console.log("up");
-    console.log(avatarwidth);
-    return () => {
-      console.log("cleanup");
-    };
-  }, [avatarwidth]);
-
-  console.log(linkData);
+  // console.log(linkData);
   return (
     <div className="outterwrap">
       <div className="wrap">

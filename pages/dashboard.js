@@ -14,7 +14,7 @@ export async function getServerSideProps({ req, res }) {
     if (valid) {
       data = await getPageDatawLinkData();
     }
-    console.log(data);
+    // console.log(data);
     return { props: { pageDataSS: data.pageData, linkDataSS: data.linkData } };
   } catch (error) {
     // console.log(error);
@@ -29,12 +29,12 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
   useEffect(() => {
     dispatch({ type: "updateLink", linkdata: linkDataSS });
   }, []);
-  console.log(links);
+  // console.log(links);
 
-  console.log(pageDataSS);
+  // console.log(pageDataSS);
 
   const updatedPageData = (data) => {
-    console.log(data);
+    // console.log(data);
     // save(data);
     setpageData(data);
   };

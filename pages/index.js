@@ -6,7 +6,7 @@ export async function getServerSideProps() {
   let data;
   try {
     data = await getPageDatawLinkData(false);
-    console.log(data);
+    // console.log(data);
   } catch (error) {
     console.log(error.message);
   }
