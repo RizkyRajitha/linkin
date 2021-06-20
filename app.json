@@ -15,7 +15,7 @@
   ],
   "env": {
     "KEY": {
-      "description": "Random secret key.This gets generated automatically",
+      "description": "Random secret key",
       "value": ""
     },
     "DBURL": {
