@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { isEmptry } from "../lib/side";
+import { isEmpty } from "../lib/side";
 // import Image from "next/image";
 
 export default function Home({
@@ -16,34 +15,16 @@ export default function Home({
   linkData,
   preview = false,
 }) {
-  accentColor = isEmptry(accentColor) ? "#BDD7FF" : accentColor;
-  avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
-  handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
-  handlerFontColor = isEmptry(handlerFontColor) ? "#fff" : handlerFontColor;
-  bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
-  fontFamily = isEmptry(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
-  fontUrl = isEmptry(fontUrl)
+  accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
+  avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
+  handlerFontSize = isEmpty(handlerFontSize) ? "15" : handlerFontSize;
+  handlerFontColor = isEmpty(handlerFontColor) ? "#fff" : handlerFontColor;
+  bgColor = isEmpty(bgColor) ? "#fff" : bgColor;
+  fontFamily = isEmpty(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
+  fontUrl = isEmpty(fontUrl)
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
 
-  console.log(
-    handlerText,
-    handlerFontColor,
-    handlerFontSize,
-    bgColor,
-    avatarwidth,
-    accentColor
-  );
-
-  useEffect(() => {
-    console.log("up");
-    console.log(avatarwidth);
-    return () => {
-      console.log("cleanup");
-    };
-  }, [avatarwidth]);
-
-  console.log(linkData);
   return (
     <div className="outterwrap">
       <div className="wrap">
@@ -71,7 +52,6 @@ export default function Home({
                     {element.iconClass && (
                       <i className={`${element.iconClass} icon`}></i>
                     )}
-                    {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
                     <div className="d-flex w-100 align-items-center justify-content-center">
                       {element.displayText}
                     </div>
@@ -81,51 +61,6 @@ export default function Home({
             })}
           </ul>
         </div>
-        {/* <div className={style.links}>
-          <ul>
-            <li>
-              <a
-                href="https://www.wonderousnightsky.store/"
-                className={style.link}
-                target="_blank"
-              >
-                <i className={`fas fa-store ${style.iconpadding}`}></i>Checkout
-                My Shop
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.paypal.com/paypalme/wonderousnightsky?locale.x=en_US"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-paypal ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                Support My Page
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/wonderousnightsky/?hl=en"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-instagram ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                DM for collaborations
-              </a>
-            </li>
-          </ul> */}
-        {/* <!-- <div className="card">
-          <h3>Card</h3>
-          <p>Just a card to display some information ...</p>
-        </div> --> */}
-        {/* </div> */}
-        {/* <div className="footer">
-          Copyright © 2021 All Rights Reserved by {footerText}.
-        </div> */}
       </div>
       <style
         jsx

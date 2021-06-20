@@ -32,11 +32,6 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Handler name"
                 {...register("handlerText")}
               />
-              {/* {errors.handlerText && (
-                  <div className="invalid-feedback">
-                    {errors.handlerText.message}
-                  </div>
-                )} */}
             </div>
             <div className="mb-3 ">
               <label className="form-label">Handler link</label>
@@ -57,7 +52,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 })}
               />
               <div className="form-text">
-                Ex - https://www.instagram.com/wonderousnightsky/
+                Ex - https://www.instagram.com/[yourhandle]
               </div>
 
               {errors.handlerLink && (
@@ -100,6 +95,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Avatar width "
                 {...register("avatarwidth", {
                   max: { message: "Width must be below 100%", value: 100 },
+                  min: { message: "Width must be above 1%", value: 1 },
                 })}
               />
               {errors.avatarwidth && (

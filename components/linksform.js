@@ -38,15 +38,15 @@ const LinksForm = ({ pagedataid }) => {
   };
 
   const saveLinkData = async (linkdata) => {
-    console.log("save linkdata");
-    console.log(linkdata);
+    // console.log("save linkdata");
+    // console.log(linkdata);
     setloading(true);
 
     let operation = "insertpagelinks";
     if (linkdata.hasOwnProperty("id")) {
       operation = `updatepagelinks`;
     }
-    console.log(operation);
+    // console.log(operation);
     try {
       let res = await fetch(`${endpoint}/api/${operation}`, {
         method: "POST",
@@ -54,7 +54,7 @@ const LinksForm = ({ pagedataid }) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      console.log(res);
+      // console.log(res);
 
       if (!res.success) {
         toast.error(`Error ${res.message}`, {
@@ -116,8 +116,8 @@ const LinksForm = ({ pagedataid }) => {
     if (!confirm.isConfirmed) {
       return;
     }
-    console.log("delete link");
-    console.log(id);
+    // console.log("delete link");
+    // console.log(id);
     setloading(true);
 
     try {
@@ -222,43 +222,3 @@ const LinksForm = ({ pagedataid }) => {
   );
 };
 export default LinksForm;
-
-/**
-     const fieldName = `links[${index}]`;
-                return (
-                  <div class="card">
-                    <div class="card-body">
-                      <fieldset name={fieldName} key={fieldName}>
-                        <div className="mb-3 small">
-                          <label className="form-label">Name {index}</label>
-                          <input
-                            type="text"
-                            className={
-                              errors.handlerText
-                                ? "form-control is-invalid"
-                                : "form-control"
-                            }
-                            placeholder="Enter name"
-                            // {...register("name")}
-                            {...register(`${fieldName}.name`)}
-                          />
-                        </div>
-                        <div className="mb-3 small">
-                          <label className="form-label">Name {index}</label>
-                          <input
-                            type="text"
-                            className={
-                              errors.handlerText
-                                ? "form-control is-invalid"
-                                : "form-control"
-                            }
-                            placeholder="Enter link"
-                            // {...register("name")}
-                            {...register(`${fieldName}.link`)}
-                          />
-                        </div>
-                      </fieldset>{" "}
-                    </div>{" "}
-                  </div>
-                );
- */

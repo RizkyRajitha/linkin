@@ -44,7 +44,7 @@ const FontForm = ({ data, update, loading }) => {
                 className={
                   errors.fontUrl ? "form-control is-invalid" : "form-control"
                 }
-                placeholder="Enter Avatar Url"
+                placeholder="Enter Font Url"
                 {...register("fontUrl", {
                   pattern: {
                     message: "Should be a valid URL",
@@ -74,7 +74,7 @@ const FontForm = ({ data, update, loading }) => {
                 className={
                   errors.fontFamily ? "form-control is-invalid" : "form-control"
                 }
-                placeholder="Enter Footer text"
+                placeholder="Enter Font name"
                 {...register("fontFamily")}
               />
 

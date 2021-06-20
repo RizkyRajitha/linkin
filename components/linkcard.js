@@ -16,17 +16,6 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
   } = useForm({ defaultValues: item });
 
   useEffect(() => {
-    // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(item);
-
-    // cancel the debounce function when submited by enter
-    // debouncedSaveLinkData.cancel();
-
-    // console.warn("!!!!!!!!!!!!!!!!!!!!!!!!!");
-    // console.log(item);
-    // console.log(cardInfo);
-    // console.log(cardInfo.id);
-
     // reset when the linkdata is change to the form update with new values
     if (cardInfo.id === undefined && item.id) {
       // console.log("reset with item");
@@ -39,11 +28,6 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
       reset(item);
       setCardInfo(item);
     }
-
-    // reset when the linkdata is change to the form update with new values
-    // if (item) {
-    //   reset(item);
-    // }
   }, [item]);
 
   watch((data, { type }) => {
@@ -139,9 +123,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
                 placeholder="Enter Icon Class"
                 {...register(`iconClass`)}
               />{" "}
-              <div className="form-text">
-                Use font awesome for icon classes
-              </div>
+              <div className="form-text">Use font awesome for icon classes</div>
             </div>
             <div className="mb-1 small ">
               {/* <label className="form-label small">Handler Font color </label> */}
