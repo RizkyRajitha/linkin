@@ -74,7 +74,7 @@ const FontForm = ({ data, update, loading }) => {
                 className={
                   errors.fontFamily ? "form-control is-invalid" : "form-control"
                 }
-                placeholder="Enter Font name"
+                placeholder="Enter Font family"
                 {...register("fontFamily")}
               />
 
