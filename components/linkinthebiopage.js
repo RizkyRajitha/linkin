@@ -25,16 +25,6 @@ export default function Home({
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
 
-  // console.log(
-  //   handlerText,
-  //   handlerFontColor,
-  //   handlerFontSize,
-  //   bgColor,
-  //   avatarwidth,
-  //   accentColor
-  // );
-
-  // console.log(linkData);
   return (
     <div className="outterwrap">
       <div className="wrap">
@@ -62,7 +52,6 @@ export default function Home({
                     {element.iconClass && (
                       <i className={`${element.iconClass} icon`}></i>
                     )}
-                    {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
                     <div className="d-flex w-100 align-items-center justify-content-center">
                       {element.displayText}
                     </div>
@@ -72,51 +61,6 @@ export default function Home({
             })}
           </ul>
         </div>
-        {/* <div className={style.links}>
-          <ul>
-            <li>
-              <a
-                href="https://www.wonderousnightsky.store/"
-                className={style.link}
-                target="_blank"
-              >
-                <i className={`fas fa-store ${style.iconpadding}`}></i>Checkout
-                My Shop
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.paypal.com/paypalme/wonderousnightsky?locale.x=en_US"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-paypal ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                Support My Page
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/wonderousnightsky/?hl=en"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-instagram ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                DM for collaborations
-              </a>
-            </li>
-          </ul> */}
-        {/* <!-- <div className="card">
-          <h3>Card</h3>
-          <p>Just a card to display some information ...</p>
-        </div> --> */}
-        {/* </div> */}
-        {/* <div className="footer">
-          Copyright © 2021 All Rights Reserved by {footerText}.
-        </div> */}
       </div>
       <style
         jsx
