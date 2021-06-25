@@ -19,6 +19,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "@prisma/client": "^2.25.0",
     "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
@@ -38,6 +39,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "babel-jest": "^27.0.1",
-    "jest": "^27.0.1"
+    "jest": "^27.0.1",
+    "prisma": "^2.25.0"
   }
 }
