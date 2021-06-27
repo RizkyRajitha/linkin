@@ -1,8 +1,10 @@
 import { Pool } from "pg";
-import { DBURLLOCAL } from "../configs/config";
+// import { DBURLLOCAL } from "../configs/config";
 
-const connectionString =
-  process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL;
+const connectionString = process.env.DBURL;
+
+// const connectionString =
+//   process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL;
 
 const pool = new Pool({
   connectionString: connectionString,
