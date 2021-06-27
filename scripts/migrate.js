@@ -17,7 +17,7 @@ const connectionString = process.env.DBURL;
 // const connectionString =
 //   process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
 
-console.log(connectionString);
+//console.log(connectionString);
 
 if (!connectionString) {
   console.warn(
