@@ -4,6 +4,7 @@ import { getPageDatawLinkData } from "../lib/dbfunc";
 
 export async function getServerSideProps() {
   let data;
+  console.log(process.env)
   try {
     data = await getPageDatawLinkData(false);
     // console.log(data);

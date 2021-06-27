@@ -70,28 +70,30 @@
 - Node.js 10.13 or newer
 - Postgresql
 
-Setup local environmrnt variables in [config.js](configs/config.js)
-
-example
-
-```
-exports.DBURLLOCAL = "postgres://linkin:123@localhost:5432/linkin";
-exports.SECRETKEY = "123";
-```
-
 #### Clone and install dependencies
 
-```
+```bash
 git clone https://github.com/RizkyRajitha/linkin.git
 cd linkin
 npm i
 ```
 
+<!-- Setup local environmrnt variables in [config.js](configs/config.js) -->
+Setup local environmrnt variables in [.env.local](./.env.local)
+
+example
+
+```.env
+DBURL=postgres://linkin:123@localhost:5432/linkin
+KEY=123
+```
+
+
 #### Database migration
 
 **you must have Postgres database setup locally**
 
-```
+```bash
 node scripts/migrate.js
 ```
 
