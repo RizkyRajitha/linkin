@@ -55,8 +55,13 @@
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-
 <br>
+
+### Running with docker
+
+- build the docker image using `docker build . -t linkin` command 
+- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e KEY='123'  linkin`. make sure you specified `DBURL` and `KEY` environment varaibles.
+  
 
 ### Developing locally
 
