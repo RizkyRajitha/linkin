@@ -1,9 +1,23 @@
 const { Client } = require("pg");
 const fs = require("fs");
-const DBURLLOCAL = require("../configs/config").DBURLLOCAL;
+const path = require("path");
 
-const connectionString =
-  process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({
+    path: path.join(__dirname, "../", ".env.local"),
+  });
+
+  // console.log(dotenv.error);
+}
+
+// const DBURLLOCAL = require("../configs/config").DBURLLOCAL;
+
+const connectionString = process.env.DBURL;
+
+// const connectionString =
+//   process.env.NODE_ENV === "production" ? process.env.DBURL : DBURLLOCAL; //require("../config/config").DBURL; //'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'
+
+//console.log(connectionString);
 
 if (!connectionString) {
   console.warn(
@@ -11,8 +25,6 @@ if (!connectionString) {
   );
   process.exit(1);
 }
-
-// console.log(connectionString);
 
 const client = new Client({
   connectionString: connectionString,
