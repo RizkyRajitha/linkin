@@ -16,7 +16,7 @@
     "build": "npm-run-all migrate build-next",
     "herokustart": "next start -p $PORT",
     "build-next": "next build",
-    "test": "jest --coverage"
+    "test": "jest --coverage ./__tests__/prisma"
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",
