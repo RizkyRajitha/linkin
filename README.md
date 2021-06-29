@@ -30,7 +30,7 @@
 
 ![Screenshot_2021-05-22 Linkin Dashboard](https://user-images.githubusercontent.com/38534289/119221939-7c585780-bb0f-11eb-944f-514beb5573b7.png)
 
-### Getting started
+## Getting started
 
 - Deploy in Vercel
   - set environment variables
@@ -57,13 +57,13 @@
   - after a successfull login you will be able to see above admin dashboard.
 <br>
 
-### Running with docker
+## Running with docker
 
 - build the docker image using `docker build . -t linkin` command 
 - Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e KEY='123'  linkin`. make sure you specified `DBURL` and `KEY` environment varaibles.
   
 
-### Developing locally
+## Developing locally
 
 #### Requirements
 
@@ -79,15 +79,14 @@ npm i
 ```
 
 <!-- Setup local environmrnt variables in [config.js](configs/config.js) -->
-Setup local environmrnt variables in [.env.local](./.env.local)
+Setup local environmrnt variables in `.env.local`
 
-example
+example `.env.local` file
 
-```.env
+```
 DBURL=postgres://linkin:123@localhost:5432/linkin
 KEY=123
 ```
-
 
 #### Database migration
 
