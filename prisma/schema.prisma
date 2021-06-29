@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgres://linkin:123@localhost:5432/linkin"
+  url      = env("DBURL")
 }
 
 model linkdata {
