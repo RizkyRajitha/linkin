@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { serialize } from "cookie";
 import { createSecureToken } from "../../lib/crypto";
 
-import { getUser } from "../../lib/dbfunc";
+import { getUser } from "../../lib/dbfuncprisma";
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
