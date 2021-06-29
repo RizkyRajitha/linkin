@@ -79,7 +79,7 @@ npm i
 ```
 
 <!-- Setup local environmrnt variables in [config.js](configs/config.js) -->
-Setup local environmrnt variables in [.env.local](./.env.local)
+Setup local environmrnt variables in [.env](./.env)
 
 example
 

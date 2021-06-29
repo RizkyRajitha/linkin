@@ -24,6 +24,8 @@ export default async function handler(req, res) {
       return;
     }
 
+    // let pg = await getPageData();
+    // console.log(pg);
     let pass = bcrypt.compareSync(password, data.password);
 
     if (!pass) {
@@ -50,5 +52,6 @@ export default async function handler(req, res) {
     res.status(200).json({ success: pass, token });
   } catch (error) {
     console.log(error);
+    res.status(500).send(error.message);
   }
 }
