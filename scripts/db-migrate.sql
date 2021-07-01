@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS  "linkdata" (
     "created_at" timestamp with time zone default current_timestamp
 );
 
-insert into linkdata ("id", "pagedataid" , "iconClass" , "displayText" , "bgColor" , "linkUrl") values (1 , 1 , 'fas fa-link' , 'Demo Link', '#2C6BED' , 'https://github.com/RizkyRajitha/linkin' ) ON CONFLICT (id) DO NOTHING;
+insert into linkdata ("pagedataid" , "iconClass" , "displayText" , "bgColor" , "linkUrl") values (1 , 'fas fa-link' , 'Demo Link', '#2C6BED' , 'https://github.com/RizkyRajitha/linkin' ) ON CONFLICT (id) DO NOTHING;
 -- ALTER TABLE "pagedata" ADD COLUMN IF NOT EXISTS "fontFamily" varchar , ADD COLUMN IF NOT EXISTS "fontUrl" varchar;
 
 -- ALTER TABLE "linkdata" ADD COLUMN IF NOT EXISTS "active" boolean DEFAULT TRUE;
