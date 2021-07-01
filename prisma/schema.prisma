@@ -14,6 +14,7 @@ model linkdata {
   displayText String?   @db.VarChar
   linkUrl     String?   @db.VarChar
   bgColor     String?   @db.VarChar
+  textColor     String?   @db.VarChar
   active      Boolean?  @default(true)
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
   pagedata    pagedata? @relation(fields: [pagedataid], references: [id])
