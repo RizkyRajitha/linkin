@@ -13,7 +13,8 @@
     "dev": "next dev",
     "start": "next start",
     "migrate": "node scripts/migrate.js",
-    "build": "npm-run-all migrate build-next",
+    "build": "npm-run-all migrate prismagenerate build-next",
+    "prismagenerate": "prisma generate",
     "herokustart": "next start -p $PORT",
     "build-next": "next build",
     "test": "jest --coverage ./__tests__/prisma"
