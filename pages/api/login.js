@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { serialize } from "cookie";
 import { createSecureToken } from "../../lib/crypto";
 
-import { getUser } from "../../lib/dbfunc";
+import { getUser } from "../../lib/dbfuncprisma";
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
@@ -24,6 +24,8 @@ export default async function handler(req, res) {
       return;
     }
 
+    // let pg = await getPageData();
+    // console.log(pg);
     let pass = bcrypt.compareSync(password, data.password);
 
     if (!pass) {
@@ -50,5 +52,6 @@ export default async function handler(req, res) {
     res.status(200).json({ success: pass, token });
   } catch (error) {
     console.log(error);
+    res.status(500).send(error.message);
   }
 }

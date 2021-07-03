@@ -1,10 +1,10 @@
 import Head from "next/head";
 import LinkinTheBioPage from "../components/linkinthebiopage";
-import { getPageDatawLinkData } from "../lib/dbfunc";
+import { getPageDatawLinkData } from "../lib/dbfuncprisma";
 
 export async function getServerSideProps() {
   let data;
-  console.log(process.env)
+  //console.log(process.env);
   try {
     data = await getPageDatawLinkData(false);
     // console.log(data);
