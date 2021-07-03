@@ -1,13 +1,18 @@
 const path = require("path");
 require("dotenv").config({
-  path: path.join(__dirname, "../../", ".env"),
+  path: path.join(__dirname, "../", ".env"),
 });
+const Prisma = require("../db/dbconprisma");
 
-const { getUser, changePassword } = require("../../lib/dbfunc");
+const { getUser, changePassword } = require("../lib/dbfuncprisma");
 
 describe("Test User functions", () => {
   beforeEach(() => {
     jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterAll(async () => {
+    await Prisma.default.$disconnect();
   });
 
   test("get admin user", async () => {

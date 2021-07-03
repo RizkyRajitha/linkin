@@ -1,15 +1,15 @@
 const path = require("path");
-const Prisma = require("../../db/dbconprisma");
+const Prisma = require("../db/dbconprisma");
 
 require("dotenv").config({
-  path: path.join(__dirname, "../../", ".env"),
+  path: path.join(__dirname, "../", ".env"),
 });
 
 const {
   getPageDatawLinkData,
   getPageData,
   updatePageData,
-} = require("../../lib/dbfuncprisma");
+} = require("../lib/dbfuncprisma");
 
 describe("page data functions", () => {
   beforeEach(() => {
