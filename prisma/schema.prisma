@@ -30,6 +30,9 @@ model pagedata {
   handlerText      String?    @db.VarChar
   handlerLink      String?    @db.VarChar
   footerText       String?    @db.VarChar
+  footerTextColor       String?    @db.VarChar
+  footerBgColor       String?    @db.VarChar
+  footerTextSize       String?    @db.VarChar
   bgImgUrl         String?    @db.VarChar
   handlerFontSize  String?    @db.VarChar
   handlerFontColor String?    @db.VarChar
