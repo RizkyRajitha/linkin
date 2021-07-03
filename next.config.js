@@ -4,4 +4,5 @@ module.exports = {
   env: {
     VERSION: pkg.version,
   },
+  target: "serverless",
 };
