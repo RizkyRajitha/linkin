@@ -19,7 +19,7 @@ const FontForm = ({ data, update, loading }) => {
             <h3>Font Data</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler Font Size</label>
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <input
                   type="number"
                   className={
@@ -32,7 +32,7 @@ const FontForm = ({ data, update, loading }) => {
                     min: { message: "Font Size must be above 1px", value: 1 },
                   })}
                 />
-                <span class="input-group-text">px</span>
+                <span className="input-group-text">px</span>
                 {errors.handlerFontSize && (
                   <div className="invalid-feedback">
                     {errors.handlerFontSize.message}

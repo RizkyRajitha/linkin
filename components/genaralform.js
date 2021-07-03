@@ -63,7 +63,7 @@ const GenaralForm = ({ data, update, loading }) => {
             </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <input
                   type="number"
                   className={
@@ -77,7 +77,7 @@ const GenaralForm = ({ data, update, loading }) => {
                     min: { message: "Width must be above 1%", value: 1 },
                   })}
                 />{" "}
-                <span class="input-group-text">%</span>{" "}
+                <span className="input-group-text">%</span>{" "}
                 {errors.avatarwidth && (
                   <div className="invalid-feedback">
                     {errors.avatarwidth.message}
