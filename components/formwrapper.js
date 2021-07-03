@@ -7,6 +7,7 @@ import ColorForm from "./colorform";
 import LinksForm from "./linksform";
 import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
+import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
 
 import { ToastContainer, toast } from "react-toastify";
@@ -17,7 +18,6 @@ const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
-
 
 function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
@@ -155,7 +155,18 @@ function Formwrapper({ pageData, updatedPageData }) {
                 }}
               >
                 General
-              </button>
+              </button>{" "}
+              <button
+                type="button"
+                className={`btn btn-outline-primary ${
+                  activeForm === "footerForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("footerForm");
+                }}
+              >
+                Footer
+              </button>{" "}
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
@@ -205,6 +216,13 @@ function Formwrapper({ pageData, updatedPageData }) {
           </div>
           {activeForm === "genaralForm" && (
             <GenaralForm
+              data={pageData}
+              update={savePageData}
+              loading={loading}
+            />
+          )}
+          {activeForm === "footerForm" && (
+            <FooterForm
               data={pageData}
               update={savePageData}
               loading={loading}

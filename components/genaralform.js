@@ -61,48 +61,29 @@ const GenaralForm = ({ data, update, loading }) => {
                 </div>
               )}
             </div>{" "}
-            {/* <div className="mb-3 ">
-              <label className="form-label">Footer text</label>
-              <input
-                type="text"
-                className={
-                  errors.footerText ? "form-control is-invalid" : "form-control"
-                }
-                placeholder="Enter Footer text"
-                {...register("footerText")}
-              />
-            </div>{" "} */}
-            {/* <div className="mb-3 ">
-              <label className="form-label">Footer text</label>
-              <input
-                type="text"
-                className={
-                  errors.footerText ? "form-control is-invalid" : "form-control"
-                }
-                placeholder="Enter Footer text"
-                {...register("footerText")}
-              />
-            </div>{" "} */}
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
-              <input
-                type="number"
-                className={
-                  errors.avatarwidth
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                placeholder="Enter Avatar width "
-                {...register("avatarwidth", {
-                  max: { message: "Width must be below 100%", value: 100 },
-                  min: { message: "Width must be above 1%", value: 1 },
-                })}
-              />
-              {errors.avatarwidth && (
-                <div className="invalid-feedback">
-                  {errors.avatarwidth.message}
-                </div>
-              )}
+              <div class="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.avatarwidth
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Avatar width "
+                  {...register("avatarwidth", {
+                    max: { message: "Width must be below 100%", value: 100 },
+                    min: { message: "Width must be above 1%", value: 1 },
+                  })}
+                />{" "}
+                <span class="input-group-text">%</span>{" "}
+                {errors.avatarwidth && (
+                  <div className="invalid-feedback">
+                    {errors.avatarwidth.message}
+                  </div>
+                )}
+              </div>
             </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Avatar Url</label>

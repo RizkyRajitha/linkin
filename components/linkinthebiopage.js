@@ -13,6 +13,10 @@ export default function Home({
   fontFamily,
   fontUrl,
   linkData,
+  footerText,
+  footerTextSize,
+  footerBgColor,
+  footerTextColor,
   preview = false,
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
@@ -24,46 +28,56 @@ export default function Home({
   fontUrl = isEmpty(fontUrl)
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
+  footerTextSize = isEmpty(footerTextSize) ? 12 : footerTextSize;
+  footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
+  footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
 
   return (
-    <div className="outterwrap">
-      <div className="wrap">
-        <div className="profile">
-          <img src={avatarUrl} className="photo" />
-          <a
-            className="handlerLink"
-            href={`${handlerLink || "#"}`}
-            target="_blank"
-          >
-            <span className="handlerText">{handlerText}</span>
-          </a>
+    <div>
+      <div className="outterwrap">
+        <div className="wrap">
+          <div className="profile">
+            <img src={avatarUrl} className="photo" />
+            <a
+              className="handlerLink"
+              href={`${handlerLink || "#"}`}
+              target="_blank"
+            >
+              <span className="handlerText">{handlerText}</span>
+            </a>
+          </div>
+          <div className="links">
+            <ul>
+              {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
+              {linkData.map((element, id) => {
+                return (
+                  <li key={id}>
+                    <a
+                      href={`${element.linkUrl || "#"}`}
+                      className="link"
+                      target="_blank"
+                      style={{
+                        backgroundColor: element.bgColor || "#2c6bed",
+                        color: element.textColor || "#ffffff",
+                      }}
+                    >
+                      {element.iconClass && (
+                        <i className={`${element.iconClass} icon`}></i>
+                      )}
+                      <div className="d-flex w-100 align-items-center justify-content-center">
+                        {element.displayText}
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
-        <div className="links">
-          <ul>
-            {linkData.map((element, id) => {
-              return (
-                <li key={id}>
-                  <a
-                    href={`${element.linkUrl || "#"}`}
-                    className="link"
-                    target="_blank"
-                    style={{
-                      backgroundColor: element.bgColor || "#2c6bed",
-                      color: element.textColor || "#ffffff",
-                    }}
-                  >
-                    {element.iconClass && (
-                      <i className={`${element.iconClass} icon`}></i>
-                    )}
-                    <div className="d-flex w-100 align-items-center justify-content-center">
-                      {element.displayText}
-                    </div>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+      </div>
+      <div className="footer d-flex align-items-center justify-content-center">
+        {/* Copyright © 2021 All Rights Reserved by. */}
+        {footerText}
       </div>
       <style
         jsx
@@ -79,7 +93,7 @@ export default function Home({
           margin: 0;
           padding: 15px;
           height: 100%;
-          min-height: 100vh;
+          min-height: 96vh;
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
@@ -98,14 +112,15 @@ export default function Home({
         .footer {
           position: absolute;
           right: 0;
-          bottom: 0;
+          // bottom: 0;
+          height: 4vh;
           ${preview ? "" : "left: 0 ; "}
-          padding: 1rem;
-          background-color: #000;
+          //padding: 1rem;
+          background-color: ${footerBgColor};
           text-align: center;
-          color: #fff;
-          font-size: 0.6rem;
-          width: ${preview ? "50%" : "100%"};
+          color: ${footerTextColor};
+          font-size: ${footerTextSize}px;
+          width: ${preview ? "40%" : "100%"};
         }
 
         a {
@@ -166,3 +181,14 @@ export default function Home({
   );
 }
 //
+
+// position: absolute;
+// right: 0;
+// bottom: 0;
+// ${preview ? "" : "left: 0 ; "}
+// padding: 1rem;
+// background-color: #000;
+// text-align: center;
+// color: #fff;
+// font-size: 0.6rem;
+// width: ${preview ? "50%" : "100%"};

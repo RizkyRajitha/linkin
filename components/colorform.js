@@ -8,6 +8,8 @@ const ColorForm = ({ data, update, loading }) => {
       bgColor: data.bgColor,
       accentColor: data.accentColor,
       handlerFontColor: data.handlerFontColor,
+      footerBgColor: data.footerBgColor,
+      footerTextColor: data.footerTextColor,
     },
   });
 
@@ -45,6 +47,24 @@ const ColorForm = ({ data, update, loading }) => {
                 className="form-control form-control-color"
                 title="Choose handler Font color"
                 {...register("handlerFontColor")}
+              />
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Footer Font color </label>
+              <input
+                type="color"
+                className="form-control form-control-color"
+                title="Choose handler Font color"
+                {...register("footerTextColor")}
+              />
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Footer Background color </label>
+              <input
+                type="color"
+                className="form-control form-control-color"
+                title="Choose handler Font color"
+                {...register("footerBgColor")}
               />
             </div>{" "}
             <button

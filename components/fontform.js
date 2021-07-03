@@ -19,23 +19,26 @@ const FontForm = ({ data, update, loading }) => {
             <h3>Font Data</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler Font Size</label>
-              <input
-                type="number"
-                className={
-                  errors.handlerFontSize
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                placeholder="Enter handler font size"
-                {...register("handlerFontSize", {
-                  min: { message: "Font Size must be above 1px", value: 1 },
-                })}
-              />
-              {errors.handlerFontSize && (
-                <div className="invalid-feedback">
-                  {errors.handlerFontSize.message}
-                </div>
-              )}
+              <div class="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.handlerFontSize
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter handler font size"
+                  {...register("handlerFontSize", {
+                    min: { message: "Font Size must be above 1px", value: 1 },
+                  })}
+                />
+                <span class="input-group-text">px</span>
+                {errors.handlerFontSize && (
+                  <div className="invalid-feedback">
+                    {errors.handlerFontSize.message}
+                  </div>
+                )}
+              </div>
             </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Font Url</label>
