@@ -1,9 +1,24 @@
 // import { jwtAuth, use } from "../../middleware/middleware";
-import { getPageData } from "../../lib/dbfunc";
+import {
+  getPageData,
+  getLinkData,
+  getPageDatawLinkData,
+  updatePageData,
+  insertPageLinks,
+  updateLink,
+  deleteLink,
+  changePassword,
+} from "../../lib/dbfuncprisma";
+// import { updatePageData } from "../../lib/dbfuncprisma";
 
 async function handler(req, res) {
   try {
-    const pageData = await getPageData();
+    const pageData = await changePassword({
+      // id: 269,
+      username: "admin",
+      newhashedpassword: "11",
+      // pagedataid: 1,
+    });
     console.log(pageData);
     res.json(pageData);
   } catch (error) {

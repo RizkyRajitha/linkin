@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
-import { getPageDatawLinkData } from "../lib/dbfunc";
+import { getPageDatawLinkData } from "../lib/dbfuncprisma";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";

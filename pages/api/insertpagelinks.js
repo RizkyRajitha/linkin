@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { getLinkData, insertPageLinks } from "../../lib/dbfunc";
+import { getLinkData, insertPageLinks } from "../../lib/dbfuncprisma";
 
 
 async function handler(req, res) {

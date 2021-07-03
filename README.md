@@ -55,13 +55,12 @@
     - username = `admin`
     - password = `linkin123`
   - after a successfull login you will be able to see above admin dashboard.
-<br>
+    <br>
 
 ## Running with docker
 
-- build the docker image using `docker build . -t linkin` command 
-- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e KEY='123'  linkin`. make sure you specified `DBURL` and `KEY` environment varaibles.
-  
+- build the docker image using `docker build . -t linkin` command
+- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e KEY='123' linkin`. make sure you specified `DBURL` and `KEY` environment varaibles.
 
 ## Developing locally
 
@@ -79,7 +78,8 @@ npm i
 ```
 
 <!-- Setup local environmrnt variables in [config.js](configs/config.js) -->
-Setup local environmrnt variables in `.env.local`
+
+Setup local environmrnt variables in [.env](./.env)
 
 example `.env.local` file
 
@@ -112,15 +112,13 @@ npm run dev
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
 
-
 ### Community
 
 Join our discord community for questions and updates
 
 https://discord.gg/Jsmc5Dm9wg
 
-
-<!-- 
+<!--
 https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap
 https://res.cloudinary.com/dijjqfsto/image/upload/v1621257334/af1fcce7-deb9-4834-965e-4fed59ef6c08_z2l3yf.jpg
 'Source Code Pro', monospace

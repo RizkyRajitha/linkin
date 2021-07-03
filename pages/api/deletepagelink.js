@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { deleteLink } from "../../lib/dbfunc";
+import { deleteLink } from "../../lib/dbfuncprisma";
 
 
 async function handler(req, res) {
