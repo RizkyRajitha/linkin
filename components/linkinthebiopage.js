@@ -47,7 +47,10 @@ export default function Home({
                     href={`${element.linkUrl || "#"}`}
                     className="link"
                     target="_blank"
-                    style={{ backgroundColor: element.bgColor || "#2c6bed" }}
+                    style={{
+                      backgroundColor: element.bgColor || "#2c6bed",
+                      color: element.textColor || "#ffffff",
+                    }}
                   >
                     {element.iconClass && (
                       <i className={`${element.iconClass} icon`}></i>

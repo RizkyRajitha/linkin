@@ -116,7 +116,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
               <input
                 type="text"
                 className={
-                  errors.handlerText
+                  errors.iconClass
                     ? "form-control form-control-sm mb-2  is-invalid"
                     : "form-control form-control-sm mb-2 "
                 }
@@ -126,7 +126,19 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
               <div className="form-text">Use font awesome for icon classes</div>
             </div>
             <div className="mb-1 small ">
-              {/* <label className="form-label small">Handler Font color </label> */}
+              <label className="form-label small ">
+                Link Display Text Font color{" "}
+              </label>
+              <input
+                type="color"
+                className="form-control form-control-sm mb-2 form-control-color"
+                title="Choose Link text color"
+                placeholder="Choose Link text color"
+                {...register("textColor")}
+              />
+            </div>{" "}
+            <div className="mb-1 small ">
+              <label className="form-label small">Link background color </label>
               <input
                 type="color"
                 className="form-control form-control-sm mb-2 form-control-color"

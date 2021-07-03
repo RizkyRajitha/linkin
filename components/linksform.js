@@ -32,6 +32,7 @@ const LinksForm = ({ pagedataid }) => {
           pagedataid: pagedataid,
           bgColor: "#2c6bed",
           active: true,
+          textColor: "#ffffff",
         },
       ],
     });
