@@ -13,7 +13,7 @@
     "dev": "next dev",
     "start": "next start",
     "seed": "node scripts/seed.js",
-    "build": "npm-run-all prismamigrateprod seed prismagenerate build-next",
+    "build": "npm-run-all prismamigrateprod prismagenerate seed build-next",
     "prismagenerate": "prisma generate",
     "prismamigrateprod": "prisma migrate deploy",
     "herokustart": "next start -p $PORT",
