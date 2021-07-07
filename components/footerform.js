@@ -19,9 +19,16 @@ const FontForm = ({ data, update, loading }) => {
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Footer Data</h3>
+            <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
+              <input
+                className="form-check-input"
+                type="checkbox"
+                {...register(`footerEnabled`)}
+              />
+            </div>
             <div className="mb-3 ">
               <label className="form-label">Footer Font Size</label>
-              <div class="input-group mb-3">
+              <div className="input-group mb-3">
                 <input
                   type="number"
                   className={
@@ -34,7 +41,7 @@ const FontForm = ({ data, update, loading }) => {
                     min: { message: "Font Size must be above 1px", value: 1 },
                   })}
                 />{" "}
-                <span class="input-group-text">px</span>
+                <span className="input-group-text">px</span>
               </div>
               {errors.footerTextSize && (
                 <div className="invalid-feedback">

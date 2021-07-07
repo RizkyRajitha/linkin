@@ -20,6 +20,7 @@ export default function Home({
   handlerDescriptionFontColor,
   handlerDescription,
   bgImgUrl,
+  footerEnabled,
   preview = false,
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
@@ -91,10 +92,13 @@ export default function Home({
           </div>
         </div>
       </div>
-      <div className="footer d-flex align-items-center justify-content-center">
-        {/* Copyright © 2021 All Rights Reserved by. */}
-        {footerText}
-      </div>
+      {footerEnabled && (
+        <div className="footer d-flex align-items-center justify-content-center">
+          {/* Copyright © 2021 All Rights Reserved by. */}
+          {footerText}
+        </div>
+      )}
+
       <style
         jsx
         onError={(e) => {
@@ -109,7 +113,7 @@ export default function Home({
           margin: 0;
           padding: 15px;
           height: 100%;
-          min-height: 96vh;
+          min-height: ${footerEnabled ? "96vh" : "100vh"};
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
