@@ -11,6 +11,19 @@ services:
       NODE_ENV: "production"
     depends_on:
       - db
+      - migrate
+
+  migrate:
+    build: .
+    ports:
+      - "3000:3000"
+    command: "npm run prismamigrateprod && npm run seed"
+    environment:
+      DBURL: "postgres://linkin:linkin123@db:5432/linkin"
+      KEY: "123" # random secret key
+      NODE_ENV: "production"
+    depends_on:
+      - db
 
   db:
     image: postgres:10-alpine

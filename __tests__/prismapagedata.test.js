@@ -19,7 +19,6 @@ describe("page data functions", () => {
     await Prisma.default.$disconnect();
   });
 
-  
   test("get page data ", async () => {
     let { pageData } = await getPageData();
     const expectedUser = {
@@ -30,7 +29,7 @@ describe("page data functions", () => {
       bgColor: "#7ea2ff",
       accentColor: "#bdd7ff",
       handlerText: "LinkIn",
-      footerText: null,
+      footerText: "Powered by Linkin",
       bgImgUrl: null,
       handlerFontSize: "20",
       handlerFontColor: "#ffffff",
@@ -53,7 +52,7 @@ describe("page data functions", () => {
         accentColor: "#bdd7ff",
         handlerText: "LinkIn",
         handlerLink: null,
-        footerText: null,
+        footerText: "Powered by Linkin",
         bgImgUrl: null,
         handlerFontSize: "20",
         handlerFontColor: "#ffffff",
@@ -78,7 +77,7 @@ describe("page data functions", () => {
 
   test("get page data with links data without active links", async () => {
     let pageDatawLinks = await getPageDatawLinkData(false);
-    console.log(pageDatawLinks);
+    //console.info(pageDatawLinks);
     const expectedPageDataWLinks = {
       pageData: {
         id: 1,
@@ -90,7 +89,7 @@ describe("page data functions", () => {
         accentColor: "#bdd7ff",
         handlerText: "LinkIn",
         handlerLink: null,
-        footerText: null,
+        footerText: "Powered by Linkin",
         bgImgUrl: null,
         handlerFontSize: "20",
         handlerFontColor: "#ffffff",
@@ -151,7 +150,7 @@ describe("page data functions", () => {
       accentColor: "#bdd7ff",
       handlerText: "LinkIn",
       handlerLink: null,
-      footerText: null,
+      footerText: 'Powered by Linkin',
       bgImgUrl: null,
       handlerFontSize: "20",
       handlerFontColor: "#ffffff",

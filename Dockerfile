@@ -14,6 +14,8 @@ WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm run build-next 
+RUN npm run prismagenerate
+
 #RUN npm ci && npm run build-next 
 #&& yarn install --production --ignore-scripts --prefer-offline
 
@@ -32,6 +34,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
+#COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 USER nextjs
 
