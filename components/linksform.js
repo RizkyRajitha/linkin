@@ -33,6 +33,7 @@ const LinksForm = ({ pagedataid }) => {
           bgColor: "#2c6bed",
           active: true,
           textColor: "#ffffff",
+          borderRadius: "4px",
         },
       ],
     });

@@ -18,7 +18,7 @@ const FontForm = ({ data, update, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Footer Data</h3>
+            <h3>Footer Details</h3>
             <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
               <input
                 className="form-check-input"

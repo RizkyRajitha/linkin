@@ -66,23 +66,24 @@ export default function Home({
           <div className="links">
             <ul>
               {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
-              {linkData.map((element, id) => {
+              {linkData.map((link, id) => {
                 return (
                   <li key={id}>
                     <a
-                      href={`${element.linkUrl || "#"}`}
+                      href={`${link.linkUrl || "#"}`}
                       className="link"
                       target="_blank"
                       style={{
-                        backgroundColor: element.bgColor || "#2c6bed",
-                        color: element.textColor || "#ffffff",
+                        backgroundColor: link.bgColor || "#2c6bed",
+                        color: link.textColor || "#ffffff",
+                        borderRadius: `${link.borderRadius}px` || "4px",
                       }}
                     >
-                      {element.iconClass && (
-                        <i className={`${element.iconClass} icon`}></i>
+                      {link.iconClass && (
+                        <i className={`${link.iconClass} icon`}></i>
                       )}
                       <div className="d-flex w-100 align-items-center justify-content-center">
-                        {element.displayText}
+                        {link.displayText}
                       </div>
                     </a>
                   </li>

@@ -16,6 +16,8 @@ const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : "http://localhost:3000";
 
+const version = process.env.NEXT_PUBLIC_VERSION || "";
+
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
@@ -112,7 +114,11 @@ function Formwrapper({ pageData, updatedPageData }) {
     <>
       <div className={styles.dashform}>
         <div className="d-flex justify-content-end mb-4">
-          {" "}
+          {version !== "" && (
+            <div className="d-flex justify-content-start flex-grow-1 ms-2 mt-2 ">
+              <span>{`v ${version}`}</span>
+            </div>
+          )}
           <button
             className={`btn btn-outline-primary logout-btn ${
               styles.logoutbtn
