@@ -45,11 +45,20 @@ async function seed() {
         handlerFontSize: "20",
         handlerFontColor: "#ffffff",
         avatarwidth: "50",
+        footerBgColor: "#7ea2ff",
+        footerTextSize: "12",
+        footerText: "Powered by Linkin",
+        footerTextColor: "#ffffff",
+        handlerDescription:
+          "Linkin is a customizable self hosted link tree platform",
+        handlerDescriptionFontColor: "#ffffff",
         linkdata: {
           create: {
             bgColor: "#2C6BED",
+            textColor: "#ffffff",
             displayText: "Welcome to LinkIn",
             iconClass: "fas fa-link",
+            textColor: "#ffffff",
             linkUrl: "https://github.com/RizkyRajitha/linkin",
           },
         },
