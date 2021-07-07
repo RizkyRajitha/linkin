@@ -147,6 +147,16 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
                 {...register("bgColor")}
               />
             </div>{" "}
+            {/* <div className="mb-1 small ">
+              <label className="form-label small">Link accent color </label>
+              <input
+                type="color"
+                className="form-control form-control-sm mb-2 form-control-color"
+                title="Choose Link accent color"
+                placeholder="Choose Link accent color"
+                {...register("accentColor")}
+              />
+            </div>{" "} */}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-outline-danger btn-sm"

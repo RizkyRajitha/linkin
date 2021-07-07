@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { isEmpty } from "../lib/side";
 
 import styles from "../styles/form.module.css";
 
@@ -10,7 +11,8 @@ const GenaralForm = ({ data, update, loading }) => {
     watch,
   } = useForm({ defaultValues: data });
 
-  let imageUrl = watch(["avatarUrl"]);
+  let avatarImageUrl = watch(["avatarUrl"])[0];
+  let bgImageUrl = watch(["bgImgUrl"])[0];
 
   return (
     <>
@@ -61,6 +63,14 @@ const GenaralForm = ({ data, update, loading }) => {
                 </div>
               )}
             </div>{" "}
+            <div className="mb-3">
+              <label className="form-label">Description</label>
+              <textarea
+                className="form-control"
+                rows="3"
+                {...register("handlerDescription")}
+              ></textarea>
+            </div>
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
               <div class="input-group mb-3">
@@ -103,7 +113,49 @@ const GenaralForm = ({ data, update, loading }) => {
               />
 
               <div className="form-text">
-                square images are better. can use image providers Ex - (
+                square images are better. can use image providers Ex -(
+                <a href="https://imgur.com/" target="_blank">
+                  imgur
+                </a>{" "}
+                <a href="https://cloudinary.com/" target="_blank">
+                  cloudinary
+                </a>
+                )
+              </div>
+              {errors.avatarUrl && (
+                <div className="invalid-feedback">
+                  {errors.avatarUrl.message}
+                </div>
+              )}
+              {}
+              {!isEmpty(avatarImageUrl) && (
+                <img
+                  src={avatarImageUrl}
+                  className={styles.previewImage + " img-thumbnail"}
+                  alt="image Loading failed"
+                ></img>
+              )}
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Background Image Url</label>
+              <input
+                type="text"
+                className={
+                  errors.bgImgUrl ? "form-control is-invalid" : "form-control"
+                }
+                placeholder="Enter Background Image Url"
+                {...register("bgImgUrl", {
+                  pattern: {
+                    message: "Should be a valid Image URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
+                })}
+              />
+
+              <div className="form-text">
+                image will cover the whole area. To remove image keep this input
+                field empty . can use image providers Ex - (
                 <a href="https://imgur.com/" target="_blank">
                   imgur
                 </a>{" "}
@@ -112,15 +164,15 @@ const GenaralForm = ({ data, update, loading }) => {
                 </a>{" "}
                 )
               </div>
-              {errors.avatarUrl && (
+              {errors.bgImgUrl && (
                 <div className="invalid-feedback">
-                  {errors.avatarUrl.message}
+                  {errors.bgImgUrl.message}
                 </div>
               )}
 
-              {imageUrl && (
+              {!isEmpty(bgImageUrl) && (
                 <img
-                  src={imageUrl}
+                  src={bgImageUrl}
                   className={styles.previewImage + " img-thumbnail"}
                   alt="image Loading failed"
                 ></img>

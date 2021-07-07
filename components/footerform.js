@@ -49,7 +49,7 @@ const FontForm = ({ data, update, loading }) => {
                 className={
                   errors.footerText ? "form-control is-invalid" : "form-control"
                 }
-                placeholder="Enter Font family"
+                placeholder="Enter Footer text"
                 {...register("footerText")}
               />
             </div>

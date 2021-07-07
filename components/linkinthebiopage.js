@@ -17,6 +17,9 @@ export default function Home({
   footerTextSize,
   footerBgColor,
   footerTextColor,
+  handlerDescriptionFontColor,
+  handlerDescription,
+  bgImgUrl,
   preview = false,
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
@@ -32,12 +35,24 @@ export default function Home({
   footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
 
+  // console.log(
+  //   linkData
+  //     .map((ele, id) => {
+  //       return `
+  //   .link-${id} {
+  //   background-color: ${ele.bgColor};
+  //   color: ${ele.textColor || "#ffffff"};
+  // }`;
+  //     })
+  //     .join()
+  // );
+
   return (
     <div>
       <div className="outterwrap">
         <div className="wrap">
           <div className="profile">
-            <img src={avatarUrl} className="photo" />
+            {!isEmpty(avatarUrl) && <img src={avatarUrl} className="photo" />}
             <a
               className="handlerLink"
               href={`${handlerLink || "#"}`}
@@ -45,6 +60,7 @@ export default function Home({
             >
               <span className="handlerText">{handlerText}</span>
             </a>
+            <p className="handlerDescription">{handlerDescription}</p>
           </div>
           <div className="links">
             <ul>
@@ -97,6 +113,10 @@ export default function Home({
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
+          ${bgImgUrl ? `background-image: url("${bgImgUrl}");` : ""}
+          ${bgImgUrl ? `background-repeat: no-repeat;` : ""}
+          ${bgImgUrl ? `background-position: center;` : ""}
+          ${bgImgUrl ? `background-size: cover;` : ""}
         }
 
         .wrap {
@@ -107,6 +127,12 @@ export default function Home({
 
         .handlerLink {
           text-decoration: dashed;
+        }
+
+        .handlerDescription {
+          text-align: center;
+          text-justify: inter-word;
+          color: ${handlerDescriptionFontColor};
         }
 
         .footer {
