@@ -2,6 +2,6 @@ const pkg = require("./package.json");
 
 module.exports = {
   env: {
-    VERSION: pkg.version,
+    NEXT_PUBLIC_VERSION: pkg.version,
   },
 };
