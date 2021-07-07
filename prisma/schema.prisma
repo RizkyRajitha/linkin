@@ -14,6 +14,7 @@ model linkdata {
   displayText String?   @db.VarChar
   linkUrl     String?   @db.VarChar
   bgColor     String?   @db.VarChar
+  borderRadius     String?   @db.VarChar
   textColor     String?   @db.VarChar
   accentColor String?   @db.VarChar
   active      Boolean?  @default(true)
