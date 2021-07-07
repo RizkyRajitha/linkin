@@ -43,6 +43,7 @@
     "@testing-library/react": "^11.2.7",
     "babel-jest": "^27.0.1",
     "jest": "^27.0.1",
-    "prisma": "^2.25.0"
+    "prisma": "^2.25.0",
+    "request": "^2.88.2"
   }
 }
