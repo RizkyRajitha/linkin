@@ -7,7 +7,7 @@ import {
   // insertPageLinks,
   // updateLink,
   // deleteLink,
-  changePassword,
+  // changePassword,
 } from "../../lib/dbfuncprisma";
 // import { updatePageData } from "../../lib/dbfuncprisma";
 

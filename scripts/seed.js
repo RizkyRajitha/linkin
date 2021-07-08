@@ -58,7 +58,6 @@ async function seed() {
             textColor: "#ffffff",
             displayText: "Welcome to LinkIn",
             iconClass: "fas fa-link",
-            textColor: "#ffffff",
             linkUrl: "https://github.com/RizkyRajitha/linkin",
           },
         },

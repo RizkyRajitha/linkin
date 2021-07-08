@@ -76,7 +76,7 @@ export default function Home({
                       style={{
                         backgroundColor: link.bgColor || "#2c6bed",
                         color: link.textColor || "#ffffff",
-                        borderRadius: `${link.borderRadius}px` || "4px",
+                        borderRadius: `${link.borderRadius || "4"}px`,
                       }}
                     >
                       {link.iconClass && (
