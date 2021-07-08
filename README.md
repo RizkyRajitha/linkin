@@ -65,6 +65,22 @@
   - after a successfull login you will be able to see above admin dashboard.
     <br>
 
+<br>
+<br>
+
+- Deploy in Railway
+  - set environment variables
+    - `DATABASE_URL` - **Postgres** database url **if you are not using** railway postgres plugin 
+    - `HASHSALT` - random secret key
+    - `PORT` - 3000 
+    - `RAILWAY` - Set to `1` to run migrations and seeding in docker build stage . set `0` to avoid  migrations and seeding in docker build stage
+  - after successfully deploying visit `youdomain/admin` to view admin login
+  - use default login credentials
+    - username = `admin`
+    - password = `linkin123`
+  - after a successfull login you will be able to see above admin dashboard.
+    <br>
+
 ## Running with docker
 
 - build the docker image using `docker build . -t linkin` command
@@ -74,7 +90,7 @@
 
 #### Requirements
 
-- Node.js 10.13 or newer
+- Node.js 14.x or newer
 - Postgresql
 
 #### Clone and install dependencies
@@ -87,9 +103,9 @@ npm i
 
 <!-- Setup local environmrnt variables in [config.js](configs/config.js) -->
 
-Setup local environmrnt variables in [.env](./.env)
+Setup local environmrnt variables in `.env`
 
-example `.env.local` file
+example `.env` file
 
 ```
 DATABASE_URL=postgres://linkin:123@localhost:5432/linkin
@@ -98,10 +114,21 @@ HASHSALT=123
 
 #### Database migration
 
+create database relations with prisma migration
+
 **you must have Postgres database setup locally**
 
 ```bash
-node scripts/migrate.js
+npx prisma migrate dev
+```
+
+#### Database Seeding
+
+Addign Initial data to the database to get you started
+
+
+```bash
+npm run seed
 ```
 
 #### Run
@@ -114,11 +141,13 @@ npm run dev
 
 - [Next.Js](https://nextjs.org/) .
 - [Postgres](https://www.postgresql.org/) .
+- [Prisma](https://www.prisma.io/) .
 
 ### Currently supported hosting in
 
 - [Vercel](https://vercel.com/) .
 - [Heroku](https://heroku.com/) .
+- [railway](https://railway.app/) .
 
 ### Community
 
