@@ -81,7 +81,7 @@ const LinksForm = ({ pagedataid }) => {
         }`,
         {
           position: "bottom-left",
-          autoClose: 2000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -147,7 +147,7 @@ const LinksForm = ({ pagedataid }) => {
       dispatch({ type: "deleteLink", id: id });
       toast.success(`successfully deleted link`, {
         position: "bottom-left",
-        autoClose: 2000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,

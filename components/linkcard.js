@@ -114,18 +114,28 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
             </div>
             <div className="mb-1 small">
               {/* <label className="form-label small">Icon Class</label> */}
-              <input
-                type="text"
-                className={
-                  errors.iconClass
-                    ? "form-control form-control-sm mb-2  is-invalid"
-                    : "form-control form-control-sm mb-2 "
-                }
-                placeholder="Enter Icon Class"
-                {...register(`iconClass`)}
-              />
-              <div className="form-text">Use font awesome for icon classes</div>
+              <div className="form-text">
+                Use{" "}
+                <a
+                  className="text-decoration-none"
+                  href="https://fontawesome.com/v5.15/icons?d=gallery&p=2"
+                  target="_blank"
+                >
+                  fontawesome
+                </a>{" "}
+                for icon classes
+              </div>
             </div>
+            <input
+              type="text"
+              className={
+                errors.iconClass
+                  ? "form-control form-control-sm mb-2  is-invalid"
+                  : "form-control form-control-sm mb-2 "
+              }
+              placeholder="Enter Icon Class"
+              {...register(`iconClass`)}
+            />
             <div className="mb-3 ">
               {/* <label className="form-label">Border Radius</label> */}
               <div className="input-group mb-3">
