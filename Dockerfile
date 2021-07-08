@@ -6,18 +6,7 @@ ARG RAILWAY=0
 FROM node:alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 
-# ARG DATABASE_URL
-# ARG HASHSALT
-# ARG RAILWAY=0
-
-# ENV DBURL=$DATABASE_URL
-# ENV RAILWAY=$RAILWAY
-# ENV HASHSALT=$HASHSALT
 ENV NEXT_TELEMETRY_DISABLED 1
-
-# RUN echo ${DBURL}
-# RUN echo ${HASHSALT}
-# RUN echo ${RAILWAY}
 
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -30,26 +19,20 @@ RUN npm ci
 FROM node:alpine AS builder
 
 ARG DATABASE_URL
-# ARG HASHSALT
 ARG RAILWAY=0
 
 ENV DBURL=$DATABASE_URL
 ENV RAILWAY=$RAILWAY
-# ENV HASHSALT=$HASHSALT
 
 WORKDIR /app
 COPY . .
 COPY --from=deps /app/node_modules ./node_modules
 RUN npm run prismagenerate
-RUN npm run build-next 
-
-# RUN echo ${DBURL}
-# RUN echo ${HASHSALT}
-# RUN echo ${RAILWAY}
 
 RUN chmod +x railwaymigrate.sh
 RUN ./railwaymigrate.sh ${RAILWAY}
-#RUN if [[ -z "$arg" ]] ; then echo Argument not provided ; else echo Argument is $arg ; fi
+
+RUN npm run build-next 
 
 #RUN npm ci && npm run build-next 
 #&& yarn install --production --ignore-scripts --prefer-offline
@@ -59,10 +42,8 @@ FROM node:alpine AS runner
 
 ARG DATABASE_URL
 ARG HASHSALT
-# ARG RAILWAY=0
 
 ENV DBURL=$DATABASE_URL
-# ENV RAILWAY=$RAILWAY
 ENV HASHSALT=$HASHSALT
 
 WORKDIR /app
