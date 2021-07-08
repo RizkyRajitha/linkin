@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "private": true,
   "license": "MIT",
-  "description": "Linkin is a customizable self hosted link tree platform",
+  "description": "Linkin is a customizable self hosted link tree application",
   "logo": "https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png",
   "repository": {
     "type": "git",
@@ -12,13 +12,16 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "migrate": "node scripts/migrate.js",
-    "build": "npm-run-all migrate build-next",
+    "seed": "node scripts/seed.js",
+    "build": "npm-run-all prismamigrateprod prismagenerate seed build-next",
+    "prismagenerate": "prisma generate",
+    "prismamigrateprod": "prisma migrate deploy",
     "herokustart": "next start -p $PORT",
     "build-next": "next build",
-    "test": "jest --coverage"
+    "test": "jest --coverage ./__tests__/"
   },
   "dependencies": {
+    "@prisma/client": "^2.25.0",
     "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
@@ -39,6 +42,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "babel-jest": "^27.0.1",
-    "jest": "^27.0.1"
+    "jest": "^27.0.1",
+    "prisma": "^2.25.0"
   }
 }

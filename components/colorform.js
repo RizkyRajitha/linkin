@@ -8,6 +8,9 @@ const ColorForm = ({ data, update, loading }) => {
       bgColor: data.bgColor,
       accentColor: data.accentColor,
       handlerFontColor: data.handlerFontColor,
+      footerBgColor: data.footerBgColor,
+      footerTextColor: data.footerTextColor,
+      handlerDescriptionFontColor: data.handlerDescriptionFontColor,
     },
   });
 
@@ -19,34 +22,81 @@ const ColorForm = ({ data, update, loading }) => {
         >
           <form onSubmit={(e) => e.preventDefault()}>
             <h3>Colors</h3>
-            <div className="mb-3 ">
-              <label className="form-label">Background color</label>
+            <div className="row">
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Background color</label>
 
-              <input
-                type="color"
-                className="form-control form-control-color"
-                title="Choose Background color"
-                {...register("bgColor")}
-              />
-            </div>{" "}
-            <div className="mb-3 ">
-              <label className="form-label">Accent color </label>
-              <input
-                type="color"
-                className="form-control form-control-color"
-                title="Choose Accent color"
-                {...register("accentColor")}
-              />
-            </div>{" "}
-            <div className="mb-3 ">
-              <label className="form-label">Handler Font color </label>
-              <input
-                type="color"
-                className="form-control form-control-color"
-                title="Choose handler Font color"
-                {...register("handlerFontColor")}
-              />
-            </div>{" "}
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose Background color"
+                    {...register("bgColor")}
+                  />
+                </div>{" "}
+              </div>
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Accent color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose Accent color"
+                    {...register("accentColor")}
+                  />
+                </div>{" "}
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Handler Font color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose handler Font color"
+                    {...register("handlerFontColor")}
+                  />
+                </div>{" "}
+              </div>
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Description Font color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose Description Font color"
+                    {...register("handlerDescriptionFontColor")}
+                  />
+                </div>{" "}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Footer Font color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose handler Font color"
+                    {...register("footerTextColor")}
+                  />
+                </div>{" "}
+              </div>
+              <div className="col">
+                <div className="mb-3 ">
+                  <label className="form-label">Footer Background color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-color"
+                    title="Choose handler Font color"
+                    {...register("footerBgColor")}
+                  />
+                </div>{" "}
+              </div>
+            </div>
+
             <button
               type="submit"
               className="btn btn-primary btn-block"

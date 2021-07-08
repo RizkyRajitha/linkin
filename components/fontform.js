@@ -16,26 +16,29 @@ const FontForm = ({ data, update, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Font Data</h3>
+            <h3>Fonts</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler Font Size</label>
-              <input
-                type="number"
-                className={
-                  errors.handlerFontSize
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                placeholder="Enter handler font size"
-                {...register("handlerFontSize", {
-                  min: { message: "Font Size must be above 1px", value: 1 },
-                })}
-              />
-              {errors.handlerFontSize && (
-                <div className="invalid-feedback">
-                  {errors.handlerFontSize.message}
-                </div>
-              )}
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.handlerFontSize
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter handler font size"
+                  {...register("handlerFontSize", {
+                    min: { message: "Font Size must be above 1px", value: 1 },
+                  })}
+                />
+                <span className="input-group-text">px</span>
+                {errors.handlerFontSize && (
+                  <div className="invalid-feedback">
+                    {errors.handlerFontSize.message}
+                  </div>
+                )}
+              </div>
             </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Font Url</label>

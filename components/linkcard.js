@@ -32,6 +32,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
 
   watch((data, { type }) => {
     // console.log(type);
+    //console.log(data);
     // event fired when reset the form with updated data
     if (type == undefined) {
       return;
@@ -82,7 +83,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
                 {...register(`displayText`, {
                   required: true,
                 })}
-              />{" "}
+              />
               {errors.displayText && (
                 <div className="invalid-feedback">
                   Link Display Text is required
@@ -106,35 +107,98 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
                       /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
                   },
                 })}
-              />{" "}
+              />
               {errors.linkUrl && (
                 <div className="invalid-feedback">{errors.linkUrl.message}</div>
               )}
             </div>
             <div className="mb-1 small">
               {/* <label className="form-label small">Icon Class</label> */}
-              <input
-                type="text"
-                className={
-                  errors.handlerText
-                    ? "form-control form-control-sm mb-2  is-invalid"
-                    : "form-control form-control-sm mb-2 "
-                }
-                placeholder="Enter Icon Class"
-                {...register(`iconClass`)}
-              />{" "}
-              <div className="form-text">Use font awesome for icon classes</div>
+              <div className="form-text">
+                Use{" "}
+                <a
+                  className="text-decoration-none"
+                  href="https://fontawesome.com/v5.15/icons?d=gallery&p=2"
+                  target="_blank"
+                >
+                  fontawesome
+                </a>{" "}
+                for icon classes
+              </div>
             </div>
-            <div className="mb-1 small ">
-              {/* <label className="form-label small">Handler Font color </label> */}
+            <input
+              type="text"
+              className={
+                errors.iconClass
+                  ? "form-control form-control-sm mb-2  is-invalid"
+                  : "form-control form-control-sm mb-2 "
+              }
+              placeholder="Enter Icon Class"
+              {...register(`iconClass`)}
+            />
+            <div className="mb-3 ">
+              {/* <label className="form-label">Border Radius</label> */}
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.borderRadius
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Border Radius"
+                  {...register("borderRadius", {
+                    min: { message: "Font Size must be above 0px", value: 0 },
+                  })}
+                />
+                <span className="input-group-text">px</span>
+                {errors.borderRadius && (
+                  <div className="invalid-feedback">
+                    {errors.borderRadius.message}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <div className="mb-1 small ">
+                  <label className="form-label small ">
+                    Link Display Text Font color
+                  </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-sm mb-2 form-control-color"
+                    title="Choose Link text color"
+                    placeholder="Choose Link text color"
+                    {...register("textColor")}
+                  />
+                </div>
+              </div>
+              <div className="col">
+                <div className="mb-1 small ">
+                  <label className="form-label small">
+                    Link background color
+                  </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-sm mb-2 form-control-color"
+                    title="Choose Link background color"
+                    placeholder="Choose Link background color"
+                    {...register("bgColor")}
+                  />
+                </div>
+              </div>
+            </div>
+            {/* <div className="mb-1 small ">
+              <label className="form-label small">Link accent color </label>
               <input
                 type="color"
                 className="form-control form-control-sm mb-2 form-control-color"
-                title="Choose Link background color"
-                placeholder="Choose Link background color"
-                {...register("bgColor")}
+                title="Choose Link accent color"
+                placeholder="Choose Link accent color"
+                {...register("accentColor")}
               />
-            </div>{" "}
+            </div> */}
             <div className="d-grid gap-2 d-md-flex justify-content-md-end">
               <button
                 className="btn btn-outline-danger btn-sm"
@@ -150,7 +214,7 @@ export default function LinkCard({ item, updateLink, deleteLink, loading }) {
             </div>
             <button hidden={true} ref={refSubmitButtom} type={"submit"} />
           </form>
-        </div>{" "}
+        </div>
       </div>
     </>
   );
