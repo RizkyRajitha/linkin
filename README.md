@@ -86,6 +86,9 @@
 - build the docker image using `docker build . -t linkin` command
 - Run the docker image `docker run -d -p 3000:3000 -e DATABASE_URL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DATABASE_URL` and `HASHSALT` environment varaibles.
 
+### Database connection
+ - if the postgres database is behind pgbounce use `pgbouncer=true` parameter in `DATABASE_URL` ex - `postgres://xx:xxx@xxxx:5432/xxxx?pgbouncer=true`
+
 ## Developing locally
 
 #### Requirements
