@@ -14,8 +14,8 @@
     "postgres"
   ],
   "env": {
-    "KEY": {
-      "description": "Random secret key",
+    "HASHSALT": {
+      "description": "Random secret HASHSALT for JWT and password encryption",
       "value": ""
     },
     "DBURL": {

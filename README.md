@@ -18,7 +18,7 @@
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,KEY,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,HASHSALT,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%20platform%20%2C%20And%20we%20are%20ready%20to%20roll)
 
 ## Deploy with Heroku
 
@@ -35,7 +35,7 @@
 - Deploy in Vercel
   - set environment variables
     - `DBURL` - **Postgres** database url
-    - `KEY` - random secret key
+    - `HASHSALT` - random secret key
     - `NODE_ENV` - set NODE_ENV to `production`
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
@@ -49,7 +49,7 @@
 - Deploy in Heroku
   - set environment variables
     - `DBURL` - **Postgres** database url
-    - `KEY` - random secret key
+    - `HASHSALT` - random secret key
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
@@ -60,7 +60,7 @@
 ## Running with docker
 
 - build the docker image using `docker build . -t linkin` command
-- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e KEY='123' linkin`. make sure you specified `DBURL` and `KEY` environment varaibles.
+- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DBURL` and `HASHSALT` environment varaibles.
 
 ## Developing locally
 
@@ -85,7 +85,7 @@ example `.env.local` file
 
 ```
 DBURL=postgres://linkin:123@localhost:5432/linkin
-KEY=123
+HASHSALT=123
 ```
 
 #### Database migration
