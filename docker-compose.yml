@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DBURL: "postgres://linkin:linkin123@db:5432/linkin"
+      DATABASE_URL: "postgres://linkin:linkin123@db:5432/linkin"
       HASHSALT: "123" # random secret key
       NODE_ENV: "production"
     depends_on:
@@ -19,7 +19,7 @@ services:
       sh -c "npm run prismamigrateprod
       && npm run seed"
     environment:
-      DBURL: "postgres://linkin:linkin123@db:5432/linkin"
+      DATABASE_URL: "postgres://linkin:linkin123@db:5432/linkin"
       HASHSALT: "123" # random secret key
       NODE_ENV: "production"
     depends_on:

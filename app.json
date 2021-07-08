@@ -18,7 +18,7 @@
       "description": "Random secret HASHSALT for JWT and password encryption",
       "value": ""
     },
-    "DBURL": {
+    "DATABASE_URL": {
       "description": "Postgres database url",
       "value": ""
     }

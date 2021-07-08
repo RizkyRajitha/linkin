@@ -8,11 +8,11 @@
 
 <br>
 
-[Visit Demo](http://linkindemo.vercel.app/) 
-<br> 
-[Demo Admin](http://linkindemo.vercel.app/admin) 
+[Visit Demo](http://linkindemo.vercel.app/)
+<br>
+[Demo Admin](http://linkindemo.vercel.app/admin)
 `http://linkindemo.vercel.app/admin`
-<br> 
+<br>
 
 - Demo username = `admin`
 - Demo password = `linkin123`
@@ -22,7 +22,7 @@
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DBURL,HASHSALT,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%application%20%2C%20And%20we%20are%20ready%20to%20roll)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DATABASE_URL,HASHSALT,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%application%20%2C%20And%20we%20are%20ready%20to%20roll)
 
 ## Deploy with Heroku
 
@@ -31,8 +31,6 @@
 ## Deploy with Railway
 
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin%2F&plugins=postgresql&envs=RAILWAY%2CHASHSALT%2CPORT&RAILWAYDefault=1&HASHSALTDefault=124&PORTDefault=3000)
-
-
 
 ![Screenshot_2021-05-22 LinkIn's Link tree Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
@@ -44,7 +42,7 @@
 
 - Deploy in Vercel
   - set environment variables
-    - `DBURL` - **Postgres** database url
+    - `DATABASE_URL` - **Postgres** database url
     - `HASHSALT` - random secret key
     - `NODE_ENV` - set NODE_ENV to `production`
   - after successfully deploying visit `youdomain/admin` to view admin login
@@ -58,7 +56,7 @@
 
 - Deploy in Heroku
   - set environment variables
-    - `DBURL` - **Postgres** database url
+    - `DATABASE_URL` - **Postgres** database url
     - `HASHSALT` - random secret key
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
@@ -70,7 +68,7 @@
 ## Running with docker
 
 - build the docker image using `docker build . -t linkin` command
-- Run the docker image `docker run -d -p 3000:3000 -e DBURL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DBURL` and `HASHSALT` environment varaibles.
+- Run the docker image `docker run -d -p 3000:3000 -e DATABASE_URL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DATABASE_URL` and `HASHSALT` environment varaibles.
 
 ## Developing locally
 
@@ -94,7 +92,7 @@ Setup local environmrnt variables in [.env](./.env)
 example `.env.local` file
 
 ```
-DBURL=postgres://linkin:123@localhost:5432/linkin
+DATABASE_URL=postgres://linkin:123@localhost:5432/linkin
 HASHSALT=123
 ```
 

@@ -59,25 +59,25 @@ jobs:
         run: npm run prismamigrateprod
         env:
           NODE_ENV: production
-          DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
       - name: Seed database
         run: npm run seed
         env:
           NODE_ENV: production
-          DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
       # - name: migrate database
       #   run: node scripts/migrate.js
       #   env:
       #     NODE_ENV: production
-      #     DBURL: "postgres://postgres:postgres@localhost:5432/postgres"
+      #     DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
       - name: Run the tests
         run: npm run test
         env:
           NODE_ENV: production
-          DBURL: postgres://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
