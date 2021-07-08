@@ -30,7 +30,7 @@
 
 ## Deploy with Railway
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin%2F&plugins=postgresql&envs=RAILWAY%2CHASHSALT%2CPORT&RAILWAYDefault=1&HASHSALTDefault=124&PORTDefault=3000)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&plugins=postgresql&envs=HASHSALT%2CPORT%2CRAILWAY&HASHSALTDesc=Random+secret+HASHSALT+for+JWT+and+password+encryption&PORTDesc=Exposed+Port+in+Dockerfile&RAILWAYDesc=migrate+and+seed+the+database+in+railway+.+done+in+docker+image+build+time&PORTDefault=3000&RAILWAYDefault=1)
 
 ![Screenshot_2021-05-22 LinkIn's Link tree Page](https://user-images.githubusercontent.com/38534289/119221911-4ca94f80-bb0f-11eb-94ff-31f1c3a51d06.png)
 
@@ -70,10 +70,10 @@
 
 - Deploy in Railway
   - set environment variables
-    - `DATABASE_URL` - **Postgres** database url **if you are not using** railway postgres plugin 
     - `HASHSALT` - random secret key
     - `PORT` - 3000 
     - `RAILWAY` - Set to `1` to run migrations and seeding in docker build stage . set `0` to avoid  migrations and seeding in docker build stage
+    - `DATABASE_URL` - **Postgres** database url . use this variable **if you are not using** railway postgres plugin 
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
