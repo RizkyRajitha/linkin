@@ -19,15 +19,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build docker container
-        run: | 
-        docker build . -t ghcr.io/$GITHUB_ACTOR/linkin:latest -t ghcr.io/$GITHUB_ACTOR/linkin:${echo $GITHUB_SHA | head -c7}
+        run: docker build . -t ghcr.io/$GITHUB_ACTOR/linkin:latest -t ghcr.io/$GITHUB_ACTOR/linkin:${echo $GITHUB_SHA | head -c7}
 
       - name: Login to docker
-        run:  echo $GITHUB_TOKEN | docker login ghcr.io -u ${{github.actor}} --password-stdin
+        run: echo $GITHUB_TOKEN | docker login ghcr.io -u ${{github.actor}} --password-stdin
 
       - name: Login to docker
-        run:  docker push ghcr.io/$GITHUB_ACTOR/linkin:latest
-          
+        run: docker push ghcr.io/$GITHUB_ACTOR/linkin:latest
+
       # - name: Cache node modules
       #   uses: actions/cache@v2
       #   env:
