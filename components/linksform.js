@@ -171,8 +171,8 @@ const LinksForm = ({ pagedataid }) => {
     setloading(false);
   };
 
-  const dragEndHnadler = (data) => {
-    console.log(data);
+  const dragEndHnadler = async (data) => {
+    // console.log(data);
     // console.log(characters);
 
     if (!data.destination) return;
@@ -186,18 +186,34 @@ const LinksForm = ({ pagedataid }) => {
       return item;
     });
     // let sorted = updateditems.sort()
-    console.log(updateditems);
-    console.log(items);
+    // console.log(updateditems);
+    // console.log(items);
 
     dispatch({ type: "updateLink", linkdata: updateditems });
 
     // updateCharacters(updateditems);
 
-    console.log(
-      links.map((item) => {
-        return { name: item.displayText, id: item.orderIndex };
-      })
-    );
+    let orderData = updateditems.map((item) => {
+      return {
+        id: item.id,
+        name: item.displayText,
+        orderIndex: item.orderIndex,
+      };
+    });
+
+    // console.log(orderData);
+
+    try {
+      let res = await fetch(`${endpoint}/api/reorderlinks`, {
+        method: "POST",
+        body: JSON.stringify({ orderData }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -228,7 +244,7 @@ const LinksForm = ({ pagedataid }) => {
           <DragDropContext onDragEnd={dragEndHnadler}>
             <Droppable droppableId="links">
               {(provided) => (
-                <ul
+                <div
                   className="links"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
@@ -248,7 +264,7 @@ const LinksForm = ({ pagedataid }) => {
                       );
                     })}
                   {provided.placeholder}
-                </ul>
+                </div>
               )}
             </Droppable>
           </DragDropContext>
