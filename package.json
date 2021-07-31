@@ -18,7 +18,7 @@
     "prismamigrateprod": "prisma migrate deploy",
     "herokustart": "next start -p $PORT",
     "build-next": "next build",
-    "test": "jest --coverage ./__tests__/"
+    "test": "jest --coverage -i ./__tests__/"
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",

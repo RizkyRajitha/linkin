@@ -1,5 +1,5 @@
 const path = require("path");
-const Prisma = require("../db/dbconprisma");
+const { default: Prisma } = require("../db/dbconprisma");
 
 require("dotenv").config({
   path: path.join(__dirname, "../", ".env"),
@@ -10,21 +10,37 @@ const {
   insertPageLinks,
   updateLink,
   deleteLink,
+  reorderLinks,
 } = require("../lib/dbfuncprisma");
 
 describe("Test Link data", () => {
+  beforeAll(async () => {
+    await Prisma.linkdata.deleteMany();
+    await Prisma.linkdata.create({
+      data: {
+        id: 1,
+        pagedataid: 1,
+        iconClass: "fas fa-link",
+        displayText: "Welcome to LinkIn",
+        linkUrl: "https://github.com/RizkyRajitha/linkin",
+        bgColor: "#2C6BED",
+        active: true,
+      },
+    });
+  });
+
   beforeEach(() => {
     jest.spyOn(console, "log").mockImplementation(() => {});
   });
+
   afterAll(async () => {
-    await Prisma.default.$disconnect();
+    await Prisma.$disconnect();
   });
 
   test("get link data", async () => {
     let { linkData } = await getLinkData();
-    //console.info(linkData);
+
     const expectedLink = {
-      id: 1,
       pagedataid: 1,
       iconClass: "fas fa-link",
       displayText: "Welcome to LinkIn",
@@ -40,9 +56,8 @@ describe("Test Link data", () => {
 
   test("get link data without active", async () => {
     let { linkData } = await getLinkData(false);
-    //console.log(linkData);
+
     const expectedLink = {
-      id: 1,
       pagedataid: 1,
       iconClass: "fas fa-link",
       displayText: "Welcome to LinkIn",
@@ -59,7 +74,6 @@ describe("Test Link data", () => {
   test("get link data without active", async () => {
     let { linkData } = await getLinkData(false);
     const expectedLink = {
-      id: 1,
       pagedataid: 1,
       iconClass: "fas fa-link",
       displayText: "Welcome to LinkIn",
@@ -87,8 +101,6 @@ describe("Test Link data", () => {
     await insertPageLinks(linkTobeinserted);
     let updatedLinkData = await getLinkData();
 
-    //console.info(updatedLinkData);
-
     expect(updatedLinkData.linkData).toMatchObject([
       ...beforeUpdateLinkData.linkData,
       linkTobeinserted,
@@ -96,10 +108,10 @@ describe("Test Link data", () => {
   });
 
   test("delete link data ", async () => {
-    let beforeUpdateLinkData = await getLinkData();
+    let beforeUpdateLinkData = await (await getLinkData()).linkData;
     //console.info(beforeUpdateLinkData.linkData[1].id);
 
-    let delelement = beforeUpdateLinkData.linkData.filter((ele) => {
+    let delelement = beforeUpdateLinkData.filter((ele) => {
       return ele.id !== 1;
     });
 
@@ -108,9 +120,11 @@ describe("Test Link data", () => {
 
     //console.info(updatedLinkData);
 
-    expect(updatedLinkData.linkData).toMatchObject([
-      beforeUpdateLinkData.linkData[0],
-    ]);
+    expectedLink = beforeUpdateLinkData.filter((ele) => {
+      return ele.id === 1;
+    });
+
+    expect(updatedLinkData.linkData[0]).toMatchObject(expectedLink[0]);
   });
 
   test("update link data ", async () => {
@@ -136,25 +150,42 @@ describe("Test Link data", () => {
     // });
   });
 
-  test("revert updated link data ", async () => {
-    const linkTobeUpdated = {
-      id: 1,
+  test("reorder links", async () => {
+    await insertPageLinks({
       pagedataid: 1,
       iconClass: "fas fa-link",
-      displayText: "Welcome to LinkIn",
+      displayText: "link2",
       linkUrl: "https://github.com/RizkyRajitha/linkin",
       bgColor: "#2C6BED",
       active: true,
-    };
+    });
 
-    await updateLink(linkTobeUpdated);
-    let updatedLinkData = await getLinkData();
+    let orderList = await (
+      await getLinkData()
+    ).linkData.map((item) => {
+      return { id: item.id, orderIndex: item.orderIndex };
+    });
 
-    //console.info(updatedLinkData);
+    // console.info(orderList);
 
-    expect(updatedLinkData.linkData[0]).toMatchObject(linkTobeUpdated);
-    // linkData.forEach((element) => {
-    //   expect(element).toMatchObject(expectedLink);
-    // });
+    let reOrderList = orderList.map((item, index) => {
+      return { id: item.id, orderIndex: index };
+    });
+
+    await reorderLinks(reOrderList);
+
+    let updatedOrderList = await (
+      await getLinkData()
+    ).linkData.map((item) => {
+      return { orderIndex: item.orderIndex };
+    });
+
+    // expect(updatedLinkData.linkData[0]).toMatchObject(linkTobeUpdated);
+
+    let expectedOrderList = [{ orderIndex: 0 }, { orderIndex: 1 }];
+
+    expectedOrderList.forEach((element, index) => {
+      expect(element).toMatchObject(updatedOrderList[index]);
+    });
   });
 });
