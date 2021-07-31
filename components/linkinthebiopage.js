@@ -207,6 +207,10 @@ export default function Home({
           // padding: 1rem;
           font-size: 1.7rem;
         }
+        @media (max-width: 768px) {
+          .link {
+            padding: 1.2rem;
+          }
       `}</style>
     </div>
   );
