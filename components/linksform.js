@@ -1,11 +1,12 @@
-import styles from "../styles/form.module.css";
-import LinkCard from "./linkcard";
-import { useStateValue } from "./context/state";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import TEstt from "./test";
+import Swal from "sweetalert2";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
+import { useStateValue } from "./context/state";
+import LinkCard from "./linkcard";
+
+import styles from "../styles/form.module.css";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
@@ -13,10 +14,12 @@ const endpoint =
 const LinksForm = ({ pagedataid }) => {
   const [{ links }, dispatch] = useStateValue();
   const [loading, setloading] = useState(false);
+  const [isNewLinkInList, setisNewLinkInList] = useState(false);
 
   const addNewLink = () => {
     // console.log(links.length);
     // console.log(links[links.length - 1]);
+    setisNewLinkInList(true);
 
     let newLink = links[links.length - 1];
 
@@ -50,6 +53,11 @@ const LinksForm = ({ pagedataid }) => {
     if (linkdata.hasOwnProperty("id")) {
       operation = `updatepagelinks`;
     }
+
+    if (operation === "insertpagelinks") {
+      setisNewLinkInList(false);
+    }
+
     // console.log(operation);
     try {
       let res = await fetch(`${endpoint}/api/${operation}`, {
@@ -61,9 +69,7 @@ const LinksForm = ({ pagedataid }) => {
       // console.log(res);
 
       if (!res.success) {
-        toast.error(`Error ${res.message}`, {
-          autoClose: 5000,
-        });
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
         setloading(false);
         return;
       }
@@ -75,15 +81,11 @@ const LinksForm = ({ pagedataid }) => {
             ? "Added new page link "
             : "Updated page link " + " successfully"
         }`,
-        {
-          autoClose: 1000,
-        }
+        { autoClose: 1000 }
       );
     } catch (error) {
       console.log(error);
-      toast.error(`Error : ${error.message}`, {
-        autoClose: 5000,
-      });
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
     setloading(false);
   };
@@ -116,30 +118,26 @@ const LinksForm = ({ pagedataid }) => {
       console.log(res);
 
       if (!res.success) {
-        toast.error(`Error ${res.message}`, {
-          autoClose: 5000,
-        });
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
         setloading(false);
         return;
       }
       dispatch({ type: "deleteLink", id: id });
-      toast.success(`successfully deleted link`, {
-        autoClose: 1000,
-      });
+      toast.success(`Successfully deleted link`, { autoClose: 1000 });
     } catch (error) {
       console.log(error);
-      toast.error(`Error : ${error.message}`, {
-        autoClose: 5000,
-      });
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
     setloading(false);
   };
 
   const dragEndHnadler = async (data) => {
     // console.log(data);
-    // console.log(characters);
+    if (!data.destination) {
+      return;
+    }
 
-    if (!data.destination) return;
+    setloading(true);
 
     const items = Array.from(links);
     const [reorderedItem] = items.splice(data.source.index, 1);
@@ -149,13 +147,8 @@ const LinksForm = ({ pagedataid }) => {
       item.orderIndex = index;
       return item;
     });
-    // let sorted = updateditems.sort()
-    // console.log(updateditems);
-    // console.log(items);
 
     dispatch({ type: "updateLink", linkdata: updateditems });
-
-    // updateCharacters(updateditems);
 
     let orderData = updateditems.map((item) => {
       return {
@@ -174,9 +167,17 @@ const LinksForm = ({ pagedataid }) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      // console.log(res);
+      if (!res.success) {
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
+        return;
+      }
+
+      toast.success(`Successfully reordered links`, { autoClose: 1000 });
+      setloading(false);
     } catch (error) {
       console.log(error);
+      setloading(false);
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
   };
 
@@ -206,7 +207,7 @@ const LinksForm = ({ pagedataid }) => {
             Add new link
           </button>
           <DragDropContext onDragEnd={dragEndHnadler}>
-            <Droppable droppableId="links">
+            <Droppable droppableId="links" isDropDisabled={isNewLinkInList}>
               {(provided) => (
                 <div
                   className="links"
@@ -215,7 +216,6 @@ const LinksForm = ({ pagedataid }) => {
                 >
                   {links.length &&
                     links.map((item, index) => {
-                      console.log(index);
                       return (
                         <LinkCard
                           key={index}
@@ -224,6 +224,7 @@ const LinksForm = ({ pagedataid }) => {
                           loading={loading}
                           item={item}
                           index={index}
+                          isDragDisabled={isNewLinkInList}
                         />
                       );
                     })}
@@ -232,81 +233,6 @@ const LinksForm = ({ pagedataid }) => {
               )}
             </Droppable>
           </DragDropContext>
-          {/* <TEstt /> */}
-          {/* <DragDropContext onDragEnd={dragEndHnadler}>
-            <Droppable droppableId="list">
-              {(provided) => (
-                <div ref={provided.innerRef} {...provided.droppableProps}>
-                  {[1, 2, 3].map((item, index) => {
-                    return (
-                      <Draggable draggableId={String(item)} index={index}>
-                        {(provided) => {
-                          return <li ref={provided.innerRef}>{item}</li>;
-                        }}
-                      </Draggable>
-                    );
-                  })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext> */}
-          {/* <DragDropContext onDragEnd={dragEndHnadler}>
-            <Droppable droppableId="links">
-              {(provided) => {
-                console.log(provided);
-                <ul
-                  className="links"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {[1, 2, 3].map((item, index) => {
-                    return (
-                      <Draggable key={index} draggableId={index} index={index}>
-                        {(provided1) => {
-                          <li ref={provided1.ref}>{item}</li>;
-                        }}
-                      </Draggable>
-                    );
-                  })}
-                </ul>;
-              }}{" "}
-            </Droppable>
-          </DragDropContext> */}
-          {/* {(provided) => {
-                {
-                  console.log(provided);
-                }
-                <ul
-                  className="links"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {links &&
-                    links.map((item, index) => {
-                      return (
-                        <Draggable
-                          key={index}
-                          draggableId={index}
-                          index={index}
-                        >
-                          {(provided1) => {
-                            <LinkCard
-                              // {...provided1.draggableProps}
-                              // {...provided1.dragHandleProps}
-                              // ref={provided1.innerRef}
-                              key={index}
-                              item={item}
-                              deleteLink={deleteLink}
-                              updateLink={saveLinkData}
-                              loading={loading}
-                            />;
-                          }}
-                        </Draggable>
-                      );
-                    })}
-                </ul>;
-              }} */}
         </div>
         <ToastContainer
           position="bottom-left"

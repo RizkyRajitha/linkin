@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Draggable } from "react-beautiful-dnd";
+import debounce from "lodash.debounce";
 
 import styles from "../styles/utils.module.css";
-
-import debounce from "lodash.debounce";
-import { Draggable } from "react-beautiful-dnd";
 
 export default function LinkCard({
   item,
@@ -12,6 +11,7 @@ export default function LinkCard({
   deleteLink,
   loading,
   index,
+  isDragDisabled,
 }) {
   const refSubmitButtom = useRef(null);
   const [cardInfo, setCardInfo] = useState(item);
@@ -37,11 +37,6 @@ export default function LinkCard({
       reset(item);
       setCardInfo(item);
     }
-    // if (cardInfo.orderIndex !== item.orderIndex) {
-    //   console.log("reset after reorder");
-    //   reset(item);
-    //   setCardInfo(item);
-    // }
   }, [item]);
 
   watch((data, { type }) => {
@@ -71,7 +66,12 @@ export default function LinkCard({
 
   return (
     <>
-      <Draggable key={item.id} draggableId={String(item.id)} index={index}>
+      <Draggable
+        isDragDisabled={isDragDisabled}
+        key={item.id}
+        draggableId={String(item.id)}
+        index={index}
+      >
         {(provided) => (
           <div
             className="card mt-3"
@@ -79,25 +79,22 @@ export default function LinkCard({
             {...provided.draggableProps}
           >
             <div className="d-flex flex-row">
-              <div className={"d-flex flex-row"}>
-                <div
-                  {...provided.dragHandleProps}
-                  className={`${styles.boxshadowmenu} ms-2 mt-2 `}
-                ></div>
-              </div>
               <div className="card-body py-2 px-4">
-                {/* {console.log(errors)} */}
-                {/* {JSON.stringify(item)} */}
                 <form onSubmit={handleSubmit(submitAction)}>
-                  <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
-                    <input
-                      className="form-check-input"
-                      type="checkbox"
-                      {...register(`active`)}
-                    />
+                  <div className="d-flex flex-row justify-content-between">
+                    <div
+                      {...provided.dragHandleProps}
+                      className={`${styles.boxshadowmenu} ms-1 `}
+                    ></div>{" "}
+                    <div className="form-check form-switch d-grid gap-2 d-md-flex justify-content-md-end">
+                      <input
+                        className="form-check-input"
+                        type="checkbox"
+                        {...register(`active`)}
+                      />
+                    </div>
                   </div>
                   <div className="mb-1 small">
-                    {/* <label className="form-label small ">Link Display Text</label> */}
                     <input
                       type="text"
                       className={
@@ -106,7 +103,6 @@ export default function LinkCard({
                           : "form-control form-control-sm mb-2"
                       }
                       placeholder="Enter Link Display Text"
-                      // disabled={loading}
                       {...register(`displayText`, {
                         required: true,
                       })}
@@ -118,7 +114,6 @@ export default function LinkCard({
                     )}
                   </div>
                   <div className="mb-1 small">
-                    {/* <label className="form-label small">Enter Link Url</label> */}
                     <input
                       type="text"
                       className={
@@ -142,7 +137,6 @@ export default function LinkCard({
                     )}
                   </div>
                   <div className="mb-1 small">
-                    {/* <label className="form-label small">Icon Class</label> */}
                     <div className="form-text">
                       Use{" "}
                       <a
@@ -166,7 +160,6 @@ export default function LinkCard({
                     {...register(`iconClass`)}
                   />
                   <div className="mb-3 ">
-                    {/* <label className="form-label">Border Radius</label> */}
                     <div className="input-group mb-3">
                       <input
                         type="number"
@@ -222,15 +215,15 @@ export default function LinkCard({
                     </div>
                   </div>
                   {/* <div className="mb-1 small ">
-        <label className="form-label small">Link accent color </label>
-        <input
-          type="color"
-          className="form-control form-control-sm mb-2 form-control-color"
-          title="Choose Link accent color"
-          placeholder="Choose Link accent color"
-          {...register("accentColor")}
-        />
-      </div> */}
+                  <label className="form-label small">Link accent color </label>
+                  <input
+                    type="color"
+                    className="form-control form-control-sm mb-2 form-control-color"
+                    title="Choose Link accent color"
+                    placeholder="Choose Link accent color"
+                    {...register("accentColor")}
+                  />
+                </div> */}
                   <div className="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button
                       className="btn btn-outline-danger btn-sm"
