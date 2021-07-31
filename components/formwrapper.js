@@ -29,7 +29,6 @@ function Formwrapper({ pageData, updatedPageData }) {
 
   const savePageData = async (data) => {
     setloading(true);
-
     try {
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
@@ -40,23 +39,11 @@ function Formwrapper({ pageData, updatedPageData }) {
       if (!res.success) {
         if (res.message === "invalid_credential") {
           toast.error(`User creadentials are not valid`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         } else {
           toast.error(`Error ${res.message}`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         }
         setloading(false);
@@ -64,26 +51,14 @@ function Formwrapper({ pageData, updatedPageData }) {
       }
 
       toast.success(`successfully update page`, {
-        position: "bottom-left",
         autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
 
       updatedPageData(res.updatedPageData);
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
     setloading(false);
@@ -99,13 +74,7 @@ function Formwrapper({ pageData, updatedPageData }) {
       }
     } catch (error) {
       toast.error(`Logout Error  : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
   };
@@ -249,7 +218,6 @@ function Formwrapper({ pageData, updatedPageData }) {
         </div>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick

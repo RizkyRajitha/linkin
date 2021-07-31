@@ -60,13 +60,7 @@ const LinksForm = ({ pagedataid }) => {
 
       if (!res.success) {
         toast.error(`Error ${res.message}`, {
-          position: "bottom-left",
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         });
         setloading(false);
         return;
@@ -80,25 +74,13 @@ const LinksForm = ({ pagedataid }) => {
             : "Updated page link " + " successfully"
         }`,
         {
-          position: "bottom-left",
           autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         }
       );
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
     setloading(false);
@@ -133,37 +115,19 @@ const LinksForm = ({ pagedataid }) => {
 
       if (!res.success) {
         toast.error(`Error ${res.message}`, {
-          position: "bottom-left",
           autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
         });
         setloading(false);
         return;
       }
       dispatch({ type: "deleteLink", id: id });
       toast.success(`successfully deleted link`, {
-        position: "bottom-left",
         autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
     setloading(false);
@@ -209,7 +173,6 @@ const LinksForm = ({ pagedataid }) => {
         </div>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick
