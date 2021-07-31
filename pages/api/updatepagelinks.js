@@ -1,7 +1,6 @@
 import { jwtAuth, use } from "../../middleware/middleware";
 import { getLinkData, updateLink } from "../../lib/dbfuncprisma";
 
-
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
@@ -25,8 +24,9 @@ async function handler(req, res) {
     res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
   } catch (error) {
     console.log(error.message);
+    res.status(500).json({ success: false, msg: error.message });
 
-    res.status(500).send(error.message);
+    // res.status(500).send(error.message);
   }
 }
 
