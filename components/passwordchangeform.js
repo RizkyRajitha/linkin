@@ -41,7 +41,7 @@ const PasswordChangeForm = () => {
         return;
       }
 
-      toast.success(`successfully updated password`, { autoClose: 5000 });
+      toast.success(`Successfully updated password`, { autoClose: 5000 });
 
       await logout();
     } catch (error) {
