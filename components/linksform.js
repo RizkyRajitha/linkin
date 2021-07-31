@@ -4,6 +4,8 @@ import { useStateValue } from "./context/state";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import TEstt from "./test";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
@@ -133,6 +135,51 @@ const LinksForm = ({ pagedataid }) => {
     setloading(false);
   };
 
+  const dragEndHnadler = async (data) => {
+    // console.log(data);
+    // console.log(characters);
+
+    if (!data.destination) return;
+
+    const items = Array.from(links);
+    const [reorderedItem] = items.splice(data.source.index, 1);
+    items.splice(data.destination.index, 0, reorderedItem);
+
+    let updateditems = items.map((item, index) => {
+      item.orderIndex = index;
+      return item;
+    });
+    // let sorted = updateditems.sort()
+    // console.log(updateditems);
+    // console.log(items);
+
+    dispatch({ type: "updateLink", linkdata: updateditems });
+
+    // updateCharacters(updateditems);
+
+    let orderData = updateditems.map((item) => {
+      return {
+        id: item.id,
+        name: item.displayText,
+        orderIndex: item.orderIndex,
+      };
+    });
+
+    // console.log(orderData);
+
+    try {
+      let res = await fetch(`${endpoint}/api/reorderlinks`, {
+        method: "POST",
+        body: JSON.stringify({ orderData }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      // console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className={styles.Wrapper}>
@@ -158,18 +205,108 @@ const LinksForm = ({ pagedataid }) => {
           >
             Add new link
           </button>
-          {links &&
-            links.map((item, index) => {
-              return (
-                <LinkCard
-                  key={index}
-                  item={item}
-                  deleteLink={deleteLink}
-                  updateLink={saveLinkData}
-                  loading={loading}
-                />
-              );
-            })}
+          <DragDropContext onDragEnd={dragEndHnadler}>
+            <Droppable droppableId="links">
+              {(provided) => (
+                <div
+                  className="links"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {links.length &&
+                    links.map((item, index) => {
+                      console.log(index);
+                      return (
+                        <LinkCard
+                          key={index}
+                          deleteLink={deleteLink}
+                          updateLink={saveLinkData}
+                          loading={loading}
+                          item={item}
+                          index={index}
+                        />
+                      );
+                    })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+          {/* <TEstt /> */}
+          {/* <DragDropContext onDragEnd={dragEndHnadler}>
+            <Droppable droppableId="list">
+              {(provided) => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {[1, 2, 3].map((item, index) => {
+                    return (
+                      <Draggable draggableId={String(item)} index={index}>
+                        {(provided) => {
+                          return <li ref={provided.innerRef}>{item}</li>;
+                        }}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext> */}
+          {/* <DragDropContext onDragEnd={dragEndHnadler}>
+            <Droppable droppableId="links">
+              {(provided) => {
+                console.log(provided);
+                <ul
+                  className="links"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {[1, 2, 3].map((item, index) => {
+                    return (
+                      <Draggable key={index} draggableId={index} index={index}>
+                        {(provided1) => {
+                          <li ref={provided1.ref}>{item}</li>;
+                        }}
+                      </Draggable>
+                    );
+                  })}
+                </ul>;
+              }}{" "}
+            </Droppable>
+          </DragDropContext> */}
+          {/* {(provided) => {
+                {
+                  console.log(provided);
+                }
+                <ul
+                  className="links"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {links &&
+                    links.map((item, index) => {
+                      return (
+                        <Draggable
+                          key={index}
+                          draggableId={index}
+                          index={index}
+                        >
+                          {(provided1) => {
+                            <LinkCard
+                              // {...provided1.draggableProps}
+                              // {...provided1.dragHandleProps}
+                              // ref={provided1.innerRef}
+                              key={index}
+                              item={item}
+                              deleteLink={deleteLink}
+                              updateLink={saveLinkData}
+                              loading={loading}
+                            />;
+                          }}
+                        </Draggable>
+                      );
+                    })}
+                </ul>;
+              }} */}
         </div>
         <ToastContainer
           position="bottom-left"

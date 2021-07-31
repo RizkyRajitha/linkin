@@ -1,11 +1,11 @@
 name: Publish
 # Only trigger, when the build workflow succeeded
 on:
-  [push, pull_request]
-  # workflow_run:
-  #   workflows: ["Code-Coverage"]
-  #   types:
-  #     - completed
+  # [push, pull_request]
+  workflow_run:
+    workflows: ["Code-Coverage"]
+    types:
+      - completed
 jobs:
   Publish:
     runs-on: ubuntu-latest

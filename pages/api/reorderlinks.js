@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { getLinkData, insertPageLinks } from "../../lib/dbfuncprisma";
+import { reorderLinks } from "../../lib/dbfuncprisma";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -10,24 +10,15 @@ async function handler(req, res) {
   try {
     // Run the middleware
     await use(req, res, jwtAuth);
-    // console.log(req.body);
 
-    await insertPageLinks(req.body);
+    console.log(req.body);
 
-    let updatedLinkData = await getLinkData();
-
-    // mock loading times for testing
-    // await new Promise((resolve, reject) =>
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 5000)
-    // );
+    await reorderLinks(req.body.orderData);
 
     // console.log(updatedPageData);
-    res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
+    res.json({ success: true });
   } catch (error) {
     console.log(error.message);
-
     res.status(500).json({ success: false, msg: error.message });
   }
 }

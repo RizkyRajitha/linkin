@@ -20,7 +20,9 @@ async function handler(req, res) {
     res.json({ success: true, updatedPageData: updatedPageData.pageData });
   } catch (error) {
     console.log(error.message);
-    res.status(500).send(error.message);
+    res.status(500).json({ success: false, msg: error.message });
+
+    // res.status(500).send(error.message);
   }
 }
 

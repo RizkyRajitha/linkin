@@ -24,11 +24,11 @@ export function use(req, res, fn) {
 
 export function jwtAuth(req, res, next) {
   // console.log(req);
-  console.log(req.headers);
+  // console.log(req.headers);
 
   // console.log(req.cookie);
   let cookie = req.headers?.cookie;
-  console.log(cookie);
+  // console.log(cookie);
 
   if (!cookie) {
     // next(new Error("no token"));
@@ -57,8 +57,8 @@ export function jwtAuth(req, res, next) {
 
 export function cookieValidate(req, res) {
   let cookie = req.headers?.cookie;
-  console.log("cook");
-  console.log(cookie);
+  // console.log("cook");
+  // console.log(cookie);
   if (!cookie) {
     res.setHeader("location", "/admin");
     res.statusCode = 302;
@@ -84,7 +84,7 @@ export function cookieValidateLogin(req, res) {
   let cookie = req.headers?.cookie;
 
   let token = parse(cookie)["linkin.auth"];
-  console.log(token);
+  // console.log(token);
   let decodedToken = parseSecureToken(token);
 
   if (decodedToken) {
