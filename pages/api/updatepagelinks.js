@@ -24,7 +24,7 @@ async function handler(req, res) {
     res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
   } catch (error) {
     console.log(error.message);
-    res.status(500).json({ success: false, msg: error.message });
+    res.status(500).json({ success: false, message: error.message });
 
     // res.status(500).send(error.message);
   }
