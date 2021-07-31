@@ -11,7 +11,7 @@ async function handler(req, res) {
     // Run the middleware
     await use(req, res, jwtAuth);
 
-    console.log(req.body);
+    // console.log(req.body);
 
     await reorderLinks(req.body.orderData);
 

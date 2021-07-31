@@ -10,22 +10,15 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log(req.body);
-
     let { username, password } = req.body;
-    console.log(username, password);
 
     let data = await getUser(username);
-
-    console.log(data);
 
     if (!data) {
       res.status(401).json({ success: false, message: "invalid_credential" });
       return;
     }
 
-    // let pg = await getPageData();
-    // console.log(pg);
     let pass = bcrypt.compareSync(password, data.password);
 
     if (!pass) {
@@ -34,9 +27,6 @@ export default async function handler(req, res) {
     }
 
     let token = createSecureToken({ username: data.username });
-    // console.log(data);
-    // console.log(token);
-    // console.log(pass);
 
     const cookie = serialize("linkin.auth", token, {
       path: "/",
@@ -44,8 +34,6 @@ export default async function handler(req, res) {
       sameSite: true,
       maxAge: 60 * 60 * 24 * 365,
     });
-
-    // console.log(cookie);
 
     res.setHeader("Set-Cookie", [cookie]);
 
