@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 import styles from "../styles/formwrapper.module.css";
 
@@ -10,7 +11,6 @@ import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
 
-import { ToastContainer, toast } from "react-toastify";
 
 const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -50,7 +50,7 @@ function Formwrapper({ pageData, updatedPageData }) {
         return;
       }
 
-      toast.success(`successfully update page`, {
+      toast.success(`Successfully update page`, {
         autoClose: 1000,
       });
 
@@ -67,7 +67,7 @@ function Formwrapper({ pageData, updatedPageData }) {
   const logout = async () => {
     try {
       let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
-      console.log(res);
+      // console.log(res);
 
       if (res.success) {
         router.push("/admin");
