@@ -3,20 +3,15 @@ name: Publish
 
 on:
   workflow_run:
-    workflows: ["Code-Coverage"]
+    workflows: ["Code Coverage"]
     branches: [dev]
     types:
       - completed
       # - requested
-
-# on:
-#   # [push, pull_request]
-#   workflow_run:
-#     workflows: ["Code-Coverage"]
-#     types:
-#       - completed
 jobs:
   Publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
     runs-on: ubuntu-latest
 
     steps:
