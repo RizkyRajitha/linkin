@@ -137,6 +137,10 @@ const LinksForm = ({ pagedataid }) => {
       return;
     }
 
+    if (data.destination.index === data.source.index) {
+      return;
+    }
+
     setloading(true);
 
     const items = Array.from(links);
@@ -214,7 +218,7 @@ const LinksForm = ({ pagedataid }) => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {links.length &&
+                  {links.length > 0 &&
                     links.map((item, index) => {
                       return (
                         <LinkCard

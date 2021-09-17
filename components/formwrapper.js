@@ -84,7 +84,7 @@ function Formwrapper({ pageData, updatedPageData }) {
       <div className={styles.dashform}>
         <div className="d-flex justify-content-end mb-4">
           {version !== "" && (
-            <div className="d-flex justify-content-start flex-grow-1 ms-2 mt-2 ">
+            <div className="d-flex justify-content-start align-items-center flex-grow-1 ms-2 mt-2 ">
               <span>{`v ${version}`}</span>
             </div>
           )}
