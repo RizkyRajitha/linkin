@@ -35,42 +35,19 @@ const PasswordChangeForm = () => {
       }).then((res) => res.json());
 
       if (!res.success) {
-        toast.error(`Error : ${res.msg}`, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(`Error : ${res.message}`, { autoClose: 5000 });
         reset();
         setloading(false);
         return;
       }
 
-      toast.success(`successfully updated password`, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success(`Successfully updated password`, { autoClose: 5000 });
+
       await logout();
     } catch (error) {
       console.log(error);
       reset();
-      toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
     setloading(false);
   };
@@ -85,13 +62,7 @@ const PasswordChangeForm = () => {
       }
     } catch (error) {
       toast.error(`Logout Error  : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
   };
@@ -188,7 +159,6 @@ const PasswordChangeForm = () => {
           </form>
           <ToastContainer
             position="bottom-left"
-            autoClose={5000}
             hideProgressBar={true}
             newestOnTop={false}
             closeOnClick

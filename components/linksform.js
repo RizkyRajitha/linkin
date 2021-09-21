@@ -1,9 +1,12 @@
-import styles from "../styles/form.module.css";
-import LinkCard from "./linkcard";
-import { useStateValue } from "./context/state";
 import { useState } from "react";
-import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+
+import { useStateValue } from "./context/state";
+import LinkCard from "./linkcard";
+
+import styles from "../styles/form.module.css";
 
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
@@ -11,10 +14,12 @@ const endpoint =
 const LinksForm = ({ pagedataid }) => {
   const [{ links }, dispatch] = useStateValue();
   const [loading, setloading] = useState(false);
+  const [isNewLinkInList, setisNewLinkInList] = useState(false);
 
   const addNewLink = () => {
     // console.log(links.length);
     // console.log(links[links.length - 1]);
+    setisNewLinkInList(true);
 
     let newLink = links[links.length - 1];
 
@@ -48,6 +53,11 @@ const LinksForm = ({ pagedataid }) => {
     if (linkdata.hasOwnProperty("id")) {
       operation = `updatepagelinks`;
     }
+
+    if (operation === "insertpagelinks") {
+      setisNewLinkInList(false);
+    }
+
     // console.log(operation);
     try {
       let res = await fetch(`${endpoint}/api/${operation}`, {
@@ -59,15 +69,7 @@ const LinksForm = ({ pagedataid }) => {
       // console.log(res);
 
       if (!res.success) {
-        toast.error(`Error ${res.message}`, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
         setloading(false);
         return;
       }
@@ -79,27 +81,11 @@ const LinksForm = ({ pagedataid }) => {
             ? "Added new page link "
             : "Updated page link " + " successfully"
         }`,
-        {
-          position: "bottom-left",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        }
+        { autoClose: 1000 }
       );
     } catch (error) {
       console.log(error);
-      toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
     setloading(false);
   };
@@ -132,41 +118,67 @@ const LinksForm = ({ pagedataid }) => {
       console.log(res);
 
       if (!res.success) {
-        toast.error(`Error ${res.message}`, {
-          position: "bottom-left",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
         setloading(false);
         return;
       }
       dispatch({ type: "deleteLink", id: id });
-      toast.success(`successfully deleted link`, {
-        position: "bottom-left",
-        autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.success(`Successfully deleted link`, { autoClose: 1000 });
     } catch (error) {
       console.log(error);
-      toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
     }
     setloading(false);
+  };
+
+  const dragEndHnadler = async (data) => {
+    // console.log(data);
+    if (!data.destination) {
+      return;
+    }
+
+    setloading(true);
+
+    const items = Array.from(links);
+    const [reorderedItem] = items.splice(data.source.index, 1);
+    items.splice(data.destination.index, 0, reorderedItem);
+
+    let updateditems = items.map((item, index) => {
+      item.orderIndex = index;
+      return item;
+    });
+
+    dispatch({ type: "updateLink", linkdata: updateditems });
+
+    let orderData = updateditems.map((item) => {
+      return {
+        id: item.id,
+        name: item.displayText,
+        orderIndex: item.orderIndex,
+      };
+    });
+
+    // console.log(orderData);
+
+    try {
+      let res = await fetch(`${endpoint}/api/reorderlinks`, {
+        method: "POST",
+        body: JSON.stringify({ orderData }),
+        headers: { "Content-Type": "application/json" },
+      }).then((res) => res.json());
+
+      if (!res.success) {
+        toast.error(`Error ${res.message}`, { autoClose: 5000 });
+        return;
+      }
+
+      toast.success(`Successfully reordered links`, { autoClose: 1000 });
+      setloading(false);
+    } catch (error) {
+      console.log(error);
+      setloading(false);
+      toast.error(`Error : ${error.message}`, { autoClose: 5000 });
+    }
   };
 
   return (
@@ -194,22 +206,36 @@ const LinksForm = ({ pagedataid }) => {
           >
             Add new link
           </button>
-          {links &&
-            links.map((item, index) => {
-              return (
-                <LinkCard
-                  key={index}
-                  item={item}
-                  deleteLink={deleteLink}
-                  updateLink={saveLinkData}
-                  loading={loading}
-                />
-              );
-            })}
+          <DragDropContext onDragEnd={dragEndHnadler}>
+            <Droppable droppableId="links" isDropDisabled={isNewLinkInList}>
+              {(provided) => (
+                <div
+                  className="links"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {links.length &&
+                    links.map((item, index) => {
+                      return (
+                        <LinkCard
+                          key={index}
+                          deleteLink={deleteLink}
+                          updateLink={saveLinkData}
+                          loading={loading}
+                          item={item}
+                          index={index}
+                          isDragDisabled={isNewLinkInList}
+                        />
+                      );
+                    })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick

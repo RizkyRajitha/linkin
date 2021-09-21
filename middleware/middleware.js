@@ -23,18 +23,11 @@ export function use(req, res, fn) {
 }
 
 export function jwtAuth(req, res, next) {
-  // console.log(req);
-  console.log(req.headers);
-
-  // console.log(req.cookie);
   let cookie = req.headers?.cookie;
-  console.log(cookie);
 
   if (!cookie) {
-    // next(new Error("no token"));
     res.status(403).json({ success: false, message: "no auth token found" });
     return;
-    // throw new Error("no token");
   } else {
     let token = parse(cookie)["linkin.auth"];
     let decodedToken = parseSecureToken(token);
@@ -46,19 +39,13 @@ export function jwtAuth(req, res, next) {
 
     req.username = decodedToken.username;
 
-    console.log(decodedToken.username);
-    // console.log(tk);
-
-    console.log("middleware ok");
-
     next();
   }
 }
 
 export function cookieValidate(req, res) {
   let cookie = req.headers?.cookie;
-  console.log("cook");
-  console.log(cookie);
+
   if (!cookie) {
     res.setHeader("location", "/admin");
     res.statusCode = 302;
@@ -67,7 +54,7 @@ export function cookieValidate(req, res) {
   }
 
   let token = parse(cookie)["linkin.auth"];
-  console.log(token);
+
   let decodedToken = parseSecureToken(token);
 
   if (!decodedToken) {
@@ -84,7 +71,7 @@ export function cookieValidateLogin(req, res) {
   let cookie = req.headers?.cookie;
 
   let token = parse(cookie)["linkin.auth"];
-  console.log(token);
+
   let decodedToken = parseSecureToken(token);
 
   if (decodedToken) {
@@ -92,25 +79,4 @@ export function cookieValidateLogin(req, res) {
     res.statusCode = 302;
     res.end();
   }
-
-  // return true;
 }
-
-// export const jwtMiddleare = use(jwtAuth);
-
-// export const useAuth = use(async (req, res, next) => {
-//   let token;
-
-//   try {
-//     token = await verifyAuthToken(req);
-//   } catch (e) {
-//     return serverError(res, e.message);
-//   }
-
-//   if (!token) {
-//     return unauthorized(res);
-//   }
-
-//   req.auth = token;
-//   next();
-// });

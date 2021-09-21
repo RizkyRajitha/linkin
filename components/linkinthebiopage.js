@@ -36,18 +36,6 @@ export default function Home({
   footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
 
-  // console.log(
-  //   linkData
-  //     .map((ele, id) => {
-  //       return `
-  //   .link-${id} {
-  //   background-color: ${ele.bgColor};
-  //   color: ${ele.textColor || "#ffffff"};
-  // }`;
-  //     })
-  //     .join()
-  // );
-
   return (
     <div>
       <div className="outterwrap">
@@ -65,7 +53,6 @@ export default function Home({
           </div>
           <div className="links">
             <ul>
-              {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
               {linkData.map((link, id) => {
                 return (
                   <li key={id}>
@@ -207,6 +194,10 @@ export default function Home({
           // padding: 1rem;
           font-size: 1.7rem;
         }
+        @media (max-width: 768px) {
+          .link {
+            padding: 1.2rem;
+          }
       `}</style>
     </div>
   );

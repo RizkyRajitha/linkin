@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 
 // importing hook useSWR from package swr
 import useSWR from "swr";
@@ -13,7 +14,6 @@ import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
 
-import { ToastContainer, toast } from "react-toastify";
 
 const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -41,7 +41,6 @@ function Formwrapper({ pageData, updatedPageData }) {
   // savePageData was previously asynchronous
   const savePageData = (data) => {
     setloading(true);
-
     try {
       const { res } = useSWR(
         [`${endpoint}/api/updatepagedata`, data],
@@ -60,50 +59,26 @@ function Formwrapper({ pageData, updatedPageData }) {
       if (!res.success) {
         if (res.message === "invalid_credential") {
           toast.error(`User creadentials are not valid`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         } else {
           toast.error(`Error ${res.message}`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         }
         setloading(false);
         return;
       }
 
-      toast.success(`successfully update page`, {
-        position: "bottom-left",
+      toast.success(`Successfully update page`, {
         autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
 
       updatedPageData(res.updatedPageData);
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
     setloading(false);
@@ -121,21 +96,17 @@ function Formwrapper({ pageData, updatedPageData }) {
       the following piece of code has been replaced with the implementation of useSWR hook above
 
       let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
+
       */
       console.log(res);
+
 
       if (res.success) {
         router.push("/admin");
       }
     } catch (error) {
       toast.error(`Logout Error  : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
   };
@@ -279,7 +250,6 @@ function Formwrapper({ pageData, updatedPageData }) {
         </div>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick
