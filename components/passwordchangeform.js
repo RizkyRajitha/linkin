@@ -27,12 +27,6 @@ const PasswordChangeForm = () => {
     console.log(data);
     setloading(true);
 
-    // let payload = {};
-    // currentpassword: "123"
-    // ​
-    // newpassword: "D6taSRDazH9giCG"
-    // return;
-
     try {
       let res = await fetch(`${endpoint}/api/changepassword`, {
         method: "POST",

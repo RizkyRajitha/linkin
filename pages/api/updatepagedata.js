@@ -1,11 +1,13 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { updatePageData, getPageData } from "../../lib/dbfunc";
+import { updatePageData, getPageData } from "../../lib/dbfuncprisma";
+
 
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
     return;
   }
+
   try {
     // Run the middleware
     await use(req, res, jwtAuth);

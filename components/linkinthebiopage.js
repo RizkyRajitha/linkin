@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { isEmptry } from "../lib/side";
+import { isEmpty } from "../lib/side";
 // import Image from "next/image";
 
 export default function Home({
@@ -14,115 +13,93 @@ export default function Home({
   fontFamily,
   fontUrl,
   linkData,
+  footerText,
+  footerTextSize,
+  footerBgColor,
+  footerTextColor,
+  handlerDescriptionFontColor,
+  handlerDescription,
+  bgImgUrl,
+  footerEnabled,
   preview = false,
 }) {
-  accentColor = isEmptry(accentColor) ? "#BDD7FF" : accentColor;
-  avatarwidth = isEmptry(avatarwidth) ? "50" : avatarwidth;
-  handlerFontSize = isEmptry(handlerFontSize) ? "15" : handlerFontSize;
-  handlerFontColor = isEmptry(handlerFontColor) ? "#fff" : handlerFontColor;
-  bgColor = isEmptry(bgColor) ? "#fff" : bgColor;
-  fontFamily = isEmptry(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
-  fontUrl = isEmptry(fontUrl)
+  accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
+  avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
+  handlerFontSize = isEmpty(handlerFontSize) ? "15" : handlerFontSize;
+  handlerFontColor = isEmpty(handlerFontColor) ? "#fff" : handlerFontColor;
+  bgColor = isEmpty(bgColor) ? "#fff" : bgColor;
+  fontFamily = isEmpty(fontFamily) ? "'Roboto', sans-serif" : fontFamily;
+  fontUrl = isEmpty(fontUrl)
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
+  footerTextSize = isEmpty(footerTextSize) ? 12 : footerTextSize;
+  footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
+  footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
 
-  console.log(
-    handlerText,
-    handlerFontColor,
-    handlerFontSize,
-    bgColor,
-    avatarwidth,
-    accentColor
-  );
+  // console.log(
+  //   linkData
+  //     .map((ele, id) => {
+  //       return `
+  //   .link-${id} {
+  //   background-color: ${ele.bgColor};
+  //   color: ${ele.textColor || "#ffffff"};
+  // }`;
+  //     })
+  //     .join()
+  // );
 
-  useEffect(() => {
-    console.log("up");
-    console.log(avatarwidth);
-    return () => {
-      console.log("cleanup");
-    };
-  }, [avatarwidth]);
-
-  console.log(linkData);
   return (
-    <div className="outterwrap">
-      <div className="wrap">
-        <div className="profile">
-          <img src={avatarUrl} className="photo" />
-          <a className="handlerLink" href={`${handlerLink}`} target="_blank">
-            <span className="handlerText">{handlerText}</span>
-          </a>
+    <div>
+      <div className="outterwrap">
+        <div className="wrap">
+          <div className="profile">
+            {!isEmpty(avatarUrl) && <img src={avatarUrl} className="photo" />}
+            <a
+              className="handlerLink"
+              href={`${handlerLink || "#"}`}
+              target="_blank"
+            >
+              <span className="handlerText">{handlerText}</span>
+            </a>
+            <p className="handlerDescription">{handlerDescription}</p>
+          </div>
+          <div className="links">
+            <ul>
+              {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
+              {linkData.map((link, id) => {
+                return (
+                  <li key={id}>
+                    <a
+                      href={`${link.linkUrl || "#"}`}
+                      className="link"
+                      target="_blank"
+                      style={{
+                        backgroundColor: link.bgColor || "#2c6bed",
+                        color: link.textColor || "#ffffff",
+                        borderRadius: `${link.borderRadius || "4"}px`,
+                      }}
+                    >
+                      {link.iconClass && (
+                        <i className={`${link.iconClass} icon`}></i>
+                      )}
+                      <div className="d-flex w-100 align-items-center justify-content-center">
+                        {link.displayText}
+                      </div>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
-        <div className="links">
-          <ul>
-            {linkData.map((element, id) => {
-              return (
-                <li key={id}>
-                  <a
-                    href={`${element.linkUrl}`}
-                    className="link"
-                    target="_blank"
-                    style={{ backgroundColor: element.bgColor || "#2c6bed" }}
-                  >
-                    {element.iconClass && (
-                      <i className={`${element.iconClass} icon`}></i>
-                    )}
-                    {/* <i className={`fas fa-store ${style.iconpadding}`}></i> */}
-                    <div className="d-flex w-100 align-items-center justify-content-center">
-                      {element.displayText}
-                    </div>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        {/* <div className={style.links}>
-          <ul>
-            <li>
-              <a
-                href="https://www.wonderousnightsky.store/"
-                className={style.link}
-                target="_blank"
-              >
-                <i className={`fas fa-store ${style.iconpadding}`}></i>Checkout
-                My Shop
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.paypal.com/paypalme/wonderousnightsky?locale.x=en_US"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-paypal ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                Support My Page
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://www.instagram.com/wonderousnightsky/?hl=en"
-                className={style.link}
-                target="_blank"
-              >
-                <i
-                  className={`fab fa-instagram ${style.iconpadding} ${style.paypalicon}`}
-                ></i>
-                DM for collaborations
-              </a>
-            </li>
-          </ul> */}
-        {/* <!-- <div className="card">
-          <h3>Card</h3>
-          <p>Just a card to display some information ...</p>
-        </div> --> */}
-        {/* </div> */}
-        {/* <div className="footer">
-          Copyright © 2021 All Rights Reserved by {footerText}.
-        </div> */}
       </div>
+      {footerEnabled && (
+        <div className="footer d-flex align-items-center justify-content-center">
+          {/* Copyright © 2021 All Rights Reserved by. */}
+          {footerText}
+        </div>
+      )}
+
       <style
         jsx
         onError={(e) => {
@@ -137,10 +114,14 @@ export default function Home({
           margin: 0;
           padding: 15px;
           height: 100%;
-          min-height: 100vh;
+          min-height: ${footerEnabled ? "96vh" : "100vh"};
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
+          ${bgImgUrl ? `background-image: url("${bgImgUrl}");` : ""}
+          ${bgImgUrl ? `background-repeat: no-repeat;` : ""}
+          ${bgImgUrl ? `background-position: center;` : ""}
+          ${bgImgUrl ? `background-size: cover;` : ""}
         }
 
         .wrap {
@@ -153,17 +134,24 @@ export default function Home({
           text-decoration: dashed;
         }
 
+        .handlerDescription {
+          text-align: center;
+          text-justify: inter-word;
+          color: ${handlerDescriptionFontColor};
+        }
+
         .footer {
           position: absolute;
           right: 0;
-          bottom: 0;
+          // bottom: 0;
+          height: 4vh;
           ${preview ? "" : "left: 0 ; "}
-          padding: 1rem;
-          background-color: #000;
+          //padding: 1rem;
+          background-color: ${footerBgColor};
           text-align: center;
-          color: #fff;
-          font-size: 0.6rem;
-          width: ${preview ? "50%" : "100%"};
+          color: ${footerTextColor};
+          font-size: ${footerTextSize}px;
+          width: ${preview ? "40%" : "100%"};
         }
 
         a {
@@ -224,3 +212,14 @@ export default function Home({
   );
 }
 //
+
+// position: absolute;
+// right: 0;
+// bottom: 0;
+// ${preview ? "" : "left: 0 ; "}
+// padding: 1rem;
+// background-color: #000;
+// text-align: center;
+// color: #fff;
+// font-size: 0.6rem;
+// width: ${preview ? "50%" : "100%"};

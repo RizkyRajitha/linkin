@@ -1,19 +1,13 @@
 import bcrypt from "bcrypt";
 
 import { jwtAuth, use } from "../../middleware/middleware";
-import { changePassword, getUser } from "../../lib/dbfunc";
+import { changePassword, getUser } from "../../lib/dbfuncprisma";
 
-const changePasswordEnabled = process.env.changePasswordEnabled || true;
 const saltRounds = 10;
 
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
-    return;
-  }
-
-  if (!changePasswordEnabled) {
-    res.status(401).send("Change Password not allowed");
     return;
   }
 

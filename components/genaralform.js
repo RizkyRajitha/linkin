@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { isEmpty } from "../lib/side";
 
 import styles from "../styles/form.module.css";
 
@@ -10,7 +11,8 @@ const GenaralForm = ({ data, update, loading }) => {
     watch,
   } = useForm({ defaultValues: data });
 
-  let imageUrl = watch(["avatarUrl"]);
+  let avatarImageUrl = watch(["avatarUrl"])[0];
+  let bgImageUrl = watch(["bgImgUrl"])[0];
 
   return (
     <>
@@ -19,7 +21,7 @@ const GenaralForm = ({ data, update, loading }) => {
           className={`${styles.Inner} col-10 col-sm-10 col-md-10 col-lg-10 col-xl-8 col-xxl-8 `}
         >
           <form onSubmit={(e) => e.preventDefault()}>
-            <h3>Genaral Data</h3>
+            <h3>General Details</h3>
             <div className="mb-3 ">
               <label className="form-label">Handler name</label>
               <input
@@ -32,11 +34,6 @@ const GenaralForm = ({ data, update, loading }) => {
                 placeholder="Enter Handler name"
                 {...register("handlerText")}
               />
-              {/* {errors.handlerText && (
-                  <div className="invalid-feedback">
-                    {errors.handlerText.message}
-                  </div>
-                )} */}
             </div>
             <div className="mb-3 ">
               <label className="form-label">Handler link</label>
@@ -57,7 +54,7 @@ const GenaralForm = ({ data, update, loading }) => {
                 })}
               />
               <div className="form-text">
-                Ex - https://www.instagram.com/wonderousnightsky/
+                Ex - https://www.instagram.com/[yourhandle]
               </div>
 
               {errors.handlerLink && (
@@ -66,47 +63,37 @@ const GenaralForm = ({ data, update, loading }) => {
                 </div>
               )}
             </div>{" "}
-            {/* <div className="mb-3 ">
-              <label className="form-label">Footer text</label>
-              <input
-                type="text"
-                className={
-                  errors.footerText ? "form-control is-invalid" : "form-control"
-                }
-                placeholder="Enter Footer text"
-                {...register("footerText")}
-              />
-            </div>{" "} */}
-            {/* <div className="mb-3 ">
-              <label className="form-label">Footer text</label>
-              <input
-                type="text"
-                className={
-                  errors.footerText ? "form-control is-invalid" : "form-control"
-                }
-                placeholder="Enter Footer text"
-                {...register("footerText")}
-              />
-            </div>{" "} */}
+            <div className="mb-3">
+              <label className="form-label">Description</label>
+              <textarea
+                className="form-control"
+                rows="3"
+                {...register("handlerDescription")}
+              ></textarea>
+            </div>
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
-              <input
-                type="number"
-                className={
-                  errors.avatarwidth
-                    ? "form-control is-invalid"
-                    : "form-control"
-                }
-                placeholder="Enter Avatar width "
-                {...register("avatarwidth", {
-                  max: { message: "Width must be below 100%", value: 100 },
-                })}
-              />
-              {errors.avatarwidth && (
-                <div className="invalid-feedback">
-                  {errors.avatarwidth.message}
-                </div>
-              )}
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.avatarwidth
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Avatar width "
+                  {...register("avatarwidth", {
+                    max: { message: "Width must be below 100%", value: 100 },
+                    min: { message: "Width must be above 1%", value: 1 },
+                  })}
+                />{" "}
+                <span className="input-group-text">%</span>{" "}
+                {errors.avatarwidth && (
+                  <div className="invalid-feedback">
+                    {errors.avatarwidth.message}
+                  </div>
+                )}
+              </div>
             </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Avatar Url</label>
@@ -117,16 +104,58 @@ const GenaralForm = ({ data, update, loading }) => {
                 }
                 placeholder="Enter Avatar Url"
                 {...register("avatarUrl", {
-                  // pattern: {
-                  //   message: "Should be a valid Image URL",
-                  //   value:
-                  //     /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
-                  // },
+                  pattern: {
+                    message: "Should be a valid Image URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
                 })}
               />
 
               <div className="form-text">
-                square images are better. can be used (
+                square images are better. can use image providers Ex -(
+                <a href="https://imgur.com/" target="_blank">
+                  imgur
+                </a>{" "}
+                <a href="https://cloudinary.com/" target="_blank">
+                  cloudinary
+                </a>
+                )
+              </div>
+              {errors.avatarUrl && (
+                <div className="invalid-feedback">
+                  {errors.avatarUrl.message}
+                </div>
+              )}
+              {}
+              {!isEmpty(avatarImageUrl) && (
+                <img
+                  src={avatarImageUrl}
+                  className={styles.previewImage + " img-thumbnail"}
+                  alt="image Loading failed"
+                ></img>
+              )}
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Background Image Url</label>
+              <input
+                type="text"
+                className={
+                  errors.bgImgUrl ? "form-control is-invalid" : "form-control"
+                }
+                placeholder="Enter Background Image Url"
+                {...register("bgImgUrl", {
+                  pattern: {
+                    message: "Should be a valid Image URL",
+                    value:
+                      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/,
+                  },
+                })}
+              />
+
+              <div className="form-text">
+                image will cover the whole area. To remove image keep this input
+                field empty . can use image providers Ex - (
                 <a href="https://imgur.com/" target="_blank">
                   imgur
                 </a>{" "}
@@ -135,15 +164,15 @@ const GenaralForm = ({ data, update, loading }) => {
                 </a>{" "}
                 )
               </div>
-              {errors.avatarUrl && (
+              {errors.bgImgUrl && (
                 <div className="invalid-feedback">
-                  {errors.avatarUrl.message}
+                  {errors.bgImgUrl.message}
                 </div>
               )}
 
-              {imageUrl && (
+              {!isEmpty(bgImageUrl) && (
                 <img
-                  src={imageUrl}
+                  src={bgImageUrl}
                   className={styles.previewImage + " img-thumbnail"}
                   alt="image Loading failed"
                 ></img>

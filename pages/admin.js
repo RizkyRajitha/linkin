@@ -81,9 +81,9 @@ const Admin = ({}) => {
             {showAlert.msg && <Alert {...showAlert} />}
 
             <form onSubmit={(e) => e.preventDefault()}>
-              <h3>Sign In</h3>
+              <h3>Login</h3>
               <div className="mb-3 ">
-                <label className="form-label">Email address</label>
+                <label className="form-label">Username</label>
                 <input
                   type="text"
                   className={
@@ -91,7 +91,7 @@ const Admin = ({}) => {
                   }
                   placeholder="Enter username"
                   {...register("username", {
-                    required: "You must specify an Email address",
+                    required: "You must specify an Username",
                   })}
                 />
                 {errors.username && (
