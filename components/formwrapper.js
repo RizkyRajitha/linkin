@@ -3,7 +3,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 // importing hook useSWR from package swr
-import useSWR from "swr";
+// import useSWR from "swr";
 
 import styles from "../styles/formwrapper.module.css";
 
@@ -13,7 +13,6 @@ import GenaralForm from "./genaralform";
 import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
-
 
 const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -31,30 +30,30 @@ function Formwrapper({ pageData, updatedPageData }) {
   const [loading, setloading] = useState(false);
 
   // asynchronous function to fetch data to save page data and update page
-  const savePageDataFetcher = async ([url, data]) =>
-    await fetch(url, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-    }).then((res) => res.json());
+  // const savePageDataFetcher = async ([url, data]) =>
+  //   await fetch(url, {
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //     headers: { "Content-Type": "application/json" },
+  //   }).then((res) => res.json());
 
   // savePageData was previously asynchronous
-  const savePageData = (data) => {
+  const savePageData = async (data) => {
     setloading(true);
     try {
-      const { res } = useSWR(
-        [`${endpoint}/api/updatepagedata`, data],
-        savePageDataFetcher
-      );
+      // const { res } = useSWR(
+      //   [`${endpoint}/api/updatepagedata`, data],
+      //   savePageDataFetcher
+      // );
       /*
       the following piece of code has been replaced with the implementation of useSWR hook above
 
+      */
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
-      */
 
       if (!res.success) {
         if (res.message === "invalid_credential") {
@@ -85,21 +84,18 @@ function Formwrapper({ pageData, updatedPageData }) {
   };
 
   // asynchronous function to fetch logout data
-  const logOutFetcher = async (url) =>
-    await fetch(url).then((res) => res.json());
+  // const logOutFetcher = async (url) =>
+  //   await fetch(url).then((res) => res.json());
 
   // the logout function was previously asynchronous
-  const logout = () => {
+  const logout = async () => {
     try {
-      const { res } = useSWR(`${endpoint}/api/logout`, logOutFetcher);
+      // const { res } = useSWR(`${endpoint}/api/logout`, logOutFetcher);
       /*
       the following piece of code has been replaced with the implementation of useSWR hook above
-
-      let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
-
       */
+      let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
       console.log(res);
-
 
       if (res.success) {
         router.push("/admin");
