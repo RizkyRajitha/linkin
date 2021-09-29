@@ -7,10 +7,13 @@
 ## Linkin is a customizable self-hosted link tree application.
 
 ### 100% Free and Open Source 💯
+
 ### Self Hosted, you own your data 💽
-### Customize your  link tree with few clicks  with a feature-rich dashboard 🤖
+
+### Customize your link tree with few clicks with a feature-rich dashboard 🤖
 
 ### SEO friendly design built using Next js 🕸️
+
 ### Supports 3 one-click deploy hosting providers 🚀
 
 <br>
@@ -25,6 +28,11 @@
 - Demo password = `linkin123`
 
 <br>
+
+<img src="https://res.cloudinary.com/dijjqfsto/image/upload/v1632930278/linkin/linkin_yrgr3k.gif" alt="linkin gif" width="100%"  />
+
+<!-- ![linkin gif](https://res.cloudinary.com/dijjqfsto/image/upload/v1632930278/linkin/linkin_yrgr3k.gif) -->
+
 <br>
 
 ## Deploy with Vercel
@@ -78,9 +86,9 @@
 - Deploy in Railway
   - set environment variables
     - `HASHSALT` - random secret key
-    - `PORT` - 3000 
-    - `RAILWAY` - Set to `1` to run migrations and seeding in docker build stage . set `0` to avoid  migrations and seeding in docker build stage
-    - `DATABASE_URL` - **Postgres** database url . use this variable **if you are not using** railway postgres plugin 
+    - `PORT` - 3000
+    - `RAILWAY` - Set to `1` to run migrations and seeding in docker build stage . set `0` to avoid migrations and seeding in docker build stage
+    - `DATABASE_URL` - **Postgres** database url . use this variable **if you are not using** railway postgres plugin
   - after successfully deploying visit `youdomain/admin` to view admin login
   - use default login credentials
     - username = `admin`
@@ -94,7 +102,8 @@
 - Run the docker image `docker run -d -p 3000:3000 -e DATABASE_URL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DATABASE_URL` and `HASHSALT` environment varaibles.
 
 ### Database connection
- - if the postgres database is behind pgbounce use `pgbouncer=true` parameter in `DATABASE_URL` ex - `postgres://xx:xxx@xxxx:5432/xxxx?pgbouncer=true`
+
+- if the postgres database is behind pgbounce use `pgbouncer=true` parameter in `DATABASE_URL` ex - `postgres://xx:xxx@xxxx:5432/xxxx?pgbouncer=true`
 
 ## Developing locally
 
@@ -135,7 +144,6 @@ npx prisma migrate dev
 #### Database Seeding
 
 Addign Initial data to the database to get you started
-
 
 ```bash
 npm run seed
