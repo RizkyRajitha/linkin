@@ -6,9 +6,16 @@
 
 ## Linkin is a customizable self-hosted link tree application.
 
+### 100% Free and Open Source 💯
+### Self Hosted, you own your data 💽
+### Customize your  link tree with few clicks  with a feature-rich dashboard 🤖
+
+### SEO friendly design built using Next js 🕸️
+### Supports 3 one-click deploy hosting providers 🚀
+
 <br>
 
-[Visit Demo](http://linkindemo.vercel.app/)
+[View Demo](http://linkindemo.vercel.app/)
 <br>
 [Demo Admin](http://linkindemo.vercel.app/admin)
 `http://linkindemo.vercel.app/admin`
