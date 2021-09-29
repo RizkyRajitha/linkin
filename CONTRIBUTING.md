@@ -73,8 +73,12 @@ Linkin has 2 main branches
 
 1. [master](https://github.com/RizkyRajitha/linkin/tree/master) branch - will have the code from the latest release. only updates on a release.
 2. [dev](https://github.com/RizkyRajitha/linkin/tree/dev) branch - all the development carries out in this branch. the latest code will be available in this branch, **all the pull requests should be made to dev branch** since prs could be tested and modified for the final release phase.
-
 other than the above branches there can feature specific branches for the continence.
+
+## Making pull request
+
+when making a pull request please create your feature branch using the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch (`checkout using dev branch`), and develop in it locally. avoid installing additional dependencies unless clarified through a maintainer. make the pr to the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch.
+
 
 ## File Structure
 
@@ -219,7 +223,7 @@ it has 3 main parts
 2. Forms
 3. preview
 
-![dashboard page](https://res.cloudinary.com/dijjqfsto/image/upload/v1632202406/linkin/Untitled_Diagram.drawio_l2rkop.png)
+![dashboard page](https://res.cloudinary.com/dijjqfsto/image/upload/v1632919738/linkin/Untitled_Diagram.drawio_1_zrildi.png)
 
 #### Formwrapper
 
