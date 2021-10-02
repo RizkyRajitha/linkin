@@ -84,7 +84,7 @@ const GenaralForm = ({ data, update, loading }) => {
                   placeholder="Enter Link padding "
                   {...register("linkPadding", {
                     // max: { message: "Width must be below 100%", value: 100 },
-                    min: { message: "Width must be above 0em", value: 0 },
+                    min: { message: "Padding must be above 0em", value: 0 },
                   })}
                 />{" "}
                 <span className="input-group-text">em</span>{" "}
