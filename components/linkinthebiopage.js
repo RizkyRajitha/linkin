@@ -21,6 +21,7 @@ export default function Home({
   handlerDescription,
   bgImgUrl,
   footerEnabled,
+  linkPadding,
   preview = false,
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
@@ -35,6 +36,7 @@ export default function Home({
   footerTextSize = isEmpty(footerTextSize) ? 12 : footerTextSize;
   footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
+  linkPadding = isEmpty(linkPadding) ? "2em" : `${linkPadding}em`;
 
   return (
     <div>
@@ -177,7 +179,7 @@ export default function Home({
           margin: 14px 0;
         }
         .link {
-          padding: 2rem;
+          padding: ${linkPadding};
           display: flex;
           text-align: center;
           text-decoration: none;
