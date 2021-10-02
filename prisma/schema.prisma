@@ -27,6 +27,7 @@ model pagedata {
   avatarUrl        String?    @db.VarChar
   avatarheight     String?    @db.VarChar
   avatarwidth      String?    @db.VarChar
+  avatarBorderColor String?   @db.VarChar
   bgColor          String?    @db.VarChar
   accentColor      String?    @db.VarChar
   handlerText      String?    @db.VarChar

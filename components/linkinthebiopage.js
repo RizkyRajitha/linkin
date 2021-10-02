@@ -8,6 +8,7 @@ export default function Home({
   avatarUrl,
   accentColor,
   avatarwidth,
+  avatarBorderColor,
   handlerFontSize,
   handlerFontColor,
   fontFamily,
@@ -25,6 +26,7 @@ export default function Home({
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
   avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
+  avatarBorderColor = isEmpty(avatarBorderColor) ? "#fff" : avatarBorderColor;
   handlerFontSize = isEmpty(handlerFontSize) ? "15" : handlerFontSize;
   handlerFontColor = isEmpty(handlerFontColor) ? "#fff" : handlerFontColor;
   bgColor = isEmpty(bgColor) ? "#fff" : bgColor;
@@ -171,7 +173,7 @@ export default function Home({
           border-radius: 50%;
           width: ${avatarwidth}%;
           padding: 4px;
-          background: #fff;
+          background: ${avatarBorderColor};
         }
 
         .handlerText {
