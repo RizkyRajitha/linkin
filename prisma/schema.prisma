@@ -47,6 +47,7 @@ model pagedata {
   handlerDescription String?    @db.VarChar
   handlerDescriptionFontColor String?    @db.VarChar
   footerEnabled Boolean?   @default(true)
+  linkPadding     String?   @db.VarChar
 }
 
 model users {

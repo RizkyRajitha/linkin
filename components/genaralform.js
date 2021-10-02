@@ -70,7 +70,31 @@ const GenaralForm = ({ data, update, loading }) => {
                 rows="3"
                 {...register("handlerDescription")}
               ></textarea>
-            </div>
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Link padding</label>
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.linkPadding
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Link padding "
+                  {...register("linkPadding", {
+                    // max: { message: "Width must be below 100%", value: 100 },
+                    min: { message: "Width must be above 0em", value: 0 },
+                  })}
+                />{" "}
+                <span className="input-group-text">em</span>{" "}
+                {errors.linkPadding && (
+                  <div className="invalid-feedback">
+                    {errors.linkPadding.message}
+                  </div>
+                )}
+              </div>
+            </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
               <div className="input-group mb-3">
