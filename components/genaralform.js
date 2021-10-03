@@ -72,6 +72,33 @@ const GenaralForm = ({ data, update, loading }) => {
               ></textarea>
             </div>{" "}
             <div className="mb-3 ">
+              <label className="form-label">Linktree Width</label>
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.linktreeWidth
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Linktree Width "
+                  {...register("linktreeWidth", {
+                    // max: { message: "Width must be below 100%", value: 100 },
+                    min: {
+                      message: "Linktree Width must be above 0em",
+                      value: 0,
+                    },
+                  })}
+                />{" "}
+                <span className="input-group-text">px</span>{" "}
+                {errors.linktreeWidth && (
+                  <div className="invalid-feedback">
+                    {errors.linktreeWidth.message}
+                  </div>
+                )}
+              </div>
+            </div>{" "}
+            <div className="mb-3 ">
               <label className="form-label">Link padding</label>
               <div className="input-group mb-3">
                 <input

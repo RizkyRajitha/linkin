@@ -23,6 +23,7 @@ export default function Home({
   bgImgUrl,
   footerEnabled,
   linkPadding,
+  linktreeWidth,
   preview = false,
 }) {
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
@@ -39,6 +40,7 @@ export default function Home({
   footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
   linkPadding = isEmpty(linkPadding) ? "2em" : `${linkPadding}em`;
+  linktreeWidth = isEmpty(linktreeWidth) ? "320px" : `${linktreeWidth}px`;
 
   return (
     <div>
@@ -117,7 +119,7 @@ export default function Home({
 
         .wrap {
           width: 100%;
-          max-width: 320px;
+          max-width: ${linktreeWidth};
           margin: 0 auto;
         }
 
