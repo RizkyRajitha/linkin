@@ -53,6 +53,7 @@ async function seed() {
         handlerDescription:
           "Linkin is a customizable self hosted link tree platform",
         handlerDescriptionFontColor: "#ffffff",
+        linktreeWidth: "320",
         linkdata: {
           create: {
             bgColor: "#2C6BED",
