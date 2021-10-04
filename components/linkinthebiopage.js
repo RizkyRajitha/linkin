@@ -130,7 +130,12 @@ export default function Home({
         .handlerDescription {
           text-align: center;
           text-justify: inter-word;
-          color: ${handlerDescriptionFontColor};
+          background: ${handlerDescriptionFontColor};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent; 
+          -moz-background-clip: text;
+          -moz-text-fill-color: transparent;
+          // color: ${handlerDescriptionFontColor};
         }
 
         .footer {
@@ -140,7 +145,8 @@ export default function Home({
           height: 4vh;
           ${preview ? "" : "left: 0 ; "}
           //padding: 1rem;
-          background-color: ${footerBgColor};
+          background: ${footerBgColor};
+          // background-color: ${footerBgColor};
           text-align: center;
           color: ${footerTextColor};
           font-size: ${footerTextSize}px;
