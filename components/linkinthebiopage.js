@@ -51,7 +51,8 @@ export default function Home({
             <a
               className="handlerLink"
               href={`${handlerLink || "#"}`}
-              target="_blank">
+              target="_blank"
+            >
               <span className="handlerText">{handlerText}</span>
             </a>
             <p className="handlerDescription">{handlerDescription}</p>
@@ -70,7 +71,8 @@ export default function Home({
                         backgroundColor: link.bgColor || "#2c6bed",
                         color: link.textColor || "#ffffff",
                         borderRadius: `${link.borderRadius || "4"}px`,
-                      }}>
+                      }}
+                    >
                       {link.iconClass && (
                         <i className={`${link.iconClass} single_icon`}></i>
                       )}
@@ -93,7 +95,8 @@ export default function Home({
                         backgroundColor: link.bgColor || "#2c6bed",
                         color: link.textColor || "#ffffff",
                         borderRadius: `${link.borderRadius || "4"}px`,
-                      }}>
+                      }}
+                    >
                       {link.iconClass && (
                         <i className={`${link.iconClass} icon`}></i>
                       )}
@@ -119,7 +122,8 @@ export default function Home({
         jsx
         onError={(e) => {
           console.log(e);
-        }}>{`
+        }}
+      >{`
         @import url("${fontUrl}");
 
         @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
