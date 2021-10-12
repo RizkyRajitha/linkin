@@ -73,12 +73,11 @@ Linkin has 2 main branches
 
 1. [master](https://github.com/RizkyRajitha/linkin/tree/master) branch - will have the code from the latest release. only updates on a release.
 2. [dev](https://github.com/RizkyRajitha/linkin/tree/dev) branch - all the development carries out in this branch. the latest code will be available in this branch, **all the pull requests should be made to dev branch** since prs could be tested and modified for the final release phase.
-other than the above branches there can feature specific branches for the continence.
+   other than the above branches there can feature specific branches for the continence.
 
 ## Making pull request
 
 when making a pull request please create your feature branch using the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch (`checkout using dev branch`), and develop in it locally. avoid installing additional dependencies unless clarified through a maintainer. make the pr to the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch.
-
 
 ## File Structure
 
@@ -278,6 +277,8 @@ Linkin has 8 API routes
 | updatepagelinks | post   | `{"id":1,...}`                                                                                                          | `400` method not allowed <br> `200` `{ success: true, updatedLinkData:{...}}`<br> `500` `{ success: false, message: "error.message" }` |
 | deletepagelink  | post   | {id:"1"}                                                                                                                | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
 | reorderlinks    | post   | `{"orderData":[{"id":3,"name":"","orderIndex":0},{"id":1,"name":"","orderIndex":1},{"id":2,"name":"","orderIndex":2}]}` | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
+
+| Routes 5,6,7 and 8 are also implemented in [/pages/api/social] for the social link feature.
 
 ## Testing
 
