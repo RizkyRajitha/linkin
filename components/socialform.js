@@ -47,12 +47,12 @@ const LinksForm = ({ pagedataid }) => {
     // console.log(linkdata);
     setloading(true);
 
-    let operation = "insertpagelinks";
+    let operation = "insertsociallinks";
     if (socialdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
+      operation = `updatesociallinks`;
     }
 
-    if (operation === "insertpagelinks") {
+    if (operation === "insertsociallinks") {
       setisNewLinkInList(false);
     }
 
@@ -75,7 +75,7 @@ const LinksForm = ({ pagedataid }) => {
       dispatch({ type: "updateSocial", socialdata: res.updatedSocialData });
       toast.success(
         `${
-          operation === "insertpagelinks"
+          operation === "insertsociallinks"
             ? "Added new page link "
             : "Updated page link " + " successfully"
         }`,
@@ -107,7 +107,7 @@ const LinksForm = ({ pagedataid }) => {
     setloading(true);
 
     try {
-      let res = await fetch(`${endpoint}/api/social/deletepagelink`, {
+      let res = await fetch(`${endpoint}/api/social/deletesociallink`, {
         method: "POST",
         body: JSON.stringify({ id: id }),
         headers: { "Content-Type": "application/json" },
