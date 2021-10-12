@@ -31,8 +31,6 @@ export async function getServerSideProps({ req, res }) {
 const Admin = ({ pageDataSS, linkDataSS, socialDataSS }) => {
   const [pageData, setpageData] = useState(pageDataSS);
 
-  console.log(pageData);
-
   const [{ links, socialLinks }, dispatch] = useStateValue();
 
   useEffect(() => {
