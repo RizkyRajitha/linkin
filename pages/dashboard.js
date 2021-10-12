@@ -37,6 +37,10 @@ const Admin = ({ pageDataSS, linkDataSS, socialDataSS }) => {
     dispatch({
       type: "updateLink",
       linkdata: linkDataSS,
+    });
+
+    dispatch({
+      type: "updateSocial",
       socialdata: socialDataSS,
     });
   }, []);

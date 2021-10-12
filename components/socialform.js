@@ -28,7 +28,7 @@ const LinksForm = ({ pagedataid }) => {
       return;
     }
     dispatch({
-      type: "updateLink",
+      type: "updateSocial",
       socialdata: [
         ...socialLinks,
         {
@@ -72,7 +72,7 @@ const LinksForm = ({ pagedataid }) => {
         return;
       }
 
-      dispatch({ type: "updateLink", socialdata: res.updatedSocialData });
+      dispatch({ type: "updateSocial", socialdata: res.updatedSocialData });
       toast.success(
         `${
           operation === "insertpagelinks"
@@ -120,7 +120,7 @@ const LinksForm = ({ pagedataid }) => {
         setloading(false);
         return;
       }
-      dispatch({ type: "deleteLink", id: id });
+      dispatch({ type: "deleteSocial", id: id });
       toast.success(`Successfully deleted link`, { autoClose: 1000 });
     } catch (error) {
       console.log(error);
@@ -150,7 +150,7 @@ const LinksForm = ({ pagedataid }) => {
       return item;
     });
 
-    dispatch({ type: "updateLink", socialdata: updateditems });
+    dispatch({ type: "updateSocial", socialdata: updateditems });
 
     let orderData = updateditems.map((item) => {
       return {

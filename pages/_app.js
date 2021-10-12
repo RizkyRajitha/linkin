@@ -16,15 +16,29 @@ export default function App({ Component, pageProps }) {
     switch (action.type) {
       case "updateLink":
         return {
-          links: action.linkdata || state.links,
-          socialLinks: action.socialdata || state.socialLinks,
+          ...state,
+          links: action.linkdata,
         };
+
+      case "updateSocial":
+        return {
+          ...state,
+          socialLinks: action.socialdata,
+        };
+
       case "deleteLink":
         // console.log(state.links.filter((ele) => ele.id != action.id));
         return {
+          ...state,
           links: state.links.filter((ele) => ele.id != action.id),
+        };
+
+      case "deleteSocial":
+        return {
+          ...state,
           socialLinks: state.socialLinks.filter((ele) => ele.id != action.id),
         };
+
       default:
         return state;
     }
