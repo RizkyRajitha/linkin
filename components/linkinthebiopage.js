@@ -14,6 +14,7 @@ export default function Home({
   fontFamily,
   fontUrl,
   linkData,
+  socialData,
   footerText,
   footerTextSize,
   footerBgColor,
@@ -60,7 +61,7 @@ export default function Home({
           <div className="social">
             <ul>
               {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
-              {linkData.map((link, id) => {
+              {socialData.map((link, id) => {
                 return (
                   <li key={id}>
                     <a
