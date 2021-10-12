@@ -12,7 +12,7 @@ const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
 const LinksForm = ({ pagedataid }) => {
-  const [{ links }, dispatch] = useStateValue();
+  const [{ socialLinks }, dispatch] = useStateValue();
   const [loading, setloading] = useState(false);
   const [isNewLinkInList, setisNewLinkInList] = useState(false);
 
@@ -21,7 +21,7 @@ const LinksForm = ({ pagedataid }) => {
     // console.log(links[links.length - 1]);
     setisNewLinkInList(true);
 
-    let newLink = links[links.length - 1];
+    let newLink = socialLinks[socialLinks.length - 1];
 
     if (newLink && !newLink.hasOwnProperty("id")) {
       // console.log("new link on arr");
@@ -29,28 +29,26 @@ const LinksForm = ({ pagedataid }) => {
     }
     dispatch({
       type: "updateLink",
-      linkdata: [
-        ...links,
+      socialdata: [
+        ...socialLinks,
         {
           linkUrl: "",
-          displayText: "",
           pagedataid: pagedataid,
           bgColor: "#2c6bed",
           active: true,
-          textColor: "#ffffff",
           borderRadius: "4px",
         },
       ],
     });
   };
 
-  const saveLinkData = async (linkdata) => {
+  const saveLinkData = async (socialdata) => {
     // console.log("save linkdata");
     // console.log(linkdata);
     setloading(true);
 
     let operation = "insertpagelinks";
-    if (linkdata.hasOwnProperty("id")) {
+    if (socialdata.hasOwnProperty("id")) {
       operation = `updatepagelinks`;
     }
 
@@ -60,9 +58,9 @@ const LinksForm = ({ pagedataid }) => {
 
     // console.log(operation);
     try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
+      let res = await fetch(`${endpoint}/api/social/${operation}`, {
         method: "POST",
-        body: JSON.stringify(linkdata),
+        body: JSON.stringify(socialdata),
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
@@ -74,7 +72,7 @@ const LinksForm = ({ pagedataid }) => {
         return;
       }
 
-      dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
+      dispatch({ type: "updateLink", socialdata: res.updatedSocialData });
       toast.success(
         `${
           operation === "insertpagelinks"
@@ -109,7 +107,7 @@ const LinksForm = ({ pagedataid }) => {
     setloading(true);
 
     try {
-      let res = await fetch(`${endpoint}/api/deletepagelink`, {
+      let res = await fetch(`${endpoint}/api/social/deletepagelink`, {
         method: "POST",
         body: JSON.stringify({ id: id }),
         headers: { "Content-Type": "application/json" },
@@ -143,7 +141,7 @@ const LinksForm = ({ pagedataid }) => {
 
     setloading(true);
 
-    const items = Array.from(links);
+    const items = Array.from(socialLinks);
     const [reorderedItem] = items.splice(data.source.index, 1);
     items.splice(data.destination.index, 0, reorderedItem);
 
@@ -152,7 +150,7 @@ const LinksForm = ({ pagedataid }) => {
       return item;
     });
 
-    dispatch({ type: "updateLink", linkdata: updateditems });
+    dispatch({ type: "updateLink", socialdata: updateditems });
 
     let orderData = updateditems.map((item) => {
       return {
@@ -165,7 +163,7 @@ const LinksForm = ({ pagedataid }) => {
     // console.log(orderData);
 
     try {
-      let res = await fetch(`${endpoint}/api/reorderlinks`, {
+      let res = await fetch(`${endpoint}/api/social/reorderlinks`, {
         method: "POST",
         body: JSON.stringify({ orderData }),
         headers: { "Content-Type": "application/json" },
@@ -218,8 +216,8 @@ const LinksForm = ({ pagedataid }) => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {links.length > 0 &&
-                    links.map((item, index) => {
+                  {socialLinks.length > 0 &&
+                    socialLinks.map((item, index) => {
                       return (
                         <LinkCard
                           key={index}
