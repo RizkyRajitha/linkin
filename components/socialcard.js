@@ -168,20 +168,6 @@ export default function LinkCard({
                   <div className="row">
                     <div className="col">
                       <div className="mb-1 small ">
-                        <label className="form-label small ">
-                          Link Display Text Font color
-                        </label>
-                        <input
-                          type="color"
-                          className="form-control form-control-sm mb-2 form-control-color"
-                          title="Choose Link text color"
-                          placeholder="Choose Link text color"
-                          {...register("textColor")}
-                        />
-                      </div>
-                    </div>
-                    <div className="col">
-                      <div className="mb-1 small ">
                         <label className="form-label small">
                           Link background color
                         </label>
