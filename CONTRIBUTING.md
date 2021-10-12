@@ -278,7 +278,7 @@ Linkin has 8 API routes
 | deletepagelink  | post   | {id:"1"}                                                                                                                | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
 | reorderlinks    | post   | `{"orderData":[{"id":3,"name":"","orderIndex":0},{"id":1,"name":"","orderIndex":1},{"id":2,"name":"","orderIndex":2}]}` | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
 
-| Routes 5,6,7 and 8 are also implemented in [/pages/api/social] for the social link feature.
+| Routes 5,6,7 and 8 are also implemented in [/pages/api/social] changing "page" to "social" in the endpoint name, for accesing to social links feature.
 
 ## Testing
 
