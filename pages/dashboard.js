@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
-import { getPageDatawLinkData } from "../lib/dbfuncprisma";
+import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linkinthebiopage";
 import Formwrapper from "../components/formwrapper";
@@ -12,22 +12,35 @@ export async function getServerSideProps({ req, res }) {
     let valid = cookieValidate(req, res);
     let data;
     if (valid) {
-      data = await getPageDatawLinkData();
+      data = await getPageDatawLinkAndSocialData();
     }
     // console.log(data);
-    return { props: { pageDataSS: data.pageData, linkDataSS: data.linkData } };
+    return {
+      props: {
+        pageDataSS: data.pageData,
+        linkDataSS: data.linkData,
+        socialDataSS: data.socialData,
+      },
+    };
   } catch (error) {
     // console.log(error);
     return { props: { error } };
   }
 }
 
-const Admin = ({ pageDataSS, linkDataSS }) => {
+const Admin = ({ pageDataSS, linkDataSS, socialDataSS }) => {
   const [pageData, setpageData] = useState(pageDataSS);
 
-  const [{ links }, dispatch] = useStateValue();
+  console.log(pageData);
+
+  const [{ links, socialLinks }, dispatch] = useStateValue();
+
   useEffect(() => {
-    dispatch({ type: "updateLink", linkdata: linkDataSS });
+    dispatch({
+      type: "updateLink",
+      linkdata: linkDataSS,
+      socialdata: socialDataSS,
+    });
   }, []);
   // console.log(links);
 
@@ -55,6 +68,7 @@ const Admin = ({ pageDataSS, linkDataSS }) => {
           <Home
             {...pageData}
             linkData={links.filter((ele) => ele.displayText && ele.active)}
+            socialData={socialLinks.filter((ele) => ele.linkUrl && ele.active)}
             preview
           />
         </div>
