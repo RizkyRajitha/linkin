@@ -60,7 +60,6 @@ export default function Home({
           </div>
           <div className="social">
             <ul>
-              {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
               {socialData.map((link, id) => {
                 return (
                   <li key={id}>
@@ -75,7 +74,7 @@ export default function Home({
                       }}
                     >
                       {link.iconClass && (
-                        <i className={`${link.iconClass} single_icon`}></i>
+                        <i className={`${link.iconClass} single_icon fa-fw`}></i>
                       )}
                     </a>
                   </li>
@@ -207,34 +206,38 @@ export default function Home({
         }
 
         .social {
-			margin: 0 -2rem 0 -2rem;
-		}
-		.social ul {
-			list-style: none;
-			padding: 0;
-			margin: 0 auto;
-			width: fit-content;
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-			justify-content: center;
-		}
-		.social ul li {
-			margin: 7px;
-		}
-		.social_icon {
-			display: inline-block;
-			padding: 0.5rem;
-			text-align: center;
-			text-decoration: none;
-			border-radius: 4px;
-			transition: ease all 0.3s;
-			color: #fff;
-			align-items: center;
-		}
-		.social_icon:hover {
-			opacity: 0.9;
-		}
+          margin: 0 -2rem 0 -2rem;
+        }
+        .social ul {
+          list-style: none;
+          padding: 0;
+          margin: 0 auto;
+          width: fit-content;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .social ul li {
+          margin: 7px;
+        }
+
+        .social_icon {
+          display: inline-flex;
+          padding: 0.5rem;
+          text-align: center;
+          text-decoration: none;
+          border-radius: 4px;
+          transition: ease all 0.3s;
+          color: #fff;
+          align-items: center;
+        }
+
+        .social_icon:hover {
+          opacity: 0.9;
+        }
+
         .links ul {
           list-style: none;
           padding: 0;
@@ -249,7 +252,6 @@ export default function Home({
           text-align: center;
           text-decoration: none;
           border-radius: 4px;
-          transition: ease all 0.3s;
           color: #fff;
           align-items: center;
         }
@@ -263,8 +265,8 @@ export default function Home({
         }
 
         .single_icon {
-			font-size: 2rem;
-		}
+          font-size: 2rem;
+        }
 
         @media (max-width: 768px) {
           .link {

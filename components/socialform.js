@@ -76,8 +76,8 @@ const LinksForm = ({ pagedataid }) => {
       toast.success(
         `${
           operation === "insertsociallinks"
-            ? "Added new page link "
-            : "Updated page link " + " successfully"
+            ? "Added new Social Icon "
+            : "Updated Social Icon " + " successfully"
         }`,
         { autoClose: 1000 }
       );
@@ -90,7 +90,7 @@ const LinksForm = ({ pagedataid }) => {
 
   const deleteLink = async (id) => {
     let confirm = await Swal.fire({
-      title: "Delete Link",
+      title: "Delete Social Icon",
       text: "You won't be able to revert this!",
       icon: "warning",
       showCancelButton: true,
@@ -121,7 +121,7 @@ const LinksForm = ({ pagedataid }) => {
         return;
       }
       dispatch({ type: "deleteSocial", id: id });
-      toast.success(`Successfully deleted link`, { autoClose: 1000 });
+      toast.success(`Successfully deleted Social Icon`, { autoClose: 1000 });
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, { autoClose: 5000 });
@@ -206,7 +206,7 @@ const LinksForm = ({ pagedataid }) => {
               addNewLink();
             }}
           >
-            Add new link
+            Add new Social Icon
           </button>
           <DragDropContext onDragEnd={dragEndHnadler}>
             <Droppable droppableId="links" isDropDisabled={isNewLinkInList}>
