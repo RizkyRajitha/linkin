@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 // importing hook useSWR from package swr
@@ -10,7 +10,7 @@ import styles from "../styles/formwrapper.module.css";
 import ColorForm from "./colorform";
 import LinksForm from "./linksform";
 import SocialForm from "./socialform";
-import GenaralForm from "./genaralform";
+import GeneralForm from "./generalform";
 import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
@@ -27,8 +27,17 @@ const endpoint =
 function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
-  const [activeForm, setactiveForm] = useState("genaralForm");
+  const [activeForm, setactiveForm] = useState(
+    router?.query?.tab || "generalForm"
+  );
   const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    router.push({
+      pathname: "/dashboard",
+      query: { tab: activeForm },
+    });
+  }, [activeForm]);
 
   // asynchronous function to fetch data to save page data and update page
   // const savePageDataFetcher = async ([url, data]) =>
@@ -152,10 +161,10 @@ function Formwrapper({ pageData, updatedPageData }) {
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
-                  activeForm === "genaralForm" ? "active" : ""
+                  activeForm === "generalForm" ? "active" : ""
                 } `}
                 onClick={() => {
-                  setactiveForm("genaralForm");
+                  setactiveForm("generalForm");
                 }}
               >
                 General
@@ -229,8 +238,8 @@ function Formwrapper({ pageData, updatedPageData }) {
               </button> */}
             </div>
           </div>
-          {activeForm === "genaralForm" && (
-            <GenaralForm
+          {activeForm === "generalForm" && (
+            <GeneralForm
               data={pageData}
               update={savePageData}
               loading={loading}
