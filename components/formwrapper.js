@@ -9,7 +9,7 @@ import styles from "../styles/formwrapper.module.css";
 
 import ColorForm from "./colorform";
 import LinksForm from "./linksform";
-import GenaralForm from "./genaralform";
+import GeneralForm from "./generalform";
 import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
@@ -27,7 +27,7 @@ function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
   const [activeForm, setactiveForm] = useState(
-    router?.query?.tab || "genaralForm"
+    router?.query?.tab || "generalForm"
   );
   const [loading, setloading] = useState(false);
 
@@ -160,10 +160,10 @@ function Formwrapper({ pageData, updatedPageData }) {
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
-                  activeForm === "genaralForm" ? "active" : ""
+                  activeForm === "generalForm" ? "active" : ""
                 } `}
                 onClick={() => {
-                  setactiveForm("genaralForm");
+                  setactiveForm("generalForm");
                 }}
               >
                 General
@@ -226,8 +226,8 @@ function Formwrapper({ pageData, updatedPageData }) {
               </button> */}
             </div>
           </div>
-          {activeForm === "genaralForm" && (
-            <GenaralForm
+          {activeForm === "generalForm" && (
+            <GeneralForm
               data={pageData}
               update={savePageData}
               loading={loading}

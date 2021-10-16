@@ -3,7 +3,7 @@ import { isEmpty } from "../lib/side";
 
 import styles from "../styles/form.module.css";
 
-const GenaralForm = ({ data, update, loading }) => {
+const GeneralForm = ({ data, update, loading }) => {
   const {
     register,
     handleSubmit,
@@ -250,4 +250,4 @@ const GenaralForm = ({ data, update, loading }) => {
     </>
   );
 };
-export default GenaralForm;
+export default GeneralForm;
