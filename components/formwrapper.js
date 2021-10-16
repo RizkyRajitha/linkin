@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 
 // importing hook useSWR from package swr
@@ -26,8 +26,17 @@ const endpoint =
 function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
-  const [activeForm, setactiveForm] = useState("genaralForm");
+  const [activeForm, setactiveForm] = useState(
+    router?.query?.tab || "genaralForm"
+  );
   const [loading, setloading] = useState(false);
+
+  useEffect(() => {
+    router.push({
+      pathname: "/dashboard",
+      query: { tab: activeForm },
+    });
+  }, [activeForm]);
 
   // asynchronous function to fetch data to save page data and update page
   // const savePageDataFetcher = async ([url, data]) =>
