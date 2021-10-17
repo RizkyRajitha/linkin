@@ -73,12 +73,11 @@ Linkin has 2 main branches
 
 1. [master](https://github.com/RizkyRajitha/linkin/tree/master) branch - will have the code from the latest release. only updates on a release.
 2. [dev](https://github.com/RizkyRajitha/linkin/tree/dev) branch - all the development carries out in this branch. the latest code will be available in this branch, **all the pull requests should be made to dev branch** since prs could be tested and modified for the final release phase.
-other than the above branches there can feature specific branches for the continence.
+   other than the above branches there can feature specific branches for the continence.
 
 ## Making pull request
 
 when making a pull request please create your feature branch using the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch (`checkout using dev branch`), and develop in it locally. avoid installing additional dependencies unless clarified through a maintainer. make the pr to the **[dev](https://github.com/RizkyRajitha/linkin/tree/dev)** branch.
-
 
 ## File Structure
 
@@ -239,7 +238,8 @@ there are 6 forms inside the `Formwrapper`.form has been divided into this manne
 3. Colors (form that holds color details) [colorform.js](./components/colorform.js)
 4. Fonts (form that holds font details) [fontform.js](./components/fontform.js)
 5. Link Data (a form that configures links and their respective details, this form have it's how API posing to facilitate live refresh in links) [linksform.js](./components/linksform.js)
-6. Updated Password (a form that updates the password) [passwordchangeform.js](./components/passwordchangeform.js)
+6. Social Data (a form that configures **social** links and their respective details, this form have it's how API posing to facilitate live refresh in links) [socialform.js](./components/socialform.js)
+7. Updated Password (a form that updates the password) [passwordchangeform.js](./components/passwordchangeform.js)
 
 #### Preview
 
@@ -257,16 +257,24 @@ Linkin levarages next js built-in [api-routes](https://nextjs.org/docs/api-route
 this removes the requirement of additional API deployment, making Linkin cleaner and easier to deploy.
 all the API routes live in [/pages/api/](./pages/api/) directory.
 
-Linkin has 8 API routes
+Linkin has 12 API routes:
 
 1. login [login.js](./pages/api/login.js)
 2. logout [logout.js](./pages/api/logout.js)
 3. changepassword [changepassword.js](./pages/api/changepassword.js)
 4. updatepagedata [updatepagedata.js](./pages/api/updatepagedata.js)
-5. insertpagelinks [insertpagelinks.js](./pages/api/insertpagelinks.js)
-6. updatepagelinks [updatepagelinks.js](./pages/api/updatepagelinks.js)
-7. deletepagelink [deletepagelink.js](./pages/api/deletepagelink.js)
-8. reorderlinks [reorderlinks.js](./pages/api/reorderlinks.js)
+5. insertlinks
+   - For pages form: [insertlinks.js](./pages/api/pages/insertlinks.js)
+   - For social form: [insertlinks.js](./pages/api/social/insertlinks.js)
+6. updatelinks
+   - For pages form: [updatelinks.js](./pages/api/pages/updatelinks.js)
+   - For social form: [updatelinks.js](./pages/api/social/updatelinks.js)
+7. deletelink
+   - For pages form: [deletelink.js](./pages/api/pages/deletelink.js)
+   - For social form: [deletelink.js](./pages/api/social/deletelink.js)
+8. reorderlinks
+   - For pages form [reorderlinks.js](./pages/api/pages/reorderlinks.js)
+   - For social form [reorderlinks.js](./pages/api/social/reorderlinks.js)
 
 | API             | method | data                                                                                                                    | response                                                                                                                               |
 | --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
@@ -278,8 +286,6 @@ Linkin has 8 API routes
 | updatepagelinks | post   | `{"id":1,...}`                                                                                                          | `400` method not allowed <br> `200` `{ success: true, updatedLinkData:{...}}`<br> `500` `{ success: false, message: "error.message" }` |
 | deletepagelink  | post   | {id:"1"}                                                                                                                | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
 | reorderlinks    | post   | `{"orderData":[{"id":3,"name":"","orderIndex":0},{"id":1,"name":"","orderIndex":1},{"id":2,"name":"","orderIndex":2}]}` | `400` method not allowed <br> `200` `{ success: true }` <br> `500` `{ success: false, message: "error.message" }`                      |
-
-Routes 5,6,7 and 8 are also implemented in [/pages/api/social] changing "page" to "social" in the endpoint name, for accesing to social links feature.
 
 ## Testing
 
