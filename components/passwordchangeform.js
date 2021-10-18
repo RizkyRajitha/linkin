@@ -28,7 +28,7 @@ const PasswordChangeForm = () => {
     setloading(true);
 
     try {
-      let res = await fetch(`${endpoint}/api/changepassword`, {
+      let res = await fetch(`${endpoint}/api/user/changepassword`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: { "Content-Type": "application/json" },
@@ -54,7 +54,9 @@ const PasswordChangeForm = () => {
 
   const logout = async () => {
     try {
-      let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
+      let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
+        res.json()
+      );
       console.log(res);
 
       if (res.success) {
