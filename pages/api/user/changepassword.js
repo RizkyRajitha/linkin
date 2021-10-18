@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
-import { jwtAuth, use } from "../../middleware/middleware";
-import { changePassword, getUser } from "../../lib/dbfuncprisma";
+import { jwtAuth, use } from "../../../middleware/middleware";
+import { changePassword, getUser } from "../../../lib/dbfuncprisma";
 
 const saltRounds = 10;
 
