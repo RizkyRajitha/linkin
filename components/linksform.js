@@ -49,18 +49,18 @@ const LinksForm = ({ pagedataid }) => {
     // console.log(linkdata);
     setloading(true);
 
-    let operation = "insertpagelinks";
+    let operation = "insertlinks";
     if (linkdata.hasOwnProperty("id")) {
-      operation = `updatepagelinks`;
+      operation = `updatelinks`;
     }
 
-    if (operation === "insertpagelinks") {
+    if (operation === "insertlinks") {
       setisNewLinkInList(false);
     }
 
     // console.log(operation);
     try {
-      let res = await fetch(`${endpoint}/api/${operation}`, {
+      let res = await fetch(`${endpoint}/api/pages/${operation}`, {
         method: "POST",
         body: JSON.stringify(linkdata),
         headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ const LinksForm = ({ pagedataid }) => {
       dispatch({ type: "updateLink", linkdata: res.updatedLinkData });
       toast.success(
         `${
-          operation === "insertpagelinks"
+          operation === "insertlinks"
             ? "Added new page link "
             : "Updated page link " + " successfully"
         }`,
@@ -109,7 +109,7 @@ const LinksForm = ({ pagedataid }) => {
     setloading(true);
 
     try {
-      let res = await fetch(`${endpoint}/api/deletepagelink`, {
+      let res = await fetch(`${endpoint}/api/pages/deletelink`, {
         method: "POST",
         body: JSON.stringify({ id: id }),
         headers: { "Content-Type": "application/json" },
@@ -165,7 +165,7 @@ const LinksForm = ({ pagedataid }) => {
     // console.log(orderData);
 
     try {
-      let res = await fetch(`${endpoint}/api/reorderlinks`, {
+      let res = await fetch(`${endpoint}/api/pages/reorderlinks`, {
         method: "POST",
         body: JSON.stringify({ orderData }),
         headers: { "Content-Type": "application/json" },
