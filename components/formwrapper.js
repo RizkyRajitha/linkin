@@ -100,11 +100,13 @@ function Formwrapper({ pageData, updatedPageData }) {
   // the logout function was previously asynchronous
   const logout = async () => {
     try {
-      // const { res } = useSWR(`${endpoint}/api/logout`, logOutFetcher);
+      // const { res } = useSWR(`${endpoint}/api/user/logout`, logOutFetcher);
       /*
       the following piece of code has been replaced with the implementation of useSWR hook above
       */
-      let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
+      let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
+        res.json()
+      );
       console.log(res);
 
       if (res.success) {
