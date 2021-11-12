@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
 import { cookieValidate } from "../middleware/middleware";
-import Home from "../components/linkinthebiopage";
+import Home from "../components/linktree";
 import Formwrapper from "../components/formwrapper";
 import { useStateValue } from "../components/context/state";
 

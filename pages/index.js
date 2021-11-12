@@ -1,5 +1,5 @@
 import Head from "next/head";
-import LinkinTheBioPage from "../components/linkinthebiopage";
+import LinkinTheBioPage from "../components/linktree";
 import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
 
 export async function getServerSideProps() {

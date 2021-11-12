@@ -1,4 +1,4 @@
-import { isEmpty } from "../lib/side";
+import { isEmpty, isHex } from "../lib/side";
 // import Image from "next/image";
 
 export default function Home({
@@ -27,6 +27,10 @@ export default function Home({
   linktreeWidth,
   preview = false,
 }) {
+  let linkPaddingLowWidth = isEmpty(linkPadding)
+    ? "2em"
+    : `${linkPadding * 0.5}em`;
+
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
   avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
   avatarBorderColor = isEmpty(avatarBorderColor) ? "#fff" : avatarBorderColor;
@@ -38,7 +42,7 @@ export default function Home({
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
   footerTextSize = isEmpty(footerTextSize) ? 12 : footerTextSize;
-  footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
+  footerBgColor = isEmpty(footerBgColor) ? "" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
   linkPadding = isEmpty(linkPadding) ? "2em" : `${linkPadding}em`;
   linktreeWidth = isEmpty(linktreeWidth) ? "320px" : `${linktreeWidth}px`;
@@ -49,13 +53,16 @@ export default function Home({
         <div className="wrap">
           <div className="profile">
             {!isEmpty(avatarUrl) && <img src={avatarUrl} className="photo" />}
-            <a
-              className="handlerLink"
-              href={`${handlerLink || "#"}`}
-              target="_blank"
-            >
-              <span className="handlerText">{handlerText}</span>
-            </a>
+            <span className="handlerText">
+              <a
+                className="handlerLink"
+                href={`${handlerLink || "#"}`}
+                target="_blank"
+              >
+                {handlerText}{" "}
+              </a>
+            </span>
+
             <p className="handlerDescription">{handlerDescription}</p>
           </div>
           <div className="social">
@@ -74,7 +81,9 @@ export default function Home({
                       }}
                     >
                       {link.iconClass && (
-                        <i className={`${link.iconClass} single_icon fa-fw`}></i>
+                        <i
+                          className={`${link.iconClass} single_icon fa-fw`}
+                        ></i>
                       )}
                     </a>
                   </li>
@@ -110,13 +119,13 @@ export default function Home({
             </ul>
           </div>
         </div>
+        {footerEnabled && (
+          <div className="footer d-flex align-items-center justify-content-center">
+            {/* Copyright © 2021 All Rights Reserved by. */}
+            {footerText}
+          </div>
+        )}
       </div>
-      {footerEnabled && (
-        <div className="footer d-flex align-items-center justify-content-center">
-          {/* Copyright © 2021 All Rights Reserved by. */}
-          {footerText}
-        </div>
-      )}
 
       <style
         jsx
@@ -130,9 +139,11 @@ export default function Home({
 
         .outterwrap {
           margin: 0;
-          padding: 15px;
+          // padding: 15px;
+          padding-top:2vh ;
           height: 100%;
-          min-height: ${footerEnabled ? "96vh" : "100vh"};
+          min-height: "100vh";
+          // min-height: ${footerEnabled ? "96vh" : "100vh"};
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
@@ -143,8 +154,11 @@ export default function Home({
         }
 
         .wrap {
+          min-height: ${footerEnabled ? "94vh" : "100vh"};
+          height: 100%;
           width: 100%;
           max-width: ${linktreeWidth};
+          padding: 0  1em 0 1em;
           margin: 0 auto;
         }
 
@@ -164,7 +178,7 @@ export default function Home({
         }
 
         .footer {
-          position: absolute;
+          // position: absolute;
           right: 0;
           // bottom: 0;
           height: 4vh;
@@ -175,7 +189,7 @@ export default function Home({
           text-align: center;
           color: ${footerTextColor};
           font-size: ${footerTextSize}px;
-          width: ${preview ? "40%" : "100%"};
+          // width: ${preview ? "40%" : "100%"};
         }
 
         a {
@@ -206,7 +220,7 @@ export default function Home({
         }
 
         .social {
-          margin: 0 -2rem 0 -2rem;
+          // margin: 0 -2rem 0 -2rem;
         }
         .social ul {
           list-style: none;
@@ -270,7 +284,8 @@ export default function Home({
 
         @media (max-width: 768px) {
           .link {
-            padding: 1.2rem;
+            padding : ${linkPaddingLowWidth};
+            // padding: 1.2rem;
           }
       `}</style>
     </div>

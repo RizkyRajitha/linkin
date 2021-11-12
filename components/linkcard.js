@@ -37,6 +37,8 @@ export default function LinkCard({
       reset(item);
       setCardInfo(item);
     }
+    // logic to test comment settings data and reset
+    // reset(item);
   }, [item]);
 
   watch((data, { type }) => {
