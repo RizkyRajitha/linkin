@@ -6,15 +6,15 @@
 
 ## Linkin is a customizable self-hosted link tree application.
 
-### 100% Free and Open Source 💯
+### Free and Open Source 💯
 
 ### Self Hosted, you own your data 💽
 
-### Customize your link tree with few clicks with a feature-rich dashboard 🤖
+### Customize your link tree with few clicks using a feature-rich dashboard 🤖
 
 ### SEO friendly design built using Next js 🕸️
 
-### Supports 3 one-click deploy hosting providers 🚀
+### Supports one-click deploy using multiple cloud providers 🚀
 
 <br>
 
