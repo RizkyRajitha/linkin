@@ -39,6 +39,15 @@ export default function LinkCard({
     }
     // logic to test comment settings data and reset
     // reset(item);
+    if (
+      cardInfo.borderRadius !== item.borderRadius ||
+      cardInfo.textColor !== item.textColor ||
+      cardInfo.bgColor !== item.bgColor
+    ) {
+      // console.log("reset after common settings change");
+      reset(item);
+      setCardInfo(item);
+    }
   }, [item]);
 
   watch((data, { type }) => {
