@@ -1,4 +1,4 @@
-import { isEmpty } from "../lib/side";
+import { isEmpty, isHex } from "../lib/side";
 // import Image from "next/image";
 
 export default function Home({
@@ -8,11 +8,13 @@ export default function Home({
   avatarUrl,
   accentColor,
   avatarwidth,
+  avatarBorderColor,
   handlerFontSize,
   handlerFontColor,
   fontFamily,
   fontUrl,
   linkData,
+  socialData,
   footerText,
   footerTextSize,
   footerBgColor,
@@ -21,10 +23,17 @@ export default function Home({
   handlerDescription,
   bgImgUrl,
   footerEnabled,
+  linkPadding,
+  linktreeWidth,
   preview = false,
 }) {
+  let linkPaddingLowWidth = isEmpty(linkPadding)
+    ? "2em"
+    : `${linkPadding * 0.5}em`;
+
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
   avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
+  avatarBorderColor = isEmpty(avatarBorderColor) ? "#fff" : avatarBorderColor;
   handlerFontSize = isEmpty(handlerFontSize) ? "15" : handlerFontSize;
   handlerFontColor = isEmpty(handlerFontColor) ? "#fff" : handlerFontColor;
   bgColor = isEmpty(bgColor) ? "#fff" : bgColor;
@@ -33,20 +42,10 @@ export default function Home({
     ? "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
     : fontUrl;
   footerTextSize = isEmpty(footerTextSize) ? 12 : footerTextSize;
-  footerBgColor = isEmpty(footerBgColor) ? "#000000" : footerBgColor;
+  footerBgColor = isEmpty(footerBgColor) ? "" : footerBgColor;
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
-
-  // console.log(
-  //   linkData
-  //     .map((ele, id) => {
-  //       return `
-  //   .link-${id} {
-  //   background-color: ${ele.bgColor};
-  //   color: ${ele.textColor || "#ffffff"};
-  // }`;
-  //     })
-  //     .join()
-  // );
+  linkPadding = isEmpty(linkPadding) ? "2em" : `${linkPadding}em`;
+  linktreeWidth = isEmpty(linktreeWidth) ? "320px" : `${linktreeWidth}px`;
 
   return (
     <div>
@@ -54,18 +53,46 @@ export default function Home({
         <div className="wrap">
           <div className="profile">
             {!isEmpty(avatarUrl) && <img src={avatarUrl} className="photo" />}
-            <a
-              className="handlerLink"
-              href={`${handlerLink || "#"}`}
-              target="_blank"
-            >
-              <span className="handlerText">{handlerText}</span>
-            </a>
+            <span className="handlerText">
+              <a
+                className="handlerLink"
+                href={`${handlerLink || "#"}`}
+                target="_blank"
+              >
+                {handlerText}{" "}
+              </a>
+            </span>
+
             <p className="handlerDescription">{handlerDescription}</p>
+          </div>
+          <div className="social">
+            <ul>
+              {socialData.map((link, id) => {
+                return (
+                  <li key={id}>
+                    <a
+                      href={`${link.linkUrl || "#"}`}
+                      className="social_icon"
+                      target="_blank"
+                      style={{
+                        backgroundColor: link.bgColor || "#2c6bed",
+                        color: link.textColor || "#ffffff",
+                        borderRadius: `${link.borderRadius || "4"}px`,
+                      }}
+                    >
+                      {link.iconClass && (
+                        <i
+                          className={`${link.iconClass} single_icon fa-fw`}
+                        ></i>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
           <div className="links">
             <ul>
-              {/* {[...linkData, ...linkData, ...linkData].map((element, id) => { */}
               {linkData.map((link, id) => {
                 return (
                   <li key={id}>
@@ -92,13 +119,13 @@ export default function Home({
             </ul>
           </div>
         </div>
+        {footerEnabled && (
+          <div className="footer d-flex align-items-center justify-content-center">
+            {/* Copyright © 2021 All Rights Reserved by. */}
+            {footerText}
+          </div>
+        )}
       </div>
-      {footerEnabled && (
-        <div className="footer d-flex align-items-center justify-content-center">
-          {/* Copyright © 2021 All Rights Reserved by. */}
-          {footerText}
-        </div>
-      )}
 
       <style
         jsx
@@ -112,9 +139,11 @@ export default function Home({
 
         .outterwrap {
           margin: 0;
-          padding: 15px;
+          // padding: 15px;
+          padding-top:2vh ;
           height: 100%;
-          min-height: ${footerEnabled ? "96vh" : "100vh"};
+          min-height: "100vh";
+          // min-height: ${footerEnabled ? "96vh" : "100vh"};
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
@@ -125,8 +154,11 @@ export default function Home({
         }
 
         .wrap {
+          min-height: ${footerEnabled ? "94vh" : "100vh"};
+          height: 100%;
           width: 100%;
-          max-width: 320px;
+          max-width: ${linktreeWidth};
+          padding: 0  1em 0 1em;
           margin: 0 auto;
         }
 
@@ -137,21 +169,27 @@ export default function Home({
         .handlerDescription {
           text-align: center;
           text-justify: inter-word;
-          color: ${handlerDescriptionFontColor};
+          background: ${handlerDescriptionFontColor};
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent; 
+          -moz-background-clip: text;
+          -moz-text-fill-color: transparent;
+          // color: ${handlerDescriptionFontColor};
         }
 
         .footer {
-          position: absolute;
+          // position: absolute;
           right: 0;
           // bottom: 0;
           height: 4vh;
           ${preview ? "" : "left: 0 ; "}
           //padding: 1rem;
-          background-color: ${footerBgColor};
+          background: ${footerBgColor};
+          // background-color: ${footerBgColor};
           text-align: center;
           color: ${footerTextColor};
           font-size: ${footerTextSize}px;
-          width: ${preview ? "40%" : "100%"};
+          // width: ${preview ? "40%" : "100%"};
         }
 
         a {
@@ -171,7 +209,7 @@ export default function Home({
           border-radius: 50%;
           width: ${avatarwidth}%;
           padding: 4px;
-          background: #fff;
+          background: ${avatarBorderColor};
         }
 
         .handlerText {
@@ -179,6 +217,39 @@ export default function Home({
           font-weight: bold;
           display: block;
           font-size: ${handlerFontSize}px;
+        }
+
+        .social {
+          // margin: 0 -2rem 0 -2rem;
+        }
+        .social ul {
+          list-style: none;
+          padding: 0;
+          margin: 0 auto;
+          width: fit-content;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .social ul li {
+          margin: 7px;
+        }
+
+        .social_icon {
+          display: inline-flex;
+          padding: 0.5rem;
+          text-align: center;
+          text-decoration: none;
+          border-radius: 4px;
+          transition: ease all 0.3s;
+          color: #fff;
+          align-items: center;
+        }
+
+        .social_icon:hover {
+          opacity: 0.9;
         }
 
         .links ul {
@@ -190,12 +261,11 @@ export default function Home({
           margin: 14px 0;
         }
         .link {
-          padding: 2rem;
+          padding: ${linkPadding};
           display: flex;
           text-align: center;
           text-decoration: none;
           border-radius: 4px;
-          transition: ease all 0.3s;
           color: #fff;
           align-items: center;
         }
@@ -207,6 +277,16 @@ export default function Home({
           // padding: 1rem;
           font-size: 1.7rem;
         }
+
+        .single_icon {
+          font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+          .link {
+            padding : ${linkPaddingLowWidth};
+            // padding: 1.2rem;
+          }
       `}</style>
     </div>
   );

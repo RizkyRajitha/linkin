@@ -1,5 +1,5 @@
 const path = require("path");
-const Prisma = require("../db/dbconprisma");
+const { default: Prisma } = require("../db/dbconprisma");
 
 require("dotenv").config({
   path: path.join(__dirname, "../", ".env"),
@@ -12,14 +12,54 @@ const {
 } = require("../lib/dbfuncprisma");
 
 describe("page data functions", () => {
+  beforeAll(async () => {
+    await Prisma.linkdata.deleteMany();
+    await Prisma.pagedata.deleteMany();
+    await Prisma.pagedata.create({
+      data: {
+        id: 1,
+        avatarUrl:
+          "https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png",
+        avatarwidth: "50",
+        bgColor: "#7ea2ff",
+        accentColor: "#bdd7ff",
+        handlerText: "LinkIn",
+        footerText: "Powered by Linkin",
+        handlerFontSize: "20",
+        handlerFontColor: "#ffffff",
+      },
+    });
+
+    await Prisma.linkdata.createMany({
+      data: [
+        {
+          pagedataid: 1,
+          iconClass: "fas fa-link",
+          displayText: "Welcome to LinkIn",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          active: true,
+        },
+        {
+          pagedataid: 1,
+          iconClass: "fas fa-link",
+          displayText: "Inactive",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          active: false,
+        },
+      ],
+    });
+  });
+
   beforeEach(() => {
     jest.spyOn(console, "log").mockImplementation(() => {});
   });
   afterAll(async () => {
-    await Prisma.default.$disconnect();
+    await Prisma.$disconnect();
   });
 
-  test("get page data ", async () => {
+  test("get pagedata ", async () => {
     let { pageData } = await getPageData();
     const expectedUser = {
       id: 1,
@@ -38,9 +78,8 @@ describe("page data functions", () => {
     expect(pageData).toMatchObject(expectedUser);
   });
 
-  test("get page data with links data with active links", async () => {
+  test("get page data with all links data", async () => {
     let pageDatawLinks = await getPageDatawLinkData();
-    console.log(pageDatawLinks);
     const expectedPageDataWLinks = {
       pageData: {
         id: 1,
@@ -62,22 +101,34 @@ describe("page data functions", () => {
       },
       linkData: [
         {
-          id: 1,
           pagedataid: 1,
           iconClass: "fas fa-link",
           displayText: "Welcome to LinkIn",
           linkUrl: "https://github.com/RizkyRajitha/linkin",
           bgColor: "#2C6BED",
           active: true,
+          accentColor: null,
+          borderRadius: null,
+          textColor: null,
+        },
+        {
+          pagedataid: 1,
+          iconClass: "fas fa-link",
+          displayText: "Inactive",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          active: false,
+          accentColor: null,
+          borderRadius: null,
+          textColor: null,
         },
       ],
     };
     expect(pageDatawLinks).toMatchObject(expectedPageDataWLinks);
   });
 
-  test("get page data with links data without active links", async () => {
+  test("get page data with only active links", async () => {
     let pageDatawLinks = await getPageDatawLinkData(false);
-    //console.info(pageDatawLinks);
     const expectedPageDataWLinks = {
       pageData: {
         id: 1,
@@ -99,13 +150,15 @@ describe("page data functions", () => {
       },
       linkData: [
         {
-          id: 1,
           pagedataid: 1,
           iconClass: "fas fa-link",
           displayText: "Welcome to LinkIn",
           linkUrl: "https://github.com/RizkyRajitha/linkin",
           bgColor: "#2C6BED",
           active: true,
+          accentColor: null,
+          borderRadius: null,
+          textColor: null,
         },
       ],
     };
@@ -131,38 +184,8 @@ describe("page data functions", () => {
       fontFamily: "Roboto",
     };
 
-    //let updatedPageData = await updatePageData(beforUpdatePageData);
     await updatePageData(beforUpdatePageData);
     let updatedPageData = await getPageData();
-    //console.info(updatedPageData);
-
-    expect(updatedPageData.pageData).toMatchObject(beforUpdatePageData);
-  });
-
-  test("revert Updated page data", async () => {
-    let beforUpdatePageData = {
-      id: 1,
-      avatarUrl:
-        "https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png",
-      avatarheight: null,
-      avatarwidth: "50",
-      bgColor: "#7ea2ff",
-      accentColor: "#bdd7ff",
-      handlerText: "LinkIn",
-      handlerLink: null,
-      footerText: 'Powered by Linkin',
-      bgImgUrl: null,
-      handlerFontSize: "20",
-      handlerFontColor: "#ffffff",
-      active: true,
-      fontFamily: null,
-      fontUrl: null,
-    };
-
-    //let updatedPageData = await updatePageData(beforUpdatePageData);
-    await updatePageData(beforUpdatePageData);
-    let updatedPageData = await getPageData();
-    //console.info(updatedPageData);
 
     expect(updatedPageData.pageData).toMatchObject(beforUpdatePageData);
   });

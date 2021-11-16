@@ -3,7 +3,7 @@ import { isEmpty } from "../lib/side";
 
 import styles from "../styles/form.module.css";
 
-const GenaralForm = ({ data, update, loading }) => {
+const GeneralForm = ({ data, update, loading }) => {
   const {
     register,
     handleSubmit,
@@ -70,7 +70,58 @@ const GenaralForm = ({ data, update, loading }) => {
                 rows="3"
                 {...register("handlerDescription")}
               ></textarea>
-            </div>
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Linktree Width</label>
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.linktreeWidth
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Linktree Width "
+                  {...register("linktreeWidth", {
+                    // max: { message: "Width must be below 100%", value: 100 },
+                    min: {
+                      message: "Linktree Width must be above 0em",
+                      value: 0,
+                    },
+                  })}
+                />{" "}
+                <span className="input-group-text">px</span>{" "}
+                {errors.linktreeWidth && (
+                  <div className="invalid-feedback">
+                    {errors.linktreeWidth.message}
+                  </div>
+                )}
+              </div>
+            </div>{" "}
+            <div className="mb-3 ">
+              <label className="form-label">Link padding</label>
+              <div className="input-group mb-3">
+                <input
+                  type="number"
+                  className={
+                    errors.linkPadding
+                      ? "form-control is-invalid"
+                      : "form-control"
+                  }
+                  placeholder="Enter Link padding "
+                  {...register("linkPadding", {
+                    // max: { message: "Width must be below 100%", value: 100 },
+                    min: { message: "Padding must be above 0em", value: 0 },
+                  })}
+                />{" "}
+                <span className="input-group-text">em</span>{" "}
+                {errors.linkPadding && (
+                  <div className="invalid-feedback">
+                    {errors.linkPadding.message}
+                  </div>
+                )}
+              </div>
+            </div>{" "}
             <div className="mb-3 ">
               <label className="form-label">Avatar width</label>
               <div className="input-group mb-3">
@@ -199,4 +250,4 @@ const GenaralForm = ({ data, update, loading }) => {
     </>
   );
 };
-export default GenaralForm;
+export default GeneralForm;

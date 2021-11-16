@@ -1,6 +1,5 @@
-import { jwtAuth, use } from "../../middleware/middleware";
-import { getLinkData, insertPageLinks } from "../../lib/dbfuncprisma";
-
+import { jwtAuth, use } from "../../../middleware/middleware";
+import { getSocialData, insertSocialLinks } from "../../../lib/dbfuncprisma";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -13,9 +12,9 @@ async function handler(req, res) {
     await use(req, res, jwtAuth);
     // console.log(req.body);
 
-    await insertPageLinks(req.body);
+    await insertSocialLinks(req.body);
 
-    let updatedLinkData = await getLinkData();
+    let updatedSocialData = await getSocialData();
 
     // mock loading times for testing
     // await new Promise((resolve, reject) =>
@@ -25,11 +24,14 @@ async function handler(req, res) {
     // );
 
     // console.log(updatedPageData);
-    res.json({ success: true, updatedLinkData: updatedLinkData.linkData });
+    res.json({
+      success: true,
+      updatedSocialData: updatedSocialData.socialData,
+    });
   } catch (error) {
     console.log(error.message);
 
-    res.status(500).send(error.message);
+    res.status(500).json({ success: false, message: error.message });
   }
 }
 

@@ -1,4 +1,4 @@
-name: Code-Coverage
+name: Code Coverage
 
 on: [push, pull_request]
 
@@ -26,18 +26,18 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
 
-    strategy:
-      matrix:
-        node-version: [14.x]
+    # strategy:
+    #   matrix:
+    #     node-version: [14.x]
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js 14.x
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 14.x
 
       - name: Cache node modules
         uses: actions/cache@v2

@@ -1,6 +1,6 @@
 {
   "name": "linkin",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "license": "MIT",
   "description": "Linkin is a customizable self hosted link tree application",
@@ -18,7 +18,7 @@
     "prismamigrateprod": "prisma migrate deploy",
     "herokustart": "next start -p $PORT",
     "build-next": "next build",
-    "test": "jest --coverage ./__tests__/"
+    "test": "jest --coverage -i ./__tests__/"
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",
@@ -32,10 +32,12 @@
     "npm-run-all": "^4.1.5",
     "pg": "^8.6.0",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.4.2",
     "react-toastify": "^7.0.4",
-    "sweetalert2": "^11.0.16"
+    "sweetalert2": "^11.0.16",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.31.0",

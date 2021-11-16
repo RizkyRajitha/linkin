@@ -1,16 +1,19 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+
+// importing hook useSWR from package swr
+// import useSWR from "swr";
 
 import styles from "../styles/formwrapper.module.css";
 
 import ColorForm from "./colorform";
 import LinksForm from "./linksform";
-import GenaralForm from "./genaralform";
+import SocialForm from "./socialform";
+import GeneralForm from "./generalform";
 import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
-
-import { ToastContainer, toast } from "react-toastify";
 
 const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -24,13 +27,38 @@ const endpoint =
 function Formwrapper({ pageData, updatedPageData }) {
   const router = useRouter();
 
-  const [activeForm, setactiveForm] = useState("genaralForm");
+  const [activeForm, setactiveForm] = useState(
+    router?.query?.tab || "generalForm"
+  );
   const [loading, setloading] = useState(false);
 
+  useEffect(() => {
+    router.push({
+      pathname: "/dashboard",
+      query: { tab: activeForm },
+    });
+  }, [activeForm]);
+
+  // asynchronous function to fetch data to save page data and update page
+  // const savePageDataFetcher = async ([url, data]) =>
+  //   await fetch(url, {
+  //     method: "POST",
+  //     body: JSON.stringify(data),
+  //     headers: { "Content-Type": "application/json" },
+  //   }).then((res) => res.json());
+
+  // savePageData was previously asynchronous
   const savePageData = async (data) => {
     setloading(true);
-
     try {
+      // const { res } = useSWR(
+      //   [`${endpoint}/api/updatepagedata`, data],
+      //   savePageDataFetcher
+      // );
+      /*
+      the following piece of code has been replaced with the implementation of useSWR hook above
+
+      */
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -40,58 +68,45 @@ function Formwrapper({ pageData, updatedPageData }) {
       if (!res.success) {
         if (res.message === "invalid_credential") {
           toast.error(`User creadentials are not valid`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         } else {
           toast.error(`Error ${res.message}`, {
-            position: "bottom-left",
             autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
           });
         }
         setloading(false);
         return;
       }
 
-      toast.success(`successfully update page`, {
-        position: "bottom-left",
+      toast.success(`Successfully update page`, {
         autoClose: 1000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
 
       updatedPageData(res.updatedPageData);
     } catch (error) {
       console.log(error);
       toast.error(`Error : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
     setloading(false);
   };
 
+  // asynchronous function to fetch logout data
+  // const logOutFetcher = async (url) =>
+  //   await fetch(url).then((res) => res.json());
+
+  // the logout function was previously asynchronous
   const logout = async () => {
     try {
-      let res = await fetch(`${endpoint}/api/logout`).then((res) => res.json());
+      // const { res } = useSWR(`${endpoint}/api/user/logout`, logOutFetcher);
+      /*
+      the following piece of code has been replaced with the implementation of useSWR hook above
+      */
+      let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
+        res.json()
+      );
       console.log(res);
 
       if (res.success) {
@@ -99,13 +114,7 @@ function Formwrapper({ pageData, updatedPageData }) {
       }
     } catch (error) {
       toast.error(`Logout Error  : ${error.message}`, {
-        position: "bottom-left",
         autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
       });
     }
   };
@@ -115,7 +124,7 @@ function Formwrapper({ pageData, updatedPageData }) {
       <div className={styles.dashform}>
         <div className="d-flex justify-content-end mb-4">
           {version !== "" && (
-            <div className="d-flex justify-content-start flex-grow-1 ms-2 mt-2 ">
+            <div className="d-flex justify-content-start align-items-center flex-grow-1 ms-2 mt-2 ">
               <span>{`v ${version}`}</span>
             </div>
           )}
@@ -154,10 +163,10 @@ function Formwrapper({ pageData, updatedPageData }) {
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
-                  activeForm === "genaralForm" ? "active" : ""
+                  activeForm === "generalForm" ? "active" : ""
                 } `}
                 onClick={() => {
-                  setactiveForm("genaralForm");
+                  setactiveForm("generalForm");
                 }}
               >
                 General
@@ -206,6 +215,17 @@ function Formwrapper({ pageData, updatedPageData }) {
               >
                 Links
               </button>{" "}
+              <button
+                type="button"
+                className={`btn btn-outline-primary ${
+                  activeForm === "socialForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("socialForm");
+                }}
+              >
+                Social
+              </button>{" "}
               {/* <button
                 type="button"
                 className="btn btn-outline-primary"
@@ -220,8 +240,8 @@ function Formwrapper({ pageData, updatedPageData }) {
               </button> */}
             </div>
           </div>
-          {activeForm === "genaralForm" && (
-            <GenaralForm
+          {activeForm === "generalForm" && (
+            <GeneralForm
               data={pageData}
               update={savePageData}
               loading={loading}
@@ -245,11 +265,13 @@ function Formwrapper({ pageData, updatedPageData }) {
             <FontForm data={pageData} update={savePageData} loading={loading} />
           )}
           {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
+          {activeForm === "socialForm" && (
+            <SocialForm pagedataid={pageData.id} />
+          )}
           {activeForm === "passwordchangeform" && <PasswordChangeForm />}
         </div>
         <ToastContainer
           position="bottom-left"
-          autoClose={5000}
           hideProgressBar={true}
           newestOnTop={false}
           closeOnClick

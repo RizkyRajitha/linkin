@@ -1,21 +1,27 @@
 import Head from "next/head";
-import LinkinTheBioPage from "../components/linkinthebiopage";
-import { getPageDatawLinkData } from "../lib/dbfuncprisma";
+import LinkinTheBioPage from "../components/linktree";
+import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
 
 export async function getServerSideProps() {
   let data;
   //console.log(process.env);
   try {
-    data = await getPageDatawLinkData(false);
+    data = await getPageDatawLinkAndSocialData(false);
     // console.log(data);
   } catch (error) {
     console.log(error.message);
   }
 
-  return { props: { pageData: data.pageData, linkData: data.linkData } };
+  return {
+    props: {
+      pageData: data.pageData,
+      linkData: data.linkData,
+      socialData: data.socialData,
+    },
+  };
 }
 
-export default function Home({ pageData, linkData }) {
+export default function Home({ pageData, linkData, socialData }) {
   return (
     <>
       <Head>
@@ -33,7 +39,11 @@ export default function Home({ pageData, linkData }) {
         <meta name="og:image" content={pageData.avatarUrl} />
       </Head>
 
-      <LinkinTheBioPage {...pageData} linkData={linkData} />
+      <LinkinTheBioPage
+        {...pageData}
+        linkData={linkData}
+        socialData={socialData}
+      />
     </>
   );
 }

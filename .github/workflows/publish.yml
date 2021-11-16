@@ -1,0 +1,29 @@
+name: Publish
+# Only trigger, when the build workflow succeeded
+
+on:
+  workflow_run:
+    workflows: ["Code Coverage"]
+    branches: [master]
+    types:
+      - completed
+      # - requested
+jobs:
+  Publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build docker container
+        run: docker build . -t ghcr.io/$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')/linkin:latest -t ghcr.io/$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')/linkin:$(echo $GITHUB_SHA | head -c7)
+
+      - name: Login to docker
+        run: echo  ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{github.actor}} --password-stdin
+
+      - name: Push
+        run: docker push ghcr.io/$(echo $GITHUB_ACTOR | tr '[:upper:]' '[:lower:]')/linkin:latest
+# docker build . -t ghcr.io/aa/linkin:latest -t ghcr.io/aa/linkin:${echo $GITHUB_SHA | head -c7}

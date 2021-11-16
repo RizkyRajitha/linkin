@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 
-import { jwtAuth, use } from "../../middleware/middleware";
-import { changePassword, getUser } from "../../lib/dbfuncprisma";
+import { jwtAuth, use } from "../../../middleware/middleware";
+import { changePassword, getUser } from "../../../lib/dbfuncprisma";
 
 const saltRounds = 10;
 
@@ -42,7 +42,7 @@ async function handler(req, res) {
   } catch (error) {
     console.log(error.message);
 
-    res.status(500).json({ success: false, msg: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 }
 

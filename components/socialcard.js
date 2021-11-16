@@ -37,17 +37,6 @@ export default function LinkCard({
       reset(item);
       setCardInfo(item);
     }
-    // logic to test comment settings data and reset
-    // reset(item);
-    if (
-      cardInfo.borderRadius !== item.borderRadius ||
-      cardInfo.textColor !== item.textColor ||
-      cardInfo.bgColor !== item.bgColor
-    ) {
-      // console.log("reset after common settings change");
-      reset(item);
-      setCardInfo(item);
-    }
   }, [item]);
 
   watch((data, { type }) => {
@@ -109,25 +98,6 @@ export default function LinkCard({
                     <input
                       type="text"
                       className={
-                        errors.displayText
-                          ? "form-control form-control-sm mb-2 is-invalid"
-                          : "form-control form-control-sm mb-2"
-                      }
-                      placeholder="Enter Link Display Text"
-                      {...register(`displayText`, {
-                        required: true,
-                      })}
-                    />
-                    {errors.displayText && (
-                      <div className="invalid-feedback">
-                        Link Display Text is required
-                      </div>
-                    )}
-                  </div>
-                  <div className="mb-1 small">
-                    <input
-                      type="text"
-                      className={
                         errors.linkUrl
                           ? "form-control form-control-sm mb-2  is-invalid"
                           : "form-control form-control-sm mb-2 "
@@ -136,7 +106,6 @@ export default function LinkCard({
                       {...register(`linkUrl`, {
                         pattern: {
                           message: "Should be a valid URL",
-                          // see https://regexr.com/67tue
                           value:
                             /((https?:\/\/(?:www\.|(?!www))[a-z0-9][a-z0-9-]+[a-z0-9]\.[^\s]{2,}|www\.[a-z0-9][a-z0-9-]+[a-z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-z0-9]+\.[^\s]{2,}|www\.[a-z0-9]+\.[^\s]{2,})|(((^mailto:)(([a-z])([a-z0-9_\.-]+)?)[@](([a-z])([a-z0-9_\.-]+)?)(\.([a-z]){2,}))))/i,
                         },
@@ -197,20 +166,6 @@ export default function LinkCard({
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col">
-                      <div className="mb-1 small ">
-                        <label className="form-label small ">
-                          Link Display Text Font color
-                        </label>
-                        <input
-                          type="color"
-                          className="form-control form-control-sm mb-2 form-control-color"
-                          title="Choose Link text color"
-                          placeholder="Choose Link text color"
-                          {...register("textColor")}
-                        />
-                      </div>
-                    </div>
                     <div className="col">
                       <div className="mb-1 small ">
                         <label className="form-label small">

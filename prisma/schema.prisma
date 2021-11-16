@@ -8,44 +8,63 @@ datasource db {
 }
 
 model linkdata {
-  id          Int       @id @default(autoincrement())
-  pagedataid  Int?
-  iconClass   String?   @db.VarChar
-  displayText String?   @db.VarChar
-  linkUrl     String?   @db.VarChar
-  bgColor     String?   @db.VarChar
-  borderRadius     String?   @db.VarChar
-  textColor     String?   @db.VarChar
-  accentColor String?   @db.VarChar
-  active      Boolean?  @default(true)
-  created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  pagedata    pagedata? @relation(fields: [pagedataid], references: [id])
+  id           Int       @id @default(autoincrement())
+  pagedataid   Int?
+  iconClass    String?   @db.VarChar
+  displayText  String?   @db.VarChar
+  linkUrl      String?   @db.VarChar
+  bgColor      String?   @db.VarChar
+  borderRadius String?   @db.VarChar
+  textColor    String?   @db.VarChar
+  accentColor  String?   @db.VarChar
+  active       Boolean?  @default(true)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  pagedata     pagedata? @relation(fields: [pagedataid], references: [id])
+  orderIndex   Int       @default(autoincrement())
+}
+
+model socialdata {
+  id           Int       @id @default(autoincrement())
+  pagedataid   Int?
+  iconClass    String?   @db.VarChar
+  linkUrl      String?   @db.VarChar
+  bgColor      String?   @db.VarChar
+  borderRadius String?   @db.VarChar
+  accentColor  String?   @db.VarChar
+  active       Boolean?  @default(true)
+  created_at   DateTime? @default(now()) @db.Timestamptz(6)
+  pagedata     pagedata? @relation(fields: [pagedataid], references: [id])
+  orderIndex   Int       @default(autoincrement())
 }
 
 model pagedata {
-  id               Int        @id
-  avatarUrl        String?    @db.VarChar
-  avatarheight     String?    @db.VarChar
-  avatarwidth      String?    @db.VarChar
-  bgColor          String?    @db.VarChar
-  accentColor      String?    @db.VarChar
-  handlerText      String?    @db.VarChar
-  handlerLink      String?    @db.VarChar
-  footerText       String?    @db.VarChar
-  footerTextColor       String?    @db.VarChar
-  footerBgColor       String?    @db.VarChar
-  footerTextSize       String?    @db.VarChar
-  bgImgUrl         String?    @db.VarChar
-  handlerFontSize  String?    @db.VarChar
-  handlerFontColor String?    @db.VarChar
-  active           Boolean?   @default(true)
-  fontFamily       String?    @db.VarChar
-  fontUrl          String?    @db.VarChar
-  created_at       DateTime?  @default(now()) @db.Timestamptz(6)
-  linkdata         linkdata[]
-  handlerDescription String?    @db.VarChar
-  handlerDescriptionFontColor String?    @db.VarChar
-  footerEnabled Boolean?   @default(true)
+  id                          Int          @id
+  avatarUrl                   String?      @db.VarChar
+  avatarheight                String?      @db.VarChar
+  avatarwidth                 String?      @db.VarChar
+  avatarBorderColor           String?      @db.VarChar
+  bgColor                     String?      @db.VarChar
+  accentColor                 String?      @db.VarChar
+  handlerText                 String?      @db.VarChar
+  handlerLink                 String?      @db.VarChar
+  footerText                  String?      @db.VarChar
+  footerTextColor             String?      @db.VarChar
+  footerBgColor               String?      @db.VarChar
+  footerTextSize              String?      @db.VarChar
+  bgImgUrl                    String?      @db.VarChar
+  handlerFontSize             String?      @db.VarChar
+  handlerFontColor            String?      @db.VarChar
+  active                      Boolean?     @default(true)
+  fontFamily                  String?      @db.VarChar
+  fontUrl                     String?      @db.VarChar
+  created_at                  DateTime?    @default(now()) @db.Timestamptz(6)
+  linkdata                    linkdata[]
+  socialdata                  socialdata[]
+  handlerDescription          String?      @db.VarChar
+  handlerDescriptionFontColor String?      @db.VarChar
+  footerEnabled               Boolean?     @default(true)
+  linkPadding                 String?      @db.VarChar
+  linktreeWidth               String?      @db.VarChar
 }
 
 model users {

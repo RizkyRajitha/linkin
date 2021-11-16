@@ -1,6 +1,5 @@
-import { jwtAuth, use } from "../../middleware/middleware";
-import { updatePageData, getPageData } from "../../lib/dbfuncprisma";
-
+import { jwtAuth, use } from "../../../middleware/middleware";
+import { reorderLinks } from "../../../lib/dbfuncprisma";
 
 async function handler(req, res) {
   if (req.method !== "POST") {
@@ -11,18 +10,16 @@ async function handler(req, res) {
   try {
     // Run the middleware
     await use(req, res, jwtAuth);
+
     // console.log(req.body);
 
-    await updatePageData(req.body);
-    let updatedPageData = await getPageData();
+    await reorderLinks(req.body.orderData);
 
     // console.log(updatedPageData);
-    res.json({ success: true, updatedPageData: updatedPageData.pageData });
+    res.json({ success: true });
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ success: false, message: error.message });
-
-    // res.status(500).send(error.message);
   }
 }
 

@@ -38,7 +38,7 @@ const Admin = ({}) => {
     };
 
     try {
-      let res = await fetch(`${endpoint}/api/login`, {
+      let res = await fetch(`${endpoint}/api/user/login`, {
         method: "POST",
         body: JSON.stringify(payload),
         headers: { "Content-Type": "application/json" },

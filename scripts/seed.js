@@ -40,6 +40,7 @@ async function seed() {
         handlerText: "LinkIn",
         avatarUrl:
           "https://res.cloudinary.com/dijjqfsto/image/upload/v1621666671/linkin_logo_1_jcuvr3.png",
+        avatarBorderColor: "#ffffff",
         bgColor: "#7ea2ff",
         accentColor: "#bdd7ff",
         handlerFontSize: "20",
@@ -52,6 +53,7 @@ async function seed() {
         handlerDescription:
           "Linkin is a customizable self hosted link tree platform",
         handlerDescriptionFontColor: "#ffffff",
+        linktreeWidth: "320",
         linkdata: {
           create: {
             bgColor: "#2C6BED",
