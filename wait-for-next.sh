@@ -21,9 +21,8 @@ else
   echo pupperteer failed
 fi
 
+kill $APP_PID
+
 ls
-
-pkill $APP_PID
-
 
 
