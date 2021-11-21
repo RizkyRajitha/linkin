@@ -12,7 +12,7 @@ while ! nc -z localhost 3000; do
 done
 
 echo "run pupperteer"
-node /scripts/browser.js
+node scripts/browser.js
 
 RESULT=$?
 if [ $RESULT -eq 0 ]; then
