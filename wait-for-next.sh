@@ -12,7 +12,7 @@ while ! nc -z localhost 3000; do
 done
 
 echo "run pupperteer"
-node browser.js
+node /scripts/browser.js
 
 RESULT=$?
 if [ $RESULT -eq 0 ]; then
@@ -25,6 +25,5 @@ kill $APP_PID
 
 ls
 
-curl https://api.cloudinary.com/v1_1//image/upload -X POST --data 'file=img.png&timestamp=173719931&api_key=943785761215535'
 
 
