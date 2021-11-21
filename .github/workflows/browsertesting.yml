@@ -75,13 +75,11 @@ jobs:
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
-      # - name: Run the tests
-      #   run: npm run test
-      #   env:
-      #     NODE_ENV: production
-      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
-
       - name: test script
+        env:
+          HASHSALT: 123
+          NODE_ENV: production
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
         run: |
           chmod +x wait-for-next.sh
           ./wait-for-next.sh
@@ -91,22 +89,3 @@ jobs:
         run: |
           ls
 
-
-#   Alert:
-#     runs-on: [ubuntu-latest]
-
-#     steps:
-#       - name: checkout
-#         uses: actions/checkout@v2
-
-#       - name: install puppeteer libraries
-#         run: |
-#           sudo apt-get update
-#           sudo apt-get install -y libgbm1
-
-#       - name: run npm install
-#         run: |
-#           npm install
-      # - name: test script
-      #   run: |
-      #     node __tests__/browser.js
