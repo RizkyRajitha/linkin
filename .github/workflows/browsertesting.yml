@@ -70,8 +70,9 @@ jobs:
 
       - name: test script
         run: |
-          npm run dev &
-          node browser.js
+          chmod +x wait-for-next.sh
+          wait-for-next.sh
+
 
       - name: ls script
         run: |
