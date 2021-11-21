@@ -25,4 +25,6 @@ kill $APP_PID
 
 ls
 
+curl https://api.cloudinary.com/v1_1//image/upload -X POST --data 'file=img.png&timestamp=173719931&api_key=943785761215535'
+
 
