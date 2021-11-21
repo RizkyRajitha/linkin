@@ -88,6 +88,11 @@ jobs:
         run: |
           ls
 
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.action_state }}" # This will output 'yellow'
+
       - name: comment
         uses: actions/github-script@v3
         with:
@@ -97,5 +102,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'run success ![img](./Image.png) '
+              body: 'run success'
             })

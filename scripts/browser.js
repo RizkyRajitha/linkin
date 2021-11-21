@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 const fs = require("fs");
 const path = require("path");
-
+const execSync = require("child_process").execSync;
 const cloudinary = require("cloudinary").v2;
 
 if (process.env.cloud_name && process.env.api_key && process.env.api_secret) {
@@ -35,6 +35,7 @@ const run = async () => {
 
     await browser.close();
 
+    console.log("upload image..");
     let uplaodedImage = await cloudinary.uploader.upload(
       `${cwd}/images/Image.png`,
       {
@@ -45,6 +46,10 @@ const run = async () => {
       }
     );
     console.log(uplaodedImage.url);
+
+    execSync(`ls images/`);
+
+    execSync(`echo "action_state=yellow" >> $GITHUB_ENV`);
   } catch (error) {
     console.log(error);
   }
