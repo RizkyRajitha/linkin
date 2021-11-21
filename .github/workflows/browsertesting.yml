@@ -80,6 +80,9 @@ jobs:
           HASHSALT: 123
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+          cloud_name: ${{secrets.cloud_name}}
+          api_key: ${{secrets.api_key}}
+          api_secret: ${{secrets.api_secret}}
         run: |
           chmod +x wait-for-next.sh
           ./wait-for-next.sh
