@@ -1,0 +1,98 @@
+# This is a basic workflow to help you get started with Actions
+
+name: browser-testing
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on: push
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    # Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js 14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: install puppeteer libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgbm1
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install puppeteer
+        run: npm install puppeteer
+
+      - name: Migrate database
+        run: npm run prismamigrateprod
+        env:
+          NODE_ENV: production
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+
+      - name: Seed database
+        run: npm run seed
+        env:
+          NODE_ENV: production
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+
+      # - name: Run the tests
+      #   run: npm run test
+      #   env:
+      #     NODE_ENV: production
+      #     DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+
+      - name: test script
+        run: |
+          npm run dev &
+          node browser.js
+
+      - name: ls script
+        run: |
+          ls
+
+
+#   Alert:
+#     runs-on: [ubuntu-latest]
+
+#     steps:
+#       - name: checkout
+#         uses: actions/checkout@v2
+
+#       - name: install puppeteer libraries
+#         run: |
+#           sudo apt-get update
+#           sudo apt-get install -y libgbm1
+
+#       - name: run npm install
+#         run: |
+#           npm install
+      # - name: test script
+      #   run: |
+      #     node __tests__/browser.js
