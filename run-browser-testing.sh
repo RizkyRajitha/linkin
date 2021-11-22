@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# run next server
 npm run dev  &
 APP_PID=$!
 

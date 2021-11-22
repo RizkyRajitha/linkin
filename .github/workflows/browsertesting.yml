@@ -1,9 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Browser-Testing
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on: push
 
 jobs:
@@ -50,7 +46,7 @@ jobs:
           cache-name: cache-node-modules
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: 'node_modules'
+          path: "node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -75,7 +71,7 @@ jobs:
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
-      - name: browser testing script
+      - name: Run browser testing script
         id: browser-testing
         env:
           HASHSALT: 123
@@ -85,23 +81,10 @@ jobs:
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
           CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
         run: |
-          chmod +x wait-for-next.sh
-          ./wait-for-next.sh
+          chmod +x run-browser-testing.sh
+          ./run-browser-testing.sh
 
-      - name: list directory
-        run: |
-          ls
-
-      - name: Use the value
-        id: step_two
-        run: |
-          echo "${{ env.commentBody }}"
-      # - name: Use the value
-      #   id: step_two
-      #   run: |
-      #     echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
-
-      - name: comment
+      - name: Add comment
         uses: actions/github-script@v5
         env:
           SHA: ${{ github.sha }}

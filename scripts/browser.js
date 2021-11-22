@@ -52,7 +52,7 @@ const run = async () => {
     // execSync(
     //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
     // );
-    execSync(`echo "commentBody=ScreenSots ${commentBody}" >> $GITHUB_ENV`);
+    execSync(`echo "commentBody=Screenshots ${commentBody}" >> $GITHUB_ENV`);
     // execSync(
     //   `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
     // );
@@ -92,9 +92,12 @@ const uplaodImages = async () => {
   return urlList;
 };
 
-const captureIndexPage = async (browser) => {
+const captureIndexPage = async (
+  browser,
+  viewport = { width: 1920, height: 1080 }
+) => {
   let page = await browser.newPage();
-  await page.setViewport({ width: 1920, height: 1080 });
+  await page.setViewport(viewport);
   await page.goto(testingUrl, {
     waitUntil: "networkidle2",
   });
@@ -104,10 +107,13 @@ const captureIndexPage = async (browser) => {
   });
 };
 
-const captureDashboard = async (browser) => {
+const captureDashboard = async (
+  browser,
+  viewport = { width: 1920, height: 1080 }
+) => {
   let page = await browser.newPage();
 
-  await page.setViewport({ width: 1920, height: 1080 });
+  await page.setViewport(viewport);
 
   await page.goto(`${testingUrl}/admin`, {
     waitUntil: "networkidle2",
