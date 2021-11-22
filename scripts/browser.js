@@ -8,14 +8,14 @@ console.log(process.env.CLOUDINARY_CLOUD_NAME);
 
 const testingUrl = "http://localhost:3000";
 
-// if (
-//   !process.env.CLOUDINARY_CLOUD_NAME &&
-//   !process.env.CLOUDINARY_API_KEY &&
-//   !process.env.CLOUDINARY_API_SECRET
-// ) {
-//   console.log("cloudinary not configured");
-//   process.exit(0);
-// }
+if (
+  !process.env.CLOUDINARY_CLOUD_NAME &&
+  !process.env.CLOUDINARY_API_KEY &&
+  !process.env.CLOUDINARY_API_SECRET
+) {
+  console.log("cloudinary not configured");
+  process.exit(0);
+}
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -36,9 +36,9 @@ const run = async () => {
     });
 
     console.log("captureIndexPage");
-    await captureIndexPage();
+    await captureIndexPage(browser);
     console.log("captureDashboard");
-    await captureDashboard();
+    await captureDashboard(browser);
     console.log("uplaodImages");
     let urlList = await uplaodImages();
 
@@ -56,6 +56,7 @@ const run = async () => {
     // );
   } catch (error) {
     console.log(error);
+    process.exit(0);
   }
 };
 
