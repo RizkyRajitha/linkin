@@ -36,13 +36,15 @@ jobs:
 
       - name: comment
         uses: actions/github-script@v5
+        env:
+          SHA: ${{ github.sha }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: ${{ github.sha }},
+              commit_sha: process.env.SHA,
               body: '👋 Thanks for reporting!'
             })
 
@@ -87,7 +89,7 @@ jobs:
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
-      - name:  browser testing script
+      - name: browser testing script
         id: browser-testing
         env:
           HASHSALT: 123
@@ -112,8 +114,6 @@ jobs:
       #   id: step_two
       #   run: |
       #     echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
-
-          
 
       # - name: comment
       #   uses: actions/github-script@v5
