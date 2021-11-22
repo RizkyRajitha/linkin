@@ -97,7 +97,7 @@ jobs:
           echo "${{ env.action_state }}" # This will output 'yellow'
 
       - name: comment
-        uses: actions/github-script@v3
+        uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -105,5 +105,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: 'run success'
+              body: '👋 Thanks for reporting!'
             })

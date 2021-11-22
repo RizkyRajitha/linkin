@@ -46,16 +46,14 @@ const run = async () => {
       `${cwd}/images/Image.png`,
       {
         tags: "linkinss",
-        folder: "recaux/avatar",
-        public_id: `ss${new Date().getTime}`,
+        folder: "linkin/linkin-ci-ss",
+        public_id: `ss-${new Date().getTime()}`,
         sign_url: true,
       }
     );
     console.log(uplaodedImage.url);
 
-    execSync(`ls images/`);
-
-    execSync(`echo "action_state=yellow" >> $GITHUB_ENV`);
+    execSync(`echo '::set-output name=imageUrl::${uplaodedImage.url}'`);
   } catch (error) {
     console.log(error);
   }
