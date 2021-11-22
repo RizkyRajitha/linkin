@@ -45,7 +45,7 @@ const run = async () => {
     let commentBody = `Screenshots `;
 
     urlList.forEach((element) => {
-      commentBody = commentBody + ` ![image](${element}) \n`;
+      commentBody = commentBody + ` ![image](${element}) `;
     });
     // commentBody = commentBody + ``;
     console.log(commentBody);
