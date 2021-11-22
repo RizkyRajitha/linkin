@@ -80,9 +80,9 @@ jobs:
           HASHSALT: 123
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
-          cloud_name: ${{secrets.cloud_name}}
-          api_key: ${{secrets.api_key}}
-          api_secret: ${{secrets.api_secret}}
+          CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
+          CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
+          CLOUDINARY_API_SECRET: ${{ secrets.CLOUDINARY_API_SECRET }}
         run: |
           chmod +x wait-for-next.sh
           ./wait-for-next.sh
@@ -99,7 +99,7 @@ jobs:
       - name: comment
         uses: actions/github-script@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             github.issues.createComment({
               issue_number: context.issue.number,
