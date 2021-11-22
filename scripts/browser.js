@@ -48,7 +48,13 @@ const run = async () => {
       commentBody = commentBody + ` ![image](${element}) \n\n`;
     });
     console.log(commentBody);
-    execSync(`echo "commentBody=${commentBody}" >> $GITHUB_ENV`);
+
+    // execSync(
+    //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
+    // );
+    execSync(
+      `echo "commentBody=ScreenSots ${commentBody}" >> $GITHUB_ENV`
+    );
     // execSync(
     //   `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
     // );
