@@ -4,8 +4,6 @@ const path = require("path");
 const execSync = require("child_process").execSync;
 const cloudinary = require("cloudinary").v2;
 
-console.log(process.env.CLOUDINARY_CLOUD_NAME);
-
 const testingUrl = "http://localhost:3000";
 
 if (
@@ -14,7 +12,7 @@ if (
   !process.env.CLOUDINARY_API_SECRET
 ) {
   console.log("cloudinary not configured");
-  process.exit(0);
+  process.exit(1);
 }
 
 cloudinary.config({
@@ -56,7 +54,7 @@ const run = async () => {
     // );
   } catch (error) {
     console.log(error);
-    process.exit(0);
+    process.exit(1);
   }
 };
 
@@ -101,6 +99,8 @@ const captureIndexPage = async (browser) => {
 const captureDashboard = async (browser) => {
   let page = await browser.newPage();
 
+  await page.setViewport({ width: 1920, height: 1080 });
+
   await page.goto(`${testingUrl}/admin`, {
     waitUntil: "networkidle2",
   });
@@ -110,7 +110,7 @@ const captureDashboard = async (browser) => {
 
   await Promise.all([
     page.click("#submit"),
-    page.waitForNavigation({ waitUntil: "networkidle0" }),
+    page.waitForNavigation({ waitUntil: "networkidle2" }),
   ]);
 
   await page.screenshot({
