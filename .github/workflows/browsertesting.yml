@@ -9,44 +9,30 @@ on: push
 jobs:
   Test:
     runs-on: ubuntu-latest
-    # Service containers to run with `runner-job`
-    # services:
-    #   # Label used to access the service container
-    #   postgres:
-    #     # Docker Hub image
-    #     image: postgres
-    #     # Provide the password for postgres
-    #     env:
-    #       POSTGRES_PASSWORD: postgres
-    #       POSTGRES_USER: postgres
-    #       POSTGRES_DB: postgres
-    #     # Set health checks to wait until postgres has started
-    #     options: >-
-    #       --health-cmd pg_isready
-    #       --health-interval 10s
-    #       --health-timeout 5s
-    #       --health-retries 5
-    #     ports:
-    #       # Maps tcp port 5432 on service container to the host
-    #       - 5432:5432
+    Service containers to run with `runner-job`
+    services:
+      # Label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - 5432:5432
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: comment
-        uses: actions/github-script@v5
-        env:
-          SHA: ${{ github.sha }}
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: process.env.SHA,
-              body: '👋 Thanks for reporting!'
-            })
 
       - name: Set up Node.js 14.x
         uses: actions/setup-node@v1
@@ -115,14 +101,17 @@ jobs:
       #   run: |
       #     echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
 
-      # - name: comment
-      #   uses: actions/github-script@v5
-      #   with:
-      #     github-token: ${{ secrets.GITHUB_TOKEN }}
-      #     script: |
-      #       github.repos.createCommitComment({
-      #         owner: context.repo.owner,
-      #         repo: context.repo.repo,
-      #         commit_sha: ${{ github.sha }}
-      #         body: '👋 Thanks for reporting! '
-      #       })
+      - name: comment
+        uses: actions/github-script@v5
+        env:
+          SHA: ${{ github.sha }}
+          BODY: ${{ env.action_state }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: process.env.SHA,
+              body: process.env.BODY
+            })
