@@ -52,9 +52,7 @@ const run = async () => {
     // execSync(
     //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
     // );
-    execSync(
-      `echo "commentBody=ScreenSots ${commentBody}" >> $GITHUB_ENV`
-    );
+    execSync(`echo "commentBody=ScreenSots ${commentBody}" >> $GITHUB_ENV`);
     // execSync(
     //   `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
     // );
@@ -70,11 +68,12 @@ const uplaodImages = async () => {
   images = fs.readdirSync(`${cwd}/images/`);
   console.log(images);
 
+  let promiseArray = [];
   let urlList = [];
 
   images.forEach(async (element) => {
     console.log("upload image..");
-    let uplaodedImage = await cloudinary.uploader.upload(
+    let uplaodedImagePromise = cloudinary.uploader.upload(
       `${cwd}/images/${element}`,
       {
         tags: "linkinss",
@@ -83,10 +82,13 @@ const uplaodImages = async () => {
         sign_url: true,
       }
     );
-    console.log(uplaodedImage.url);
-    urlList.push(uplaodedImage.url);
+    promiseArray.push(uplaodedImagePromise);
   });
 
+  urlList = await Promise.all(promiseArray);
+  console.log(urlList);
+  urlList = urlList.map((ele) => ele.url);
+  console.log(urlList);
   return urlList;
 };
 
