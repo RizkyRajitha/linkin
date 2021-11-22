@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: browser-testing
+name: Browser-Testing
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -75,7 +75,8 @@ jobs:
           NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
-      - name: test script
+      - name:  browser testing script
+        id: browser-testing
         env:
           HASHSALT: 123
           NODE_ENV: production
@@ -94,16 +95,16 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          echo "${{ env.action_state }}" # This will output 'yellow'
+          echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
 
       - name: comment
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.issues.createComment({
-              issue_number: context.issue.number,
+            github.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for reporting!'
+              commit_sha: ${{ github.sha }}
+              body: '👋 Thanks for reporting! '+
             })

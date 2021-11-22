@@ -32,14 +32,14 @@ const run = async () => {
     browser = await puppeteer.launch({
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
     });
-    const page = await browser.newPage();
+
+    let page = await browser.newPage();
 
     await page.goto("http://localhost:3000", {
       waitUntil: "networkidle2",
     });
-    await page.screenshot({ path: `${cwd}/images/Image.png` });
 
-    await browser.close();
+    await page.screenshot({ path: `${cwd}/images/Image.png` });
 
     console.log("upload image..");
     let uplaodedImage = await cloudinary.uploader.upload(
@@ -53,7 +53,10 @@ const run = async () => {
     );
     console.log(uplaodedImage.url);
 
-    execSync(`echo '::set-output name=imageUrl::${uplaodedImage.url}'`);
+    await browser.close();
+    execSync(
+      `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
+    );
   } catch (error) {
     console.log(error);
   }
