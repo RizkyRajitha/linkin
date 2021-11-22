@@ -93,11 +93,6 @@ jobs:
         run: |
           echo "${{ env.commentBody }}"
 
-      - name: Use the value
-        id: step_two2
-        run: |
-          echo "${{ steps.browser-testing.outputs.commentBody }}" # This will output 'commentBody'
-
       - name: Add comment
         uses: actions/github-script@v5
         env:

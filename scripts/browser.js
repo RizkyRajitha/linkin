@@ -42,21 +42,20 @@ const run = async () => {
 
     await browser.close();
 
-    let commentBody = `Screenshots `;
+    let commentBody = `##Screenshots `;
 
     urlList.forEach((element) => {
-      commentBody = commentBody + ` ![image](${element}) `;
+      commentBody =
+        commentBody + `###${element.ssname} ![screenshot](${element.url}) `;
     });
-    // commentBody = commentBody + ``;
     console.log(commentBody);
 
+    execSync(`echo "commentBody='${commentBody}'" >> $GITHUB_ENV`);
+
+    // not working
     // execSync(
-    //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
+    //   `echo '::set-output name=commentBody::Screenshots via set out "${commentBody}"'`
     // );
-    execSync(`echo "commentBody='Screenshots ${commentBody}'" >> $GITHUB_ENV`);
-    execSync(
-      `echo '::set-output name=commentBody::Screenshots via set out "${commentBody}"'`
-    );
   } catch (error) {
     console.log(error);
     process.exit(1);
@@ -79,7 +78,7 @@ const uplaodImages = async () => {
       {
         tags: "linkinss",
         folder: "linkin/linkin-ci-ss",
-        public_id: `ss-${new Date().getTime()}`,
+        public_id: `${element}-${new Date().getTime()}`,
         sign_url: true,
       }
     );
@@ -88,7 +87,13 @@ const uplaodImages = async () => {
 
   urlList = await Promise.all(promiseArray);
   console.log(urlList);
-  urlList = urlList.map((ele) => ele.url);
+  urlList = urlList.map((ele) => {
+    let ssname = String(ele.original_filename).split("-")[1];
+    return {
+      url: ele.url,
+      ssname: ssname,
+    };
+  });
   console.log(urlList);
   return urlList;
 };
@@ -98,13 +103,16 @@ const captureIndexPage = async (
   viewport = { width: 1920, height: 1080 }
 ) => {
   let page = await browser.newPage();
+
+  const ssname = `Index ${viewport.width}X${viewport.height}`;
+
   await page.setViewport(viewport);
   await page.goto(testingUrl, {
     waitUntil: "networkidle2",
   });
 
   await page.screenshot({
-    path: `${cwd}/images/index-${new Date().getTime()}.png`,
+    path: `${cwd}/images/index-${ssname}-${new Date().getTime()}.png`,
   });
 };
 
@@ -112,6 +120,8 @@ const captureDashboard = async (
   browser,
   viewport = { width: 1920, height: 1080 }
 ) => {
+  const ssname = `Dashboard ${viewport.width}X${viewport.height}`;
+
   let page = await browser.newPage();
 
   await page.setViewport(viewport);
@@ -129,6 +139,6 @@ const captureDashboard = async (
   ]);
 
   await page.screenshot({
-    path: `${cwd}/images/dashboard-${new Date().getTime()}.png`,
+    path: `${cwd}/images/dashboard-${ssname}-${new Date().getTime()}.png`,
   });
 };
