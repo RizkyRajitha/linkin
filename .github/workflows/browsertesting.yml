@@ -1,6 +1,6 @@
 name: Browser-Testing
 
-on: push
+on: [push, pull_request]
 
 jobs:
   Browser-Testing:
@@ -45,7 +45,6 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
           path: "node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
@@ -84,21 +83,20 @@ jobs:
           chmod +x run-browser-testing.sh
           ./run-browser-testing.sh
 
-      - name: list directory
-        run: |
-          ls
+      # - name: list directory
+      #   run: |
+      #     ls
 
-      - name: Use the value
-        id: step_two
-        run: |
-          echo "${{ env.commentBody }}"
+      # - name: Use the value
+      #   id: step_two
+      #   run: |
+      #     echo "${{ env.commentBody }}"
 
       - name: Add comment
         uses: actions/github-script@v5
         env:
           SHA: ${{ github.sha }}
           commentBody: ${{ env.commentBody }}
-          commentBody2: ${{ steps.browser-testing.outputs.commentBody }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -106,5 +104,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: process.env.SHA,
-              body: `${process.env.commentBody} ${process.env.commentBody2} `
+              body: process.env.commentBody
             })
