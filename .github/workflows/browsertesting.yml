@@ -88,10 +88,10 @@ jobs:
         run: |
           ls
 
-      # - name: Use the value
-      #   id: step_two
-      #   run: |
-      #     echo "${{ env.commentBody }}"
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.commentBody }}"
 
       - name: Use the value
         id: step_two2

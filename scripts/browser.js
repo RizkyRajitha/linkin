@@ -42,17 +42,18 @@ const run = async () => {
 
     await browser.close();
 
-    let commentBody = "Screenshots ";
+    let commentBody = `"Screenshots `;
 
     urlList.forEach((element) => {
       commentBody = commentBody + ` ![image](${element}) \n\n`;
     });
+    commentBody = commentBody + `"`;
     console.log(commentBody);
 
     // execSync(
     //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
     // );
-    // execSync(`echo "commentBody=Screenshots ${commentBody}" >> $GITHUB_ENV`);
+    execSync(`echo "commentBody=Screenshots ${commentBody}" >> $GITHUB_ENV`);
     execSync(
       `echo '::set-output name=commentBody::Screenshots via set out ${commentBody}'`
     );
