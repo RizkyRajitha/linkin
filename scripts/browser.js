@@ -54,9 +54,11 @@ const run = async () => {
     console.log(uplaodedImage.url);
 
     await browser.close();
-    execSync(
-      `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
-    );
+
+    execSync(`echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`);
+    // execSync(
+    //   `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
+    // );
   } catch (error) {
     console.log(error);
   }

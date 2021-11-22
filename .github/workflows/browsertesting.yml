@@ -42,8 +42,8 @@ jobs:
             github.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: ${{ github.sha }}
-              body: '👋 Thanks for reporting! '
+              commit_sha: ${{ github.sha }},
+              body: '👋 Thanks for reporting!'
             })
 
       - name: Set up Node.js 14.x
@@ -107,7 +107,13 @@ jobs:
       - name: Use the value
         id: step_two
         run: |
-          echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
+          echo "${{ env.action_state }}" # This will output 'yellow'
+      # - name: Use the value
+      #   id: step_two
+      #   run: |
+      #     echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
+
+          
 
       # - name: comment
       #   uses: actions/github-script@v5
