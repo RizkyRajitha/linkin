@@ -34,6 +34,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: comment
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.repos.createCommitComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              commit_sha: ${{ github.sha }}
+              body: '👋 Thanks for reporting! '
+            })
+
       - name: Set up Node.js 14.x
         uses: actions/setup-node@v1
         with:
@@ -97,14 +109,14 @@ jobs:
         run: |
           echo "${{ steps.browser-testing.outputs.imageUrl }}" # This will output 'yellow'
 
-      - name: comment
-        uses: actions/github-script@v5
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.repos.createCommitComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: ${{ github.sha }}
-              body: '👋 Thanks for reporting! '+
-            })
+      # - name: comment
+      #   uses: actions/github-script@v5
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     script: |
+      #       github.repos.createCommitComment({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         commit_sha: ${{ github.sha }}
+      #         body: '👋 Thanks for reporting! '
+      #       })
