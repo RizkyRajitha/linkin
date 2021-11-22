@@ -38,12 +38,12 @@ const run = async () => {
 
     await captureIndexPage(browser);
 
-    console.log("captureIndexPage iphone 12/13 pro resolution 390X844");
+    console.log("captureIndexPage iphone 12|13 pro resolution 390X844");
 
     await captureIndexPage(
       browser,
       { height: 844, width: 390 },
-      "iphone 12/13"
+      "iphone 12|13"
     );
 
     console.log("captureDashboard resolution 1920X1080");
