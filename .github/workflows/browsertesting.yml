@@ -9,7 +9,7 @@ on: push
 jobs:
   Test:
     runs-on: ubuntu-latest
-    Service containers to run with `runner-job`
+    # Service containers to run with `runner-job`
     services:
       # Label used to access the service container
       postgres:
