@@ -10,25 +10,25 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     # Service containers to run with `runner-job`
-    services:
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres
-        # Provide the password for postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
+    # services:
+    #   # Label used to access the service container
+    #   postgres:
+    #     # Docker Hub image
+    #     image: postgres
+    #     # Provide the password for postgres
+    #     env:
+    #       POSTGRES_PASSWORD: postgres
+    #       POSTGRES_USER: postgres
+    #       POSTGRES_DB: postgres
+    #     # Set health checks to wait until postgres has started
+    #     options: >-
+    #       --health-cmd pg_isready
+    #       --health-interval 10s
+    #       --health-timeout 5s
+    #       --health-retries 5
+    #     ports:
+    #       # Maps tcp port 5432 on service container to the host
+    #       - 5432:5432
 
     steps:
       - name: Checkout repository
@@ -39,7 +39,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.repos.createCommitComment({
+            github.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: ${{ github.sha }},
