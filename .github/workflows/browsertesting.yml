@@ -105,7 +105,7 @@ jobs:
         uses: actions/github-script@v5
         env:
           SHA: ${{ github.sha }}
-          BODY: ${{ env.action_state }}
+          commentBody: ${{ env.commentBody }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -113,5 +113,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: process.env.SHA,
-              body: process.env.BODY
+              body: process.env.commentBody
             })
