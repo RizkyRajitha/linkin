@@ -45,7 +45,7 @@ const run = async () => {
     let commentBody = "";
 
     urlList.forEach((element) => {
-      commentBody = `${commentBody} ![image](${element})`;
+      commentBody = commentBody + ` ![image](${element}) \n\n`;
     });
     console.log(commentBody);
     execSync(`echo "commentBody=${commentBody}" >> $GITHUB_ENV`);
