@@ -4,10 +4,14 @@ const path = require("path");
 const execSync = require("child_process").execSync;
 const cloudinary = require("cloudinary").v2;
 
-console.log(process.env.cloud_name);
+console.log(process.env.CLOUDINARY_CLOUD_NAME);
 
-if (process.env.cloud_name && process.env.api_key && process.env.api_secret) {
-  console.log("cloudinary not configured ");
+if (
+  !process.env.CLOUDINARY_CLOUD_NAME &&
+  !process.env.CLOUDINARY_API_KEY &&
+  !process.env.CLOUDINARY_API_SECRET
+) {
+  console.log("cloudinary not configured");
   process.exit(0);
 }
 
