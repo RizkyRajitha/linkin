@@ -3,7 +3,7 @@ name: Browser-Testing
 on: push
 
 jobs:
-  Test:
+  Browser-Testing:
     runs-on: ubuntu-latest
     # Service containers to run with `runner-job`
     services:
@@ -84,11 +84,26 @@ jobs:
           chmod +x run-browser-testing.sh
           ./run-browser-testing.sh
 
+      - name: list directory
+        run: |
+          ls
+
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.commentBody }}"
+
+      - name: Use the value
+        id: step_two2
+        run: |
+          echo "${{ steps.browser-testing.outputs.commentBody }}" # This will output 'commentBody'
+
       - name: Add comment
         uses: actions/github-script@v5
         env:
           SHA: ${{ github.sha }}
           commentBody: ${{ env.commentBody }}
+          commentBody2: ${{ steps.browser-testing.outputs.commentBody }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
@@ -96,5 +111,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: process.env.SHA,
-              body: process.env.commentBody
+              body: `${process.env.commentBody} ${process.env.commentBody2} `
             })

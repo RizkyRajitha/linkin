@@ -53,9 +53,9 @@ const run = async () => {
     //   `echo "action_state=![image](${uplaodedImage.url})" >> $GITHUB_ENV`
     // );
     execSync(`echo "commentBody=Screenshots ${commentBody}" >> $GITHUB_ENV`);
-    // execSync(
-    //   `echo '::set-output name=imageUrl::![image](${uplaodedImage.url})'`
-    // );
+    execSync(
+      `echo '::set-output name=commentBody::Screenshots via set out ${commentBody}'`
+    );
   } catch (error) {
     console.log(error);
     process.exit(1);
