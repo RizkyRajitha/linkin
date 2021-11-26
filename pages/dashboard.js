@@ -14,7 +14,6 @@ export async function getServerSideProps({ req, res }) {
     if (valid) {
       data = await getPageDatawLinkAndSocialData();
     }
-    // console.log(data);
     return {
       props: {
         pageDataSS: data.pageData,
@@ -24,7 +23,7 @@ export async function getServerSideProps({ req, res }) {
     };
   } catch (error) {
     // console.log(error);
-    return { props: { error } };
+    return { props: { error: error.message } };
   }
 }
 
