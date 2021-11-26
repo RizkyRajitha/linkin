@@ -71,7 +71,7 @@ const run = async () => {
     // {name}<<{delimiter}
     // {value}
     // {delimiter}
-    execSync(`echo 'commentBody<<EOF${commentBody}EOF' >> $GITHUB_ENV`);
+    execSync(`echo 'commentBody<<EOF ${commentBody} EOF' >> $GITHUB_ENV`);
 
     // execSync(`echo 'commentBody<<EOF' >> $GITHUB_ENV`);
     // execSync(`${commentBody} >> $GITHUB_ENV`);
