@@ -60,9 +60,17 @@ const run = async () => {
       commentBody =
         commentBody + `${element.ssname} ![screenshot](${element.url}) \n`;
     });
+    // commentBody = commentBody + `'`;
+
     console.log(commentBody);
 
-    execSync(`echo "commentBody=$'${commentBody}'" >> $GITHUB_ENV`);
+    // echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
+    // curl https://httpbin.org/json >> $GITHUB_ENV
+    // echo 'EOF' >> $GITHUB_ENV
+
+    execSync(`echo "commentBody<<EOF" >> $GITHUB_ENV`);
+    execSync(`echo ${commentBody} >> $GITHUB_ENV`);
+    execSync(`echo 'EOF' >> $GITHUB_ENV`);
 
     // not working
     // execSync(
