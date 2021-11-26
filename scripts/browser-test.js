@@ -62,7 +62,7 @@ const run = async () => {
     });
     console.log(commentBody);
 
-    execSync(`echo "commentBody='${commentBody}'" >> $GITHUB_ENV`);
+    execSync(`echo "commentBody=$'${commentBody}'" >> $GITHUB_ENV`);
 
     // not working
     // execSync(
