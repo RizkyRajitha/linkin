@@ -54,15 +54,15 @@ const run = async () => {
 
     await browser.close();
 
-    let commentBody = `## Screenshots <br></br>`;
+    let commentBody = `## Screenshots \n`;
 
     urlList.forEach((element) => {
       commentBody =
-        commentBody + `${element.ssname} ![screenshot](${element.url}) `;
+        commentBody + `${element.ssname} ![screenshot](${element.url}) \n`;
     });
     console.log(commentBody);
 
-    execSync(`echo "commentBody=${commentBody}" >> $GITHUB_ENV`);
+    execSync(`echo "commentBody='${commentBody}'" >> $GITHUB_ENV`);
 
     // not working
     // execSync(
