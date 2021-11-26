@@ -68,8 +68,8 @@ const run = async () => {
     // curl https://httpbin.org/json >> $GITHUB_ENV
     // echo 'EOF' >> $GITHUB_ENV
 
-    execSync(`echo "commentBody<<EOF" >> $GITHUB_ENV`);
-    execSync(`echo ${commentBody} >> $GITHUB_ENV`);
+    execSync(`echo 'commentBody<<EOF' >> $GITHUB_ENV`);
+    execSync(`${commentBody} >> $GITHUB_ENV`);
     execSync(`echo 'EOF' >> $GITHUB_ENV`);
 
     // not working
