@@ -135,7 +135,7 @@ export default function Home({
       >{`
         @import url("${fontUrl}");
 
-        @import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+        @import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
 
         .outterwrap {
           margin: 0;
