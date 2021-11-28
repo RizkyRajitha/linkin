@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const execSync = require("child_process").execSync;
 const cloudinary = require("cloudinary").v2;
+const { Buffer } = require("buffer");
 
 const testingUrl = "http://localhost:3000";
 
@@ -64,6 +65,17 @@ const run = async () => {
 
     console.log(commentBody);
 
+    urlList.forEach((element) => {
+      commentBody =
+        commentBody + `${element.ssname} ![screenshot](${element.url}) `;
+    });
+    console.log(commentBody);
+
+    let base64commentBodytr = new Buffer.from(commentBody).toString("base64");
+    // let buffercommentBody = //new Buffer(commentBody)
+
+    execSync(`echo "commentBody=${base64commentBodytr}" >> $GITHUB_ENV`);
+
     // echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
     // curl https://httpbin.org/json >> $GITHUB_ENV
     // echo 'EOF' >> $GITHUB_ENV
@@ -71,9 +83,9 @@ const run = async () => {
     // {name}<<{delimiter}
     // {value}
     // {delimiter}
-    execSync(`echo 'commentBody<<EOF'
-    ${commentBody} 
-    'EOF' >> $GITHUB_ENV`);
+    // execSync(`echo 'commentBody<<EOF'
+    // ${commentBody}
+    // 'EOF' >> $GITHUB_ENV`);
 
     // execSync(`echo 'commentBody<<EOF' >> $GITHUB_ENV`);
     // execSync(`${commentBody} >> $GITHUB_ENV`);
