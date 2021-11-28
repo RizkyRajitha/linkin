@@ -5,7 +5,7 @@ export default function Toast({ message, type, toaster }) {
   const [msg, setmsg] = useState(message);
 
   useEffect(() => {
-    console.log(message);
+    // console.log(message);
 
     toaster(showError);
 

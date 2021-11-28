@@ -22,12 +22,12 @@ async function handler(req, res) {
     }
 
     let user = await getUser(username);
-    console.log(user);
+    // console.log(user);
     let isCurrentPassTrue = await bcrypt.compare(
       req.body.currentPassword,
       user.password
     );
-    console.log(isCurrentPassTrue);
+    // console.log(isCurrentPassTrue);
 
     if (!isCurrentPassTrue) {
       throw new Error("invalid password");

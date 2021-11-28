@@ -80,7 +80,7 @@ function Formwrapper({ pageData, updatedPageData }) {
       let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
         res.json()
       );
-      console.log(res);
+      // console.log(res);
 
       if (res.success) {
         router.push("/admin");
