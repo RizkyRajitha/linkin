@@ -44,7 +44,7 @@ export function jwtAuth(req, res, next) {
 export function cookieValidate(req, res) {
   let cookie = req.headers?.cookie;
 
-  console.log("dashboard cookie");
+  // console.log("dashboard cookie");
 
   if (!cookie) {
     res.writeHead(302, {
