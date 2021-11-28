@@ -6,7 +6,7 @@ require("dotenv").config({
 });
 
 const {
-  getPageDatawLinkData,
+  getPageDatawLinkAndSocialData,
   getPageData,
   updatePageData,
 } = require("../lib/dbfuncprisma");
@@ -14,6 +14,7 @@ const {
 describe("page data functions", () => {
   beforeAll(async () => {
     await Prisma.linkdata.deleteMany();
+    await Prisma.socialdata.deleteMany();
     await Prisma.pagedata.deleteMany();
     await Prisma.pagedata.create({
       data: {
@@ -50,6 +51,19 @@ describe("page data functions", () => {
         },
       ],
     });
+
+    await Prisma.socialdata.createMany({
+      data: [
+        {
+          pagedataid: 1,
+          iconClass: "fab fa-github",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          borderRadius: "5",
+          active: true,
+        },
+      ],
+    });
   });
 
   beforeEach(() => {
@@ -79,7 +93,7 @@ describe("page data functions", () => {
   });
 
   test("get page data with all links data", async () => {
-    let pageDatawLinks = await getPageDatawLinkData();
+    let pageDatawLinks = await getPageDatawLinkAndSocialData();
     const expectedPageDataWLinks = {
       pageData: {
         id: 1,
@@ -123,12 +137,22 @@ describe("page data functions", () => {
           textColor: null,
         },
       ],
+      socialData: [
+        {
+          pagedataid: 1,
+          iconClass: "fab fa-github",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          borderRadius: "5",
+          active: true,
+        },
+      ],
     };
     expect(pageDatawLinks).toMatchObject(expectedPageDataWLinks);
   });
 
   test("get page data with only active links", async () => {
-    let pageDatawLinks = await getPageDatawLinkData(false);
+    let pageDatawLinks = await getPageDatawLinkAndSocialData(false);
     const expectedPageDataWLinks = {
       pageData: {
         id: 1,
