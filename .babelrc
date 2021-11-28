@@ -1,5 +1,5 @@
 {
-  // diabled optimizeForSpeed becasue styled-jsx style not found error wehn updating styles
+  // diabled optimiuzeForSpeed becasue styled-jsx style not fond error wehn updating styles
   // framework.cb05d56be993eb6b088a.js:1 DOMException: Failed to execute 'insertRule' on 'CSSStyleSheet': Failed to insert the rule.
   //https://github.com/vercel/styled-jsx/issues/295
   "presets": [["next/babel", { "styled-jsx": { "optimizeForSpeed": false } }]]

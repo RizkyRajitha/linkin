@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     environment:
       DATABASE_URL: "postgres://linkin:linkin123@db:5432/linkin"
-      HASHSALT: "123" # random secret key
+      HASHSALT: "1234" # random secret key
       NODE_ENV: "production"
     depends_on:
       - db
@@ -34,7 +34,6 @@ services:
       POSTGRES_USER: "linkin"
       POSTGRES_PASSWORD: "linkin123"
     volumes:
-      #      - ./scripts/db-migrate.sql:/docker-entrypoint-initdb.d/db-migrate.sql
       - linkin-data:/var/lib/postgresql/data
 volumes:
   linkin-data:
