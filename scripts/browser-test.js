@@ -135,7 +135,7 @@ const captureDashboard = async (
   viewport = { width: 1920, height: 1080 },
   deviceName = ""
 ) => {
-  const ssname = `Index ${deviceName} ${viewport.width}X${viewport.height}`;
+  const ssname = `Dashboard ${deviceName} ${viewport.width}X${viewport.height}`;
 
   let page = await browser.newPage();
 
