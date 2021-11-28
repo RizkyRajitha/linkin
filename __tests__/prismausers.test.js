@@ -35,26 +35,34 @@ describe("Test User functions", () => {
       password: "$2b$10$gKoU.xdV9vrGY2wEW0KAnuBmQeYxOUgXRHS9f8Sgx40m7kxpejddG",
     };
     expect(user).toMatchObject(expectedUser);
+
+    // expect to fail if no name provided
+    await expect(getUser()).rejects.toThrow("pass valid username");
   });
 
   test("change Password of admin", async () => {
-    try {
-      let newUserPasswordData = {
-        username: "admin",
-        newhashedpassword: "1234",
-      };
+    let newUserPasswordData = {
+      username: "admin",
+      newhashedpassword: "1234",
+    };
 
-      const expectedUser = {
-        username: "admin",
-        password: "1234",
-      };
+    const expectedUser = {
+      username: "admin",
+      password: "1234",
+    };
 
-      await changePassword(newUserPasswordData);
-      let user = await getUser("admin");
-      //.info(user);
-      expect(user).toMatchObject(expectedUser);
-    } catch (error) {
-      console.error(error);
-    }
+    await changePassword(newUserPasswordData);
+    let user = await getUser("admin");
+    expect(user).toMatchObject(expectedUser);
+
+    // check throwing errors
+    // if no username provided
+    await expect(changePassword({ username: null })).rejects.toThrow(
+      "pass valid username"
+    );
+    // if no hashed password
+    await expect(changePassword({ username: "user" })).rejects.toThrow(
+      "pass valid newhashedpassword"
+    );
   });
 });

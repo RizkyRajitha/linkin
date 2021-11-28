@@ -109,6 +109,11 @@ describe("Test Link data", () => {
     });
 
     expect(updatedLinkData.linkData[0]).toMatchObject(expectedLink[0]);
+
+    // expect fail if no id provided
+    await expect(deleteLink({ id: undefined })).rejects.toThrow(
+      "pass valid id"
+    );
   });
 
   test("update link data ", async () => {
@@ -167,5 +172,7 @@ describe("Test Link data", () => {
     expectedOrderList.forEach((element, index) => {
       expect(element).toMatchObject(updatedOrderList[index]);
     });
+    // expect to fail if no data provided
+    await expect(reorderLinks([])).rejects.toThrow("invalid data");
   });
 });

@@ -98,6 +98,11 @@ describe("Test Social data", () => {
     expectedLink = beforeUpdateSocialData.filter((ele) => ele.id === 1);
 
     expect(updatedSocialData.socialData[0]).toMatchObject(expectedLink[0]);
+
+    // expect fail if no id provided
+    await expect(deleteSocialLink({ id: undefined })).rejects.toThrow(
+      "pass valid id"
+    );
   });
 
   test("update social data ", async () => {
@@ -146,5 +151,8 @@ describe("Test Social data", () => {
     expectedOrderList.forEach((element, index) => {
       expect(element).toMatchObject(updatedOrderList[index]);
     });
+
+    // expect to fail if no data provided
+    await expect(reorderSocialLinks([])).rejects.toThrow("invalid data");
   });
 });
