@@ -54,25 +54,9 @@ describe("Test Link data", () => {
     });
   });
 
-  test("get link data without active", async () => {
+  test("get link data without inactive", async () => {
     let { linkData } = await getLinkData(false);
 
-    const expectedLink = {
-      pagedataid: 1,
-      iconClass: "fas fa-link",
-      displayText: "Welcome to LinkIn",
-      linkUrl: "https://github.com/RizkyRajitha/linkin",
-      bgColor: "#2C6BED",
-      active: true,
-    };
-
-    linkData.forEach((element) => {
-      expect(element).toMatchObject(expectedLink);
-    });
-  });
-
-  test("get link data without active", async () => {
-    let { linkData } = await getLinkData(false);
     const expectedLink = {
       pagedataid: 1,
       iconClass: "fas fa-link",
@@ -108,7 +92,7 @@ describe("Test Link data", () => {
   });
 
   test("delete link data ", async () => {
-    let beforeUpdateLinkData = await (await getLinkData()).linkData;
+    let beforeUpdateLinkData = (await getLinkData()).linkData;
     //console.info(beforeUpdateLinkData.linkData[1].id);
 
     let delelement = beforeUpdateLinkData.filter((ele) => {
@@ -160,9 +144,7 @@ describe("Test Link data", () => {
       active: true,
     });
 
-    let orderList = await (
-      await getLinkData()
-    ).linkData.map((item) => {
+    let orderList = (await getLinkData()).linkData.map((item) => {
       return { id: item.id, orderIndex: item.orderIndex };
     });
 
@@ -174,9 +156,7 @@ describe("Test Link data", () => {
 
     await reorderLinks(reOrderList);
 
-    let updatedOrderList = await (
-      await getLinkData()
-    ).linkData.map((item) => {
+    let updatedOrderList = (await getLinkData()).linkData.map((item) => {
       return { orderIndex: item.orderIndex };
     });
 
