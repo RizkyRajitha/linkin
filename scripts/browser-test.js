@@ -59,42 +59,15 @@ const run = async () => {
 
     urlList.forEach((element) => {
       commentBody =
-        commentBody + `${element.ssname} ![screenshot](${element.url}) \n`;
+        commentBody +
+        `### ${element.ssname} \n <br /> ![screenshot-${element.ssname}](${element.url}) \n`;
     });
-    // commentBody = commentBody + `'`;
 
-    console.log(commentBody);
-
-    urlList.forEach((element) => {
-      commentBody =
-        commentBody + `${element.ssname} ![screenshot](${element.url}) `;
-    });
     console.log(commentBody);
 
     let base64commentBodytr = new Buffer.from(commentBody).toString("base64");
-    // let buffercommentBody = //new Buffer(commentBody)
 
     execSync(`echo "commentBody=${base64commentBodytr}" >> $GITHUB_ENV`);
-
-    // echo 'JSON_RESPONSE<<EOF' >> $GITHUB_ENV
-    // curl https://httpbin.org/json >> $GITHUB_ENV
-    // echo 'EOF' >> $GITHUB_ENV
-
-    // {name}<<{delimiter}
-    // {value}
-    // {delimiter}
-    // execSync(`echo 'commentBody<<EOF'
-    // ${commentBody}
-    // 'EOF' >> $GITHUB_ENV`);
-
-    // execSync(`echo 'commentBody<<EOF' >> $GITHUB_ENV`);
-    // execSync(`${commentBody} >> $GITHUB_ENV`);
-    // execSync(`echo 'EOF' >> $GITHUB_ENV`);
-
-    // not working
-    // execSync(
-    //   `echo '::set-output name=commentBody::Screenshots via set out "${commentBody}"'`
-    // );
   } catch (error) {
     console.log(error);
     process.exit(1);
