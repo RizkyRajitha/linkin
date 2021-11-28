@@ -74,7 +74,7 @@ jobs:
         id: browser-testing
         env:
           HASHSALT: 123
-          NODE_ENV: production
+          # NODE_ENV: production
           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
           CLOUDINARY_CLOUD_NAME: ${{ secrets.CLOUDINARY_CLOUD_NAME }}
           CLOUDINARY_API_KEY: ${{ secrets.CLOUDINARY_API_KEY }}
