@@ -122,7 +122,7 @@ const LinksForm = ({ pagedataid }) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      console.log(res);
+      // console.log(res);
 
       if (!res.success) {
         toast.error(`Error ${res.message}`, { autoClose: 5000 });
@@ -207,7 +207,7 @@ const LinksForm = ({ pagedataid }) => {
       }
     });
 
-    console.log(data);
+    // console.log(data);
 
     let confirm = await Swal.fire({
       title: "Apply common settings",
@@ -232,7 +232,7 @@ const LinksForm = ({ pagedataid }) => {
         headers: { "Content-Type": "application/json" },
       }).then((res) => res.json());
 
-      console.log(res);
+      // console.log(res);
 
       if (!res.success) {
         toast.error(`Error ${res.message}`, { autoClose: 5000 });

@@ -8,7 +8,7 @@ import Alert from "../components/alert";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-console.log(endpoint);
+// console.log(endpoint);
 export async function getServerSideProps({ req, res }) {
   try {
     cookieValidateLogin(req, res);

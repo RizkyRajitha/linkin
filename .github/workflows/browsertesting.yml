@@ -83,14 +83,10 @@ jobs:
           chmod +x run-browser-testing.sh
           ./run-browser-testing.sh
 
-      # - name: list directory
-      #   run: |
-      #     ls
-
-      # - name: Use the value
-      #   id: step_two
-      #   run: |
-      #     echo "${{ env.commentBody }}"
+      - name: Use the value
+        id: step_two
+        run: |
+          echo "${{ env.commentBody }}"
 
       - name: Add comment
         uses: actions/github-script@v5
@@ -100,9 +96,14 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+
+            let buffercommentBody = process.env.commentBody
+            let utf8commentBody = new Buffer.from(buffercommentBody, "base64").toString("utf8");
+            console.log(utf8commentBody);
+
             github.rest.repos.createCommitComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: process.env.SHA,
-              body: process.env.commentBody
+              body: utf8commentBody
             })

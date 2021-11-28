@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const execSync = require("child_process").execSync;
 const cloudinary = require("cloudinary").v2;
+const { Buffer } = require("buffer");
 
 const testingUrl = "http://localhost:3000";
 
@@ -54,20 +55,19 @@ const run = async () => {
 
     await browser.close();
 
-    let commentBody = `## Screenshots <br></br>`;
+    let commentBody = `## Screenshots \n`;
 
     urlList.forEach((element) => {
       commentBody =
-        commentBody + `${element.ssname} ![screenshot](${element.url}) `;
+        commentBody +
+        `### ${element.ssname} \n <br /> ![screenshot-${element.ssname}](${element.url}) \n`;
     });
+
     console.log(commentBody);
 
-    execSync(`echo "commentBody=${commentBody}" >> $GITHUB_ENV`);
+    let base64commentBodytr = new Buffer.from(commentBody).toString("base64");
 
-    // not working
-    // execSync(
-    //   `echo '::set-output name=commentBody::Screenshots via set out "${commentBody}"'`
-    // );
+    execSync(`echo "commentBody=${base64commentBodytr}" >> $GITHUB_ENV`);
   } catch (error) {
     console.log(error);
     process.exit(1);

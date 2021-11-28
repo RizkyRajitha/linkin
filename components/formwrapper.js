@@ -1,10 +1,6 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
-
-// importing hook useSWR from package swr
-// import useSWR from "swr";
-
 import styles from "../styles/formwrapper.module.css";
 
 import ColorForm from "./colorform";
@@ -39,26 +35,11 @@ function Formwrapper({ pageData, updatedPageData }) {
     });
   }, [activeForm]);
 
-  // asynchronous function to fetch data to save page data and update page
-  // const savePageDataFetcher = async ([url, data]) =>
-  //   await fetch(url, {
-  //     method: "POST",
-  //     body: JSON.stringify(data),
-  //     headers: { "Content-Type": "application/json" },
-  //   }).then((res) => res.json());
 
-  // savePageData was previously asynchronous
   const savePageData = async (data) => {
     setloading(true);
     try {
-      // const { res } = useSWR(
-      //   [`${endpoint}/api/updatepagedata`, data],
-      //   savePageDataFetcher
-      // );
-      /*
-      the following piece of code has been replaced with the implementation of useSWR hook above
 
-      */
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -93,21 +74,13 @@ function Formwrapper({ pageData, updatedPageData }) {
     setloading(false);
   };
 
-  // asynchronous function to fetch logout data
-  // const logOutFetcher = async (url) =>
-  //   await fetch(url).then((res) => res.json());
-
-  // the logout function was previously asynchronous
   const logout = async () => {
     try {
-      // const { res } = useSWR(`${endpoint}/api/user/logout`, logOutFetcher);
-      /*
-      the following piece of code has been replaced with the implementation of useSWR hook above
-      */
+    
       let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
         res.json()
       );
-      console.log(res);
+      // console.log(res);
 
       if (res.success) {
         router.push("/admin");
