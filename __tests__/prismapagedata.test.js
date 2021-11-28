@@ -92,7 +92,7 @@ describe("page data functions", () => {
     expect(pageData).toMatchObject(expectedUser);
   });
 
-  test("get page data with all links data", async () => {
+  test("get page data with all links and social data", async () => {
     let pageDatawLinks = await getPageDatawLinkAndSocialData();
     const expectedPageDataWLinks = {
       pageData: {
@@ -183,6 +183,17 @@ describe("page data functions", () => {
           accentColor: null,
           borderRadius: null,
           textColor: null,
+        },
+      ],
+
+      socialData: [
+        {
+          pagedataid: 1,
+          iconClass: "fab fa-github",
+          linkUrl: "https://github.com/RizkyRajitha/linkin",
+          bgColor: "#2C6BED",
+          borderRadius: "5",
+          active: true,
         },
       ],
     };
