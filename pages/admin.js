@@ -8,7 +8,7 @@ import Alert from "../components/alert";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-console.log(endpoint);
+// console.log(endpoint);
 export async function getServerSideProps({ req, res }) {
   try {
     cookieValidateLogin(req, res);
@@ -86,6 +86,7 @@ const Admin = ({}) => {
                 <label className="form-label">Username</label>
                 <input
                   type="text"
+                  id="username"
                   className={
                     errors.username ? "form-control is-invalid" : "form-control"
                   }
@@ -104,6 +105,7 @@ const Admin = ({}) => {
                 <label className="form-label">Password</label>
                 <input
                   type="password"
+                  id="password"
                   className={
                     errors.password ? "form-control is-invalid" : "form-control"
                   }
@@ -121,6 +123,7 @@ const Admin = ({}) => {
 
               <button
                 type="submit"
+                id="submit"
                 className="btn btn-primary btn-block"
                 onClick={handleSubmit(login)}
                 disabled={loading}

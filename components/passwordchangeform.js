@@ -24,7 +24,7 @@ const PasswordChangeForm = () => {
   password.current = watch("newPassword", "");
 
   const updatePassword = async (data) => {
-    console.log(data);
+    // console.log(data);
     setloading(true);
 
     try {
@@ -57,7 +57,7 @@ const PasswordChangeForm = () => {
       let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
         res.json()
       );
-      console.log(res);
+      // console.log(res);
 
       if (res.success) {
         router.push("/admin");

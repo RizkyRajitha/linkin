@@ -9,7 +9,7 @@ const FontForm = ({ data, update, loading }) => {
     formState: { errors },
   } = useForm({ defaultValues: data });
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <>

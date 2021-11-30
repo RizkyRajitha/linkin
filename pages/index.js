@@ -4,7 +4,7 @@ import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
 
 export async function getServerSideProps() {
   let data;
-  //console.log(process.env);
+  // console.log(process.env.NODE_ENV);
   try {
     data = await getPageDatawLinkAndSocialData(false);
     // console.log(data);

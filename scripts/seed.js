@@ -58,9 +58,17 @@ async function seed() {
           create: {
             bgColor: "#2C6BED",
             textColor: "#ffffff",
-            displayText: "Welcome to LinkIn",
+            displayText: "Welcome to Linkin",
             iconClass: "fas fa-link",
             linkUrl: "https://github.com/RizkyRajitha/linkin",
+          },
+        },
+        socialdata: {
+          create: {
+            iconClass: "fab fa-github",
+            linkUrl: "https://github.com/RizkyRajitha/linkin",
+            bgColor: "#2C6BED",
+            borderRadius: "5",
           },
         },
       },

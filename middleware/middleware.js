@@ -1,5 +1,3 @@
-// import Cors from "cors";
-
 import { parse } from "cookie";
 import { parseSecureToken } from "../lib/crypto";
 
@@ -46,9 +44,15 @@ export function jwtAuth(req, res, next) {
 export function cookieValidate(req, res) {
   let cookie = req.headers?.cookie;
 
+  // console.log("dashboard cookie");
+
   if (!cookie) {
-    res.setHeader("location", "/admin");
-    res.statusCode = 302;
+    res.writeHead(302, {
+      location: "/admin",
+      "Content-Type": "text/html",
+    });
+    // res.setHeader("location", "/admin");
+    // res.statusCode = 302;
     res.end();
     return new Error("cookie invalid");
   }
@@ -58,7 +62,11 @@ export function cookieValidate(req, res) {
   let decodedToken = parseSecureToken(token);
 
   if (!decodedToken) {
-    res.setHeader("location", "/admin");
+    res.writeHead(302, {
+      location: "/admin",
+      "Content-Type": "text/html",
+    });
+    // res.setHeader("location", "/admin");
     res.statusCode = 302;
     res.end();
     return new Error("cookie invalid");
@@ -75,8 +83,12 @@ export function cookieValidateLogin(req, res) {
   let decodedToken = parseSecureToken(token);
 
   if (decodedToken) {
-    res.setHeader("location", "/dashboard");
-    res.statusCode = 302;
+    res.writeHead(302, {
+      location: "/dashboard",
+      "Content-Type": "text/html",
+    });
+    // res.setHeader("location", "/dashboard");
+    // res.statusCode = 302;
     res.end();
   }
 }
