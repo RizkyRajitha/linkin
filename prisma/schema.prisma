@@ -65,6 +65,7 @@ model pagedata {
   footerEnabled               Boolean?     @default(true)
   linkPadding                 String?      @db.VarChar
   linktreeWidth               String?      @db.VarChar
+  iconsPosition               String?      @default("top") @db.VarChar
 }
 
 model users {
