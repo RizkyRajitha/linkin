@@ -177,7 +177,7 @@ export default function LinkCard({
                     </div>
                   </div>
                   <div className="row">
-                    {/* <div className="col">
+                    <div className="col">
                       <div className="mb-1 small ">
                         <label className="form-label small ">
                           Link Display Text Font color
@@ -190,7 +190,7 @@ export default function LinkCard({
                           {...register("textColor")}
                         />
                       </div>
-                    </div> */}
+                    </div>
                     <div className="col">
                       <div className="mb-1 small ">
                         <label className="form-label small">
