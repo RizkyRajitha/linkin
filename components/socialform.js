@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useForm } from "react-hook-form";
+import debounce from "lodash.debounce";
 
 import { useStateValue } from "./context/state";
 import LinkCard from "./socialcard";
@@ -11,10 +13,35 @@ import styles from "../styles/form.module.css";
 const endpoint =
   process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
 
-const LinksForm = ({ pagedataid }) => {
+const LinksForm = ({ pagedataid, data, update }) => {
   const [{ socialLinks }, dispatch] = useStateValue();
   const [loading, setloading] = useState(false);
   const [isNewLinkInList, setisNewLinkInList] = useState(false);
+  const refSubmitButtom = useRef(null);
+
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {
+      iconsPosition: data.iconsPosition || "top",
+    },
+  });
+
+  watch((data, { type }) => {
+    // console.log(type);
+    //console.log(data);
+    // event fired when reset the form with updated data
+    if (type == undefined) {
+      return;
+    }
+    debouncedSaveLinkData();
+  });
+
+  // debounced function to save the data after 1.5 seconds
+  const debouncedSaveLinkData = useCallback(
+    debounce(() => {
+      refSubmitButtom?.current?.click();
+    }, 1500),
+    []
+  );
 
   const addNewLink = () => {
     // console.log(links.length);
@@ -199,15 +226,49 @@ const LinksForm = ({ pagedataid }) => {
               ></span>
             </div>
           )}
-          <button
-            type="button"
-            className="btn btn-outline-primary"
-            onClick={(e) => {
-              addNewLink();
-            }}
-          >
-            Add new Social Icon
-          </button>
+          <div className="d-flex justify-content-between align-self-center">
+            <button
+              type="button"
+              className="btn btn-outline-primary mr-auto p-2"
+              onClick={(e) => {
+                addNewLink();
+              }}
+            >
+              Add new Social Icon
+            </button>
+            <div className="d-flex align self-center">
+              <form
+                onSubmit={handleSubmit(update)}
+                className="align-self-center"
+              >
+                <div className="form-check form-check-inline align-self-center">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="position"
+                    id="r1"
+                    value="top"
+                    {...register(`iconsPosition`)}
+                  />
+                  <label htmlFor="r1">Top</label>
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="position"
+                    id="r2"
+                    value="bottom"
+                    {...register(`iconsPosition`)}
+                  />
+                  <label className="form-check-label" htmlFor="r2">
+                    Bottom
+                  </label>
+                </div>
+                <button hidden={true} ref={refSubmitButtom} type={"submit"} />
+              </form>
+            </div>
+          </div>
           <DragDropContext onDragEnd={dragEndHnadler}>
             <Droppable droppableId="links" isDropDisabled={isNewLinkInList}>
               {(provided) => (

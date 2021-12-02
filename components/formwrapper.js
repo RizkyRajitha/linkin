@@ -35,11 +35,9 @@ function Formwrapper({ pageData, updatedPageData }) {
     });
   }, [activeForm]);
 
-
   const savePageData = async (data) => {
     setloading(true);
     try {
-
       let res = await fetch(`${endpoint}/api/updatepagedata`, {
         method: "POST",
         body: JSON.stringify(data),
@@ -76,7 +74,6 @@ function Formwrapper({ pageData, updatedPageData }) {
 
   const logout = async () => {
     try {
-    
       let res = await fetch(`${endpoint}/api/user/logout`).then((res) =>
         res.json()
       );
@@ -239,7 +236,11 @@ function Formwrapper({ pageData, updatedPageData }) {
           )}
           {activeForm === "linksForm" && <LinksForm pagedataid={pageData.id} />}
           {activeForm === "socialForm" && (
-            <SocialForm pagedataid={pageData.id} />
+            <SocialForm
+              pagedataid={pageData.id}
+              data={pageData}
+              update={savePageData}
+            />
           )}
           {activeForm === "passwordchangeform" && <PasswordChangeForm />}
         </div>
