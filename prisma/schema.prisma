@@ -30,6 +30,7 @@ model socialdata {
   linkUrl      String?   @db.VarChar
   bgColor      String?   @db.VarChar
   borderRadius String?   @db.VarChar
+  textColor    String?   @db.VarChar
   accentColor  String?   @db.VarChar
   active       Boolean?  @default(true)
   created_at   DateTime? @default(now()) @db.Timestamptz(6)
@@ -65,6 +66,7 @@ model pagedata {
   footerEnabled               Boolean?     @default(true)
   linkPadding                 String?      @db.VarChar
   linktreeWidth               String?      @db.VarChar
+  iconsPosition               String?      @default("top") @db.VarChar
 }
 
 model users {

@@ -22,7 +22,15 @@ export default function LinkCard({
     formState: { errors },
     reset,
     watch,
-  } = useForm({ defaultValues: item });
+  } = useForm({
+    defaultValues: {
+      ...item,
+      bgColor: {
+        transparent: item.bgColor === "transparent" ? "true" : false,
+        color: item.bgColor === "transparent" ? "#000" : item.bgColor,
+      },
+    },
+  });
 
   useEffect(() => {
     // reset when the linkdata is change to the form update with new values
@@ -60,7 +68,10 @@ export default function LinkCard({
   const submitAction = (data) => {
     // when the form is submited by enter , the debounced action is canceled to avoid uplicate debounce
     debouncedSaveLinkData.cancel();
-    // console.log(data);
+
+    if (data.bgColor.transparent === "true") data.bgColor = "transparent";
+    else data.bgColor = data.bgColor.color;
+
     updateLink(data);
   };
 
@@ -168,6 +179,20 @@ export default function LinkCard({
                   <div className="row">
                     <div className="col">
                       <div className="mb-1 small ">
+                        <label className="form-label small ">
+                          Link Display Text Font color
+                        </label>
+                        <input
+                          type="color"
+                          className="form-control form-control-sm mb-2 form-control-color"
+                          title="Choose Link text color"
+                          placeholder="Choose Link text color"
+                          {...register("textColor")}
+                        />
+                      </div>
+                    </div>
+                    <div className="col">
+                      <div className="mb-1 small ">
                         <label className="form-label small">
                           Link background color
                         </label>
@@ -176,8 +201,23 @@ export default function LinkCard({
                           className="form-control form-control-sm mb-2 form-control-color"
                           title="Choose Link background color"
                           placeholder="Choose Link background color"
-                          {...register("bgColor")}
+                          {...register("bgColor.color")}
                         />
+                        <div className="form-check">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            id="transparentBG"
+                            value="true"
+                            {...register("bgColor.transparent")}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="transparentBG"
+                          >
+                            Transparent Background
+                          </label>
+                        </div>
                       </div>
                     </div>
                   </div>
