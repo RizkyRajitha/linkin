@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const BackupComponent = () => {
   const endpoint =
@@ -34,7 +35,22 @@ const BackupComponent = () => {
 
   const handleBackup = async (event) => {
     event.preventDefault();
+
     let file = document.getElementById("backup").files[0];
+    if (!file) return toast.error(`No file selected`, { autoClose: 5000 });
+
+    let confirm = await Swal.fire({
+      title: "Restore Data",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Restore data",
+    });
+
+    if (!confirm.isConfirmed) return;
+
     let fr = new FileReader();
 
     fr.onload = async function () {
@@ -49,16 +65,15 @@ const BackupComponent = () => {
         body: JSON.stringify(dataJson),
       })
         .then(() => location.reload()) // reload for getting restored page data
-        .catch((err) => console.log(err.message));
+        .catch((err) => toast.error(`${err.message}`, { autoClose: 10000 }));
     };
 
-    if (file) fr.readAsText(file);
-    else toast.error(`No file selected`, { autoClose: 5000 });
+    fr.readAsText(file);
   };
 
   return (
     <>
-      <h4>Backup and Restore data</h4>
+      <h3>Backup and Restore data</h3>
       <div className="mb-3 form-control">
         <h5>Backup</h5>
         <button
