@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const BackupComponent = () => {
   const endpoint =
     process.env.NODE_ENV === "production" ? `` : "http://localhost:3000";
@@ -51,21 +53,33 @@ const BackupComponent = () => {
     };
 
     if (file) fr.readAsText(file);
+    else toast.error(`No file selected`, { autoClose: 5000 });
   };
 
   return (
     <>
       <h4>Backup and Restore data</h4>
-      <div className="mb-3 ">
-        <button className={`btn btn-secondary`} onClick={getBackup}>
+      <div className="mb-3 form-control">
+        <h5>Backup</h5>
+        <button
+          className={`btn btn-secondary d-inline mb-3`}
+          onClick={getBackup}
+        >
           Download Backup
         </button>
         <form>
-          <label htmlFor="backup">Restore data from file</label>
-          <input type="file" className="form-control" id="backup" />
+          <label htmlFor="backup">
+            <h5>Restore data from file</h5>
+          </label>
+          <input
+            type="file"
+            accept="application/json"
+            className="form-control mb-2"
+            id="backup"
+          />
           <button
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-secondary"
             onClick={handleBackup}
           >
             Restore Data
