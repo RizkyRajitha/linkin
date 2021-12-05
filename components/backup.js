@@ -14,12 +14,17 @@ const BackupComponent = () => {
       const a = document.createElement("a");
       a.style.display = "none";
       a.href = url;
-      // the filename you want
-      a.download = "linkin-backup.json";
+
+      // filename = linkin-backup-date.json
+      let filename = `linkin-backup-${new Date()
+        .toISOString()
+        .slice(0, 16)
+        .replace(":", "-")}.json`;
+      a.download = filename; // set filename
       document.body.appendChild(a);
       a.click();
       a.remove();
-      window.URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(url); // avoid memory leaks
     } catch (error) {
       console.log(error.message);
     }
@@ -27,11 +32,11 @@ const BackupComponent = () => {
 
   const handleBackup = async (event) => {
     event.preventDefault();
-    let data = document.getElementById("backup").files[0];
-
+    let file = document.getElementById("backup").files[0];
     let fr = new FileReader();
+
     fr.onload = async function () {
-      const a = JSON.parse(fr.result);
+      const dataJson = JSON.parse(fr.result);
 
       await fetch(`${endpoint}/api/user/backup`, {
         headers: {
@@ -39,13 +44,13 @@ const BackupComponent = () => {
           "Content-Type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify(a),
+        body: JSON.stringify(dataJson),
       })
-        .then(location.reload()) // reload for getting restored page data
+        .then(() => location.reload()) // reload for getting restored page data
         .catch((err) => console.log(err.message));
     };
 
-    if (data) fr.readAsText(data);
+    if (file) fr.readAsText(file);
   };
 
   return (
