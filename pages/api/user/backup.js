@@ -46,9 +46,7 @@ async function post(req, res) {
 
     res.json({ success: true });
   } catch (error) {
-    console.log(error.message);
-
-    res.status(500).json({ success: false, message: error.message });
+    res.status(400).json({ success: false, message: error.message });
   }
 }
 

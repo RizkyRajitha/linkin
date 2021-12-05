@@ -29,7 +29,7 @@ const BackupComponent = () => {
       a.remove();
       window.URL.revokeObjectURL(url); // avoid memory leaks
     } catch (error) {
-      console.log(error.message);
+      toast.error(`${error.message}`, { autoClose: 10000 });
     }
   };
 
@@ -64,8 +64,15 @@ const BackupComponent = () => {
         method: "POST",
         body: JSON.stringify(dataJson),
       })
-        .then(() => location.reload()) // reload for getting restored page data
-        .catch((err) => toast.error(`${err.message}`, { autoClose: 10000 }));
+        .then(async (res) => {
+          console.log(res);
+          if (!res.ok) throw Error((await res.json()).message);
+          location.reload();
+        }) // reload for getting restored page data
+        .catch((err) => {
+          toast.error(`${err.message}`, { autoClose: 10000 });
+          toast.error(`File may be corrupted`, { autoClose: 10000 });
+        });
     };
 
     fr.readAsText(file);
