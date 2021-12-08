@@ -4,8 +4,14 @@ import {
   restoreBackupData,
 } from "../../../lib/dbfuncprisma";
 
-// endoint for download and restore backups
+// endpoint for download and restore backups
 async function handler(req, res) {
+  // Run the middleware
+  await use(req, res, jwtAuth).catch((error) => {
+    console.log(error.message);
+    res.status(500).json({ success: false, message: error.message });
+  });
+
   switch (req.method) {
     case "GET":
       return await get(req, res);
@@ -19,9 +25,6 @@ async function handler(req, res) {
 
 async function get(req, res) {
   try {
-    // Run the middleware
-    await use(req, res, jwtAuth);
-
     let data = await getPageDatawLinkAndSocialData();
 
     res.json({
@@ -37,15 +40,13 @@ async function get(req, res) {
 
 async function post(req, res) {
   try {
-    // Run the middleware
-    await use(req, res, jwtAuth);
-
     let { linkin_version, ...data } = req.body;
 
     await restoreBackupData(data);
 
     res.json({ success: true });
   } catch (error) {
+    console.log(error.message);
     res.status(400).json({ success: false, message: error.message });
   }
 }
