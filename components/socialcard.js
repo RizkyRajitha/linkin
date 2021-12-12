@@ -27,7 +27,7 @@ export default function LinkCard({
       ...item,
       bgColor: {
         transparent: item.bgColor === "transparent" ? "true" : false,
-        color: item.bgColor === "transparent" ? "#000" : item.bgColor,
+        color: item.bgColor === "transparent" ? "#2c6bed" : item.bgColor,
       },
     },
   });
@@ -197,6 +197,7 @@ export default function LinkCard({
                           Link background color
                         </label>
                         <input
+                          defaultValue="#2c6bed"
                           type="color"
                           className="form-control form-control-sm mb-2 form-control-color"
                           title="Choose Link background color"
