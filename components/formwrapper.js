@@ -10,6 +10,7 @@ import GeneralForm from "./generalform";
 import FontForm from "./fontform";
 import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
+import LayoutForm from "./layoutform";
 
 const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -144,6 +145,17 @@ function Formwrapper({ pageData, updatedPageData }) {
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
+                  activeForm === "layoutForm" ? "active" : ""
+                } `}
+                onClick={() => {
+                  setactiveForm("layoutForm");
+                }}
+              >
+                Layout
+              </button>{" "}
+              <button
+                type="button"
+                className={`btn btn-outline-primary ${
                   activeForm === "footerForm" ? "active" : ""
                 } `}
                 onClick={() => {
@@ -240,6 +252,13 @@ function Formwrapper({ pageData, updatedPageData }) {
               pagedataid={pageData.id}
               data={pageData}
               update={savePageData}
+            />
+          )}
+          {activeForm === "layoutForm" && (
+            <LayoutForm
+              data={pageData}
+              update={savePageData}
+              loading={loading}
             />
           )}
           {activeForm === "passwordchangeform" && <PasswordChangeForm />}
