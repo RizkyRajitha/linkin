@@ -39,10 +39,17 @@ export default function LinkCard({
       reset(item);
       setCardInfo(item);
     }
-    // reset when the link is deleted to the card will show differert value
+    // reset when the link is deleted  or reordered to the card will show differert value
     if (cardInfo.id !== item.id) {
       // console.log("reset after delete");
-      reset(item);
+      // reset(item);
+      reset({
+        ...item,
+        bgColor: {
+          transparent: item.bgColor === "transparent" ? "true" : false,
+          color: item.bgColor === "transparent" ? "#2c6bed" : item.bgColor,
+        },
+      });
       setCardInfo(item);
     }
   }, [item]);
