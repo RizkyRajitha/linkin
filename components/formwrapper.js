@@ -12,9 +12,9 @@ import FooterForm from "./footerform";
 import PasswordChangeForm from "./passwordchangeform";
 import LayoutForm from "./layoutform";
 
-const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : "http://localhost:3000";
+// const PUBLICURL = process.env.NEXT_PUBLIC_VERCEL_URL
+//   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+//   : "http://localhost:3000";
 
 const version = process.env.NEXT_PUBLIC_VERSION || "";
 
@@ -28,12 +28,14 @@ function Formwrapper({ pageData, updatedPageData }) {
     router?.query?.tab || "generalForm"
   );
   const [loading, setloading] = useState(false);
+  const [origin, setorigin] = useState(null);
 
   useEffect(() => {
     router.push({
       pathname: "/dashboard",
       query: { tab: activeForm },
     });
+    setorigin(window.location.origin);
   }, [activeForm]);
 
   const savePageData = async (data) => {
@@ -107,20 +109,20 @@ function Formwrapper({ pageData, updatedPageData }) {
               setactiveForm("passwordchangeform");
             }}
           >
-            Change Password
+            Change password
           </button>
           <a
             className={`btn btn-outline-primary logout-btn ${styles.logoutbtn}`}
-            href={`${PUBLICURL}`}
+            href={origin}
             target="_blank"
           >
-            visit
+            Visit
           </a>
           <button
             className={`btn btn-outline-secondary logout-btn ${styles.logoutbtn}`}
             onClick={() => logout()}
           >
-            logout
+            Logout
           </button>
         </div>
 
@@ -152,7 +154,7 @@ function Formwrapper({ pageData, updatedPageData }) {
                 }}
               >
                 Layout
-              </button>{" "}
+              </button>
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
@@ -163,7 +165,7 @@ function Formwrapper({ pageData, updatedPageData }) {
                 }}
               >
                 Footer
-              </button>{" "}
+              </button>
               <button
                 type="button"
                 className={`btn btn-outline-primary ${
