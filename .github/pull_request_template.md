@@ -1,5 +1,5 @@
 ## Contributing Guidelines pull request [Making a pull request](https://github.com/RizkyRajitha/linkin/blob/master/CONTRIBUTING.md#making-pull-request)
-<!-- ## Please create the pull request to **[dev](https://github.com/RizkyRajitha/linkin/tree/dev) branch** branch. -->
+## Please create the pull request to **[dev](https://github.com/RizkyRajitha/linkin/tree/dev) branch** branch.
 
 ### Guidelines
 
