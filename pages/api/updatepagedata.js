@@ -1,6 +1,5 @@
 import { jwtAuth, use } from "../../middleware/middleware";
-import { updatePageData, getPageData } from "../../lib/dbfuncprisma";
-
+import { updatePageData, getPageData } from "../../db/services/pages";
 
 async function handler(req, res) {
   if (req.method !== "POST") {

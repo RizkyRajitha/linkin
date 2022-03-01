@@ -1,6 +1,6 @@
+import { deleteLink } from "../../../db/services/links";
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { deleteLink } from "../../../lib/dbfuncprisma";
-
+// import { deleteLink } from "../../../lib/dbfuncprisma";
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");

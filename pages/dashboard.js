@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 
-import { getPageDatawLinkAndSocialData } from "../lib/dbfuncprisma";
+import { getPageDatawLinkAndSocialData } from "../db/services/pages";
 import { cookieValidate } from "../middleware/middleware";
 import Home from "../components/linktree";
 import Formwrapper from "../components/formwrapper";

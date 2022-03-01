@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { getSocialData, updateSocialLink } from "../../../lib/dbfuncprisma";
+import { getSocialData, updateSocialLink } from "../../../db/services/socialicons";
 
 async function handler(req, res) {
   if (req.method !== "POST") {

@@ -1,6 +1,6 @@
+import { getSocialData , insertSocialLinks } from "../../../db/services/socialicons";
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { getSocialData, insertSocialLinks } from "../../../lib/dbfuncprisma";
-
+// import { getSocialData, insertSocialLinks } from "../../db";
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");

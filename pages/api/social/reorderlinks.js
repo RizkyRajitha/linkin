@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { reorderSocialLinks } from "../../../lib/dbfuncprisma";
+import { reorderSocialLinks } from "../../../db/services/socialicons";
 
 async function handler(req, res) {
   if (req.method !== "POST") {

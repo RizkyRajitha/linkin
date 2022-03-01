@@ -1,5 +1,5 @@
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { reorderLinks } from "../../../lib/dbfuncprisma";
+import { reorderLinks } from "../../../db/services/links";
 
 async function handler(req, res) {
   if (req.method !== "POST") {

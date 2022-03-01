@@ -1,6 +1,6 @@
+import { deleteSocialLink } from "../../../db/services/socialicons";
 import { jwtAuth, use } from "../../../middleware/middleware";
-import { deleteSocialLink } from "../../../lib/dbfuncprisma";
-
+// import { deleteSocialLink } from "../../../lib/dbfuncprisma";
 async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(400).send("method not allowed");
