@@ -78,8 +78,8 @@ const LinksForm = ({ pagedataid }) => {
       toast.success(
         `${
           operation === "insertlinks"
-            ? "Added new Social Icon "
-            : "Updated Social Icon " + " successfully"
+            ? "Added new social icon "
+            : "Updated social icon " + " successfully"
         }`,
         { autoClose: 1000 }
       );

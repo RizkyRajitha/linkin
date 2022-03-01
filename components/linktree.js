@@ -1,5 +1,6 @@
 import { isEmpty, isHex } from "../lib/side";
-import SocialIconsSection from "./linktreesocialsection";
+import Links from "./linktree/links";
+import SocialIcons from "./linktree/socialicons";
 // import Image from "next/image";
 
 export default function Home({
@@ -67,39 +68,11 @@ export default function Home({
 
             <p className="handlerDescription">{handlerDescription}</p>
           </div>
-          {iconsPosition === "top" && (
-            <SocialIconsSection socialData={socialData} />
-          )}
 
-          <div className="links">
-            <ul>
-              {linkData.map((link, id) => {
-                return (
-                  <li key={id}>
-                    <a
-                      href={`${link.linkUrl || "#"}`}
-                      className="link"
-                      target="_blank"
-                      style={{
-                        backgroundColor: link.bgColor || "#2c6bed",
-                        color: link.textColor || "#ffffff",
-                        borderRadius: `${link.borderRadius || "4"}px`,
-                      }}
-                    >
-                      {link.iconClass && (
-                        <i className={`${link.iconClass} icon`}></i>
-                      )}
-                      <div className="d-flex w-100 align-items-center justify-content-center">
-                        {link.displayText}
-                      </div>
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          {iconsPosition === "top" && <SocialIcons socialData={socialData} />}
+          <Links linkData={linkData} linkPadding={linkPadding} />
           {iconsPosition === "bottom" && (
-            <SocialIconsSection socialData={socialData} />
+            <SocialIcons socialData={socialData} />
           )}
         </div>
 
@@ -138,7 +111,7 @@ export default function Home({
         }
 
         .wrap {
-          min-height: ${footerEnabled ? "94vh" : "100vh"};
+          min-height: ${footerEnabled ? "94vh" : "98vh"};
           height: 100%;
           width: 100%;
           max-width: ${linktreeWidth};
@@ -201,35 +174,7 @@ export default function Home({
           font-weight: bold;
           display: block;
           font-size: ${handlerFontSize}px;
-        }
-
-        .links ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-        .links ul li {
-          margin: 14px 0;
-        }
-        .link {
-          padding: ${linkPadding};
-          display: flex;
-          text-align: center;
-          text-decoration: none;
-          border-radius: 4px;
-          color: #fff;
-          align-items: center;
-        }
-        .link:hover {
-          opacity: 0.9;
-        }
-
-        .icon {
-          // padding: 1rem;
-          font-size: 1.7rem;
-        }
-
-        
+        }       
 
         @media (max-width: 768px) {
           .link {
