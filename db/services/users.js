@@ -1,4 +1,4 @@
-import Prisma from "../db/dbconprisma";
+import Prisma from "../dbconprisma";
 
 /**
  * get User by username
