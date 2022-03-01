@@ -49,18 +49,3 @@ export async function updatePageData(data) {
     throw new Error(error.message);
   }
 }
-
-/**
- * insert PageLink
- * @param {*} data
- * @returns
- */
-export async function insertPageLinks(data) {
-  try {
-    let insertLinksData = Prisma.linkdata.create({ data });
-
-    return insertLinksData;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
