@@ -33,7 +33,6 @@ export default function Home({
   let linkPaddingLowWidth = isEmpty(linkPadding)
     ? "2em"
     : `${linkPadding * 0.5}em`;
-
   accentColor = isEmpty(accentColor) ? "#BDD7FF" : accentColor;
   avatarwidth = isEmpty(avatarwidth) ? "50" : avatarwidth;
   avatarBorderColor = isEmpty(avatarBorderColor) ? "#fff" : avatarBorderColor;
@@ -49,6 +48,14 @@ export default function Home({
   footerTextColor = isEmpty(footerTextColor) ? "#ffffff" : footerTextColor;
   linkPadding = isEmpty(linkPadding) ? "2em" : `${linkPadding}em`;
   linktreeWidth = isEmpty(linktreeWidth) ? "320px" : `${linktreeWidth}px`;
+  handlerLink = isEmpty(handlerLink) ? "#" : handlerLink;
+
+  let bgImage = isEmpty(bgImgUrl)
+    ? ""
+    : `background-image: url("${bgImgUrl}");`;
+  let bgRepeat = isEmpty(bgImgUrl) ? "" : "background-repeat: no-repeat;";
+  let bgPosition = isEmpty(bgImgUrl) ? "" : "background-position: center;";
+  let bgSize = isEmpty(bgImgUrl) ? "" : "background-size: cover;";
 
   return (
     <div>
@@ -57,12 +64,8 @@ export default function Home({
           <div className="profile">
             {!isEmpty(avatarUrl) && <img src={avatarUrl} className="photo" />}
             <span className="handlerText">
-              <a
-                className="handlerLink"
-                href={`${handlerLink || "#"}`}
-                target="_blank"
-              >
-                {handlerText}{" "}
+              <a className="handlerLink" href={handlerLink} target="_blank">
+                {handlerText}
               </a>
             </span>
 
@@ -104,10 +107,10 @@ export default function Home({
           width: 100%;
           font-family: ${fontFamily};
           background: ${bgColor};
-          ${bgImgUrl ? `background-image: url("${bgImgUrl}");` : ""}
-          ${bgImgUrl ? `background-repeat: no-repeat;` : ""}
-          ${bgImgUrl ? `background-position: center;` : ""}
-          ${bgImgUrl ? `background-size: cover;` : ""}
+          ${bgImage}
+          ${bgRepeat}
+          ${bgPosition}
+          ${bgSize}
         }
 
         .wrap {
