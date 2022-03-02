@@ -21,6 +21,8 @@
     "test": "jest --coverage -i ./__tests__/"
   },
   "dependencies": {
+    "@nivo/bar": "^0.79.1",
+    "@nivo/core": "^0.79.0",
     "@prisma/client": "^2.25.0",
     "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
