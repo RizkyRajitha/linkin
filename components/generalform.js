@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { isEmpty } from "../lib/side";
 
 import styles from "../styles/form.module.css";
+import BackupForm from "./backup";
 
 const GeneralForm = ({ data, update, loading }) => {
   const {
@@ -245,6 +246,8 @@ const GeneralForm = ({ data, update, loading }) => {
               Save
             </button>
           </form>
+          <br />
+          <BackupForm />
         </div>
       </div>
     </>
