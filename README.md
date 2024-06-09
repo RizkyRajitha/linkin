@@ -2,7 +2,7 @@
   <img width="400" height="400" alt="Linkin logo" src="https://user-images.githubusercontent.com/38534289/119221855-0522c380-bb0f-11eb-8fee-c335fd0ff67c.png">
 </p>
 
-# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin) ![license](https://img.shields.io/github/license/rizkyrajitha/linkin??style=plastic) ![Github Actions](https://github.com/rizkyrajitha/linkin/workflows/Code-Coverage/badge.svg)
+# Linkin &middot; [![DeepScan grade](https://deepscan.io/api/teams/14086/projects/17178/branches/386441/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=14086&pid=17178&bid=386441) [![codecov](https://codecov.io/gh/RizkyRajitha/linkin/branch/master/graph/badge.svg?token=DPE3YVUYUW)](https://codecov.io/gh/RizkyRajitha/linkin) ![license](https://img.shields.io/github/license/rizkyrajitha/linkin??style=plastic) [![Code Coverage](https://github.com/RizkyRajitha/linkin/actions/workflows/coverage.yml/badge.svg?branch=master)](https://github.com/RizkyRajitha/linkin/actions/workflows/coverage.yml)
 
 ## Linkin is a customizable self-hosted link tree application.
 
