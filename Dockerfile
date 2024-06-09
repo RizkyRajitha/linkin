@@ -3,7 +3,7 @@ ARG DATABASE_URL
 ARG HASHSALT
 ARG RAILWAY=0
 # Install dependencies only when needed
-FROM node:alpine AS deps
+FROM node:18-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 
 ENV NEXT_TELEMETRY_DISABLED 1
@@ -16,7 +16,7 @@ RUN npm ci
 
 
 # Rebuild the source code only when needed
-FROM node:alpine AS builder
+FROM node:18-alpine AS builder
 
 ARG DATABASE_URL
 ARG RAILWAY=0
@@ -38,7 +38,7 @@ RUN npm run build-next
 #&& yarn install --production --ignore-scripts --prefer-offline
 
 # Production image, copy all the files and run next
-FROM node:alpine AS runner
+FROM node:18-alpine AS runner
 
 ARG DATABASE_URL
 ARG HASHSALT

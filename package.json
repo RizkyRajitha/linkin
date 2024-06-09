@@ -1,6 +1,6 @@
 {
   "name": "linkin",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "private": true,
   "license": "MIT",
   "description": "Linkin is a customizable self hosted link tree application",
@@ -21,7 +21,7 @@
     "test": "jest --coverage -i ./__tests__/"
   },
   "dependencies": {
-    "@prisma/client": "^2.25.0",
+    "@prisma/client": "^4.16.2",
     "bcrypt": "^5.0.0",
     "cookie": "^0.4.1",
     "cors": "^2.8.5",
@@ -45,6 +45,6 @@
     "babel-jest": "^27.0.1",
     "cloudinary": "^1.27.1",
     "jest": "^27.0.1",
-    "prisma": "^2.25.0"
+    "prisma": "^4.16.2"
   }
 }
