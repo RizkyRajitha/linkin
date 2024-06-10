@@ -1,6 +1,6 @@
 {
   "name": "linkin",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "private": true,
   "license": "MIT",
   "description": "Linkin is a customizable self hosted link tree application",
