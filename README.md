@@ -37,7 +37,7 @@
 
 ## Deploy with Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DATABASE_URL,HASHSALT,NODE_ENV&demo-title=Linkin&demo-description=Linkin%20is%20a%20customizable%20self%20hosted%20link%20tree%application%20%2C%20And%20we%20are%20ready%20to%20roll)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FRizkyRajitha%2Flinkin&env=DATABASE_URL%2CHASHSALT%2CNODE_ENV)
 
 ## Deploy with Heroku
 
@@ -98,8 +98,34 @@
 
 ## Running with docker
 
-- build the docker image using `docker build . -t linkin` command
-- Run the docker image `docker run -d -p 3000:3000 -e DATABASE_URL='postgres://linkin:123@localhost:5432/linkin' -e HASHSALT='123' linkin`. make sure you specified `DATABASE_URL` and `HASHSALT` environment varaibles.
+- clone repository or download [docker-compose.yaml](https://raw.githubusercontent.com/RizkyRajitha/linkin/master/docker-compose.yml) yml file
+- update image to if you dont have it locally like below.
+
+  ```yml
+  services:
+  linkin:
+    image: ghcr.io/rizkyrajitha/linkin:latest
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: "postgres://linkin:linkin123@db:5432/linkin"
+      HASHSALT: "1234" # random secret key
+      NODE_ENV: "production"
+    depends_on:
+      - migrate
+
+  migrate:
+    image: ghcr.io/rizkyrajitha/linkin:latest
+    command: >
+      sh -c "npm run prismamigrateprod
+      && npm run seed"
+    environment:
+      DATABASE_URL: "postgres://linkin:linkin123@db:5432/linkin"
+      HASHSALT: "123" # random secret key
+      NODE_ENV: "production"
+  ```
+
+- Run `docker compose up -d` to start linkin (this will apply all migrations and then start linkin container).
 
 ### Database connection
 
@@ -109,7 +135,7 @@
 
 #### Requirements
 
-- Node.js 14.x or newer
+- Node.js 18.x or newer
 - Postgresql
 
 #### Clone and install dependencies
